@@ -185,7 +185,7 @@ main {
 	border-radius: 5px;
 }
 
-.side-left-list-on {
+.side-left-on {
 	margin-top: 30px;
 	background-image: url(../img/btn-on.png);
 	height: 91px;
@@ -194,16 +194,7 @@ main {
 	color: #57BCA9;
 }
 
-.side-left-insert-off {
-	margin-top: 25px;
-	background-image: url(../img/btn-off.png);
-	height: 91px;
-	text-align: center;
-	line-height: 91px;
-	color: rgba(0, 0, 0, 0.5);
-}
-
-.side-left-total-off {
+.side-left-off {
 	margin-top: 25px;
 	background-image: url(../img/btn-off.png);
 	height: 91px;
