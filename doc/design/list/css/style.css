@@ -286,6 +286,40 @@ input[type="radio"]:checked + label {
     background-color: #57BCA9;
 	border-radius: 5px;
 }
+
+.content-table {
+	/* border-spacing: 30px 0px;
+	border-collapse: separate; */
+}
+
+.content-table-tr {
+	margin-bottom: 30px;
+}
+
+.content-categort-box {
+	width: 150px;
+	height: 80px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 30px;
+	text-align: center;
+	line-height: 80px;
+}
+
+.content-title-box {
+	width: 420px;
+	height: 80px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 30px;
+	text-align: center;
+}
+
+.content-amount-box {
+	width: 210px;
+	height: 80px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 30px;
+	text-align: center;
+}
 /* ------------------------------------------------------------------------ */
 
 
