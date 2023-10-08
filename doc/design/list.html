@@ -11,29 +11,39 @@
 
 		<main>
 			<div class="header">
-
+				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="">
+					<form action="list.html/?date=" method="post">
 						<table>
-							<input class="date-box" type="date" placeholder='날짜를 선택해주세요.' required value={props.date} onChange={props.changeHandler}>
+							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
+							<input class="date-box" type="date">
 						</table>
 					</form>
 
 					<div class="side-left-line-1"></div>
 
-					<div class="side-left-list"></div>
-					<div class="side-left-insert"></div>
-					<div class="side-left-total"></div>
+					<a href=""><div class="side-left-page side-left-list-on"><p>오늘의 지출</p></div></a>
+					<a href=""><div class="side-left-page side-left-insert-off"><p>지출 내역서</p></div></a>
+					<a href=""><div class="side-left-page side-left-total-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
 
-					<div class="side-left-box-category"><P>음식</P></div>
-					<div class="side-left-box-category"><P>의류</P></div>
-					<div class="side-left-box-category"><P>유형</P></div>
-					<div class="side-left-box-category"><P>멍청 비용</P></div>
+					<form action="" method="post">
+						<input type="radio" name="category" id="category1">
+						<label for="category1" class="category-box">전체 비용</label>
+				
+						<input type="radio" name="category" id="category2">
+						<label for="category2" class="category-box">생활 비용</label>
+				
+						<input type="radio" name="category" id="category3">
+						<label for="category3" class="category-box">활동 비용</label>
+				
+						<input type="radio" name="category" id="category4">
+						<label for="category4" class="category-box">멍청 비용</label>
+					</form>
 
 				</div>
 			</div>
@@ -45,11 +55,12 @@
 			<div class="side-right">
 				<div class="side-right-box">
 					
-					<div class="side-right-top"></div>
+					<div class="side-right-top"><p>성 공!</p></div>
 					<div class="side-right-character"></div>
 					<div class="side-right-bottom">
 						<p>소비한 벨</p>
 						<meter value="15" min="0" max="100" optimum="15" id="meter"></meter>
+						<p>사용 금액 / 전체 금액</p>
 					</div>
 
 				</div>
