@@ -259,6 +259,37 @@ input[type="radio"]:checked + label {
 
 
 
+/* 중앙 */
+/* ------------------------------------------------------------------------ */
+
+.content {
+	position: absolute;
+	top: 90px; 
+	left: 440px;
+	padding: 40px 30px;
+}
+
+.box {
+	width: 870px;
+	height: 780px;
+	overflow:scroll;
+	overflow-x: hidden
+}
+
+.box::-webkit-scrollbar {
+	width: 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 5px;
+}
+
+.box::-webkit-scrollbar-thumb {
+    background-color: #57BCA9;
+	border-radius: 5px;
+}
+/* ------------------------------------------------------------------------ */
+
+
+
 /* 우측 */
 /* ------------------------------------------------------------------------ */
 
