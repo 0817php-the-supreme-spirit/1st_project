@@ -1,7 +1,7 @@
 <?php
 
     $monthly = 3000000;
-    $user = 400000;
+    $user = 4000;
 
     // 한 달 일 수를 계산하는 date('t")
     $days = date('t'); 
