@@ -270,20 +270,20 @@ input[type="radio"]:checked + label {
 	padding: 40px 30px;
 }
 
-.box {
+.content-box {
 	width: 870px;
 	height: 780px;
 	overflow:scroll;
 	overflow-x: hidden
 }
 
-.box::-webkit-scrollbar {
+.content-box::-webkit-scrollbar {
 	width: 8px;
     background-color: rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 }
 
-.box::-webkit-scrollbar-thumb {
+.content-box::-webkit-scrollbar-thumb {
     background-color: #57BCA9;
 	border-radius: 5px;
 }
