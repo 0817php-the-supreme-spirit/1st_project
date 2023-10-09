@@ -273,19 +273,6 @@ input[type="radio"]:checked + label {
 .content-box {
 	width: 870px;
 	height: 780px;
-	overflow:scroll;
-	overflow-x: hidden
-}
-
-.content-box::-webkit-scrollbar {
-	width: 8px;
-    background-color: rgba(0, 0, 0, 0.2);
-	border-radius: 5px;
-}
-
-.content-box::-webkit-scrollbar-thumb {
-    background-color: #57BCA9;
-	border-radius: 5px;
 }
 
 /* ------------------------------------------------------------------------ */
