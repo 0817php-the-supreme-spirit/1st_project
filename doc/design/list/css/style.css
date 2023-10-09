@@ -291,10 +291,14 @@ input[type="radio"]:checked + label {
 .content-table {
 	/* border-spacing: 30px 0px;
 	border-collapse: separate; */
+	display: inline-block;
 }
 
-.content-table-tr {
+.cotent-table tr, td {
+	display: inline-block;
 	margin-bottom: 30px;
+	margin-left: 15px;
+	vertical-align: middle;
 }
 
 .content-categort-box {
@@ -312,6 +316,7 @@ input[type="radio"]:checked + label {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
 	text-align: center;
+	line-height: 80px;
 }
 
 .content-amount-box {
@@ -320,7 +325,9 @@ input[type="radio"]:checked + label {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
 	text-align: center;
+	line-height: 80px;
 }
+
 /* ------------------------------------------------------------------------ */
 
 
