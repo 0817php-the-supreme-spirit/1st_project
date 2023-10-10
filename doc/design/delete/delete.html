@@ -50,35 +50,32 @@
 
 			<div class="content">
 				<div class="content-box">
-					<div class="box1">
-						<h1>리스트를 <span>삭제</span>하시겠습니까?</h1>
-				<br>
-						<h4>삭제 후 복구할 수 없습니다.</h4>
-					</div>
-				<br>
-					<div class="box2">
-						<p>날짜</p>
-					</div>
-				<br>
-					<div class="box3">
-						<form action="" >
-							<label for="title" class="title">제목</label>
-							<input type="text" class="title_box">
-						</form>	
-					</div>
-				<br>		
-					<div class="box4">
-						<form action="">
-							<label for="memo" class="memo">메모</label>
-							<textarea class="memo_box" name="" id="memo" cols="50" rows="1" placeholder=" 255자까지 작성"></textarea>
-						</form>	
-					</div>
-				<br>
+					<table>
+						<div class="box1">
+							<h1>리스트를 삭제하시겠습니까?</h1>
+							<p>삭제 후 복구할 수 없습니다.</p>
+						</div>
+						
+						<tr class="box2">
+							<th>날짜</th>
+							<!-- <td><?php echo $item["id"] ?></td> -->
+						</tr>
+						
+						<tr class="box3">
+							<th>제목</th>
+							<!-- <td><?php echo $item["title"] ?></td> -->
+						</tr>
+						<tr class="box4">
+							<th>메모</th>
+							<!-- <td><?php echo $item["content"] ?></td> -->
+						</tr>
+					</table>
 					<div class="box5">
-						<p>일일 사용 금액</p>
-					</div>
-					<div class="box6">
-						<p>일일 잔여 금액</p>
+						<form action="" method="post">
+							<input type="hidden" name="id" value="">
+							<button type="submit">삭제</button>
+							<a href="">취소</a>
+						</form>
 					</div>
 				</div>
 			</div>
