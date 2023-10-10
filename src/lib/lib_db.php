@@ -46,7 +46,7 @@
 	}
 
 	// ----------------------------
-	// 함수명 	: db_select_boards_paging
+	// 함수명 	: db_select
 	// 기능 	: boards paging 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
@@ -57,7 +57,8 @@
 		try {
 			$sql = 
 				" SELECT "
-				."		cate.category_name "
+				." 		id "
+				."		,cate.category_name "
 				."		,todo.title "
 				."		,todo.amount_used "
 				." FROM "
@@ -71,6 +72,46 @@
 			$stmt = $conn->query($sql);
 			$result = $stmt->fetchAll();
 			return $result; // 정상 : 쿼리 결과 리턴
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		}
+	}
+
+	// ----------------------------
+	// 함수명 	: db_select_date
+	// 기능 	: boards paging 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_select_date(&$conn, &$arr_param) {
+		try {
+			$sql = 
+				" SELECT "
+				." 		id "
+				."		,cate.category_name "
+				."		,todo.title "
+				."		,todo.amount_used "
+				." FROM "
+				."		todolist_table todo "
+				." JOIN "
+				." category_table cate "
+				." ON "
+				." todo.category_id = cate.category_id "
+				." WHERE "
+				." create_date = :date "
+				;
+
+			$arr_ps = [
+				":date" => $arr_param["date"]
+			];
+
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; // 결과 리턴
+
 		}
 		catch(Exception $e) {
 			return false; // 예외 발생 : flase 리턴

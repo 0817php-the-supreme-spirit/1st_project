@@ -1,8 +1,11 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
+	define("ERROR_MSG_PARAM", "%s : 필수 입력 사항입니다.");
+
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
+	$arr_err_msg = []; // 에러 메세지 저장용
 
 	try {
 		if(!db_conn($conn))
@@ -10,14 +13,30 @@
 			//강제 예외 발생 : DB Instance
 			throw new Exception("DB Error : PDO Instance");
 		}
-
-		$result = db_select($conn);
-		if(!$result)
-		{
-			throw new Exception("DB Error : SELECT boards");
+		if($http_method === "GET") {
+			$result = db_select($conn);
+			if(!$result)
+			{
+				throw new Exception("DB Error : SELECT boards");
+			}
 		}
+		else {
+			$date = trim(isset($_POST["date"]) ? $_POST["date"] : "");
 
-		var_dump($result);
+			if($id === "") {
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+            }
+
+			$arr_param = [
+				"date" => $date
+			];
+
+			$result = db_select_date($conn, $arr_param);
+
+			if(!$result) {
+				throw new Exception("DB Error : UPDATE Boards id");
+			}
+		}
 
 
 	}
@@ -50,10 +69,11 @@
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="list.html/?date=" method="post">
+					<form action="/1st_project/src/php/list.html" method="post">
 						<table>
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date">
+							<input class="date-box" type="date" id="date" name="date">
+							<input type="submit" value="제출">
 						</table>
 					</form>
 
@@ -85,106 +105,25 @@
 			<div class="content">
 				<div class="content-box">
 					<table class="content-table">
+						<?php 
+							foreach($result as $item) {
+						?>
 						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
+							<td class="content-categort-box">
+								<?php if($item["category_name"] == 'life') { ?>
+									<img src="/1st_project/src/img/life.png"> 
+								<?php } else if($item["category_name"] == 'activity') { ?>
+									<img src="/1st_project/src/img/activity.png">
+								<?php }  else { ?>
+									<img src="/1st_project/src/img/stupid.png">
+								<?php } ?>
+							</td>
+							<td class="content-title-box"><a href="/1st_project/src/php/detail.php/?id=<?php echo $item["id"]; ?>"><?php echo $item["title"]?></a></td>
+							<td class="content-amount-box"><?php echo $item["amount_used"], "원"; ?></td>
 						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
-						<tr>
-							<td class="content-categort-box">그림</td>
-							<td class="content-title-box">제목</td>
-							<td class="content-amount-box">금액</td>
-						</tr>
+						<?php 
+							}
+						?>
 					</table>
 				</div>
 			</div>

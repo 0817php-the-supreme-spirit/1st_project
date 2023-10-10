@@ -299,6 +299,7 @@ input[type="radio"]:checked + label {
 	margin-bottom: 30px;
 	margin-left: 15px;
 	vertical-align: middle;
+	color: rgba(0, 0, 0, 0.5);
 }
 
 .content-categort-box {
@@ -308,6 +309,7 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	text-align: center;
 	line-height: 80px;
+	padding: 5px;
 }
 
 .content-title-box {
@@ -318,6 +320,18 @@ input[type="radio"]:checked + label {
 	text-align: center;
 	line-height: 80px;
 }
+
+.content-title-box a {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.content-title-box a:hover {
+	transform: scale(1.2);
+	transition-duration: 0.3s;
+	font-size: 2.1rem;
+	color: #57BCA9;
+}
+
 
 .content-amount-box {
 	width: 210px;
