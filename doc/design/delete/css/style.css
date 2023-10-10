@@ -463,7 +463,7 @@ meter::-webkit-meter-bar {
 	height: 150px;
 	padding-top: 30px;
 	line-height: 50px;
-	box-shadow: 5px 5px 5px 5px gray;
+	/* box-shadow: 5px 5px 5px 5px gray; */
 }
 
 .box1>h1 {
@@ -472,8 +472,8 @@ meter::-webkit-meter-bar {
 }
 
 .box1>h1>span {
-	color: red;
-	text-shadow: 3px 3px grey;
+	color: #ba2de1;
+	/* text-shadow: 3px 3px grey; */
 }
 
 .box2 {
