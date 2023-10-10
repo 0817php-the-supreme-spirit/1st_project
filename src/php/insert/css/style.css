@@ -89,8 +89,8 @@ main {
 /* 레이아웃 구분 */
 /* ------------------------------------------------------------------------ */
 .header {
-	background-color: #57BCA9;
-	background-color: rgba(87, 188, 169, 1);
+	
+	background-color: rgba(100, 161, 233, 1);
 	width: 100%;
 	height: 90px;
 	border-radius: 0px 50px 0px 0px;
@@ -132,13 +132,13 @@ main {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid rgba(100, 161, 233, 1);
 	text-align: center;
 	color: #57BCA9;
 }
 
 .date-box:focus {
-	background-color: #57bca9;
+	background-color: rgba(100, 161, 233, 1);
 	color: #fff;
 	border: none;
 	outline: none;
@@ -159,14 +159,14 @@ main {
 	cursor: pointer;
 }
 
-.date-boxt[type='date']::before {
+/* .date-boxt[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
-	}
+	} */
 
-.date-box[type='date']:valid::before {
+/* .date-box[type='date']:valid::before {
 	display: none;
-}
+} */
 
 /* input[type='date']::before {
 	content: attr(placeholder);
@@ -236,7 +236,7 @@ main {
 	height: 50px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid rgba(100, 161, 233, 1);
 	text-align: center;
 	line-height: 43px;
 	color: #57BCA9;
@@ -253,7 +253,7 @@ input[type="radio"]:checked + label {
 }
 
 .category-box:hover {
-    background-color:#57BCA9;
+    background-color:rgba(100, 161, 233, 1);
 	color: #fff;
 }
 /* ------------------------------------------------------------------------ */
@@ -275,8 +275,212 @@ input[type="radio"]:checked + label {
 	height: 780px;
 }
 
-/* ------------------------------------------------------------------------ */
+.content-date-box {
+	width: 870px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	border-radius: 30px;
+	text-align: center;
+	line-height: 100px;
+	font-size: 35px;
+	cursor: pointer;
+}
 
+.content-date-box>input[type='date']::-webkit-calendar-picker-indicator {
+	position: absolute;
+	top: 0;
+	width: 870px;
+	height: 100px;
+	background: transparent;
+	color: transparent;
+	cursor: pointer;
+}
+.content-date-box input {
+	min-width: 100%;
+	text-align: center;
+} 
+
+.content-date-box > input {
+	cursor: pointer;
+	text-align: center;
+}
+.content-date-box:hover {
+	background-color: #ffffff;
+}
+
+.content-title-box1 {
+	width: 150px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	border-radius: 30px;
+	display: inline-block;
+	text-align: center;
+	line-height: 100px;
+	margin-right: 20px;
+	margin-top: 37px;
+	font-size: 30px;
+	
+}
+.content-title-box2 {
+	width: 700px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: rgba(130, 115, 87, 1);
+	border-radius: 30px;
+	padding: 20px;
+	opacity: 10;
+}
+.content-memo-box {
+	margin-top: 37px;
+	height: 100px;
+}
+.content-memo-box1 {
+	width: 150px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	border-radius: 30px;
+	display: inline-block;
+	text-align: center;
+	line-height: 100px;
+	margin-right: 10px;
+	font-size: 30px;
+	
+}
+.content-memo-box2 {
+	resize:none;
+	width: 700px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: rgba(130, 115, 87, 1);
+	border-radius: 30px;
+	border: none;
+	vertical-align:middle;
+	opacity: 10;
+}
+
+textarea {
+	padding-left: 20px;
+	padding-top: 35px;
+}
+
+.content-value-box {
+	width: 870px;
+	height: 230px;
+}
+.content-category {
+	width: 420px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	text-align: center;
+	border-radius: 30px;
+	border: none;
+	margin-top: 37px;
+	appearance: none;
+	font-size: 30px;
+}
+
+.content-category:hover {
+	background-color: #ffffff;
+}
+
+select:focus {outline:none;}
+
+select:hover {
+	border-color: rgba(100, 161, 233, 1);
+  }
+
+.content-category-money {
+	width: 420px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: rgba(130, 115, 87, 1);
+	line-height: 100px;
+	text-align: center;
+	border-radius: 30px;
+	margin-top: 30px;
+}
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+  }
+input:focus {outline: none;}
+
+textarea:focus {outline: none;}
+
+.content-category-money input {
+	text-align: center;
+}
+
+.content-float1 {
+	float: left;
+}
+.content-float2 {
+	float: left;
+	width: 420px;
+	height: 230px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	font-size: 40px;
+	border-radius: 30px;
+	text-align: center;
+	margin-top: 37px;
+	margin-left: 30px;
+	line-height: 150px;
+}
+.content-float2 > p {
+	height: 80px;
+	font-size: 60px;
+	color: rgba(228, 91, 91, 1);
+	/* text-align: center; */
+}
+
+.content-button {
+	width: 870px;
+	height: 200px;
+	float: left;
+}
+button{
+	border:none;
+}
+
+.content-button-go {
+	float: left;
+	width: 260px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	text-align: center;
+	border-radius: 30px;
+	line-height: 100px;
+	margin: 30px auto;
+	margin-left: 160px;
+	font-size: 35px;
+}
+.content-button-go:hover {
+	background-color: #ffffff
+}
+.content-button-back {
+	float: left;
+	width: 260px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	color: #57BCA9;
+	text-align: center;
+	border-radius: 30px;
+	line-height: 100px;
+	margin: 30px auto;
+	margin-left: 30px;
+	font-size: 35px;
+}
+.content-button-back:hover {
+	background-color: #ffffff
+}
+/* ------------------------------------------------------------------------ */
 
 
 /* 우측 */
