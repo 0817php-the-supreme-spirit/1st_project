@@ -27,3 +27,39 @@ CREATE TABLE category_table(
 
 
 COMMIT;
+
+INSERT INTO user_table (
+ 	monthly_salary
+ 	,daily_salary
+)
+ 	
+VALUES (
+ 	3000000
+ 	,100000
+);
+
+INSERT INTO category_table (
+ 	category_id
+ 	,category_name
+)
+ 	
+VALUES (
+ 	'2'
+ 	,'stupid'
+);
+
+
+INSERT INTO todolist_table (
+ 	title
+ 	,amount_used
+ 	,category_id
+)
+VALUES
+ 	('옷삼',30000,'0')
+ 	,('밥삼',6000,'0')
+ 	,('걍 돈 버림',10000,'2')
+ 	,('햄버거 먹음',8000,'0')
+ 	,('곱도리탕 부심',12000,'0')
+ 	,('돈 많아서 걍 씀',10000,'2')
+ 	,('거지라서 사탕 사먹음',300,'1')
+ 	,('어쩔티비',10000,'2');
