@@ -90,7 +90,7 @@
 					<div class="side-left-line-2"></div>
 
 					<form action="" method="post">
-						<input type="radio" name="category" id="category1">
+						<input type="radio" name="category" id="category1" checked>
 						<label for="category1" class="category-box">전체 비용</label>
 				
 						<input type="radio" name="category" id="category2">
