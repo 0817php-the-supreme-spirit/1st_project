@@ -598,9 +598,13 @@ meter::-webkit-meter-bar {
 }
 
 .box6>form>button:hover {
-	color: #c0a0c9;
+	background-color: #c0a0c9;
+	color: #ffff;
+	transition: 0.2s;
 }
 
 .box6>form>a:hover {
-	color: #c0a0c9;
+	background-color: #c0a0c9;
+	color: #ffff;
+	transition: 0.2s;
 }
