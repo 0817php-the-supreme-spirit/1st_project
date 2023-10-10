@@ -1,6 +1,6 @@
 <?php
 	// ----------------------------
-	// 함수명 	: my_db_conn
+	// 함수명 	: db_conn
 	// 기능 	: DB Connecy
 	// 파라미터 : PDO &$conn
 	// 리턴 	: 없음
@@ -8,7 +8,7 @@
 
 	function db_conn( &$conn )
 	{
-		$db_host 	= "localhost"; //host | 127.0.0.1 = localhost 
+		$db_host 	= "192.168.0.85"; //host | 127.0.0.1 = localhost 
 		$db_user 	= "team2"; // user
 		$db_pw 		= "team2"; // password
 		$db_name 	= "1st_project"; // DB name
@@ -33,7 +33,49 @@
 		}
 	}
 
+	// ----------------------------
+	// 함수명 	: db_destroy_conn
+	// 기능 	: DB Destoroy
+	// 파라미터 : PDO &$conn
+	// 리턴 	: 없음
+	// ----------------------------
 
+	function db_destroy_conn(&$conn)
+	{
+		$conn = null;
+	}
+
+	// ----------------------------
+	// 함수명 	: db_select_boards_paging
+	// 기능 	: boards paging 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_select(&$conn) {
+		try {
+			$sql = 
+				" SELECT "
+				."		cate.category_name "
+				."		,todo.title "
+				."		,todo.amount_used "
+				." FROM "
+				."		todolist_table todo "
+				." JOIN "
+				." category_table cate "
+				." ON "
+				." todo.category_id = cate.category_id "
+				;
+
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return $result; // 정상 : 쿼리 결과 리턴
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		}
+	}
 
 
 

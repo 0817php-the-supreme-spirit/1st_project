@@ -1,9 +1,43 @@
+<?php
+	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
+	require_once(ROOT."lib/lib_db.php");
+	$conn = null;
+	$http_method = $_SERVER["REQUEST_METHOD"];
+
+	try {
+		if(!db_conn($conn))
+		{
+			//강제 예외 발생 : DB Instance
+			throw new Exception("DB Error : PDO Instance");
+		}
+
+		$result = db_select($conn);
+		if(!$result)
+		{
+			throw new Exception("DB Error : SELECT boards");
+		}
+
+		var_dump($result);
+
+
+	}
+	catch(Exception $e) {
+		echo $e->getMessage(); // 예외발생 메세지 출력
+		exit; // 처리 종료
+	}
+	finally {
+		db_destroy_conn($conn); // DB 파기
+	}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="./css/style.css">
+		<link rel="stylesheet" href="/1st_project/src/css/list/style.css">
 		<title>Document</title>
 	</head>
 

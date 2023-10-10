@@ -44,8 +44,8 @@ INSERT INTO category_table (
 )
  	
 VALUES (
- 	'2'
- 	,'stupid'
+ 	'1'
+ 	,'activity'
 );
 
 
@@ -63,3 +63,9 @@ VALUES
  	,('돈 많아서 걍 씀',10000,'2')
  	,('거지라서 사탕 사먹음',300,'1')
  	,('어쩔티비',10000,'2');
+ 	
+ 	
+SELECT cate.category_name, todo.title, todo.amount_used
+FROM todolist_table todo
+JOIN category_table cate
+ON todo.category_id = cate.category_id;
