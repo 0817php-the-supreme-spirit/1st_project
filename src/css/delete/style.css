@@ -348,7 +348,7 @@ meter::-webkit-meter-bar {
 	line-height: 100px;
 } */
 
-.box1 {
+/* .box1 {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
 	text-align: center;
@@ -429,11 +429,10 @@ meter::-webkit-meter-bar {
 /* .memo, .memo_box {
 	margin: 5px;
 } */
-
+/* 
 .box5, .box6 {
 	display: inline-block;
 	background-color: rgba(255, 255, 255, 0.5);
-	/* margin: 15px; */
 	width: 403px;
 	height: 80px;
 	text-align: center;
@@ -441,13 +440,171 @@ meter::-webkit-meter-bar {
 	border-radius: 20px;
 	position: relative;
 	bottom: 10px;
-}
+} */
 
-.box6 {
+/* .box6 {
 	left: 50px;
-}
+} */
 
 /* .box5 {
 	display: inline-block;
 	background-color: rgba(255, 255, 255, 0.5);
-} */
+} */ 
+
+.main_box {
+	border-collapse: collapse;
+}
+
+.box1 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 30px;
+	text-align: center;
+	width: 870px;
+	height: 150px;
+	padding-top: 30px;
+	line-height: 50px;
+	/* box-shadow: 5px 5px 5px 5px gray; */
+}
+
+.box1>h1 {
+	font-size: 3rem;	
+	
+}
+
+.box1>h1>span {
+	color: #ba2de1;
+	/* text-shadow: 3px 3px grey; */
+}
+
+.box2 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	text-align: center;
+	width: 870px;
+	height: 80px;
+	padding-top: 20px;
+	line-height: 50px;
+	color: #c0a0c9;
+}
+
+.box3 {
+	width: 870px;
+	height: 80px;
+	position: relative;
+}
+
+.box3-1 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	display: inline-block;
+	width: 157px;
+	height: 80px;
+	text-align: center;
+	padding-top: 30px;
+	position: absolute;
+	color: #c0a0c9;
+}
+
+.box3-2 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	display: inline-block;
+	text-align: center;
+	width: 700px;
+	height: 80px;
+	position: absolute;
+	left: 170px;
+	line-height: 80px;
+}
+
+.box4 {
+	width: 870px;
+	height: 80px;
+	position: relative;
+}
+
+.box4-1 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	display: inline-block;
+	width: 157px;
+	height: 80px;
+	text-align: center;
+	padding-top: 30px;
+	position: absolute;
+	color: #c0a0c9;
+}
+
+.box4-2 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	display: inline-block;
+	text-align: center;
+	width: 700px;
+	height: 80px;
+	position: absolute;
+	left: 170px;
+	line-height: 80px;
+}
+
+.box5 {
+	text-align: left;
+}
+
+.box5-1, .box5-2 {
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	display: inline-block;
+	width: 410px;
+	height: 100px;
+	padding-left: 30px;
+	line-height: 100px;
+	color: #c0a0c9;
+}
+
+.box5-2 {
+	position: relative;
+	left: 40px;
+}
+
+.box6 {
+	text-align: center;
+	
+}
+
+.box6-1 {
+	display: inline-block;
+	border: none;
+	color: #c0a0c9;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	width: 260px;
+	height: 76px;
+	position: relative;
+	right: 76px;
+}
+
+.box6-2 {
+	display: inline-block;
+	text-decoration: none;
+	color: #c0a0c9;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	width: 260px;
+	height: 76px;
+	line-height: 80px;
+	position: relative;
+	left: 76px;
+}
+
+.box6>form>button:hover {
+	background-color: #c0a0c9;
+	color: #ffff;
+	transition: 0.2s;
+}
+
+.box6>form>a:hover {
+	background-color: #c0a0c9;
+	color: #ffff;
+	transition: 0.2s;
+}
