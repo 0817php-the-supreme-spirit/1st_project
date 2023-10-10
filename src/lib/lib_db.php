@@ -109,7 +109,8 @@
 			];
 
 			$stmt = $conn->prepare($sql);
-			$result = $stmt->execute($arr_ps);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
 			return $result; // 결과 리턴
 
 		}
