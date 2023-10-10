@@ -297,7 +297,7 @@ input[type="radio"]:checked + label {
 	cursor: pointer;
 }
 .content-date-box input {
-	min-width: 50%;
+	min-width: 100%;
 	text-align: center;
 } 
 
