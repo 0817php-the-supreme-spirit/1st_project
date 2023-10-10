@@ -159,14 +159,14 @@ main {
 	cursor: pointer;
 }
 
-.date-boxt[type='date']::before {
+/* .date-boxt[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
-	}
+	} */
 
-.date-box[type='date']:valid::before {
+/* .date-box[type='date']:valid::before {
 	display: none;
-}
+} */
 
 /* input[type='date']::before {
 	content: attr(placeholder);
