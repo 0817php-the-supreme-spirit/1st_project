@@ -50,7 +50,35 @@
 
 			<div class="content">
 				<div class="content-box">
-					
+					<form action="#">
+							<input type="date" class="update-date-total">
+						<div class="update-category">
+							<select class="update-category">
+								<option value="do amount">생활 비용</option>
+								<option value="active amount">활동 비용</option>
+								<option value="babo amount">멍청 비용</option>
+							</select>
+							</div>
+							<div class="update-title-memo">
+								<div class="update-title">
+									<label for="update-title">제목</label>
+									<input type="text" id="update-title" placeholder="뭘 샀는지 궁금해요!" required>
+								</div>
+								<div class="update-memo">
+									<label for="update-memo"">메모</label>
+									<textarea name="update-memo" id="update-memo" cols="50" rows="1" maxlength="49" required></textarea>
+								</div>
+							</div>
+							<div class="update-spent">
+								<label for="update-spent"></label>
+								<input type="number" id="update-spent" placeholder="금액을 입력해주세요." required>
+							</div>
+							<div class="update-button">
+								<button type="submit">수정확인</button>
+								<a href="#">수정취소</a>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 
