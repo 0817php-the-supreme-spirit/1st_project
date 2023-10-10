@@ -65,7 +65,27 @@ VALUES
  	,('어쩔티비',10000,'2');
  	
  	
-SELECT cate.category_name, todo.title, todo.amount_used
+ 	
+INSERT INTO todolist_table (
+ 	title
+ 	,amount_used
+ 	,category_id
+ 	,create_date
+ 	,modify_date
+)
+VALUES
+ 	('옷삼',30000,'0',20230909,20230909)
+ 	,('밥삼',6000,'0',20230909,20230909)
+ 	,('걍 돈 버림',10000,'2',20230909,20230909)
+ 	,('햄버거 먹음',8000,'0',20230909,20230909)
+ 	,('곱도리탕 부심',12000,'0',20230909,20230909)
+ 	,('돈 많아서 걍 씀',10000,'2',20230909,20230909)
+ 	,('거지라서 사탕 사먹음',300,'1',20230909,20230909)
+ 	,('어쩔티비',10000,'2',20230909,20230909);
+ 	
+ 	
+SELECT todo.id, cate.category_name, todo.title, todo.amount_used
 FROM todolist_table todo
 JOIN category_table cate
-ON todo.category_id = cate.category_id;
+ON todo.category_id = cate.category_id
+WHERE todo.create_date = '2023-09-09';

@@ -90,7 +90,7 @@
 		try {
 			$sql = 
 				" SELECT "
-				." 		id "
+				." 		todo.id "
 				."		,cate.category_name "
 				."		,todo.title "
 				."		,todo.amount_used "
@@ -101,7 +101,7 @@
 				." ON "
 				." todo.category_id = cate.category_id "
 				." WHERE "
-				." create_date = :date "
+				." todo.create_date = :date "
 				;
 
 			$arr_ps = [
@@ -112,7 +112,6 @@
 			$stmt->execute($arr_ps);
 			$result = $stmt->fetchAll();
 			return $result; // 결과 리턴
-
 		}
 		catch(Exception $e) {
 			return false; // 예외 발생 : flase 리턴

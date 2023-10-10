@@ -23,6 +23,10 @@
 		else {
 			$date = $_POST["date"] ?? "";
 
+			// $date = str_replace('-', '', $date); // 하이픈 제거
+			// $date = (int)trim($date);
+			
+
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
@@ -32,10 +36,10 @@
 			];
 
 			$result = db_select_date($conn, $arr_param);
+			
 			if(!$result) {
 				throw new Exception("DB Error : select_date");
 			}
-			var_dump($result);
 		}
 
 
@@ -72,7 +76,7 @@
 					<form action="/1st_project/src/php/list.php" method="post">
 						<table>
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date" id="date" name="date">
+							<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 							<input type="submit" value="제출">
 						</table>
 					</form>
