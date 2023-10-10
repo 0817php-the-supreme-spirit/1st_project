@@ -159,14 +159,14 @@ main {
 	cursor: pointer;
 }
 
-.date-boxt[type='date']::before {
+/* .date-boxt[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
-	}
+	} */
 
-.date-box[type='date']:valid::before {
+/* .date-box[type='date']:valid::before {
 	display: none;
-}
+} */
 
 /* input[type='date']::before {
 	content: attr(placeholder);
@@ -231,7 +231,7 @@ main {
 } */
 
 .category-box {
-	margin-top: 20px;
+	margin-top: 17px;
 	width: 340px;
 	height: 50px;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -272,7 +272,7 @@ input[type="radio"]:checked + label {
 
 .content-box {
 	width: 870px;
-	height: 780px;
+	height: 775px;
 	overflow:scroll;
 	overflow-x: hidden
 }
@@ -349,7 +349,7 @@ input[type="radio"]:checked + label {
 
 .side-right-box {
 	width: 340px;
-	height: 780px;
+	height: 775px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
 	border: 1px solid #57BCA9;
