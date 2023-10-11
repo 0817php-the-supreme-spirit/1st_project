@@ -109,17 +109,29 @@
 					<div class="side-left-line-2"></div>
 
 					<form action="" method="post">
-						<input type="radio" name="category" id="category1" checked>
-						<label for="category1" class="category-box">전체 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="life" id="life" checked>
+							<label for="category1" class="category-box">전체 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category2">
-						<label for="category2" class="category-box">생활 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="life" id="life">
+							<label for="category2" class="category-box">생활 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category3">
-						<label for="category3" class="category-box">활동 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="activity" id="activity">
+							<label for="category3" class="category-box">활동 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category4">
-						<label for="category4" class="category-box">멍청 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="stupid" id="stupid">
+							<label for="category4" class="category-box">멍청 비용</label>
+							<button class="btn-position">></button>
+						</div>
 					</form>
 
 				</div>

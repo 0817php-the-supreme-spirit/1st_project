@@ -47,7 +47,7 @@
 
 	// ----------------------------
 	// 함수명 	: db_select
-	// 기능 	: boards paging 조회
+	// 기능 	: 1st_project 게시물 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -69,7 +69,7 @@
 				." WHERE "
 				." todo.create_date = :date "
 				;
-				
+
 		$arr_ps = [
 			":date" => $arr_param["date"]
 		];
@@ -87,7 +87,7 @@
 
 	// ----------------------------
 	// 함수명 	: db_select_date
-	// 기능 	: boards paging 조회
+	// 기능 	: 1st_project 해당 날짜 게시물 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
