@@ -223,7 +223,7 @@
 							<a href="">수정</a>
 						</div>
 						<div class="content-btn-delete">
-							<a href="">삭제</a>
+							<a href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>">삭제</a>
 						</div>
 
 					</div>

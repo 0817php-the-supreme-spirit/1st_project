@@ -1,23 +1,21 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 require_once(ROOT."lib/delete_lib_db.php");
 
-$conn=null;
-db_conn($conn);//서버 연결
-
-
+$arr_err_msg = [];
 
 try {
     //2. db connect
     //2-1. connection 함수 호출
-     // PDO 객체 변수
+    $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
-        //2-2. 예외처리
         throw new Exception("DB Error : PDO Instance");
     }
 
     // METHOD 획득?
     $http_method = $_SERVER["REQUEST_METHOD"];
+
     if($http_method === "GET") {
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         
@@ -51,9 +49,7 @@ try {
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        // if($page === "") {
-        //     $arr_err_msg[] = "Parameter Error : page";
-        // }
+        
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -72,7 +68,6 @@ try {
             throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
-        
         exit;
     }
 } catch(Exception $e) {
@@ -80,7 +75,7 @@ try {
         $conn->rollBack();
     }
     //echo $e->getMessage(); // 에러메세지 출력
-    header("Location: error.php/?err_msg={$e->getMessage()}");
+    //header("Location: error.php/?err_msg={$e->getMessage()}");
     exit; // 처리종료
 } finally {
     db_destroy_conn($conn);
@@ -171,10 +166,9 @@ try {
 				<br>
 					<div class="box6">
 						<form action="" method="post">
-							<input type="hidden" name="id" value="">
+							<input type="hidden" name="id" value="<?php echo $id; ?>">
 							<button type="submit" class="box6-1">삭제</button>
-							
-							<a href="/1st_project/src/php/list.php" class="box6-2">취소</a>
+							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>" class="box6-2">취소</a>
 						</form>
 					</div>
 				</div>
