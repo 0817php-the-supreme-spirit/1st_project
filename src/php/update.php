@@ -20,8 +20,6 @@ $memo = $_POST["memo"];
 $amount_used = $_POST["amount_used"];
 $create_date = $_POST["create_date"];
 $category_id = $_POST["category_id"];
-echo var_dump($title);
-echo var_dump($memo);
 
 $arr_param = [
 	"title" => $title
@@ -39,7 +37,7 @@ if(!update_execute($conn, $arr_param)){
 }
 $conn->commit();
 
-header("Location: php/detail.php/?id={$id}"); //업데이트 완료 후 디테일 페이지로 이동
+header("Location: /1st_project/src/php/datail.php/?id={$id}"); //업데이트 완료 후 디테일 페이지로 이동
 exit;
 }
 //업데이트 완료한거 불러오기
@@ -115,37 +113,37 @@ $item = $result[0];
 
 			<div class="content">
 				<div class="content-box">
-					<form action="#" method="POST">
-						<input type="hidden" name="id" value="<?php echo $item["id"]; ?>">
-							<input type="date" class="update-date" value="<?php echo $item["create_date"]; ?>">
+					<form action="/1st_project/src/php/update.php" method="POST">
+						<input type="hidden" name="id" value="<?php echo $id; ?>">
+						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
-							<select class="update-category">
+							<select name="category_id" class="update-category">
 								<option value="0">생활 비용</option>
 								<option value="1">활동 비용</option>
 								<option value="2">멍청 비용</option>
 							</select>
+						</div>
+						<div class="update-title-memo">
+							<div class="update-title">
+								<label for="update-title">제목</label>
+								<input type="text" name="title" id="update-title" placeholder="뭘 샀는지 궁금해요!" required value="<?php echo $item["title"]; ?>">
 							</div>
-							<div class="update-title-memo">
-								<div class="update-title">
-									<label for="update-title">제목</label>
-									<input type="text" id="update-title" placeholder="뭘 샀는지 궁금해요!" required value="<?php echo $item["title"]; ?>">
-								</div>
-								<div class="update-memo">
-									<label for="update-memo">메모</label>
-									<textarea name="update-memo" id="update-memo" cols="50" rows="1" maxlength="49"><?php echo $item["memo"]; ?></textarea>
-								</div>
+							<div class="update-memo">
+								<label for="update-memo">메모</label>
+								<textarea name="memo" id="update-memo" cols="50" rows="1" maxlength="49"><?php echo $item["memo"]; ?></textarea>
 							</div>
-							<div class="update-spent">
-								<label for="update-spent"></label>
-								<input type="number" id="update-spent" placeholder="금액을 입력해주세요." required value="<?php echo $item["amount_used"]; ?>">
-							</div>
-							<div class="update-button">
-								<button type="submit">수정확인</button>
-								<a href="/1st_project/src/php/datail.php/?id=<?php echo $id; ?>">수정취소</a>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="update-spent">
+							<label for="update-spent"></label>
+							<input type="number" name="amount_used" id="update-spent" placeholder="금액을 입력해주세요." required value="<?php echo $item["amount_used"]; ?>">
+						</div>
+						<div class="update-button">
+							<button type="submit">수정확인</button>
+							<a href="/1st_project/src/php/datail.php/?id=<?php echo $id; ?>">수정취소</a>
+						</div>
+					</form>
 				</div>
+			</div>
 
 			<div class="side-right">
 				<div class="side-right-box">

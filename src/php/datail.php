@@ -220,7 +220,7 @@
 							<a href="">이전</a>
 						</div>
 						<div class="content-btn-correction">
-							<a href="">수정</a>
+							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>">수정</a>
 						</div>
 						<div class="content-btn-delete">
 							<a href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>">삭제</a>
