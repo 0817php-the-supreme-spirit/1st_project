@@ -32,7 +32,7 @@ try {
         $arr_param = [
             "id" => $id
         ];
-        $result = db_select_date($conn, $arr_param);
+        $result = db_select_id($conn, $arr_param);
         // 예외처리
         if($result === false) {
             throw new Exception("DB Error : Select id");
@@ -49,9 +49,7 @@ try {
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        if($date === "") {
-            $arr_err_msg[] = "Parameter Error : date";
-        }
+
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -146,7 +144,7 @@ try {
 						</div>
 					<br>	
 						<div class="box2">
-							<h1 class="box2-1">카테고리</h1> <h1 class="box2-2">날짜</h1>
+							<h1 class="box2-1"><?php echo $item["category_name"]?></h1> <h1 class="box2-2"><?php echo $item["create_date"]?></h1>
 						</div>
 					<br>	
 						<div class="box3">
@@ -161,7 +159,7 @@ try {
 					<br>
 					<br>
 						<div class="box5">
-							<span class="box5-1">일일 사용 금액:</span> <span class="box5-2">일일 잔여 금액:</span>
+							<span class="box5-1">일일 사용 금액: <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액: <?php echo $item["daily_salary"]?></span>
 						</div>
 					
 				<br>
