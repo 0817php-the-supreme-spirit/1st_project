@@ -2,7 +2,7 @@
 /* 기본 값
 /* ------------------------------------------------------------------------ */
 @font-face {
-	src: url(../font/a신디나루M.ttf);
+	src: url(/1st_project/src/font/a신디나루M.ttf);
 	font-family: "main-font";
 }
 
@@ -14,7 +14,7 @@
 	font-family: "main-font";
 	font-size: 25px;
 	font-weight: 600;
-	cursor: url(../cur/B.cur), url(../cur/A.cur), auto
+	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto
 }
 
 /* reset.css */
@@ -68,7 +68,7 @@ input {
 }
 
 body {
-	background-image: url(../img/back.jpg);
+	background-image: url(/1st_project/src/img/back.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px;
@@ -159,7 +159,7 @@ main {
 	cursor: pointer;
 }
 
-.date-boxt[type='date']::before {
+.date-box[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
 	}
@@ -188,7 +188,7 @@ main {
 
 .side-left-on {
 	margin-top: 30px;
-	background-image: url(../img/btn-on.png);
+	background-image: url(/1st_project/src/img/btn-on.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -197,7 +197,7 @@ main {
 
 .side-left-off {
 	margin-top: 25px;
-	background-image: url(../img/btn-off.png);
+	background-image: url(/1st_project/src/img/btn-on.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -205,7 +205,7 @@ main {
 }
 
 .side-left-page:hover {
-	background-image: url(../img/btn-on.png);
+	background-image: url(/1st_project/src/img/btn-on.png);
 	color: #57BCA9;
 }
 
@@ -308,7 +308,7 @@ input[type="radio"]:checked + label {
 	margin-top: 50px;
 	width: 330px;
 	height: 90px;
-	background-image: url(../img/result.png);
+	background-image: url(/1st_project/src/img/result.png);
 	text-align: center;
 	line-height: 90px;
 	font-size: 40px;
@@ -320,7 +320,7 @@ input[type="radio"]:checked + label {
 	margin-top: 30px;
 	width: 212px;
 	height: 382px;
-	background-image: url(../img/character1.png);
+	background-image: url(/1st_project/src/img/character1.png);
 	background-repeat: no-repeat;
 }
 
