@@ -129,7 +129,7 @@
 
 	function db_insert(&$conn, &$arr_param) {
 		$sql =
-			" INSERT INTO  ( "
+			" INSERT INTO todolist_table ( "
 			." title "
 			." ,memo "
 			." ,amount_used "
