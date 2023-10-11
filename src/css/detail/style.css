@@ -369,6 +369,7 @@ input[type="radio"]:checked + label {
 	font-size: 35px;
 	color: #57BCA9;
 	display: inline-block;
+	position: relative;
 }
 
 .content-memo-box-1 {
@@ -378,6 +379,8 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	margin-right: 25px;
 	display: inline-block;
+	position: absolute;
+	left: 0px;
 }
 
 .content-memo-box-2 {
@@ -386,6 +389,8 @@ input[type="radio"]:checked + label {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
 	display: inline-block;
+	position: absolute;
+	left: 200px;
 }
 
 .content-value-box {

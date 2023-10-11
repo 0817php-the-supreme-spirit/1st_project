@@ -178,7 +178,7 @@
 							</div>
 
 							<div class="content-title-box-2">
-								<p>제목 값</p>
+								<p><?php echo $item["title"]; ?></p>
 							</div>
 						</div>
 
@@ -188,14 +188,19 @@
 							</div>
 
 							<div class="content-memo-box-2">
-								<p>메모 값</p>
+								<p><?php if($item["memo"] == 0) {
+									echo "메모를 하지 않았어요";
+									}
+									else {
+									echo $item["memo"]; 
+									} ?></p>
 							</div>
 						</div>
 
 						<div class="content-value-box">
 							<div class="content-user-box">
 								<div class="content-user-amount">
-									<p>일일 사용 금액 : 20000</p>
+									<p>일일 남은 금액 : <?php echo $item["amount_used"]; ?></p>
 								</div>
 		
 								<div class="content-user-remaining">

@@ -223,6 +223,7 @@
 			." 		todo.id "
 			."		,cate.category_name "
 			."		,todo.title "
+			." 		,todo.memo "
 			."		,todo.amount_used "
 			." 		,todo.create_date "
 			." FROM "

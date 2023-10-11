@@ -55,11 +55,11 @@ INSERT INTO todolist_table (
  	,category_id
 )
 VALUES
- 	('옷삼',30000,'0')
- 	,('밥삼',6000,'0')
- 	,('걍 돈 버림',10000,'2')
- 	,('햄버거 먹음',8000,'0')
- 	,('곱도리탕 부심',12000,'0')
+ 	('옷삿다',30000,'0')
+ 	,('니가알던 내가 아냐',6000,'0')
+ 	,('걍 닌텐도 지름',10000,'2')
+ 	,('마제소바 머금 먹음',8000,'0')
+ 	,('마라탕을 손으로  부심',12000,'0')
  	,('돈 많아서 걍 씀',10000,'2')
  	,('거지라서 사탕 사먹음',300,'1')
  	,('어쩔티비',10000,'2');
@@ -88,4 +88,19 @@ SELECT todo.id, cate.category_name, todo.title, todo.amount_used
 FROM todolist_table todo
 JOIN category_table cate
 ON todo.category_id = cate.category_id
-WHERE todo.create_date = '2023-09-01';
+WHERE cate.category_name = 'life'
+AND todo.create_date = 20231010;
+
+SELECT todo.id, cate.category_name, todo.title, todo.amount_used
+FROM todolist_table todo
+JOIN category_table cate
+ON todo.category_id = cate.category_id
+WHERE cate.category_name = 'life'
+AND todo.id = 9;
+
+SELECT *
+FROM todolist_table todo
+JOIN category_table cate
+ON todo.category_id = cate.category_id
+
+alter table todolist_table alter column memo set DEFAULT '메모 없음';
