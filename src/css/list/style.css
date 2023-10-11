@@ -87,7 +87,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: transparent; // 뒷 배경을 부모와 같게 맞춰줌
+    background-color: transparent;
 	outline: none;
 	border: none;
 }
@@ -284,6 +284,10 @@ input[type="radio"]:checked + label {
     background-color:#57BCA9;
 	color: #fff;
 }
+
+.category-box:focus {
+	background-color: #57BCA9;
+}
 /* ------------------------------------------------------------------------ */
 
 
@@ -343,7 +347,7 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	text-align: center;
 	line-height: 80px;
-	padding: 5px;
+	/* padding: 5px; */
 }
 
 .content-title-box {
@@ -443,15 +447,17 @@ meter::-webkit-meter-bar {
 }
 /* ------------------------------------------------------------------------ */
 /* 공통 사항 추가 부분 */
-
-.category-all-box {
-	position: relative;
+.content-td-color {
+	background-color: rgba(87, 188, 169, 0.8);
+	color: #fff;
+	font-size: 30px;
 }
 
-.btn-position {
-	position: absolute;
-	border-radius: 50px;
+.gap {
+	padding-top: 8px;
+}
+
+.category-box-select {
+	background-color: #57BCA9;
 	color: #fff;
-	top: 28px;
-	left: 300px;
 }

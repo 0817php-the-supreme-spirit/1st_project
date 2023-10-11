@@ -18,6 +18,9 @@
 			$id = isset($_GET["id"]) ? $_GET["id"] : "";
 			$date = date('Y-m-d');
 
+			if($id === "" ) {
+				$arr_err_msg[] = "Parameter Error : id";
+			}
 
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
@@ -27,12 +30,27 @@
 				$arr_param = [
 					"date" => $date
 				];
+
 				$result = db_select($conn, $arr_param);
 
 				if(!$result)
 				{
 					throw new Exception("DB Error : SELECT boards");
 				}
+				$arr_param = [
+					"id" => $id
+				];
+		
+				$result = db_select_id($conn, $arr_param);
+		
+				if($result === false) {
+					throw new Exception("DB Error : Select id");
+				}
+		
+				else if(!(count($result) === 1)) {
+					throw new Exception("DB Error : Select id Count");
+				}
+				$item = $result[0];
 			}
 		}
 		else {
@@ -69,6 +87,7 @@
 				}
 			}
 		}
+
 	}
 	catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
@@ -80,20 +99,20 @@
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/1st_project/src/css/list/style.css">
-		<title>아껴봐요 절약의 숲 리스트 페이지</title>
+		<link rel="stylesheet" href="/1st_project/src/css/detail/style.css">
+		<title>Document</title>
 	</head>
 
 	<body>
+
 		<main>
 			<div class="header">
-				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
@@ -142,43 +161,73 @@
 			</div>
 
 			<div class="content">
-				<div class="content-box">
-						<?php foreach($arr_err_msg as $val) { ?>
-							<div class="error-box">
-							<p class="err_msg"><?php echo $val; ?></p>
-							</div>
-						<?php } ?>
+				<?php 
+					foreach($result as $item) {
+				?>
+					<div class="content-box">
+						<div class="content-date-box">
+							<span><?php echo $item["create_date"]; ?></span>
+						</div>
+						<div class="content-category-box">
+							<span>카테고리</span>
+						</div>
 
-					<?php 
-					if(!$arr_err_msg) { ?>
-						<table class="content-table">
-							<tr>
-								<td class="content-categort-box content-td-color">분류</td>
-								<td class="content-title-box content-td-color">제목</td>
-								<td class="content-amount-box content-td-color">사용 금액</td>
-							</tr>
-					<?php } ?>
-						
-						<?php 
-							foreach($result as $item) {
-						?>
-						<tr>
-							<td class="content-categort-box">
-								<?php if($item["category_name"] == 'life') { ?>
-									<img class="gap" src="/1st_project/src/img/life.png"> 
-								<?php } else if($item["category_name"] == 'activity') { ?>
-									<img class="gap" src="/1st_project/src/img/activity.png">
-								<?php }  else { ?>
-									<img src="/1st_project/src/img/stupid.png">
-								<?php } ?>
-							</td>
-							<td class="content-title-box"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>"><?php echo $item["title"]?></a></td>
-							<td class="content-amount-box"><?php echo $item["amount_used"], "원"; ?></td>
-						</tr>
-						<?php 
-							}
-						?>
-					</table>
+						<div class="content-title-box">
+							<div class="content-title-box-1">
+								<p>제목</p>
+							</div>
+
+							<div class="content-title-box-2">
+								<p><?php echo $item["title"]; ?></p>
+							</div>
+						</div>
+
+						<div class="content-memo-box">
+							<div class="content-memo-box-1">
+								<p>메모</p>
+							</div>
+
+							<div class="content-memo-box-2">
+								<p><?php if($item["memo"] == 0) {
+									echo "메모를 하지 않았어요";
+									}
+									else {
+									echo $item["memo"]; 
+									} ?></p>
+							</div>
+						</div>
+
+						<div class="content-value-box">
+							<div class="content-user-box">
+								<div class="content-user-amount">
+									<p>일일 남은 금액 : <?php echo $item["amount_used"]; ?></p>
+								</div>
+		
+								<div class="content-user-remaining">
+									<p>일일 남은 금액 : 20000</p>
+								</div>
+							</div>
+
+							<div class="content-phrases-box">
+								<p>파이어족이</p>
+								<p>될꺼야?</p>
+							</div>
+						</div>
+				<?php } ?>
+
+					<div class="content-btn-box">
+						<div class="content-btn-before">
+							<a href="">이전</a>
+						</div>
+						<div class="content-btn-correction">
+							<a href="">수정</a>
+						</div>
+						<div class="content-btn-delete">
+							<a href="">삭제</a>
+						</div>
+
+					</div>
+					
 				</div>
 			</div>
 

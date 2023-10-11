@@ -2,6 +2,77 @@
 define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 require_once(ROOT."lib/insert_lib_db.php"); // db관련 라이브러리
 
+$conn = null; 
+$http_method = $_SERVER["REQUEST_METHOD"];
+$arr_err_msg = []; // 에러 메세지 저장
+$title = "";
+$memo = "";
+$amount_used = "";
+$create_date = "";
+$category_id = "";
+
+// POSt로 request가 왔을 때 처리
+// $mttp_method = $_SERVER["REQUEST"];
+if($http_method === "POST") {
+	try {
+		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : "";
+		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
+		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
+		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
+	
+		if($title === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
+        }
+        if($name_t === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "memo");
+        }
+		if($name_t === "") {
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");       
+		}
+		if($name_t === "") {
+		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+		}
+		if($name_t === "") {
+		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
+		}
+
+		if(count($arr_err_msg) === 0) {
+
+			$arr_post = $_POST;
+			$conn = null;
+
+ 		// DB 접속
+	    if(!db_conn($conn)) {
+            // DB Instance 에러
+		    throw new Exception("DB Error : PDO Instance");
+
+	    }
+        $conn ->beginTransaction(); //트랜잭션 시작 하는 부분
+
+        //insert
+        if(!db_insert($conn, $arr_post)) {
+            throw new Exception("DB Error : Insert test");
+        }
+
+        $conn->commit(); //모든 처리 완료 시 커밋
+
+        //리스트 페이지로 이동
+        header("Location: list.php");
+        exit;
+      }
+	} catch(Exception $e) {
+        if($conn !== null) {
+        $conn->rollBack();
+        }
+        // echo $e->getMessage(); //Exception 메세지 출력
+        header("Location: error.php/?err_msg={$e->getMessage()}");
+        exit;
+    } finally {
+        db_destroy_conn($conn); // db 파기
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -60,36 +131,34 @@ require_once(ROOT."lib/insert_lib_db.php"); // db관련 라이브러리
 						<!-- <p>날짜</p> -->
 						<input type="date">
 					</div>
-					<form>
-						<table>
-							<label for="text-title" class="content-title-box1">제목</label>
-							<input type="text" id="text-title" class="content-title-box2" placeholder="뭘 샀는지 궁금해요!">
-							<div class="content-memo-box">
-								<label for="text-memo" class="content-memo-box1">메모</label>
-								<textarea class="content-memo-box2" id="text-memo" maxlength="50" placeholder="같이 작성하면 좋아요!"></textarea>
+					<form action="/1st_project/src/insert.php" method="post">
+							<table>
+								<label for="text-title" class="content-title-box1">제목</label>
+								<input type="text" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
+								<div class="content-memo-box">
+									<label for="text-memo" class="content-memo-box1">메모</label>
+									<textarea class="content-memo-box2" id="text-memo" maxlength="50" placeholder="같이 작성하면 좋아요!"></textarea>
+								</div>
+							</table>
+						<div class="content-value-box">
+							<div class="content-float1">
+									<select name="category1" id="category" class="content-category" required>
+										<option value="" selected disabled hidden>선택해주세요</option>
+										<option value="life">생활비용</option>
+										<option value="activity">활동비용</option>
+										<option value="stupid">멍청비용</option>
+									</select>
+								<p class="content-category-money"><input type="number" name="number" required placeholder="금액을 입력해 주세요"></p>
 							</div>
-						</table>
+							<div class="content-float2">
+								<p>벌써 지출</p>
+								<p>할려고요?</p>
+							</div>
+						</div>
+						<div class="content-button">
+							<button class="content-button-go" type="submit">작성</button>
+						<a href="/1st_project/src/list.php" class="content-button-back">돌아가기</a>
 					</form>
-					<div class="content-value-box">
-						<div class="content-float1">
-							<form action="#">
-								<select name="category1" id="category" class="content-category">
-									<option value="" selected disabled hidden>선택해주세요</option>
-									<option value="life">생활비용</option>
-									<option value="activity">활동비용</option>
-									<option value="stupid">멍청비용</option>
-								</select>
-							</form>
-							<p class="content-category-money"><input type="number" name="number" placeholder="금액을 입력해 주세요"></p>
-						</div>
-						<div class="content-float2">
-							<p>벌써 지출</p>
-							<p>할려고요?</p>
-						</div>
-					</div>
-					<div class="content-button">
-						<button class="content-button-go">작성</button>
-						<a href="#" class="content-button-back">돌아가기</a>
 					</div>
 				</div>
 			</div>
