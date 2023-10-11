@@ -14,7 +14,7 @@
 	font-family: "main-font";
 	font-size: 25px;
 	font-weight: 600;
-	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto
+	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto; 
 }
 
 /* reset.css */
