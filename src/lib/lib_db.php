@@ -268,13 +268,72 @@
 // main.php
 
 	// ----------------------------
-	// 함수명 	: db_uset_salary_insert
+	// 함수명 	: db_user_salary_insert
 	// 기능 	: 유저의 한달 급여 입력
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
 	// ----------------------------
 
+	function db_user_salary_insert(&$conn, &$arr_param) {
+		$sql = 
+			" INSERT INTO user_table ( "
+			."		monthly_salary "
+			."		,daily_salary "
+			." ) "
+			." VALUES ( "
+			."		:monthly_salary "
+			." 		,:daily_salary "
+			." ) "
+			;
+
+		$arr_ps = [
+			":monthly_salary" => $arr_param["monthly_salary"]
+			,":daily_salary" => $arr_param["daily_salary"]
+		];
+
+		try {
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; // 결과 리턴
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		}
+	}
+
+		// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_date_compare(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		todo.id "
+			." FROM "
+			."		todolist_table todo "
+			." WHERE "
+			." 		todo.id = :id "
+			;
+
+			$arr_ps = [
+				":id" => $arr_param["id"]
+			];
+			
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		} 
+	}
 
 // -------------------------------------------------------------
 ?>
