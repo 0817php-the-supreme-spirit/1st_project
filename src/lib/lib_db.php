@@ -314,17 +314,8 @@
 		$sql = 
 			" SELECT "
 			." 		todo.id "
-			."		,cate.category_name "
-			."		,todo.title "
-			." 		,todo.memo "
-			."		,todo.amount_used "
-			." 		,todo.create_date "
 			." FROM "
 			."		todolist_table todo "
-			." JOIN "
-			." 		category_table cate "
-			." ON "
-			." 		todo.category_id = cate.category_id "
 			." WHERE "
 			." 		todo.id = :id "
 			;
