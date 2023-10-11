@@ -19,16 +19,13 @@ try {
     // METHOD 획득?
     $http_method = $_SERVER["REQUEST_METHOD"];
     if($http_method === "GET") {
-        
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        $page = isset($_GET["page"]) ? $_GET["page"] : "";
+        
         $arr_err_msg = [];
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        if($page === "") {
-            $arr_err_msg[] = "Parameter Error : page";
-        }
+        
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -72,7 +69,7 @@ try {
 
         //예외처리
         if(!$result) {
-            throw new Exception("DB Error : Delete Boards id");
+            throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
         
@@ -152,17 +149,17 @@ try {
 						</div>
 					<br>	
 						<div class="box2">
-							<h1>날짜</h1>
+							<h1 class="box2-1">카테고리</h1> <h1 class="box2-2">날짜</h1>
 						</div>
 					<br>	
 						<div class="box3">
 							<p class="box3-1">제목</p>
-							<p class="box3-2">tqtqtqtqtqtqtqtqtqtqtqtqtqtqtq</p>
+							<p class="box3-2"><?php echo $item["title"]?></p>
 						</div>
 					<br>
 						<div class="box4">
 							<p class="box4-1">메모</p>
-							<p class="box4-2">아아아ㅏㄱ</p>
+							<p class="box4-2"><?php echo $item["memo"]?></p>
 						</div>
 					<br>
 					<br>

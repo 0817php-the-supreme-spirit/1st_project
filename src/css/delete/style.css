@@ -2,7 +2,7 @@
 /* 기본 값
 /* ------------------------------------------------------------------------ */
 @font-face {
-	src: url(/1st_project/src/font/a신디나루M.ttf);
+	src: url(../font/a신디나루M.ttf);
 	font-family: "main-font";
 }
 
@@ -14,7 +14,7 @@
 	font-family: "main-font";
 	font-size: 25px;
 	font-weight: 600;
-	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto
+	cursor: url(../cur/B.cur), url(../cur/A.cur), auto
 }
 
 /* reset.css */
@@ -68,7 +68,7 @@ input {
 }
 
 body {
-	background-image: url(/1st_project/src/img/back.jpg);
+	background-image: url(../img/back.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px;
@@ -159,7 +159,7 @@ main {
 	cursor: pointer;
 }
 
-.date-box[type='date']::before {
+.date-boxt[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
 	}
@@ -188,7 +188,7 @@ main {
 
 .side-left-on {
 	margin-top: 30px;
-	background-image: url(/1st_project/src/img/btn-on.png);
+	background-image: url(../img/btn-on.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -197,7 +197,7 @@ main {
 
 .side-left-off {
 	margin-top: 25px;
-	background-image: url(/1st_project/src/img/btn-on.png);
+	background-image: url(../img/btn-off.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -205,7 +205,7 @@ main {
 }
 
 .side-left-page:hover {
-	background-image: url(/1st_project/src/img/btn-on.png);
+	background-image: url(../img/btn-on.png);
 	color: #57BCA9;
 }
 
@@ -308,7 +308,7 @@ input[type="radio"]:checked + label {
 	margin-top: 50px;
 	width: 330px;
 	height: 90px;
-	background-image: url(/1st_project/src/img/result.png);
+	background-image: url(../img/result.png);
 	text-align: center;
 	line-height: 90px;
 	font-size: 40px;
@@ -320,7 +320,7 @@ input[type="radio"]:checked + label {
 	margin-top: 30px;
 	width: 212px;
 	height: 382px;
-	background-image: url(/1st_project/src/img/character1.png);
+	background-image: url(../img/character1.png);
 	background-repeat: no-repeat;
 }
 
@@ -477,14 +477,22 @@ meter::-webkit-meter-bar {
 }
 
 .box2 {
+	text-align: center;
+}
+
+.box2-1, .box2-2 {
+	width: 430px;
+	height: 80px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	text-align: center;
-	width: 870px;
-	height: 80px;
-	padding-top: 20px;
-	line-height: 50px;
+	display: inline-block;
+	line-height: 80px;
 	color: #c0a0c9;
+}
+
+.box2-1 {
+
 }
 
 .box3 {
