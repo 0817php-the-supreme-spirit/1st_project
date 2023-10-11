@@ -3,6 +3,8 @@ define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 require_once(ROOT."lib/delete_lib_db.php");
 
+//db_conn($conn);
+
 $arr_err_msg = [];
 
 try {
@@ -18,12 +20,10 @@ try {
 
     if($http_method === "GET") {
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        
         $arr_err_msg = [];
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -49,7 +49,9 @@ try {
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        
+        if($date === "") {
+            $arr_err_msg[] = "Parameter Error : date";
+        }
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
