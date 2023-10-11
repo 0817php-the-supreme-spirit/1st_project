@@ -302,8 +302,8 @@
 		}
 	}
 
-		// ----------------------------
-	// 함수명 	: db_user_salary_date_compare
+	// ----------------------------
+	// 함수명 	: db_user_salary_compare
 	// 기능 	: 유저의 한달 주기 비교
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
@@ -313,25 +313,58 @@
 	function db_user_salary_date_compare(&$conn, &$arr_param) {
 		$sql = 
 			" SELECT "
-			." 		todo.id "
+			." 		input_date "
 			." FROM "
-			."		todolist_table todo "
+			."		user_table "
 			." WHERE "
-			." 		todo.id = :id "
+			." 		input_date "
+			." BETWEEN "
+			." date_format(now(), '%Y-%m-01') "
+			." AND "
+			." date_format(now(), '%Y-%m-%d') "
 			;
 
-			$arr_ps = [
-				":id" => $arr_param["id"]
-			];
-			
 		try {
 			$stmt = $conn->prepare($sql);
 			$stmt->execute($arr_ps);
 			$result = $stmt->fetchAll();
-			return $result;
+			return count($result);
 		}
 		catch(Exception $e) {
 			return false; // 예외 발생 : flase 리턴
+		} 
+	}
+
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_compare(&$conn) {
+		$sql = 
+			" SELECT "
+			." 		input_date "
+			." FROM "
+			."		user_table "
+			." WHERE "
+			." 		input_date "
+			." BETWEEN "
+			." date_format(now(), '%Y-%m-01') "
+			." AND "
+			." date_format(now(), '%Y-%m-%d') "
+			;
+			
+		try {
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return count($result);
+		}
+		catch(Exception $e) {
+			return false;
 		} 
 	}
 
