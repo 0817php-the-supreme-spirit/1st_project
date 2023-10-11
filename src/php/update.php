@@ -1,0 +1,111 @@
+<?php
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/src/lib/");
+require_once(ROOT."update_lib_db.php");
+
+$conn = null;
+
+db_conn($conn);
+
+?>
+
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="">
+		<title>Document</title>
+	</head>
+
+	<body>
+
+		<main>
+			<div class="header">
+				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
+			</div>
+
+			<div class="side-left">
+				<div class="side-left-box">
+					<form action="list.html/?date=" method="post">
+						<table>
+							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
+							<input class="date-box" type="date">
+						</table>
+					</form>
+
+					<div class="side-left-line-1"></div>
+
+					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
+					<a href=""><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
+					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+
+					<div class="side-left-line-2"></div>
+
+					<form action="" method="post">
+						<input type="radio" name="category" id="category1">
+						<label for="category1" class="category-box">전체 비용</label>
+				
+						<input type="radio" name="category" id="category2">
+						<label for="category2" class="category-box">생활 비용</label>
+				
+						<input type="radio" name="category" id="category3">
+						<label for="category3" class="category-box">활동 비용</label>
+				
+						<input type="radio" name="category" id="category4">
+						<label for="category4" class="category-box">멍청 비용</label>
+					</form>
+
+				</div>
+			</div>
+
+			<div class="content">
+				<div class="content-box">
+					<form action="#">
+							<input type="date" class="update-date-total">
+						<div class="update-category">
+							<select class="update-category">
+								<option value="do amount">생활 비용</option>
+								<option value="active amount">활동 비용</option>
+								<option value="babo amount">멍청 비용</option>
+							</select>
+							</div>
+							<div class="update-title-memo">
+								<div class="update-title">
+									<label for="update-title">제목</label>
+									<input type="text" id="update-title" placeholder="뭘 샀는지 궁금해요!" required>
+								</div>
+								<div class="update-memo">
+									<label for="update-memo"">메모</label>
+									<textarea name="update-memo" id="update-memo" cols="50" rows="1" maxlength="49" required></textarea>
+								</div>
+							</div>
+							<div class="update-spent">
+								<label for="update-spent"></label>
+								<input type="number" id="update-spent" placeholder="금액을 입력해주세요." required>
+							</div>
+							<div class="update-button">
+								<button type="submit">수정확인</button>
+								<a href="#">수정취소</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="side-right">
+				<div class="side-right-box">
+					
+					<div class="side-right-top"><p>성 공!</p></div>
+					<div class="side-right-character"></div>
+					<div class="side-right-bottom">
+						<p>소비한 벨</p>
+						<meter value="15" min="0" max="100" optimum="15" id="meter"></meter>
+						<p>사용 금액 / 전체 금액</p>
+					</div>
+
+				</div>
+			</div>
+		</main>
+		
+	</body>
+</html>
