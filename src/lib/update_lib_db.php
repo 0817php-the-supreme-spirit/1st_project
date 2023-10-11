@@ -141,7 +141,7 @@ function update_execute( &$conn, &$arr_param ){
 		,":id" => $arr_param["id"]
 	];
 	$stmt = $conn->prepare($sql);
-	$result = $stmt->fetchAll();
+	$stmt->execute($arr_ps);
 	return $result;
 }catch(Exception $e){
 	echo $e->getMessage(); // Exception 메세지 출력
@@ -149,4 +149,35 @@ function update_execute( &$conn, &$arr_param ){
 }
 
 }
-// ?>
+
+function select_change_detail( &$conn, &$arr_param_id ){
+	try{$sql = " SELECT "
+	."			cate.category_name "
+	."			,tod.title "
+	."			,tod.memo "
+	."			,tod.amount_used "
+	."			,tod.create_date "
+	."		FROM "
+	."			todolist_table tod "
+	."		JOIN "
+	."			category_table cate "
+	."		ON "
+	."			cate.category_id = tod.category_id "
+	."		WHERE "
+	."			id = :id ";
+
+	$arr_param = [
+		":id" => $arr_param_id["id"]
+	];
+
+	$stmt = $conn->prepare($sql);
+	$stmt->execute($arr_param);
+	$result = $stmt->fetchAll();
+	return $result;
+}catch(Exception $e){
+	echo $e->getMessage(); // Exception 메세지 출력
+	return false;
+}
+}
+
+?>
