@@ -87,7 +87,7 @@ button {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-color: transparent; // 뒷 배경을 부모와 같게 맞춰줌
+    background-color: transparent;
 	outline: none;
 	border: none;
 }

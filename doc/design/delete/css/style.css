@@ -477,13 +477,17 @@ meter::-webkit-meter-bar {
 }
 
 .box2 {
+	text-align: center;
+}
+
+.box2-1, .box2-2 {
+	width: 430px;
+	height: 80px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	text-align: center;
-	width: 870px;
-	height: 80px;
-	padding-top: 20px;
-	line-height: 50px;
+	display: inline-block;
+	line-height: 80px;
 	color: #c0a0c9;
 }
 

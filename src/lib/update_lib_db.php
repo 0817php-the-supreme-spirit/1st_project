@@ -118,6 +118,35 @@
 		}
 	}
 
+function update_execute( &$conn, &$arr_param ){
+	try{ $sql = " UPDATE "
+	."			todolist_table "
+	."		SET "
+	."			.title = :title "
+	."			,memo = :memo "
+	."			,amount_used = :amount_used "
+	."			,create_date = :create_date "
+	."			,modify_date = NOW() "
+	."			,category_id = :category_id "
+	."		WHERE "
+	."			id = :id "
+	;
 
+	$arr_ps = [
+		":title" => $arr_param["title"]
+		,":memo" => $arr_param["memo"]
+		,":amout_used" => $arr_param["amount_used"]
+		,":create_date" => $arr_param["create_date"]
+		,":category_id" => $arr_param["category_id"]
+		,":id" => $arr_param["id"]
+	];
+	$stmt = $conn->prepare($sql);
+	$result = $stmt->fetchAll();
+	return $result;
+}catch(Exception $e){
+	echo $e->getMessage(); // Exception 메세지 출력
+	return false;
+}
 
-?>
+}
+// ?>

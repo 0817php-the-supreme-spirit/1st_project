@@ -1,33 +1,28 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 require_once(ROOT."lib/delete_lib_db.php");
 
-$conn=null;
-db_conn($conn);//서버 연결
+//db_conn($conn);
 
-
+$arr_err_msg = [];
 
 try {
     //2. db connect
     //2-1. connection 함수 호출
-     // PDO 객체 변수
+    $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
-        //2-2. 예외처리
         throw new Exception("DB Error : PDO Instance");
     }
 
     // METHOD 획득?
     $http_method = $_SERVER["REQUEST_METHOD"];
+
     if($http_method === "GET") {
-        
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        $page = isset($_GET["page"]) ? $_GET["page"] : "";
         $arr_err_msg = [];
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
-        }
-        if($page === "") {
-            $arr_err_msg[] = "Parameter Error : page";
         }
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
@@ -54,9 +49,9 @@ try {
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        // if($page === "") {
-        //     $arr_err_msg[] = "Parameter Error : page";
-        // }
+        if($date === "") {
+            $arr_err_msg[] = "Parameter Error : date";
+        }
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -72,10 +67,9 @@ try {
 
         //예외처리
         if(!$result) {
-            throw new Exception("DB Error : Delete Boards id");
+            throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
-        
         exit;
     }
 } catch(Exception $e) {
@@ -83,7 +77,7 @@ try {
         $conn->rollBack();
     }
     //echo $e->getMessage(); // 에러메세지 출력
-    header("Location: error.php/?err_msg={$e->getMessage()}");
+    //header("Location: error.php/?err_msg={$e->getMessage()}");
     exit; // 처리종료
 } finally {
     db_destroy_conn($conn);
@@ -152,17 +146,17 @@ try {
 						</div>
 					<br>	
 						<div class="box2">
-							<h1>날짜</h1>
+							<h1 class="box2-1">카테고리</h1> <h1 class="box2-2">날짜</h1>
 						</div>
 					<br>	
 						<div class="box3">
 							<p class="box3-1">제목</p>
-							<p class="box3-2">tqtqtqtqtqtqtqtqtqtqtqtqtqtqtq</p>
+							<p class="box3-2"><?php echo $item["title"]?></p>
 						</div>
 					<br>
 						<div class="box4">
 							<p class="box4-1">메모</p>
-							<p class="box4-2">아아아ㅏㄱ</p>
+							<p class="box4-2"><?php echo $item["memo"]?></p>
 						</div>
 					<br>
 					<br>
@@ -174,10 +168,9 @@ try {
 				<br>
 					<div class="box6">
 						<form action="" method="post">
-							<input type="hidden" name="id" value="">
+							<input type="hidden" name="id" value="<?php echo $id; ?>">
 							<button type="submit" class="box6-1">삭제</button>
-							
-							<a href="/1st_project/src/php/list.php" class="box6-2">취소</a>
+							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>" class="box6-2">취소</a>
 						</form>
 					</div>
 				</div>

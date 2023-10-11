@@ -45,6 +45,10 @@
 		$conn = null;
 	}
 
+
+// -------------------------------------------------------------
+// list.php
+
 	// ----------------------------
 	// 함수명 	: db_select
 	// 기능 	: 1st_project 게시물 조회
@@ -209,4 +213,127 @@
 	}
 }
 
+// -------------------------------------------------------------
+
+
+// -------------------------------------------------------------
+// datal.php
+
+	// ----------------------------
+	// 함수명 	: db_select_id
+	// 기능 	: list.php의 게시물 id값
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+	
+	function db_select_id(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		todo.id "
+			."		,cate.category_name "
+			."		,todo.title "
+			." 		,todo.memo "
+			."		,todo.amount_used "
+			." 		,todo.create_date "
+			." FROM "
+			."		todolist_table todo "
+			." JOIN "
+			." 		category_table cate "
+			." ON "
+			." 		todo.category_id = cate.category_id "
+			." WHERE "
+			." 		todo.id = :id "
+			;
+
+			$arr_ps = [
+				":id" => $arr_param["id"]
+			];
+			
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		} 
+	}
+
+// -------------------------------------------------------------
+
+
+// -------------------------------------------------------------
+// main.php
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_insert
+	// 기능 	: 유저의 한달 급여 입력
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_insert(&$conn, &$arr_param) {
+		$sql = 
+			" INSERT INTO user_table ( "
+			."		monthly_salary "
+			."		,daily_salary "
+			." ) "
+			." VALUES ( "
+			."		:monthly_salary "
+			." 		,:daily_salary "
+			." ) "
+			;
+
+		$arr_ps = [
+			":monthly_salary" => $arr_param["monthly_salary"]
+			,":daily_salary" => $arr_param["daily_salary"]
+		];
+
+		try {
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; // 결과 리턴
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		}
+	}
+
+		// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_date_compare(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		todo.id "
+			." FROM "
+			."		todolist_table todo "
+			." WHERE "
+			." 		todo.id = :id "
+			;
+
+			$arr_ps = [
+				":id" => $arr_param["id"]
+			];
+			
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		} 
+	}
+
+// -------------------------------------------------------------
 ?>
