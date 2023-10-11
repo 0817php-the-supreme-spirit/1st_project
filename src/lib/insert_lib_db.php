@@ -118,6 +118,45 @@
 		}
 	}
 
+// ******* insert lib. *************
+// ----------------------------
+	// 함수명 	: db_insert
+	// 기능 	: boards 레코드 작성
+	// 파라미터 : PDO 	&$conn
+	//			Array	&$arr_param 쿼리 작성용 배열
+	// 리턴 	: Boolean
+	// ----------------------------
 
-
+	function db_insert(&$conn, &$arr_param) {
+		$sql =
+			" INSERT INTO  ( "
+			." title "
+			." ,memo "
+			." ,amount_used "
+			." ,create_date "
+			." ,category_id "
+			." ) "
+			." VALUES ( "
+			." :title "
+			." ,:memo "
+			." ,:amount_used "
+			." ,:create_date "
+			." ,:category_id "
+			." ) "
+			;
+		$arr_ps = [
+			":title" => $arr_param["title"]
+			,":memo" => $arr_param["memo"]
+			,":amount_used" => $arr_param["amount_used"]
+			,":create_date" => $arr_param["create_date"]
+			,":category_id" => $arr_param["category_id"]
+		];
+		try {
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; //결과 리턴
+		}catch(Exception $e) {
+			return false;
+		}
+	}
 ?>
