@@ -88,4 +88,4 @@ SELECT todo.id, cate.category_name, todo.title, todo.amount_used
 FROM todolist_table todo
 JOIN category_table cate
 ON todo.category_id = cate.category_id
-WHERE todo.create_date = '2023-09-09';
+WHERE todo.create_date = '2023-09-01';

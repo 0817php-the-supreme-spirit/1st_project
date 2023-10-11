@@ -1,7 +1,7 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "%s : 필수 입력 사항입니다.");
+	define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
@@ -14,14 +14,27 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 		if($http_method === "GET") {
-			$result = db_select($conn);
-			if(!$result)
-			{
-				throw new Exception("DB Error : SELECT boards");
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+			$date = date('Y-m-d');
+
+			if($date === "") {
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+            }
+
+			if(count($arr_err_msg) === 0) {
+				$arr_param = [
+					"date" => $date
+				];
+				$result = db_select($conn, $arr_param);
+
+				if(!$result)
+				{
+					throw new Exception("DB Error : SELECT boards");
+				}
 			}
 		}
 		else {
-			$date = $_POST["date"] ?? "";
+			$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
 
 			// $date = str_replace('-', '', $date); // 하이픈 제거
 			// $date = (int)trim($date);
@@ -31,14 +44,20 @@
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
 
-			$arr_param = [
-				"date" => $date
-			];
+			if(count($arr_err_msg) === 0) {
+				$arr_param = [
+					"date" => $date
+				];
 
-			$result = db_select_date($conn, $arr_param);
-			
-			if(!$result) {
-				throw new Exception("DB Error : select_date");
+				$result = db_select_date($conn, $arr_param);
+				
+				if(count($result) === 0) {
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+					// throw new Exception("DB Error : select_date");
+				}
+				else if(!$result) {
+					throw new Exception("DB Error : select_date");
+				}
 			}
 		}
 
@@ -68,17 +87,17 @@
 
 		<main>
 			<div class="header">
-				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="/1st_project/src/php/list.php" method="post">
-						<table>
+					<form action="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
-							<input type="submit" value="제출">
-						</table>
+							<label class="date-label">
+								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
+								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
+							</label>
 					</form>
 
 					<div class="side-left-line-1"></div>
@@ -108,6 +127,11 @@
 
 			<div class="content">
 				<div class="content-box">
+						<?php foreach($arr_err_msg as $val) { ?>
+							<div class="error-box">
+							<p class="err_msg"><?php echo $val; ?></p>
+							</div>
+						<?php } ?>
 					<table class="content-table">
 						<?php 
 							foreach($result as $item) {

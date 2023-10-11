@@ -53,7 +53,8 @@
 	// 리턴 	: Array / false
 	// ----------------------------
 
-	function db_select(&$conn, &$arr_param) {
+	function db_select(&$conn) {
+		try {
 			$sql = 
 				" SELECT "
 				." 		id "
@@ -66,19 +67,11 @@
 				." category_table cate "
 				." ON "
 				." todo.category_id = cate.category_id "
-				." WHERE "
-				." todo.create_date = :date "
 				;
-				
-		$arr_ps = [
-			":date" => $arr_param["date"]
-		];
-		
-		try {
-			$stmt = $conn->prepare($sql);
-			$stmt->execute($arr_ps);
+
+			$stmt = $conn->query($sql);
 			$result = $stmt->fetchAll();
-			return $result; // 결과 리턴
+			return $result; // 정상 : 쿼리 결과 리턴
 		}
 		catch(Exception $e) {
 			return false; // 예외 발생 : flase 리턴
@@ -94,6 +87,7 @@
 	// ----------------------------
 
 	function db_select_date(&$conn, &$arr_param) {
+		try {
 			$sql = 
 				" SELECT "
 				." 		todo.id "
@@ -113,7 +107,7 @@
 			$arr_ps = [
 				":date" => $arr_param["date"]
 			];
-		try {
+
 			$stmt = $conn->prepare($sql);
 			$stmt->execute($arr_ps);
 			$result = $stmt->fetchAll();
