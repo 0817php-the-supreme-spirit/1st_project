@@ -2,7 +2,7 @@
 /* 기본 값
 /* ------------------------------------------------------------------------ */
 @font-face {
-	src: url(../font/a신디나루M.ttf);
+	src: url(../../font/a신디나루M.ttf);
 	font-family: "main-font";
 }
 
@@ -14,7 +14,7 @@
 	font-family: "main-font";
 	font-size: 25px;
 	font-weight: 600;
-	cursor: url(../cur/B.cur), url(../cur/A.cur), auto
+	cursor: url(../../cur/B.cur), url(../../cur/A.cur), auto
 }
 
 /* reset.css */
@@ -68,7 +68,7 @@ input {
 }
 
 body {
-	background-image: url(../img/back.jpg);
+	background-image: url(../../img/back.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px;
@@ -188,7 +188,7 @@ main {
 
 .side-left-on {
 	margin-top: 30px;
-	background-image: url(../img/btn-on.png);
+	background-image: url(../../img/btn-on.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -197,7 +197,7 @@ main {
 
 .side-left-off {
 	margin-top: 25px;
-	background-image: url(../img/btn-off.png);
+	background-image: url(../../img/btn-off.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -205,7 +205,7 @@ main {
 }
 
 .side-left-page:hover {
-	background-image: url(../img/btn-on.png);
+	background-image: url(../../img/btn-on.png);
 	color: #57BCA9;
 }
 
@@ -308,7 +308,7 @@ input[type="radio"]:checked + label {
 	margin-top: 50px;
 	width: 330px;
 	height: 90px;
-	background-image: url(../img/result.png);
+	background-image: url(../../img/result.png);
 	text-align: center;
 	line-height: 90px;
 	font-size: 40px;
@@ -320,7 +320,7 @@ input[type="radio"]:checked + label {
 	margin-top: 30px;
 	width: 260px;
 	height: 382px;
-	background-image: url(../img/캐릭터test.gif);
+	background-image: url(../../img/캐릭터test.gif);
 	background-repeat: no-repeat;
 	background-size: contain;
 }
@@ -397,7 +397,7 @@ select:hover {
 	content: attr(placeholder);
 	height: 100%;
 	} */
-.update-date-total {
+.update-date {
 	width: 850px;
 	height: 104px;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -409,7 +409,7 @@ select:hover {
 	box-sizing: border-box;
 }
 
-.update-date-total[type='date']::-webkit-calendar-picker-indicator {
+.update-date[type='date']::-webkit-calendar-picker-indicator {
 	position: absolute;
 	top: 0;
 	width: 850px;
@@ -419,25 +419,25 @@ select:hover {
 	cursor: pointer;
 	box-sizing: border-box;
 }
-.update-date-total{
+.update-date{
 	/* min-width: 100%; */
 	text-align: center;
 } 
-.update-date-total[type='date']:focus, .update-date-total[type='date']:active{
+.update-date[type='date']:focus, .update-date-total[type='date']:active{
 	outline: none;
 } 
 	
-	.update-date-total{
+	.update-date{
 		cursor: pointer;
 		text-align: center;
 	}
-	.update-date-total:hover {
+	.update-date:hover {
 		background-color: rgba(255, 255, 255, 0.8);
 	}
 .update-date[type='date']:valid::before {
 	display: none;
 }
-.update-date-total:focus{
+.update-date:focus{
 	background-color: rgba(255, 255, 255, 0.8);
 }
 
