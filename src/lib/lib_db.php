@@ -47,7 +47,7 @@
 
 	// ----------------------------
 	// 함수명 	: db_select
-	// 기능 	: boards paging 조회
+	// 기능 	: 1st_project 게시물 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -69,7 +69,7 @@
 				." WHERE "
 				." todo.create_date = :date "
 				;
-				
+
 		$arr_ps = [
 			":date" => $arr_param["date"]
 		];
@@ -85,45 +85,128 @@
 		}
 	}
 
+// 	// ----------------------------
+// 	// 함수명 	: db_select_date
+// 	// 기능 	: 1st_project 해당 날짜 게시물 조회
+// 	// 파라미터 : PDO 		&$conn
+// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+// 	// 리턴 	: Array / false
+// 	// ----------------------------
+
+// 	function db_select_date(&$conn, &$arr_param) {
+// 			$sql = 
+// 				" SELECT "
+// 				." 		todo.id "
+// 				."		,cate.category_name "
+// 				."		,todo.title "
+// 				."		,todo.amount_used "
+// 				." FROM "
+// 				."		todolist_table todo "
+// 				." JOIN "
+// 				." category_table cate "
+// 				." ON "
+// 				." todo.category_id = cate.category_id "
+// 				." WHERE "
+// 				." todo.create_date = :date "
+// 				;
+
+// 			$arr_ps = [
+// 				":date" => $arr_param["date"]
+// 			];
+// 		try {
+// 			$stmt = $conn->prepare($sql);
+// 			$stmt->execute($arr_ps);
+// 			$result = $stmt->fetchAll();
+// 			return $result; // 결과 리턴
+// 		}
+// 		catch(Exception $e) {
+// 			return false; // 예외 발생 : flase 리턴
+// 		}
+// 	}
+	
+// 	// ----------------------------
+// 	// 함수명 	: db_select_category
+// 	// 기능 	: 1st_project 해당 카테고리 게시물 조회
+// 	// 파라미터 : PDO 		&$conn
+// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+// 	// 리턴 	: Array / false
+// 	// ----------------------------
+
+// 	function db_select_category(&$conn, &$arr_param) {
+// 		$sql = 
+// 			" SELECT "
+// 			." 		todo.id "
+// 			."		,cate.category_name "
+// 			."		,todo.title "
+// 			."		,todo.amount_used "
+// 			." FROM "
+// 			."		todolist_table todo "
+// 			." JOIN "
+// 			." category_table cate "
+// 			." ON "
+// 			." todo.category_id = cate.category_id "
+// 			." WHERE "
+// 			." cate.category_name = :category "
+// 			;
+
+// 		$arr_ps = [
+// 			":category" => $arr_param["category"]
+// 		];
+// 	try {
+// 		$stmt = $conn->prepare($sql);
+// 		$stmt->execute($arr_ps);
+// 		$result = $stmt->fetchAll();
+// 		return $result; // 결과 리턴
+// 	}
+// 	catch(Exception $e) {
+// 		return false; // 예외 발생 : flase 리턴
+// 	}
+// }
+
 	// ----------------------------
-	// 함수명 	: db_select_date
-	// 기능 	: boards paging 조회
+	// 함수명 	: db_select_search
+	// 기능 	: 1st_project 해당 날짜 게시물 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
 	// ----------------------------
 
-	function db_select_date(&$conn, &$arr_param) {
-			$sql = 
-				" SELECT "
-				." 		todo.id "
-				."		,cate.category_name "
-				."		,todo.title "
-				."		,todo.amount_used "
-				." FROM "
-				."		todolist_table todo "
-				." JOIN "
-				." category_table cate "
-				." ON "
-				." todo.category_id = cate.category_id "
-				." WHERE "
-				." todo.create_date = :date "
-				;
+	function db_select_search(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		todo.id "
+			."		,cate.category_name "
+			."		,todo.title "
+			."		,todo.amount_used "
+			." FROM "
+			."		todolist_table todo "
+			." JOIN "
+			." 		category_table cate "
+			." ON "
+			." 		todo.category_id = cate.category_id "
+			." WHERE "
+			." 		todo.create_date = :date "
+			;
 
-			$arr_ps = [
-				":date" => $arr_param["date"]
-			];
-		try {
-			$stmt = $conn->prepare($sql);
-			$stmt->execute($arr_ps);
-			$result = $stmt->fetchAll();
-			return $result; // 결과 리턴
+		$arr_ps = [
+			":date" => $arr_param["date"]
+		];
+
+		if (!empty($arr_param["category"])) {
+			$sql .= " AND cate.category_name = :category ";
+			$arr_ps[":category"] = $arr_param["category"];
 		}
-		catch(Exception $e) {
-			return false; // 예외 발생 : flase 리턴
-		}
+		
+	try {
+		$stmt = $conn->prepare($sql);
+		$stmt->execute($arr_ps);
+		$result = $stmt->fetchAll();
+		return $result; // 결과 리턴
 	}
-
-
+	catch(Exception $e) {
+		echo $e->getMessage(); // 예외발생 메세지 출력
+		return false; // 예외 발생 : flase 리턴
+	}
+}
 
 ?>

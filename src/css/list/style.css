@@ -442,3 +442,16 @@ meter::-webkit-meter-bar {
 	appearance: none;
 }
 /* ------------------------------------------------------------------------ */
+/* 공통 사항 추가 부분 */
+
+.category-all-box {
+	position: relative;
+}
+
+.btn-position {
+	position: absolute;
+	border-radius: 50px;
+	color: #fff;
+	top: 28px;
+	left: 300px;
+}

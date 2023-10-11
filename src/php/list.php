@@ -34,29 +34,36 @@
 			}
 		}
 		else {
-			$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
+			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
-			// $date = str_replace('-', '', $date); // 하이픈 제거
-			// $date = (int)trim($date);
-			
+			$life = isset($_POST["life"]) ? trim($_POST["life"]) : "";
+			$activity = isset($_POST["activity"]) ? trim($_POST["activity"]) : "";
+			$stupid = isset($_POST["stupid"]) ? trim($_POST["stupid"]) : "";
+
+			$category = [];
 
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
 
+			if(isset($_POST["category"])) {
+				$category = $_POST["category"];
+			}
+
 			if(count($arr_err_msg) === 0) {
 				$arr_param = [
 					"date" => $date
+					,"category" => $category
 				];
 
-				$result = db_select_date($conn, $arr_param);
+				$result = db_select_search($conn, $arr_param);
 				
-				if(count($result) === 0) {
+				if($result === false) {
+					throw new Exception("DB Error : select_search");
+				}
+				else if(count($result) === 0) {
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 					// throw new Exception("DB Error : select_date");
-				}
-				else if(!$result) {
-					throw new Exception("DB Error : select_date");
 				}
 			}
 		}
@@ -80,7 +87,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/1st_project/src/css/list/style.css">
-		<title>Document</title>
+		<title>아껴봐요 절약의 숲 리스트 페이지</title>
 	</head>
 
 	<body>
@@ -98,7 +105,6 @@
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>
-					</form>
 
 					<div class="side-left-line-1"></div>
 
@@ -108,18 +114,29 @@
 
 					<div class="side-left-line-2"></div>
 
-					<form action="" method="post">
-						<input type="radio" name="category" id="category1" checked>
-						<label for="category1" class="category-box">전체 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="category" id="category1" value="">
+							<label for="category1" class="category-box">전체 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category2">
-						<label for="category2" class="category-box">생활 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="category" id="category2" value='life'>
+							<label for="category2" class="category-box">생활 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category3">
-						<label for="category3" class="category-box">활동 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="category" id="category3" value='activity'>
+							<label for="category3" class="category-box">활동 비용</label>
+							<button class="btn-position">></button>
+						</div>
 				
-						<input type="radio" name="category" id="category4">
-						<label for="category4" class="category-box">멍청 비용</label>
+						<div class="category-all-box">
+							<input type="radio" name="category" id="category4" value='stupid'>
+							<label for="category4" class="category-box">멍청 비용</label>
+							<button class="btn-position">></button>
+						</div>
 					</form>
 
 				</div>
