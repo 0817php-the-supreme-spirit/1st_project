@@ -7,53 +7,65 @@
 	$http_method = $_SERVER["REQUEST_METHOD"];
 	$arr_err_msg = []; // 에러 메세지 저장용
 
-	if($http_method === "POST") {
 
 		try {
 
-			$arr_post = $_POST;
-			
-			// 파라미터 획득
-			$monthly_salary = isset($_POST["monthly_salary"]) ? trim($_POST["monthly_salary"]) : ""; // title 셋팅
-
-			if($monthly_salary === "") {
-				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "한달 급여를 입력하지 않으셨습니다.");
+			if(!db_conn($conn))
+			{
+				throw new Exception("DB Error : PDO Instance");
 			}
 
-			$days = date('t'); 
+			if($http_method === "GET") {
 
-			$daily_salary = $monthly_salary / $days;
-
-			$daily_salary = (int)$daily_salary;
-			
-			if(count($arr_err_msg) === 0) {
-
-				if(!db_conn($conn))
+				if(db_user_salary_compare($conn) === 1)
 				{
-					throw new Exception("DB Error : PDO Instance");
+					header("Location: list.php");
 				}
-				$conn->beginTransaction();
+			
+			}
 
-				// 게시글 작성을 위헤 파라미터 셋팅
-				$arr_param = [
-					"monthly_salary" => $_POST["monthly_salary"]
-					,"daily_salary" => $daily_salary
-				];
-
-				// insert
-				if(!db_user_salary_insert($conn, $arr_param)) {
-					// DB Insert 에러
-					throw new Exception("DB Error : Insert Boards");
-				}
-
-				$conn->commit();
-
-				// 리스트 페이지로 이동
-				header("Location: list.php"); //Location을 콜론(:) 이후의 주소로 이동하라는 헤더 메시지이다
-				exit;
-			}	
 			else {
+				$arr_post = $_POST;
 				
+				// 파라미터 획득
+				$monthly_salary = isset($_POST["monthly_salary"]) ? trim($_POST["monthly_salary"]) : ""; // title 셋팅
+
+				if($monthly_salary === "") {
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "한달 급여를 입력하지 않으셨습니다.");
+				}
+
+				$days = date('t'); 
+
+				$daily_salary = $monthly_salary / $days;
+
+				$daily_salary = (int)$daily_salary;
+				
+				if(count($arr_err_msg) === 0) {
+
+					if(!db_conn($conn))
+					{
+						throw new Exception("DB Error : PDO Instance");
+					}
+					$conn->beginTransaction();
+
+					// 게시글 작성을 위헤 파라미터 셋팅
+					$arr_param = [
+						"monthly_salary" => $_POST["monthly_salary"]
+						,"daily_salary" => $daily_salary
+					];
+
+					// insert
+					if(!db_user_salary_insert($conn, $arr_param)) {
+						// DB Insert 에러
+						throw new Exception("DB Error : Insert Boards");
+					}
+
+					$conn->commit();
+
+					// 리스트 페이지로 이동
+					header("Location: list.php"); //Location을 콜론(:) 이후의 주소로 이동하라는 헤더 메시지이다
+					exit;
+				}	
 			}
 		}
 		catch(Exception $e) {
@@ -68,7 +80,6 @@
 		finally {
 			db_destroy_conn($conn); // DB 파기
 		}
-	}
 ?>
 
 <!DOCTYPE html>
