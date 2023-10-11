@@ -318,10 +318,11 @@ input[type="radio"]:checked + label {
 .side-right-character {
 	margin: auto;
 	margin-top: 30px;
-	width: 212px;
+	width: 260px;
 	height: 382px;
-	background-image: url(../img/character1.png);
+	background-image: url(../img/캐릭터test.gif);
 	background-repeat: no-repeat;
+	background-size: contain;
 }
 
 .side-right-bottom {
@@ -479,11 +480,11 @@ textarea {
 .update-spent>input[type=number]{
 	box-sizing: border-box;
 	padding: 22px 25px;
-	width: 558px;
+	width: 400px;
 	height: 84px;
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.5);
-	margin-top: 30px;
+	margin-top: 43px;
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -505,7 +506,7 @@ input[type="number"]::-webkit-inner-spin-button {
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.5);
 	line-height: 80px;
-	margin-top: 55px;
+	margin-top: 42px;
 	color: #2CAE92;
 }
 .update-button>button:hover, .update-button>a:hover {
