@@ -1,32 +1,25 @@
 <?php
-define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1ST_PROFECT/src/"); //웹 서버
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
 require_once(ROOT."lib/delete_lib_db.php");
+
+$conn=null;
+db_conn($conn);//서버 연결
+
 
 
 try {
     //2. db connect
     //2-1. connection 함수 호출
-    $conn = null; // PDO 객체 변수
-    if(!my_db_conn($conn)) {
+     // PDO 객체 변수
+    if(!db_conn($conn)) {
         //2-2. 예외처리
         throw new Exception("DB Error : PDO Instance");
     }
 
     // METHOD 획득?
     $http_method = $_SERVER["REQUEST_METHOD"];
-
     if($http_method === "GET") {
-        //3-1. get일 경우
-        // 파라미터에서 id, page 획득
-        // $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        // $page = isset($_GET["page"]) ? $_GET["page"] : "";
-        // if($id === "") {
-        //     throw new Exception("Parameter Error : ID");
-        // }
-        // if($page === "") {
-        //     throw new Exception("Parameter Error : page");
-        // }
-//-----------------------------------------------------------------
+        
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $page = isset($_GET["page"]) ? $_GET["page"] : "";
         $arr_err_msg = [];
@@ -44,7 +37,7 @@ try {
         $arr_param = [
             "id" => $id
         ];
-        $result = db_select_boards_id($conn, $arr_param);
+        $result = db_select_date($conn, $arr_param);
         // 예외처리
         if($result === false) {
             throw new Exception("DB Error : Select id");
@@ -61,9 +54,9 @@ try {
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-        if($page === "") {
-            $arr_err_msg[] = "Parameter Error : page";
-        }
+        // if($page === "") {
+        //     $arr_err_msg[] = "Parameter Error : page";
+        // }
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
@@ -75,14 +68,14 @@ try {
         $arr_param = [
             "id" => $id
         ];
-        $result = db_delete_boards_id($conn, $arr_param);
+        $result = db_delete_date_id($conn, $arr_param);
 
         //예외처리
         if(!$result) {
             throw new Exception("DB Error : Delete Boards id");
         }
         $conn->commit();
-        header("Location: list.php");
+        
         exit;
     }
 } catch(Exception $e) {
@@ -105,7 +98,7 @@ try {
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="/1ST_PROFECT/src/css/delete/style.css">
+		<link rel="stylesheet" href="/1st_project/src/css/delete/style.css">
 		<title>삭제 페이지</title>
 	</head>
 
@@ -184,7 +177,7 @@ try {
 							<input type="hidden" name="id" value="">
 							<button type="submit" class="box6-1">삭제</button>
 							
-							<a href="" class="box6-2">취소</a>
+							<a href="/1st_project/src/php/list.php" class="box6-2">취소</a>
 						</form>
 					</div>
 				</div>
