@@ -15,7 +15,9 @@
 		}
 		if($http_method === "GET") {
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+			$id = isset($_GET["id"]) ? $_GET["id"] : "";
 			$date = date('Y-m-d');
+
 
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
@@ -67,8 +69,6 @@
 				}
 			}
 		}
-
-
 	}
 	catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
@@ -91,7 +91,6 @@
 	</head>
 
 	<body>
-
 		<main>
 			<div class="header">
 				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
@@ -173,7 +172,7 @@
 									<img src="/1st_project/src/img/stupid.png">
 								<?php } ?>
 							</td>
-							<td class="content-title-box"><a href="/1st_project/src/php/detail.php/?id=<?php echo $item["id"]; ?>"><?php echo $item["title"]?></a></td>
+							<td class="content-title-box"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo $item["amount_used"], "원"; ?></td>
 						</tr>
 						<?php 

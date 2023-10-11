@@ -2,7 +2,7 @@
 /* 기본 값
 /* ------------------------------------------------------------------------ */
 @font-face {
-	src: url(../font/a신디나루M.ttf);
+	src: url(/1st_project/src/font/a신디나루M.ttf);
 	font-family: "main-font";
 }
 
@@ -14,7 +14,7 @@
 	font-family: "main-font";
 	font-size: 25px;
 	font-weight: 600;
-	cursor: url(../cur/B.cur), url(../cur/A.cur), auto
+	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto
 }
 
 /* reset.css */
@@ -68,7 +68,7 @@ input {
 }
 
 body {
-	background-image: url(../img/back.jpg);
+	background-image: url(/1st_project/src/img/back.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px;
@@ -81,6 +81,15 @@ main {
 	border-radius: 0px 50px 50px 0px;
 	position: relative;
 	/* z-index: -1; */
+}
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+	outline: none;
+	border: none;
 }
 /* ------------------------------------------------------------------------ */
 
@@ -127,6 +136,25 @@ main {
 	height: 775px;
 }
 
+.date-label {
+	position: relative;
+}
+
+.date-btn {
+	position: absolute;
+	top: -8px;
+	right: 20px;
+}
+
+.date-btn img {
+	width: 40px;
+	opacity: 0.2;
+}
+
+.date-btn img:hover {
+	opacity: 1;
+}
+
 .date-box {
 	width: 340px;
 	height: 60px;
@@ -159,14 +187,14 @@ main {
 	cursor: pointer;
 }
 
-.date-boxt[type='date']::before {
+/* .date-box[type='date']::before {
 	content: attr(placeholder);
 	height: 100%;
 	}
 
 .date-box[type='date']:valid::before {
 	display: none;
-}
+} */
 
 /* input[type='date']::before {
 	content: attr(placeholder);
@@ -188,7 +216,7 @@ main {
 
 .side-left-on {
 	margin-top: 30px;
-	background-image: url(../img/btn-on.png);
+	background-image: url(/1st_project/src/img/btn-on.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -197,7 +225,7 @@ main {
 
 .side-left-off {
 	margin-top: 25px;
-	background-image: url(../img/btn-off.png);
+	background-image: url(/1st_project/src/img/btn-off.png);
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
@@ -205,7 +233,7 @@ main {
 }
 
 .side-left-page:hover {
-	background-image: url(../img/btn-on.png);
+	background-image: url(/1st_project/src/img/btn-on.png);
 	color: #57BCA9;
 }
 
@@ -256,6 +284,10 @@ input[type="radio"]:checked + label {
     background-color:#57BCA9;
 	color: #fff;
 }
+
+.category-box:focus {
+	background-color: #57BCA9;
+}
 /* ------------------------------------------------------------------------ */
 
 
@@ -276,7 +308,7 @@ input[type="radio"]:checked + label {
 }
 
 .content-date-box {
-	width: 100%;
+	width: 420px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -284,6 +316,20 @@ input[type="radio"]:checked + label {
 	line-height: 100px;
 	font-size: 35px;
 	color: #57BCA9;
+	display: inline-block;
+	margin-right: 20px;
+}
+
+.content-category-box {
+	width: 420px;
+	height: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 30px;
+	text-align: center;
+	line-height: 100px;
+	font-size: 35px;
+	color: #57BCA9;
+	display: inline-block;
 }
 
 .content-title-box {
@@ -468,7 +514,7 @@ input[type="radio"]:checked + label {
 	margin-top: 50px;
 	width: 330px;
 	height: 90px;
-	background-image: url(../img/result.png);
+	background-image: url(/1st_project/src/img/result.png);
 	text-align: center;
 	line-height: 90px;
 	font-size: 40px;
@@ -480,7 +526,7 @@ input[type="radio"]:checked + label {
 	margin-top: 30px;
 	width: 212px;
 	height: 382px;
-	background-image: url(../img/character1.png);
+	background-image: url(/1st_project/src/img/character1.png);
 	background-repeat: no-repeat;
 }
 
@@ -501,3 +547,17 @@ meter::-webkit-meter-bar {
 	appearance: none;
 }
 /* ------------------------------------------------------------------------ */
+.content-td-color {
+	background-color: rgba(87, 188, 169, 0.8);
+	color: #fff;
+	font-size: 30px;
+}
+
+.gap {
+	padding-top: 8px;
+}
+
+.category-box-select {
+	background-color: #57BCA9;
+	color: #fff;
+}
