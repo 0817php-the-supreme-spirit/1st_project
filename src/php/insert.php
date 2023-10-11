@@ -1,9 +1,15 @@
+<?php 
+define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
+require_once(ROOT."lib/insert_lib_db.php"); // db관련 라이브러리
+
+?>
+
 <!DOCTYPE html>
 <html lang="ko">
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="./css/style.css">
+		<link rel="stylesheet" href="/1st_project/src/css/insert/style.css">
 		<title>Document</title>
 	</head>
 
