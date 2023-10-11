@@ -1,6 +1,7 @@
 <?php 
 define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 require_once(ROOT."lib/insert_lib_db.php"); // db관련 라이브러리
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null; 
 $http_method = $_SERVER["REQUEST_METHOD"];
@@ -11,10 +12,14 @@ $amount_used = "";
 $create_date = "";
 $category_id = "";
 
+$date = date('Y-m-d');
+
 // POSt로 request가 왔을 때 처리
 // $mttp_method = $_SERVER["REQUEST"];
 if($http_method === "POST") {
 	try {
+		$arr_post = $_POST;
+
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
         $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : "";
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
@@ -24,49 +29,53 @@ if($http_method === "POST") {
 		if($title === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
         }
-        if($name_t === "") {
+        if($memo === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "memo");
         }
-		if($name_t === "") {
+		if($amount_used === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");       
 		}
-		if($name_t === "") {
+		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-		if($name_t === "") {
+		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
 
 		if(count($arr_err_msg) === 0) {
 
-			$arr_post = $_POST;
-			$conn = null;
+			// DB 접속
+			if(!db_conn($conn)) {
+				// DB Instance 에러
+				throw new Exception("DB Error : PDO Instance");
+			}
+			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
 
- 		// DB 접속
-	    if(!db_conn($conn)) {
-            // DB Instance 에러
-		    throw new Exception("DB Error : PDO Instance");
+			// 게시글 작성을 위해 파라미터 셋팅
+			$arr_post = [
+				"title" => $_POST["title"]
+				,"memo" => $_POST["memo"]
+				,"amount_used" => $_POST["amount_used"]
+				,"create_date" => $_POST["create_date"]
+				,"category_id" => $_POST["category_id"]
+			];
 
-	    }
-        $conn ->beginTransaction(); //트랜잭션 시작 하는 부분
+			//insert
+			if(!db_insert($conn, $arr_post)) {
+				throw new Exception("DB Error : Insert page");
+			}
+			$conn->commit(); //모든 처리 완료 시 커밋
 
-        //insert
-        if(!db_insert($conn, $arr_post)) {
-            throw new Exception("DB Error : Insert test");
-        }
-
-        $conn->commit(); //모든 처리 완료 시 커밋
-
-        //리스트 페이지로 이동
-        header("Location: list.php");
-        exit;
+			//리스트 페이지로 이동
+			header("Location: list.php");
+			exit;
       }
 	} catch(Exception $e) {
         if($conn !== null) {
         $conn->rollBack();
         }
-        // echo $e->getMessage(); //Exception 메세지 출력
-        header("Location: error.php/?err_msg={$e->getMessage()}");
+        echo $e->getMessage(); //Exception 메세지 출력
+        // header("Location: error.php/?err_msg={$e->getMessage()}");
         exit;
     } finally {
         db_destroy_conn($conn); // db 파기
@@ -127,28 +136,28 @@ if($http_method === "POST") {
 
 			<div class="content">
 				<div class="content-box">
+					<form action="/1st_project/src/php/insert.php" method="post">
 					<div class="content-date-box">
 						<!-- <p>날짜</p> -->
-						<input type="date">
+						<input type="date" name="create_date" value="<?php echo $date; ?>">
 					</div>
-					<form action="/1st_project/src/insert.php" method="post">
 							<table>
 								<label for="text-title" class="content-title-box1">제목</label>
-								<input type="text" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
+								<input type="text" name="title" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
 								<div class="content-memo-box">
 									<label for="text-memo" class="content-memo-box1">메모</label>
-									<textarea class="content-memo-box2" id="text-memo" maxlength="50" placeholder="같이 작성하면 좋아요!"></textarea>
+									<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="50" required placeholder="같이 작성하면 좋아요!"></textarea>
 								</div>
 							</table>
 						<div class="content-value-box">
 							<div class="content-float1">
-									<select name="category1" id="category" class="content-category" required>
+									<select name="category_id" id="category" class="content-category" required>
 										<option value="" selected disabled hidden>선택해주세요</option>
-										<option value="life">생활비용</option>
-										<option value="activity">활동비용</option>
-										<option value="stupid">멍청비용</option>
+										<option value="0">생활비용</option>
+										<option value="1">활동비용</option>
+										<option value="2">멍청비용</option>
 									</select>
-								<p class="content-category-money"><input type="number" name="number" required placeholder="금액을 입력해 주세요"></p>
+								<p class="content-category-money"><input type="number" name="amount_used" id="amount_used" required placeholder="금액을 입력해 주세요"></p>
 							</div>
 							<div class="content-float2">
 								<p>벌써 지출</p>
@@ -157,7 +166,7 @@ if($http_method === "POST") {
 						</div>
 						<div class="content-button">
 							<button class="content-button-go" type="submit">작성</button>
-						<a href="/1st_project/src/list.php" class="content-button-back">돌아가기</a>
+						<a href="/1st_project/src/php/list.php" class="content-button-back">돌아가기</a>
 					</form>
 					</div>
 				</div>

@@ -32,6 +32,48 @@ function db_delete_date_id(&$conn, &$arr_param) {
     }
 }
 
+	// ----------------------------
+	// 함수명 	: db_select_id
+	// 기능 	: list.php의 게시물 id값
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+	
+	function db_select_id(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		todo.id "
+			."		,cate.category_name "
+			."		,todo.title "
+			." 		,todo.memo "
+			."		,todo.amount_used "
+			." 		,todo.create_date "
+			." FROM "
+			."		todolist_table todo "
+			." JOIN "
+			." 		category_table cate "
+			." ON "
+			." 		todo.category_id = cate.category_id "
+			." WHERE "
+			." 		todo.id = :id "
+			;
+
+			$arr_ps = [
+				":id" => $arr_param["id"]
+			];
+			
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		} 
+	}
+
 
 
 //--------------------------------------------------------
@@ -80,86 +122,6 @@ function db_conn( &$conn )
 	{
 		$conn = null;
 	}
-
-// ----------------------------
-	// 함수명 	: db_select
-	// 기능 	: 1st_project 게시물 조회
-	// 파라미터 : PDO 		&$conn
-	// 			: Array 	&$arr_param | 쿼리 작성용 배열
-	// 리턴 	: Array / false
-	// ----------------------------
-
-	function db_select(&$conn, &$arr_param) {
-        $sql = 
-            " SELECT "
-            ." 		id "
-            ."		,cate.category_name "
-            ."		,todo.title "
-            ."		,todo.amount_used "
-            ." FROM "
-            ."		todolist_table todo "
-            ." JOIN "
-            ." category_table cate "
-            ." ON "
-            ." todo.category_id = cate.category_id "
-            ." WHERE "
-            ." todo.create_date = :date "
-            ;
-
-    $arr_ps = [
-        ":date" => $arr_param["date"]
-    ];
-    
-    try {
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($arr_ps);
-        $result = $stmt->fetchAll();
-        return $result; // 결과 리턴
-    }
-    catch(Exception $e) {
-        return false; // 예외 발생 : flase 리턴
-    }
-}
-
-
-// ----------------------------
-// 함수명 	: db_select_date
-// 기능 	: 1st_project 해당 날짜 게시물 조회
-// 파라미터 : PDO 		&$conn
-// 			: Array 	&$arr_param | 쿼리 작성용 배열
-// 리턴 	: Array / false
-// ----------------------------
-
-function db_select_date(&$conn, &$arr_param) {
-        $sql = 
-            " SELECT "
-            ." 		todo.id "
-            ."		,cate.category_name "
-            ."		,todo.title "
-            ."		,todo.amount_used "
-            ." FROM "
-            ."		todolist_table todo "
-            ." JOIN "
-            ." category_table cate "
-            ." ON "
-            ." todo.category_id = cate.category_id "
-            ." WHERE "
-            ." todo.create_date = :date "
-            ;
-
-        $arr_ps = [
-            ":date" => $arr_param["date"]
-        ];
-    try {
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($arr_ps);
-        $result = $stmt->fetchAll();
-        return $result; // 결과 리턴
-    }
-    catch(Exception $e) {
-        return false; // 예외 발생 : flase 리턴
-    }
-}	
 
 
 

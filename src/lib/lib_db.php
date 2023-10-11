@@ -45,6 +45,10 @@
 		$conn = null;
 	}
 
+
+// -------------------------------------------------------------
+// list.php
+
 	// ----------------------------
 	// 함수명 	: db_select
 	// 기능 	: 1st_project 게시물 조회
@@ -209,9 +213,15 @@
 	}
 }
 
+// -------------------------------------------------------------
+
+
+// -------------------------------------------------------------
+// datal.php
+
 	// ----------------------------
-	// 함수명 	: db_select_search
-	// 기능 	: 1st_project 해당 날짜 게시물 조회
+	// 함수명 	: db_select_id
+	// 기능 	: list.php의 게시물 id값
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -251,4 +261,112 @@
 		} 
 	}
 
+// -------------------------------------------------------------
+
+
+// -------------------------------------------------------------
+// main.php
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_insert
+	// 기능 	: 유저의 한달 급여 입력
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_insert(&$conn, &$arr_param) {
+		$sql = 
+			" INSERT INTO user_table ( "
+			."		monthly_salary "
+			."		,daily_salary "
+			." ) "
+			." VALUES ( "
+			."		:monthly_salary "
+			." 		,:daily_salary "
+			." ) "
+			;
+
+		$arr_ps = [
+			":monthly_salary" => $arr_param["monthly_salary"]
+			,":daily_salary" => $arr_param["daily_salary"]
+		];
+
+		try {
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; // 결과 리턴
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		}
+	}
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_date_compare(&$conn, &$arr_param) {
+		$sql = 
+			" SELECT "
+			." 		input_date "
+			." FROM "
+			."		user_table "
+			." WHERE "
+			." 		input_date "
+			." BETWEEN "
+			." date_format(now(), '%Y-%m-01') "
+			." AND "
+			." date_format(now(), '%Y-%m-%d') "
+			;
+
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return count($result);
+		}
+		catch(Exception $e) {
+			return false; // 예외 발생 : flase 리턴
+		} 
+	}
+
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_compare(&$conn) {
+		$sql = 
+			" SELECT "
+			." 		input_date "
+			." FROM "
+			."		user_table "
+			." WHERE "
+			." 		input_date "
+			." BETWEEN "
+			." date_format(now(), '%Y-%m-01') "
+			." AND "
+			." date_format(now(), '%Y-%m-%d') "
+			;
+			
+		try {
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return count($result);
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
+
+// -------------------------------------------------------------
 ?>
