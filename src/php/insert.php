@@ -29,11 +29,12 @@ if($http_method === "POST") {
 		if($title === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
         }
+		var_dump($arr_post);
         if($memo === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "memo");
         }
 		if($amount_used === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");       
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
 		}
 		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
