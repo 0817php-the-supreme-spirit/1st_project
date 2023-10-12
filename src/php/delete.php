@@ -119,7 +119,7 @@ try {
 
 					<div class="side-left-line-2"></div>
 
-					<form action="" method="post">
+					<!-- <form action="" method="post">
 						<input type="radio" name="category" id="category1">
 						<label for="category1" class="category-box">전체 비용</label>
 				
@@ -131,7 +131,11 @@ try {
 				
 						<input type="radio" name="category" id="category4">
 						<label for="category4" class="category-box">멍청 비용</label>
-					</form>
+					</form> -->
+
+					<div class="img-left-box">
+						<p class="font-left-box">삭제중..</p>
+					</div>
 
 				</div>
 			</div>
