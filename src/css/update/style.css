@@ -336,7 +336,7 @@ input[type="radio"]:checked + label {
 .side-right-top {
 	margin: auto;
 	/* margin-left: 20px; */
-	margin-top: 50px;
+	margin-top: 30px;
 	width: 330px;
 	height: 90px;
 	background-image: url(../../img/result.png);
@@ -473,6 +473,29 @@ progress[value]::-webkit-progress-bar{
 
 .failure {
 	color: red;
+}
+
+.small {
+	font-size: 20px;
+	line-height: 20px;
+	color: #57BCA9;
+}
+
+.bar {
+	margin: auto;
+	width: 230px;
+	margin-top: 7px;
+	border: 1px solid #57BCA9;
+}
+
+.side-right-user {
+	margin: auto;
+	width: 300px;
+	padding: 10px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border: 1px solid #57bca934;
+	border-radius: 30px;
+	box-shadow: 0 14px 28px rgba(107, 107, 107, 0.1), 0 10px 10px rgba(117, 117, 117, 0.1);
 }
 
 /* ------------------------------------------------------------------------ */
