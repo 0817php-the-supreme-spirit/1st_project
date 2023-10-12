@@ -68,6 +68,7 @@ try {
             throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
+		header("Location: /1st_project/src/php/list.php");
         exit;
     }
 } catch(Exception $e) {
@@ -159,13 +160,13 @@ try {
 					<br>
 					<br>
 						<div class="box5">
-							<span class="box5-1">일일 사용 금액: <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액: <?php echo $item["daily_salary"]?></span>
+							<span class="box5-1">일일 사용 금액: <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액: </span>
 						</div>
 					
 				<br>
 				<br>
 					<div class="box6">
-						<form action="" method="post">
+						<form action="/1st_project/src/php/delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id; ?>">
 							<button type="submit" class="box6-1">삭제</button>
 							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>" class="box6-2">취소</a>
