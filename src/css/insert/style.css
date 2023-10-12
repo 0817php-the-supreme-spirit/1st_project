@@ -438,7 +438,7 @@ textarea:focus {outline: none;}
 .content-float2 > p {
 	height: 80px;
 	font-size: 60px;
-	color: rgba(228, 91, 91, 1);
+	color: rgba(228, 91, 91, 0.89);
 	/* text-align: center; */
 }
 
@@ -503,7 +503,7 @@ button{
 
 .side-right-box {
 	width: 340px;
-	height: 780px;
+	height: 770px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
 	border: 1px solid #57BCA9;
