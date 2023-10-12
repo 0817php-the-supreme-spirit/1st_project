@@ -60,18 +60,20 @@
 	function db_select(&$conn, &$arr_param) {
 			$sql = 
 				" SELECT "
-				." 		id "
+				." 		todo.id "
 				."		,cate.category_name "
 				."		,todo.title "
 				."		,todo.amount_used "
 				." FROM "
 				."		todolist_table todo "
 				." JOIN "
-				." category_table cate "
+				." 		category_table cate "
 				." ON "
-				." todo.category_id = cate.category_id "
+				." 		todo.category_id = cate.category_id "
 				." WHERE "
-				." todo.create_date = :date "
+				." 		todo.create_date = :date "
+				." AND "
+				." 		todo.delete_date IS NULL ";
 				;
 
 		$arr_ps = [
@@ -262,6 +264,89 @@
 	}
 
 // -------------------------------------------------------------
+
+// ******* insert lib. *************
+// ----------------------------
+	// 함수명 	: db_insert
+	// 기능 	: boards 레코드 작성
+	// 파라미터 : PDO 	&$conn
+	//			Array	&$arr_param 쿼리 작성용 배열
+	// 리턴 	: Boolean
+	// ----------------------------
+
+	function db_insert(&$conn, &$arr_param) {
+		$sql =
+			" INSERT INTO todolist_table ( "
+			." title "
+			." ,memo "
+			." ,amount_used "
+			." ,create_date "
+			." ,category_id "
+			." ) "
+			." VALUES ( "
+			." :title "
+			." ,:memo "
+			." ,:amount_used "
+			." ,:create_date "
+			." ,:category_id "
+			." ) "
+			;
+		$arr_ps = [
+			":title" => $arr_param["title"]
+			,":memo" => $arr_param["memo"]
+			,":amount_used" => $arr_param["amount_used"]
+			,":create_date" => $arr_param["create_date"]
+			,":category_id" => $arr_param["category_id"]
+		];
+		try {
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result; //결과 리턴
+		}catch(Exception $e) {
+			return false;
+		}
+	}
+// ******* insert lib. *************
+// ----------------------------
+
+
+// ----------------------------
+// ******* delete lib. *************
+//------------------------------------------
+// 함수명   : db_delete_boards_id
+// 기능     : 특정 id 레코드 삭제처리
+// 파라미터 : PDO  &$conn
+//            Array &$arr_param          
+// 리턴     : boolean
+// -----------------------------------------
+function db_delete_date_id(&$conn, &$arr_param) {
+    $sql =
+    " UPDATE "
+	." todolist_table "
+    ." SET " 
+    ." delete_date = now() "
+    ." WHERE "
+    ." id = :id "
+    ;
+
+    $arr_ps = [
+        ":id" => $arr_param["id"]
+    ];
+
+    try {
+        //쿼리 실행
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute($arr_ps);
+
+        return $result;
+    } catch(Exception $e) {
+        echo $e->getMessage();
+        return false;
+    }
+}
+// ******* delete lib. *************
+// ----------------------------
+
 
 
 // -------------------------------------------------------------
