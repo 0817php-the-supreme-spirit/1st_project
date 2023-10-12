@@ -62,6 +62,8 @@
 				$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
 				
 				$amount_used = $amount_used[0];
+
+				var_dump($item);
 			}
 		}
 		else {
@@ -207,7 +209,13 @@
 							<span><?php echo $item["create_date"]; ?></span>
 						</div>
 						<div class="content-category-box">
-							<span>카테고리</span>
+							<span><?php if($item["category_name"] == 'life') { ?>
+									<p>생활 비용</p>
+								<?php } else if($item["category_name"] == 'activity') { ?>
+									<p>활동 비용</p>
+								<?php }  else { ?>
+									<p>멍청 비용</p>
+								<?php } ?></span>
 						</div>
 
 						<div class="content-title-box">
