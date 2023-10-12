@@ -4,7 +4,7 @@
     $user = 4000;
 
     // 한 달 일 수를 계산하는 date('t")
-    $days = date('t'); 
+    $days = date('t')-date('d');
 
     // 한달 급여를 일수로 나누기
     $daily = $monthly / $days;
@@ -16,7 +16,9 @@
     $percent = ($user / $daily) * 100;
 
     $percent = (int)$percent;
-    
+
+    echo $days;
+    echo "\n";
     echo date('Y-m-d H:i:s'); 
     echo "\n";
     echo "한 달 급여: $monthly";

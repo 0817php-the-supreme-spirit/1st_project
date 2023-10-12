@@ -34,7 +34,7 @@
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "한달 급여를 입력하지 않으셨습니다.");
 				}
 
-				$days = date('t'); 
+				$days = date('t')-date('d');
 
 				$daily_salary = $monthly_salary / $days;
 

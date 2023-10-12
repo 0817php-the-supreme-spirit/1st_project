@@ -1,6 +1,6 @@
 <?php 
 define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
-require_once(ROOT."lib/insert_lib_db.php"); // db관련 라이브러리
+require_once(ROOT."lib/lib_db.php"); // db관련 라이브러리
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null; 
@@ -112,8 +112,8 @@ if($http_method === "POST") {
 
 					<div class="side-left-line-1"></div>
 
-					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
+					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
+					<a href=""><div class="side-left-page side-left-on"><p>지출 작성부</p></div></a>
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>

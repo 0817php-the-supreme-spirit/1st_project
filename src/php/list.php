@@ -29,10 +29,12 @@
 					"date" => $date
 				];
 				$result = db_select($conn, $arr_param);
-				if(!$result)
-				{
-					throw new Exception("DB Error : SELECT");
+
+				if(!$result) {
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 				}
+
+				
 			}
 		}
 		else {
@@ -108,7 +110,7 @@
 					<div class="side-left-line-1"></div>
 
 					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
+					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
