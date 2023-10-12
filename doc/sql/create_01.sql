@@ -104,3 +104,15 @@ JOIN category_table cate
 ON todo.category_id = cate.category_id
 
 alter table todolist_table alter column memo set DEFAULT '메모 없음';
+
+flush PRIVILEGES;
+
+INSERT INTO user_table ( monthly_salary )
+VALUES (20000)
+
+SELECT *
+FROM user_table
+WHERE MONTH(input_date) = NOW();
+
+SELECT * from user_table
+where input_date between date_format(now(), '%Y-%m-01') and date_format(now(), '%Y-%m-%d');

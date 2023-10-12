@@ -22,6 +22,7 @@
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
+			
 
 			if(count($arr_err_msg) === 0) {
 				$arr_param = [
@@ -29,10 +30,11 @@
 				];
 				$result = db_select($conn, $arr_param);
 
-				if(!$result)
-				{
-					throw new Exception("DB Error : SELECT boards");
+				if(!$result) {
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 				}
+
+				
 			}
 		}
 		else {
