@@ -347,6 +347,9 @@ meter::-webkit-meter-bar {
 	text-align: center;
 	color: #2CAE92;
 }
+.content-box>form {
+	margin-top: 10px;
+}
 
 select {
 		border:none;
@@ -370,7 +373,8 @@ select:focus {
 }
 select:hover {
 	background-color: rgb(255, 255, 255, 0.8);
-	transition: 0.2s;
+	border: 3px solid #ebd461;
+
 }
 .update-category>select>option {
 	color: rgb(0, 0, 0, 0.4);
@@ -425,15 +429,19 @@ select:hover {
 } 
 .update-date[type='date']:focus, .update-date-total[type='date']:active{
 	outline: none;
+	border: 3px solid #ebd461;
 } 
 	
-	.update-date{
-		cursor: pointer;
-		text-align: center;
-	}
-	.update-date:hover {
-		background-color: rgba(255, 255, 255, 0.8);
-	}
+.update-date{
+cursor: pointer;
+text-align: center;
+}
+
+.update-date:hover {
+background-color: rgba(255, 255, 255, 0.8);
+border: 3px solid #ebd461;;
+}
+
 .update-date[type='date']:valid::before {
 	display: none;
 }
@@ -477,14 +485,25 @@ textarea {
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.5);
 }
+
+#update-title:focus + #title1{
+	background-color: #57BCA9;
+}
+
+
+
 .update-spent>input[type=number]{
 	box-sizing: border-box;
+	display: inline-block;
 	padding: 22px 25px;
 	width: 400px;
 	height: 84px;
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.5);
 	margin-top: 43px;
+	border: 3px solid #ebd461;
+	text-align: center;
+	
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -509,10 +528,21 @@ input[type="number"]::-webkit-inner-spin-button {
 	margin-top: 42px;
 	color: #2CAE92;
 }
+.update-button>button:visited, .update-button>a:visited {
+	color: #2CAE92;
+}
 .update-button>button:hover, .update-button>a:hover {
 	background-color: rgb(255, 255, 255, 0.8);
 	transition: 0.2s;
+	color: #ebd461;
 }
-.update-button>button:visited, .update-button>a:visited {
-	color: #2CAE92;
+
+.update-icon{
+	background-image: url(../../icon/update2.png);
+	background: cover;
+	width: 270px;
+	height: 300px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin-left: 50px;
 }

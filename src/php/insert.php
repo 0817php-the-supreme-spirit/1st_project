@@ -111,8 +111,11 @@ if($http_method === "POST") {
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
-
-					<form action="" method="post">
+					<div class="category-box">
+						<p>작성중..</p>
+						<div class="category-box2"></div>
+					</div>
+					<!-- <form action="" method="post">
 						<input type="radio" name="category" id="category1">
 						<label for="category1" class="category-box">전체 비용</label>
 				
@@ -124,7 +127,7 @@ if($http_method === "POST") {
 				
 						<input type="radio" name="category" id="category4">
 						<label for="category4" class="category-box">멍청 비용</label>
-					</form>
+					</form> -->
 
 				</div>
 			</div>
