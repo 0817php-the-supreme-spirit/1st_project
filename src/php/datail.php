@@ -62,8 +62,6 @@
 				$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
 				
 				$amount_used = $amount_used[0];
-
-				var_dump($item);
 			}
 		}
 		else {
