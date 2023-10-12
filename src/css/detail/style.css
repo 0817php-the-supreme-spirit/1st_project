@@ -594,7 +594,7 @@ input[type="radio"]:checked + label {
 }
 
 .side-right-bottom {
-	margin-top: 50px;
+	margin-top: 30px;
 	text-align: center;
 	color: rgba(0, 0, 0, 0.5);
 }

@@ -1,7 +1,7 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
+	define("ERROR_MSG_PARAM", "%s 해당 값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
@@ -14,13 +14,11 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 		if($http_method === "GET") {
-			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 			$id = isset($_GET["id"]) ? $_GET["id"] : "";
-			$date = date('Y-m-d');
-
 
 			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date1");
             }
 			
 
@@ -31,7 +29,7 @@
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date2");
 				}
 
 				$arr_param = [
@@ -43,6 +41,7 @@
 					throw new Exception("DB Error : select_user_table");
 				}
 				$amount_used = $amount_used[0];
+
 			}
 		}
 		else {
@@ -55,7 +54,7 @@
 			$category = [];
 
 			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
 
 			if(isset($_POST["category"])) {
@@ -74,7 +73,7 @@
 					throw new Exception("DB Error : select_search");
 				}
 				else if(count($result) === 0) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date4");
 					// throw new Exception("DB Error : select_date");
 				}
 				

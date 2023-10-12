@@ -19,6 +19,7 @@ try {
     $http_method = $_SERVER["REQUEST_METHOD"];
 
     if($http_method === "GET") {
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $arr_err_msg = [];
         if($id === "") {
@@ -41,10 +42,23 @@ try {
         }
         $item = $result[0];
 
+		$arr_param = [
+			"date" => $date
+		];
+
+		$amount_used = db_select_amount_used($conn, $arr_param);
+		if($amount_used === false) {
+			throw new Exception("DB Error : select_user_table");
+		}
+		$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
+		
+		$amount_used = $amount_used[0];
+
     } else {
         //3-2. post일 경우
         //파라미터 id획득
         $id = isset($_POST["id"]) ? $_POST["id"] : "";
+		$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
         $arr_err_msg = [];
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
@@ -54,6 +68,7 @@ try {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
 
+	
         //트랜젝션 시작
         $conn->beginTransaction();
 
@@ -71,6 +86,20 @@ try {
 		header("Location: /1st_project/src/php/list.php");
         exit;
     }
+	$user_data = db_select_user_table($conn);
+	if($user_data === false) {
+		throw new Exception("DB Error : select_user_table");
+	}
+
+	$user_days = $user_data[0];
+
+	$user_days_percent = $user_days["daily_salary"];
+
+	$amount_used_percent = $amount_used["amount_used"];
+
+	$percent = ($amount_used_percent / $user_days_percent) * 100;
+
+	$percent = (int)$percent;
 } catch(Exception $e) {
     if($http_method === "POST") {
         $conn->rollBack();
@@ -99,16 +128,18 @@ try {
 
 		<main>
 			<div class="header">
-				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="list.html/?date=" method="post">
-						<table>
+					<form action="/1st_project/src/php/list.php" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date">
-						</table>
+							<label class="date-label">
+								<input type="hidden" name="date" value="<?php echo $date; ?>">
+								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
+								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
+							</label>
 					</form>
 
 					<div class="side-left-line-1"></div>
@@ -149,7 +180,14 @@ try {
 						</div>
 					<br>	
 						<div class="box2">
-							<h1 class="box2-1"><?php echo $item["category_name"]?></h1> <h1 class="box2-2"><?php echo $item["create_date"]?></h1>
+							<h1 class="box2-1"><span><?php if($item["category_name"] == 'life') { ?>
+									<p>생활 비용</p>
+								<?php } else if($item["category_name"] == 'activity') { ?>
+									<p>활동 비용</p>
+								<?php }  else { ?>
+									<p>멍청 비용</p>
+								<?php } ?></span>
+							</h1> <h1 class="box2-2"><?php echo $item["create_date"]?></h1>
 						</div>
 					<br>	
 						<div class="box3">
@@ -182,12 +220,35 @@ try {
 			<div class="side-right">
 				<div class="side-right-box">
 					
-					<div class="side-right-top"><p>성 공!</p></div>
-					<div class="side-right-character"></div>
+					<div class="side-right-top">
+						<?php if($percent >= 0 && $percent < 80) { ?>
+							<p class="success">성 공!</p>
+						<?php } else if($percent >= 80 && $percent < 99) { ?>
+							<p class="danger">위 험!</p>
+						<?php } else { ?>
+							<p class="failure">실 패!</p>
+						<?php } ?>
+					</div>
+					<div class="side-right-character">
+						<?php if($percent >= 0 && $percent < 20) { ?>
+							<div class="side-right-character-1"></div>
+						<?php } else if($percent >= 20 && $percent < 40) { ?>
+							<div class="side-right-character-2"></div>
+						<?php } else if($percent >= 40 && $percent < 60) { ?>
+							<div class="side-right-character-3"></div>
+						<?php } else if($percent >= 60 && $percent < 80) { ?>
+							<div class="side-right-character-4"></div>
+						<?php } else if($percent >= 80 && $percent < 100) { ?>
+							<div class="side-right-character-5"></div>
+						<?php } else if($percent > 100) { ?>
+							<div class="side-right-character-6"></div>
+						<?php } ?>
+					</div>
 					<div class="side-right-bottom">
 						<p>소비한 벨</p>
-						<meter value="15" min="0" max="100" optimum="15" id="meter"></meter>
-						<p>사용 금액 / 전체 금액</p>
+						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
+						<p>사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
+						<p class="p_gpa">남은 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
 					</div>
 
 				</div>
