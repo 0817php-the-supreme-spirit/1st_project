@@ -68,18 +68,7 @@ try {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
 
-		$arr_param = [
-			"date" => $date
-		];
-
-		$amount_used = db_select_amount_used($conn, $arr_param);
-		if($amount_used === false) {
-			throw new Exception("DB Error : select_user_table");
-		}
-		$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-		
-		$amount_used = $amount_used[0];
-
+	
         //트랜젝션 시작
         $conn->beginTransaction();
 
@@ -191,7 +180,14 @@ try {
 						</div>
 					<br>	
 						<div class="box2">
-							<h1 class="box2-1"><?php echo $item["category_name"]?></h1> <h1 class="box2-2"><?php echo $item["create_date"]?></h1>
+							<h1 class="box2-1"><span><?php if($item["category_name"] == 'life') { ?>
+									<p>생활 비용</p>
+								<?php } else if($item["category_name"] == 'activity') { ?>
+									<p>활동 비용</p>
+								<?php }  else { ?>
+									<p>멍청 비용</p>
+								<?php } ?></span>
+							</h1> <h1 class="box2-2"><?php echo $item["create_date"]?></h1>
 						</div>
 					<br>	
 						<div class="box3">
