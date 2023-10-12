@@ -357,6 +357,10 @@ input[type="radio"]:checked + label {
 .content-date-box:hover {
 	background-color: rgb(255, 255, 255, 0.8);
 }
+.content-date-box > input:hover {
+	color: rgba(100, 161, 233, 1);
+}
+
 .content-title-box {
 	margin-top: 37px;
 	height: 100px;
@@ -450,6 +454,7 @@ textarea:focus{
 
 .content-category:hover {
 	background-color: rgb(255, 255, 255, 0.8);
+	color: rgba(100, 161, 233, 1);
 }
 
 select:focus {outline:none;}
