@@ -104,10 +104,8 @@ if($http_method === "POST") {
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="list.html/?date=" method="post">
-						<table>
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date">
-						</table>
+							<input class="date-box" type="date" name="create_date" value="<?php echo $date; ?>">
 					</form>
 
 					<div class="side-left-line-1"></div>
