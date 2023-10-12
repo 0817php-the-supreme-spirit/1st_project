@@ -14,9 +14,8 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 		if($http_method === "GET") {
-			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 			$id = isset($_GET["id"]) ? $_GET["id"] : "";
-			$date = date('Y-m-d');
 
 			if($id === "" ) {
 				$arr_err_msg[] = "Parameter Error : id";

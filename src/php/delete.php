@@ -1,7 +1,7 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
-require_once(ROOT."lib/delete_lib_db.php");
+require_once(ROOT."lib/lib_db.php");
 
 //db_conn($conn);
 
