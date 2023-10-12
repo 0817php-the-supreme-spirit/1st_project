@@ -21,7 +21,7 @@ try{
 
 	//POST 값 변수지정
 	$title = $_POST["title"];
-	$memo = $_POST["memo"] ? $_POST["memo"] : null;
+	$memo = $_POST["memo"] ? $_POST["memo"] : null; //memo 값 없을 시 null 세팅
 	$amount_used = $_POST["amount_used"];
 	$create_date = $_POST["create_date"];
 	$category_id = $_POST["category_id"];
@@ -111,6 +111,8 @@ try{
 
 					<div class="side-left-line-2"></div>
 
+					<div class="icon"></div>
+<!-- 
 					<form action="" method="post">
 						<input type="radio" name="category" id="category1">
 						<label for="category1" class="category-box">전체 비용</label>
@@ -123,7 +125,7 @@ try{
 				
 						<input type="radio" name="category" id="category4">
 						<label for="category4" class="category-box">멍청 비용</label>
-					</form>
+					</form> -->
 
 				</div>
 			</div>
@@ -142,7 +144,7 @@ try{
 						</div>
 						<div class="update-title-memo">
 							<div class="update-title">
-								<label for="update-title">제목</label>
+								<label for="update-title" id ="title1">제목</label>
 								<input type="text" name="title" id="update-title" placeholder="뭘 샀는지 궁금해요!" required value="<?php echo $item["title"]; ?>">
 							</div>
 							<div class="update-memo">
