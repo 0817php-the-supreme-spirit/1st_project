@@ -462,7 +462,7 @@ select:hover {
 	width: 420px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: rgba(130, 115, 87, 1);
+	color: #000;
 	line-height: 100px;
 	text-align: center;
 	border-radius: 30px;
@@ -532,7 +532,8 @@ button{
 	font-size: 35px;
 }
 .content-button-go:hover {
-	background-color: #ffffff
+	background-color: rgba(255, 255, 255, 0.8);
+	color: rgba(100, 161, 233, 1);
 }
 .content-button-back {
 	float: left;
@@ -548,7 +549,8 @@ button{
 	font-size: 35px;
 }
 .content-button-back:hover {
-	background-color: #ffffff
+	background-color: rgba(255, 255, 255, 0.8);
+	color: rgba(100, 161, 233, 1);
 }
 /* ------------------------------------------------------------------------ */
 

@@ -484,8 +484,9 @@ input[type="radio"]:checked + label {
 }
 
 .content-btn-box a:hover {
-	color: #57bca9;
+	color: #57BCA9;
 }
+
 /* ------------------------------------------------------------------------ */
 
 
