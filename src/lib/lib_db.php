@@ -60,7 +60,7 @@
 	function db_select(&$conn, &$arr_param) {
 			$sql = 
 				" SELECT "
-				." 		id "
+				." 		todo.id "
 				."		,cate.category_name "
 				."		,todo.title "
 				."		,todo.amount_used "
