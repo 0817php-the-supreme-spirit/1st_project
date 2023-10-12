@@ -6,23 +6,27 @@ $conn = null;
 db_conn($conn);
 $http_method = $_SERVER["REQUEST_METHOD"];
 
+//기본 날짜값 세팅
 $date = date('Y-m-d');
+
 
 try{
 
 	if ($http_method === "GET") {
-		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"];
+		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
 
 	}
 	else {
-	$id = isset($_POST["id"]) ? $_POST["id"] : "";
-	
+	$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
+
+	//POST 값 변수지정
 	$title = $_POST["title"];
-	$memo = $_POST["memo"];
+	$memo = $_POST["memo"] ? $_POST["memo"] : null;
 	$amount_used = $_POST["amount_used"];
 	$create_date = $_POST["create_date"];
 	$category_id = $_POST["category_id"];
-
+	
+	//POST 값 받아오기
 	$arr_param = [
 		"title" => $title
 		,"memo" => $memo
@@ -34,12 +38,16 @@ try{
 
 	$conn->beginTransaction();
 
+	//POST값 입력
 	if(!update_execute($conn, $arr_param)){
 		throw new Exception("DB Error : Update_boards_id");
 	}
+	
+	//커밋
 	$conn->commit();
 
-	header("Location: /1st_project/src/php/datail.php/?id={$id}"); //업데이트 완료 후 디테일 페이지로 이동
+	//업데이트 완료 후 디테일 페이지로 이동
+	header("Location: /1st_project/src/php/datail.php/?id={$id}"); 
 	exit;
 	}
 	//업데이트 완료한거 불러오기
@@ -48,6 +56,7 @@ try{
 		"id" => $id
 	];
 
+	// 게시글 데이터 조회
 	$result = select_change_detail( $conn, $arr_param_id );
 
 		//게시글 조회 예외처리
@@ -61,7 +70,7 @@ try{
 	if($http_method === "POST") {
 	$conn->rollBack();
 	}
-	echo $e->getmessage();
+	echo $e->getmessage(); // Exception 메세지 출력
 	exit;
 }finally{
 	db_destroy_conn($conn);
