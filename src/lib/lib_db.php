@@ -239,7 +239,40 @@
 		try {
 			$stmt = $conn->query($sql);
 			$result = $stmt->fetchAll();
-			return count($result);
+			return $result;
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
+
+
+	// ----------------------------
+	// 함수명 	: db_select_amount_used
+	// 기능 	: user_table 유저 일일 급여 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_select_amount_used(&$conn, &$arr_param) {
+		$sql =
+			" SELECT "
+			." 		sum(amount_used) as amount_used "
+			." FROM "
+			."		todolist_table "
+			." WHERE "
+			." 		create_date = :date "
+			;
+		$arr_ps = [
+			":date" => $arr_param["date"]
+		];
+		
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result; // 결과 리턴
 		}
 		catch(Exception $e) {
 			return false;

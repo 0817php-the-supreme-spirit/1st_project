@@ -318,7 +318,10 @@ input[type="radio"]:checked + label {
 .content-date-box:hover {
 	background-color: #ffffff;
 }
-
+.content-title-box {
+	margin-top: 37px;
+	height: 100px;
+}
 .content-title-box1 {
 	width: 150px;
 	height: 100px;
@@ -328,8 +331,7 @@ input[type="radio"]:checked + label {
 	display: inline-block;
 	text-align: center;
 	line-height: 100px;
-	margin-right: 20px;
-	margin-top: 37px;
+	margin-right: 10px;
 	font-size: 30px;
 	
 }
@@ -342,6 +344,11 @@ input[type="radio"]:checked + label {
 	padding: 20px;
 	opacity: 10;
 }
+.content-title-box2:focus {
+	outline: none;
+	background-color: rgb(255, 255, 255, 0.8);
+}
+
 .content-memo-box {
 	margin-top: 37px;
 	height: 100px;
@@ -370,7 +377,10 @@ input[type="radio"]:checked + label {
 	vertical-align:middle;
 	opacity: 10;
 }
-
+.content-memo-box2:focus {
+	outline: none;
+	background-color: rgb(255, 255, 255, 0.8);
+}
 textarea {
 	padding-left: 20px;
 	padding-top: 35px;
@@ -396,6 +406,7 @@ textarea {
 .content-category:hover {
 	background-color: #ffffff;
 }
+
 
 select:focus {outline:none;}
 
@@ -425,6 +436,11 @@ textarea:focus {outline: none;}
 .content-category-money input {
 	text-align: center;
 }
+.content-category-money>input[type=number]:focus {
+	outline: none;
+	background-color: rgb(255, 255, 255, 0.8);
+}
+
 
 .content-float1 {
 	float: left;
