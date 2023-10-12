@@ -264,7 +264,7 @@ button {
 	background-color: rgba(255, 255, 255, 0.929);
 	border-radius: 20px;
 	width: 340px;
-	height: 300px;
+	height: 270px;
 	background-image: url(/1st_project/src/icon/Helmet.png);
 	background-repeat: no-repeat;
 	background-size: 250px 250px;
@@ -739,7 +739,7 @@ progress[value]::-webkit-progress-bar{
 .box6-1 {
 	display: inline-block;
 	border: none;
-	color: #c0a0c9;
+	color: #57bca9;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	width: 260px;
@@ -752,7 +752,7 @@ progress[value]::-webkit-progress-bar{
 .box6-2 {
 	display: inline-block;
 	text-decoration: none;
-	color: #c0a0c9;
+	color: #57bca9;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	width: 260px;
@@ -765,13 +765,13 @@ progress[value]::-webkit-progress-bar{
 
 
 .box6>form>button:hover {
-	background-color: #c0a0c9;
-	color: #ffff;
+	background-color: rgb(255, 255, 255, 0.8);
+	color:  #c0a0c9;
 	transition: 0.2s;
 }
 
 .box6>form>a:hover {
-	background-color: #c0a0c9;
-	color: #ffff;
+	background-color: rgb(255, 255, 255, 0.8);
+	color:  #c0a0c9;
 	transition: 0.2s;
 }

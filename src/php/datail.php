@@ -261,7 +261,7 @@
 
 					<div class="content-btn-box">
 						<div class="content-btn-before">
-							<a href="">이전</a>
+							<a href="/1st_project/src/php/list.php">이전</a>
 						</div>
 						<div class="content-btn-correction">
 							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>">수정</a>

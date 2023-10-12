@@ -198,8 +198,8 @@ else {
 								</div>
 							</div>
 							<div class="content-float2">
-								<p>벌써 지출</p>
-								<p>할려고요?</p>
+								<p>벌써지출</p>
+								<p>할거에요?</p>
 							</div>
 						</div>
 						<div class="content-button">
