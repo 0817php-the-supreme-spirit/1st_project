@@ -111,7 +111,7 @@ try{
 
 					<div class="side-left-line-2"></div>
 
-					<div class="icon"></div>
+					<div class="update-icon"></div>
 <!-- 
 					<form action="" method="post">
 						<input type="radio" name="category" id="category1">
