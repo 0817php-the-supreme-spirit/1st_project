@@ -230,7 +230,7 @@ main {
 	color: #57BCA9;
 } */
 
-.category-box {
+/* .category-box {
 	margin-top: 20px;
 	width: 340px;
 	height: 50px;
@@ -241,8 +241,33 @@ main {
 	line-height: 43px;
 	color: #57BCA9;
 	display: inline-block;
+} */
+.category-box {
+	margin-top: 20px;
+	width: 340px;
+	height: 250px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 20px;
+	border: 3px solid rgba(100, 161, 233, 1);
+	text-align: center;
+	line-height: 43px;
+	/* color: #57BCA9; */
+	display: inline-block;
+	padding-top: 20px;
+	background-image: url(/1st_project/src/icon/insert1.png);
+	background-size: 190px;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
 }
-
+.category-box p {
+	font-size: 60px;
+	color: #000;
+	line-height: 125px;
+	position: absolute;
+	top: 50px;
+	left: 80px;
+}
 input[type="radio"] {
     display: none; /* 라디오 버튼 숨김 */
 }
@@ -309,7 +334,7 @@ input[type="radio"]:checked + label {
 	text-align: center;
 }
 .content-date-box:hover {
-	background-color: #ffffff;
+	background-color: rgb(255, 255, 255, 0.8);
 }
 .content-title-box {
 	margin-top: 37px;
@@ -403,7 +428,7 @@ textarea:focus{
 }
 
 .content-category:hover {
-	background-color: #ffffff;
+	background-color: rgb(255, 255, 255, 0.8);
 }
 
 select:focus {outline:none;}
@@ -433,8 +458,13 @@ textarea:focus {outline: none;}
 
 .content-category-money input {
 	text-align: center;
+	width: 420px;
+	height: 100px;
+	border-radius: 30px;
 }
-
+.content-category-money > input:focus {
+	background-color: rgb(255, 255, 255, 0.8);
+}
 .content-float1 {
 	float: left;
 }
@@ -522,7 +552,7 @@ button{
 	height: 770px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
-	border: 1px solid #57BCA9;
+	border: 1px solid rgba(100, 161, 233, 1);
 }
 
 .side-right-top {

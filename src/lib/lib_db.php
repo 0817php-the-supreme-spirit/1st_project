@@ -192,6 +192,8 @@
 			." 		todo.category_id = cate.category_id "
 			." WHERE "
 			." 		todo.create_date = :date "
+			." AND "
+			." 		delete_date IS NULL ";
 			;
 
 		$arr_ps = [
@@ -239,7 +241,42 @@
 		try {
 			$stmt = $conn->query($sql);
 			$result = $stmt->fetchAll();
-			return count($result);
+			return $result;
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
+
+
+	// ----------------------------
+	// 함수명 	: db_select_amount_used
+	// 기능 	: user_table 유저 일일 급여 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_select_amount_used(&$conn, &$arr_param) {
+		$sql =
+			" SELECT "
+			." 		sum(amount_used) as amount_used "
+			." FROM "
+			."		todolist_table "
+			." WHERE "
+			." 		create_date = :date "
+			." AND "
+			." 		delete_date IS NULL ";
+			;
+		$arr_ps = [
+			":date" => $arr_param["date"]
+		];
+		
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result; // 결과 리턴
 		}
 		catch(Exception $e) {
 			return false;
@@ -498,29 +535,30 @@ function db_delete_date_id(&$conn, &$arr_param) {
 
 	function update_execute( &$conn, &$arr_param ){
 		try{ $sql = " UPDATE "
-		."			todolist_table "
-		."		SET "
-		."			title = :title "
-		."			,memo = :memo "
-		."			,amount_used = :amount_used "
-		."			,create_date = :create_date "
-		."			,modify_date = NOW() "
-		."			,category_id = :category_id "
-		."		WHERE "
-		."			id = :id "
-		;
-	
-		$arr_ps = [
-			":title" => $arr_param["title"]
-			,":memo" => $arr_param["memo"]
-			,":amount_used" => $arr_param["amount_used"]
-			,":create_date" => $arr_param["create_date"]
-			,":category_id" => $arr_param["category_id"]
-			,":id" => $arr_param["id"]
-		];
-		$stmt = $conn->prepare($sql);
-		$result = $stmt->execute($arr_ps);
-		return $result;
+			."			todolist_table "
+			."		SET "
+			."			title = :title "
+			."			,memo = :memo "
+			."			,amount_used = :amount_used "
+			."			,create_date = :create_date "
+			."			,modify_date = NOW() "
+			."			,category_id = :category_id "
+			."		WHERE "
+			."			id = :id "
+			;
+		
+			$arr_ps = [
+				":title" => $arr_param["title"]
+				,":memo" => $arr_param["memo"]
+				,":amount_used" => $arr_param["amount_used"]
+				,":create_date" => $arr_param["create_date"]
+				,":category_id" => $arr_param["category_id"]
+				,":id" => $arr_param["id"]
+			];
+
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+			return $result;
 	}catch(Exception $e){
 		echo $e->getMessage(); // Exception 메세지 출력
 		return false;
