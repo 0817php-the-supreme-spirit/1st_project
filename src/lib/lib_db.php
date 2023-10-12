@@ -297,8 +297,8 @@
 
 // -------------------------------------------------------------
 
-// ******* insert lib. *************
 // ----------------------------
+// ******* insert lib. *************
 	// 함수명 	: db_insert
 	// 기능 	: boards 레코드 작성
 	// 파라미터 : PDO 	&$conn
@@ -486,4 +486,84 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	}
 
 // -------------------------------------------------------------
+// ----------------------------
+// ******* update lib. *************
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function update_execute( &$conn, &$arr_param ){
+		try{ $sql = " UPDATE "
+		."			todolist_table "
+		."		SET "
+		."			title = :title "
+		."			,memo = :memo "
+		."			,amount_used = :amount_used "
+		."			,create_date = :create_date "
+		."			,modify_date = NOW() "
+		."			,category_id = :category_id "
+		."		WHERE "
+		."			id = :id "
+		;
+	
+		$arr_ps = [
+			":title" => $arr_param["title"]
+			,":memo" => $arr_param["memo"]
+			,":amount_used" => $arr_param["amount_used"]
+			,":create_date" => $arr_param["create_date"]
+			,":category_id" => $arr_param["category_id"]
+			,":id" => $arr_param["id"]
+		];
+		$stmt = $conn->prepare($sql);
+		$result = $stmt->execute($arr_ps);
+		return $result;
+	}catch(Exception $e){
+		echo $e->getMessage(); // Exception 메세지 출력
+		return false;
+	}
+	
+	}
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_compare
+	// 기능 	: 유저의 한달 주기 비교
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function select_change_detail( &$conn, &$arr_param_id ){
+		try{$sql = " SELECT "
+		."			cate.category_name "
+		."			,tod.title "
+		."			,tod.memo "
+		."			,tod.amount_used "
+		."			,tod.create_date "
+		."		FROM "
+		."			todolist_table tod "
+		."		JOIN "
+		."			category_table cate "
+		."		ON "
+		."			cate.category_id = tod.category_id "
+		."		WHERE "
+		."			id = :id ";
+	
+		$arr_param = [
+			":id" => $arr_param_id["id"]
+		];
+	
+		$stmt = $conn->prepare($sql);
+		$stmt->execute($arr_param);
+		$result = $stmt->fetchAll();
+		return $result;
+	}catch(Exception $e){
+		echo $e->getMessage(); // Exception 메세지 출력
+		return false;
+	}
+	}
+// ******* update lib. *************
+// ----------------------------
 ?>

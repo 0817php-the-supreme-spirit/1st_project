@@ -1,6 +1,6 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
-require_once(ROOT."lib/update_lib_db.php");
+require_once(ROOT."lib/lib_db.php");
 
 $conn = null;
 db_conn($conn);

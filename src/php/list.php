@@ -71,6 +71,7 @@
 				}
 			}
 		}
+		
 	}
 	catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
