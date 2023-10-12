@@ -435,16 +435,30 @@ input[type="radio"]:checked + label {
 	color: rgba(0, 0, 0, 0.5);
 }
 
-meter {
+progress {
 	width: 300px;
-	height: 80px;
-	border-radius: 10px;
+	height: 60px;
 }
 
-meter::-webkit-meter-bar {
-    border-radius: 15px;
-	appearance: none;
+
+progress[value]::-webkit-progress-bar{
+	background-color: whitesmoke;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.25) inset;
 }
+
+#progress[value]{
+	appearance: none;
+	border-radius: 15px;
+	overflow: hidden;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+#progress[value]::-webkit-progress-value{
+	background-image: linear-gradient(to left, #2ecc71, #3498db);
+}
+
 /* ------------------------------------------------------------------------ */
 /* 공통 사항 추가 부분 */
 .content-td-color {
@@ -461,3 +475,4 @@ meter::-webkit-meter-bar {
 	background-color: #57BCA9;
 	color: #fff;
 }
+
