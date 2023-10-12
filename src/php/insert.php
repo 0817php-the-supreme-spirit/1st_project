@@ -112,7 +112,7 @@ if($http_method === "POST") {
 
 					<div class="side-left-line-2"></div>
 					<div class="category-box">
-						<p>작성중..</p>
+						<!-- <p>작성중..</p> -->
 						<div class="category-box2"></div>
 					</div>
 					<!-- <form action="" method="post">
