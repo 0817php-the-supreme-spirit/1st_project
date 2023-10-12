@@ -216,6 +216,7 @@ main {
 	width: 140px;
 	border: 3px solid #c0a0c9;
 	border-radius: 5px;
+	background-color: rgba(255, 255, 255, 0.929);
 }
 
 /* .side-left-box-category {
@@ -230,7 +231,29 @@ main {
 	color: #57BCA9;
 } */
 
-.category-box {
+.img-left-box {
+	border: 3px solid #c0a0c9;
+	background-color: rgba(255, 255, 255, 0.929);
+	border-radius: 20px;
+	width: 340px;
+	height: 300px;
+	background-image: url(/1st_project/src/icon/Helmet.png);
+	background-repeat: no-repeat;
+	background-size: 250px 250px;
+}
+
+.font-left-box {
+	display: inline-block;
+	font-size: 3em;
+	font-style: oblique;
+	position: relative;
+	left: 80px;
+	top: 170px;
+	color: #c0a0c9;
+	-webkit-text-stroke: 1px #000;
+}
+
+/* .category-box {
 	margin-top: 17px;
 	width: 340px;
 	height: 50px;
@@ -241,7 +264,7 @@ main {
 	line-height: 43px;
 	color: #c0a0c9;
 	display: inline-block;
-}
+} */
 
 input[type="radio"] {
     display: none; /* 라디오 버튼 숨김 */
