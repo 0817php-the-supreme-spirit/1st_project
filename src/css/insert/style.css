@@ -311,7 +311,10 @@ input[type="radio"]:checked + label {
 .content-date-box:hover {
 	background-color: #ffffff;
 }
-
+.content-title-box {
+	margin-top: 37px;
+	height: 100px;
+}
 .content-title-box1 {
 	width: 150px;
 	height: 100px;
@@ -321,8 +324,7 @@ input[type="radio"]:checked + label {
 	display: inline-block;
 	text-align: center;
 	line-height: 100px;
-	margin-right: 20px;
-	margin-top: 37px;
+	margin-right: 10px;
 	font-size: 30px;
 	
 }
@@ -335,6 +337,13 @@ input[type="radio"]:checked + label {
 	padding: 20px;
 	opacity: 10;
 }
+.content-title-box2:focus {
+	outline: none;
+	background-color: rgb(255, 255, 255, 0.8);
+}
+/* .content-title-box2:hover {
+	background-color: #fffffff7;
+} */
 .content-memo-box {
 	margin-top: 37px;
 	height: 100px;
@@ -352,6 +361,7 @@ input[type="radio"]:checked + label {
 	font-size: 30px;
 	
 }
+
 .content-memo-box2 {
 	resize:none;
 	width: 700px;
@@ -363,10 +373,16 @@ input[type="radio"]:checked + label {
 	vertical-align:middle;
 	opacity: 10;
 }
-
+/* .content-memo-box2:hover {
+	background-color: #fffffff7;
+} */
 textarea {
 	padding-left: 20px;
 	padding-top: 35px;
+}
+textarea:focus{
+	outline: none;
+	background-color: rgb(255, 255, 255, 0.8);
 }
 
 .content-value-box {
@@ -438,7 +454,7 @@ textarea:focus {outline: none;}
 .content-float2 > p {
 	height: 80px;
 	font-size: 60px;
-	color: rgba(228, 91, 91, 1);
+	color: rgba(228, 91, 91, 0.89);
 	/* text-align: center; */
 }
 
@@ -503,7 +519,7 @@ button{
 
 .side-right-box {
 	width: 340px;
-	height: 780px;
+	height: 770px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
 	border: 1px solid #57BCA9;

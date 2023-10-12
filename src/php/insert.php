@@ -21,7 +21,7 @@ if($http_method === "POST") {
 		$arr_post = $_POST;
 
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
-        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : "";
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null;
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
@@ -29,11 +29,8 @@ if($http_method === "POST") {
 		if($title === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
         }
-        if($memo === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "memo");
-        }
 		if($amount_used === "") {
-            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");       
+            $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
 		}
 		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
@@ -103,10 +100,8 @@ if($http_method === "POST") {
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="list.html/?date=" method="post">
-						<table>
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<input class="date-box" type="date">
-						</table>
+							<input class="date-box" type="date" name="create_date" value="<?php echo $date; ?>">
 					</form>
 
 					<div class="side-left-line-1"></div>
@@ -141,14 +136,15 @@ if($http_method === "POST") {
 						<!-- <p>날짜</p> -->
 						<input type="date" name="create_date" value="<?php echo $date; ?>">
 					</div>
-							<table>
+							<div class="content-title-box">
 								<label for="text-title" class="content-title-box1">제목</label>
 								<input type="text" name="title" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
-								<div class="content-memo-box">
-									<label for="text-memo" class="content-memo-box1">메모</label>
-									<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="50" required placeholder="같이 작성하면 좋아요!"></textarea>
-								</div>
-							</table>
+							</div>
+							<div class="content-memo-box">
+								<label for="text-memo" class="content-memo-box1">메모</label>
+								<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="50" placeholder="메모도 중요해요!"></textarea>
+							</div>
+							
 						<div class="content-value-box">
 							<div class="content-float1">
 									<select name="category_id" id="category" class="content-category" required>
@@ -157,7 +153,9 @@ if($http_method === "POST") {
 										<option value="1">활동비용</option>
 										<option value="2">멍청비용</option>
 									</select>
-								<p class="content-category-money"><input type="number" name="amount_used" id="amount_used" required placeholder="금액을 입력해 주세요"></p>
+								<div class="content-category-money">
+									<input type="number" name="amount_used" id="amount_used" required placeholder="금액을 입력해 주세요">
+								</div>
 							</div>
 							<div class="content-float2">
 								<p>벌써 지출</p>
