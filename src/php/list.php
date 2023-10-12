@@ -96,6 +96,7 @@
 		if($user_data === false) {
 			throw new Exception("DB Error : select_user_table");
 		}
+
 		$user_days = $user_data[0];
 
 		$user_days_percent = $user_days["daily_salary"];
@@ -105,8 +106,6 @@
 		$percent = ($amount_used_percent / $user_days_percent) * 100;
 
 		$percent = (int)$percent;
-
-		echo $percent;
 
 	}
 	catch(Exception $e) {
@@ -137,9 +136,10 @@
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" method="post">
+					<form action="/1st_project/src/php/list.php" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
 							<label class="date-label">
+								<input type="hidden" name="date" value="<?php echo $date; ?>">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>

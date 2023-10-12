@@ -50,6 +50,18 @@
 					throw new Exception("DB Error : Select id Count");
 				}
 				$item = $result[0];
+
+				$arr_param = [
+					"date" => $date
+				];
+		
+				$amount_used = db_select_amount_used($conn, $arr_param);
+				if($amount_used === false) {
+					throw new Exception("DB Error : select_user_table");
+				}
+				$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
+				
+				$amount_used = $amount_used[0];
 			}
 		}
 		else {
@@ -84,8 +96,34 @@
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 					// throw new Exception("DB Error : select_date");
 				}
+
+				$arr_param = [
+					"date" => $date
+				];
+		
+				$amount_used = db_select_amount_used($conn, $arr_param);
+				if($amount_used === false) {
+					throw new Exception("DB Error : select_user_table");
+				}
+				$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
+				
+				$amount_used = $amount_used[0];
 			}
 		}
+		$user_data = db_select_user_table($conn);
+		if($user_data === false) {
+			throw new Exception("DB Error : select_user_table");
+		}
+
+		$user_days = $user_data[0];
+
+		$user_days_percent = $user_days["daily_salary"];
+
+		$amount_used_percent = $amount_used["amount_used"];
+
+		$percent = ($amount_used_percent / $user_days_percent) * 100;
+
+		$percent = (int)$percent;
 
 	}
 	catch(Exception $e) {
@@ -111,14 +149,15 @@
 
 		<main>
 			<div class="header">
-				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" method="post">
+					<form action="/1st_project/src/php/list.php" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
 							<label class="date-label">
+								<input type="hidden" name="date" value="<?php echo $date; ?>">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>
@@ -126,7 +165,7 @@
 					<div class="side-left-line-1"></div>
 
 					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
+					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
@@ -233,12 +272,35 @@
 			<div class="side-right">
 				<div class="side-right-box">
 					
-					<div class="side-right-top"><p>성 공!</p></div>
-					<div class="side-right-character"></div>
+					<div class="side-right-top">
+						<?php if($percent >= 0 && $percent < 80) { ?>
+							<p class="success">성 공!</p>
+						<?php } else if($percent >= 80 && $percent < 99) { ?>
+							<p class="danger">위 험!</p>
+						<?php } else { ?>
+							<p class="failure">실 패!</p>
+						<?php } ?>
+					</div>
+					<div class="side-right-character">
+						<?php if($percent >= 0 && $percent < 20) { ?>
+							<div class="side-right-character-1"></div>
+						<?php } else if($percent >= 20 && $percent < 40) { ?>
+							<div class="side-right-character-2"></div>
+						<?php } else if($percent >= 40 && $percent < 60) { ?>
+							<div class="side-right-character-3"></div>
+						<?php } else if($percent >= 60 && $percent < 80) { ?>
+							<div class="side-right-character-4"></div>
+						<?php } else if($percent >= 80 && $percent < 100) { ?>
+							<div class="side-right-character-5"></div>
+						<?php } else if($percent > 100) { ?>
+							<div class="side-right-character-6"></div>
+						<?php } ?>
+					</div>
 					<div class="side-right-bottom">
 						<p>소비한 벨</p>
-						<meter value="15" min="0" max="100" optimum="15" id="meter"></meter>
-						<p>사용 금액 / 전체 금액</p>
+						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
+						<p>사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
+						<p class="p_gpa">남은 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
 					</div>
 
 				</div>

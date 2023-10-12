@@ -527,12 +527,69 @@ input[type="radio"]:checked + label {
 }
 
 .side-right-character {
+	width: 240px;
+	height: 400px;
 	margin: auto;
-	margin-top: 30px;
-	width: 212px;
-	height: 382px;
-	background-image: url(/1st_project/src/img/character1.png);
+}
+
+.side-right-character-1 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
 	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/1.png);
+}
+
+.side-right-character-2 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/2.png);
+}
+
+.side-right-character-3 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/3.png);
+}
+
+.side-right-character-4 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/4.png);
+}
+
+.side-right-character-5 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/5.png);
+}
+
+.side-right-character-6 {
+	margin: auto;
+	margin-top: 10px;
+	width: 250px;
+	height: 400px;
+	background-repeat: no-repeat;
+	background-size:contain;
+	background-image: url(/1st_project/src/img/character/6.png);
 }
 
 .side-right-bottom {
@@ -541,17 +598,36 @@ input[type="radio"]:checked + label {
 	color: rgba(0, 0, 0, 0.5);
 }
 
-meter {
+progress {
+	margin-top: 10px;
 	width: 300px;
-	height: 80px;
-	border-radius: 10px;
+	height: 35px;
+	color: #2ecc71;
+	margin-bottom: 20px;
 }
 
-meter::-webkit-meter-bar {
-    border-radius: 15px;
-	appearance: none;
+progress[value]::-webkit-progress-bar{
+	background-color: whitesmoke;
+	box-shadow: 0 2px 5px rgba(0,0,0,0.25) inset;
 }
+
+#progress {
+    appearance: none;
+}
+
+#progress::-webkit-progress-bar {
+    background:#f0f0f0;
+    border-radius:10px;
+    box-shadow: inset 3px 3px 10px #ccc;
+}
+#progress::-webkit-progress-value {
+    border-radius:10px;
+    background: #1D976C;
+	background-image: linear-gradient(to left, #2ecc71, #3498db);
+}
+
 /* ------------------------------------------------------------------------ */
+/* 공통 사항 추가 부분 */
 .content-td-color {
 	background-color: rgba(87, 188, 169, 0.8);
 	color: #fff;
@@ -565,4 +641,16 @@ meter::-webkit-meter-bar {
 .category-box-select {
 	background-color: #57BCA9;
 	color: #fff;
+}
+
+.p_gpa {
+	margin-top: 10px;
+}
+
+.danger {
+	color: tomato;
+}
+
+.failure {
+	color: red;
 }
