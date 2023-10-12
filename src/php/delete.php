@@ -160,7 +160,7 @@ try {
 					<br>
 					<br>
 						<div class="box5">
-							<span class="box5-1">일일 사용 금액: <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액: </span>
+							<span class="box5-1">일일 사용 금액 : <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액 : </span>
 						</div>
 					
 				<br>
