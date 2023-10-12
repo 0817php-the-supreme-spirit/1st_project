@@ -192,6 +192,8 @@
 			." 		todo.category_id = cate.category_id "
 			." WHERE "
 			." 		todo.create_date = :date "
+			." AND "
+			." 		delete_date IS NULL ";
 			;
 
 		$arr_ps = [
@@ -263,6 +265,8 @@
 			."		todolist_table "
 			." WHERE "
 			." 		create_date = :date "
+			." AND "
+			." 		delete_date IS NULL ";
 			;
 		$arr_ps = [
 			":date" => $arr_param["date"]
