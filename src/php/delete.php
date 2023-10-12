@@ -68,18 +68,6 @@ try {
             throw new Exception(implode("<br>", $arr_err_msg));
         }
 
-		$arr_param = [
-			"date" => $date
-		];
-
-		$amount_used = db_select_amount_used($conn, $arr_param);
-		if($amount_used === false) {
-			throw new Exception("DB Error : select_user_table");
-		}
-		$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-		
-		$amount_used = $amount_used[0];
-
         //트랜젝션 시작
         $conn->beginTransaction();
 
