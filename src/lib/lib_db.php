@@ -215,6 +215,38 @@
 	}
 }
 
+// ----------------------------
+	// 함수명 	: db_select_user_table
+	// 기능 	: user_table 유저 일일 급여 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_select_user_table(&$conn) {
+		$sql =
+			" SELECT "
+			." 		daily_salary "
+			." FROM "
+			."		user_table "
+			." WHERE "
+			." 		input_date "
+			." BETWEEN "
+			." 		date_format(now(), '%Y-%m-01') "
+			." AND "
+			." 		date_format(now(), '%Y-%m-%d') "
+			;
+		try {
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return count($result);
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
+
+
 // -------------------------------------------------------------
 
 

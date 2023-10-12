@@ -4,60 +4,68 @@ require_once(ROOT."lib/update_lib_db.php");
 
 $conn = null;
 db_conn($conn);
-
 $http_method = $_SERVER["REQUEST_METHOD"];
 
 $date = date('Y-m-d');
 
-if ($http_method === "GET") {
-	$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"];
+try{
 
-}
-else {
-$id = isset($_POST["id"]) ? $_POST["id"] : "";
-$title = $_POST["title"];
-$memo = $_POST["memo"];
-$amount_used = $_POST["amount_used"];
-$create_date = $_POST["create_date"];
-$category_id = $_POST["category_id"];
+	if ($http_method === "GET") {
+		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"];
 
-$arr_param = [
-	"title" => $title
-	,"memo" => $memo
-	,"amount_used" => $amount_used
-	,"create_date" => $create_date
-	,"category_id" => $category_id
-	,"id" => $id
-];
-
-$conn->beginTransaction();
-
-if(!update_execute($conn, $arr_param)){
-	throw new Exception("DB Error : Update_boards_id");
-}
-$conn->commit();
-
-header("Location: /1st_project/src/php/datail.php/?id={$id}"); //업데이트 완료 후 디테일 페이지로 이동
-exit;
-}
-//업데이트 완료한거 불러오기
-
-$arr_param_id = [
-	"id" => $id
-];
-
-$result = select_change_detail( $conn, $arr_param_id );
-
-	//게시글 조회 예외처리
-	if($result === false){
-		throw new Exception("DB Error : PDO Select_id");
-	//게시글 조회 에러
-	} else if(!count($result) === 1){
-	//게시글 조회 count 에러
-	throw new Exception("DB Error : PDO Select_id count,".count($result));
 	}
-$item = $result[0];
+	else {
+	$id = isset($_POST["id"]) ? $_POST["id"] : "";
+	
+	$title = $_POST["title"];
+	$memo = $_POST["memo"];
+	$amount_used = $_POST["amount_used"];
+	$create_date = $_POST["create_date"];
+	$category_id = $_POST["category_id"];
 
+	$arr_param = [
+		"title" => $title
+		,"memo" => $memo
+		,"amount_used" => $amount_used
+		,"create_date" => $create_date
+		,"category_id" => $category_id
+		,"id" => $id
+	];
+
+	$conn->beginTransaction();
+
+	if(!update_execute($conn, $arr_param)){
+		throw new Exception("DB Error : Update_boards_id");
+	}
+	$conn->commit();
+
+	header("Location: /1st_project/src/php/datail.php/?id={$id}"); //업데이트 완료 후 디테일 페이지로 이동
+	exit;
+	}
+	//업데이트 완료한거 불러오기
+
+	$arr_param_id = [
+		"id" => $id
+	];
+
+	$result = select_change_detail( $conn, $arr_param_id );
+
+		//게시글 조회 예외처리
+		if($result === false){
+			throw new Exception("DB Error : PDO Select_id");
+		}
+		
+	$item = $result[0];
+
+} catch(Exception $e) {
+	if($http_method === "POST") {
+	$conn->rollBack();
+	}
+	echo $e->getmessage();
+	exit;
+}finally{
+	db_destroy_conn($conn);
+}
 
 ?>
 
@@ -74,7 +82,7 @@ $item = $result[0];
 
 		<main>
 			<div class="header">
-				<a href=""><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">
