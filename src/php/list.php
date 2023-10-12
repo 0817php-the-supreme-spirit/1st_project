@@ -29,10 +29,12 @@
 					"date" => $date
 				];
 				$result = db_select($conn, $arr_param);
-				if(!$result)
-				{
-					throw new Exception("DB Error : SELECT");
+
+				if(!$result) {
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 				}
+
+				
 			}
 		}
 		else {
