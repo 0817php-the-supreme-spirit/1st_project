@@ -248,7 +248,7 @@
 								</div>
 		
 								<div class="content-user-remaining">
-									<p>일일 남은 금액 : 20000</p>
+									<p>일일 남은 금액 : <?php echo $user_days["daily_salary"]; ?></p>
 								</div>
 							</div>
 
@@ -261,7 +261,7 @@
 
 					<div class="content-btn-box">
 						<div class="content-btn-before">
-							<a href="/1st_project/src/php/list.php">이전</a>
+							<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>">이전</a>
 						</div>
 						<div class="content-btn-correction">
 							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>">수정</a>
@@ -305,8 +305,12 @@
 					<div class="side-right-bottom">
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
-						<p>사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-						<p class="p_gpa">남은 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+						<div class="side-right-user">
+							<p class="small">사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
+							<p class="small p_gpa">남은 금액 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<div class="bar"></div>
+							<p class="small p_gpa all">전체 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+						</div>
 					</div>
 
 				</div>
