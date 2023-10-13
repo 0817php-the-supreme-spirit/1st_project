@@ -35,9 +35,9 @@ INSERT INTO user_table (
 )
  	
 VALUES (
- 	2000000
- 	,50000
- 	,20230909
+ 	4000000
+ 	,133000
+ 	,20230701
 );
 
 INSERT INTO category_table (
@@ -109,8 +109,8 @@ alter table todolist_table alter column memo set DEFAULT '메모 없음';
 
 flush PRIVILEGES;
 
-INSERT INTO user_table ( monthly_salary )
 VALUES (20000)
+INSERT INTO user_table ( monthly_salary )
 
 SELECT *
 FROM user_table
