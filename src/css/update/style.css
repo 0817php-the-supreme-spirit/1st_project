@@ -235,6 +235,15 @@ button {
 	color: rgba(0, 0, 0, 0.5);
 }
 
+.side-left-on:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
+.side-left-off:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
+
 .side-left-page:hover {
 	background-image: url(../../img/btn-on.png);
 	color: #57BCA9;
@@ -497,6 +506,7 @@ progress[value]::-webkit-progress-bar{
 	border-radius: 30px;
 	box-shadow: 0 14px 28px rgba(107, 107, 107, 0.1), 0 10px 10px rgba(117, 117, 117, 0.1);
 }
+
 
 /* ------------------------------------------------------------------------ */
 

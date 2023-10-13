@@ -450,6 +450,17 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	display: inline-block;
 	font-size: 45px;
+	line-height: 80px;
+	padding: 30px;
+}
+
+.content-phrases-box-color {
+	color: #8496E2;
+}
+
+
+.content-phrases-box-failure {
+	color: #F08384;
 }
 
 .content-btn-box {

@@ -374,6 +374,15 @@ summary::marker {
 	display: inline-block;
 }
 
+.content-box-success-color {
+	color: #8496E2;
+}
+
+
+.content-box-success-failure {
+	color: #F08384;
+}
+
 .content-td-color {
 	background-color: rgba(87, 188, 169, 0.8);
 	color: #fff;
@@ -439,7 +448,7 @@ summary::marker {
 
 .side-right-box {
 	width: 340px;
-	height: 775px;
+	height: 780px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
 	border: 1px solid #57BCA9;
