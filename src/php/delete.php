@@ -1,32 +1,39 @@
 <?php
-define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
-define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
-require_once(ROOT."lib/lib_db.php");
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //상수 설정, 웹서버 root패스 생성
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다."); //상수 설정, 파라미터 에러 메세지 불러오기 
+require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 //db_conn($conn);
 
-$arr_err_msg = [];
+$arr_err_msg = [];//에러메세지 저장용
 
+// TRY문 시작
 try {
     //2. db connect
     //2-1. connection 함수 호출
     $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
+		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
         throw new Exception("DB Error : PDO Instance");
     }
 
-    // METHOD 획득?
+    // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
     $http_method = $_SERVER["REQUEST_METHOD"];
 
+	// get일 경우 삭제 버튼을 눌렀을 때?
     if($http_method === "GET") {
+		//파라미터에서 받아올 date, id의 값
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $arr_err_msg = [];
+
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
+		//여기서 나 date의 값은 없앴는데 이래도괜찮은건가?
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
+			//에러메세지 출력할 때 한 배열에 출력하기 위해 (implode(): 배열에 속한 문자열을 한 문자열로 만드는 함수) 사용 
         }
 
         // 게시글 정보 획득
