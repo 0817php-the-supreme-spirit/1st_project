@@ -321,6 +321,7 @@ input[type="radio"]:checked + label {
 	top: 90px; 
 	left: 440px;
 	padding: 40px 30px;
+	height: 900px;
 }
 
 .content-box {
