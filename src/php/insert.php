@@ -6,11 +6,11 @@ define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 $conn = null; 
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = []; // 에러 메세지 저장
-$title = "";
-$memo = "";
-$amount_used = "";
-$create_date = "";
-$category_id = "";
+// $title = "";
+// $memo = "";
+// $amount_used = "";
+// $create_date = "";
+// $category_id = "";
 
 
 // POSt로 request가 왔을 때 처리

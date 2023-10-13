@@ -68,7 +68,7 @@ input {
 }
 
 body {
-	background-image: url(/1st_project/src/img/back.jpg);
+	background-image: url(/1st_project/src/img/back3.png);
 	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 50px;
@@ -160,9 +160,9 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid rgba(100, 161, 233, 1);
 	text-align: center;
-	color: #57BCA9;
+	color: rgba(100, 161, 233, 1);
 }
 
 .date-box:focus {
@@ -210,7 +210,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid rgba(100, 161, 233, 1);
 	border-radius: 5px;
 }
 
@@ -220,7 +220,7 @@ button {
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
-	color: #57BCA9;
+	color: rgba(100, 161, 233, 1);
 }
 
 .side-left-off {
@@ -241,7 +241,7 @@ button {
 }
 .side-left-page:hover {
 	background-image: url(/1st_project/src/img/btn-on.png);
-	color: #57BCA9;
+	color: rgba(100, 161, 233, 1);
 }
 
 .side-left-line-2 {
@@ -249,7 +249,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid rgba(100, 161, 233, 1);
 	border-radius: 5px;
 }
 
@@ -281,7 +281,7 @@ button {
 	margin-top: 20px;
 	width: 340px;
 	height: 250px;
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
 	border: 3px solid rgba(100, 161, 233, 1);
 	text-align: center;
@@ -292,8 +292,6 @@ button {
 	background-size: 240px;
 	background-repeat: no-repeat;
 	background-position: center;
-	
-	
 }
 
 input[type="radio"] {
@@ -308,6 +306,8 @@ input[type="radio"]:checked + label {
 .category-box:hover {
     background-color:rgba(100, 161, 233, 1);
 	color: #fff;
+	transform: scale(1.1);
+    transition-duration: 0.3s;
 }
 /* ------------------------------------------------------------------------ */
 
@@ -332,12 +332,13 @@ input[type="radio"]:checked + label {
 	width: 870px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: #57BCA9;
+	color: rgba(100, 161, 233, 1);
 	border-radius: 30px;
 	text-align: center;
 	line-height: 100px;
 	font-size: 35px;
 	cursor: pointer;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 
 .content-date-box>input[type='date']::-webkit-calendar-picker-indicator {
@@ -383,16 +384,18 @@ input[type="radio"]:checked + label {
 	line-height: 100px;
 	margin-right: 10px;
 	font-size: 30px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 	
 }
 .content-title-box2 {
 	width: 700px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: #000;
+	color: #000000e7;
 	border-radius: 30px;
 	padding: 20px;
 	opacity: 10;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 .content-title-box2:focus {
 	outline: none;
@@ -416,6 +419,7 @@ input[type="radio"]:checked + label {
 	line-height: 100px;
 	margin-right: 10px;
 	font-size: 30px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 	
 }
 
@@ -424,11 +428,12 @@ input[type="radio"]:checked + label {
 	width: 700px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: #000;
+	color: #000000e7;
 	border-radius: 30px;
 	border: none;
 	vertical-align:middle;
 	opacity: 10;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 /* .content-memo-box2:hover {
 	background-color: #fffffff7;
@@ -452,6 +457,7 @@ textarea:focus{
 	background-color: rgba(255, 255, 255, 0.5);
 	color: #57BCA9;
 	text-align: center;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 	border-radius: 30px;
 	border: none;
 	margin-top: 37px;
@@ -479,6 +485,7 @@ select:hover {
 	text-align: center;
 	border-radius: 30px;
 	margin-top: 30px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 input::-webkit-inner-spin-button {
 	appearance: none;
@@ -513,6 +520,7 @@ textarea:focus {outline: none;}
 	margin-top: 37px;
 	margin-left: 30px;
 	line-height: 150px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 .content-float2 > p {
 	height: 80px;
@@ -535,13 +543,14 @@ button{
 	width: 260px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: #57BCA9;
+	color: rgba(0, 0, 0, 0.5);
 	text-align: center;
 	border-radius: 30px;
 	line-height: 100px;
 	margin: 30px auto;
 	margin-left: 160px;
 	font-size: 35px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 .content-button-go:hover {
 	background-color: rgba(255, 255, 255, 0.8);
@@ -552,13 +561,14 @@ button{
 	width: 260px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	color: #57BCA9;
+	color: rgba(0, 0, 0, 0.5);
 	text-align: center;
 	border-radius: 30px;
 	line-height: 100px;
 	margin: 30px auto;
 	margin-left: 30px;
 	font-size: 35px;
+	/* border: 1px solid rgba(100, 161, 233, 0.5); */
 }
 .content-button-back:hover {
 	background-color: rgba(255, 255, 255, 0.8);
@@ -584,7 +594,7 @@ button{
 
 .side-right-box {
 	width: 340px;
-	height: 770px;
+	height: 780px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
 	border: 1px solid rgba(100, 161, 233, 1);
