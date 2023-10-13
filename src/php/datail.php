@@ -121,14 +121,14 @@
 
 		$amount_used_percent = $amount_used["amount_used"];
 
+		$percent = ($amount_used_percent / $user_days_percent) * 100;
+		
+		$percent = (int)$percent;
+		
 		$amunt_used_days_percent = $item["amount_used"];
 
-		$percent = ($amount_used_percent / $user_days_percent) * 100;
-
 		$percent_days = ($amunt_used_days_percent / $user_days_percent) * 100;
-
-		$percent = (int)$percent;
-
+		
 		$percent_days = (int)$percent_days;
 
 	}

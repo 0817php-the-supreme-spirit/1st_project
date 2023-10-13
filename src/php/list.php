@@ -1,7 +1,7 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "%s 값을 찾을 수 없습니다.");
+	define("ERROR_MSG_PARAM", "값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
