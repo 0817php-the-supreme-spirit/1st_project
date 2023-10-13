@@ -17,18 +17,23 @@ try {
         throw new Exception("DB Error : PDO Instance");
     }
 
-    // METHOD 획득?
+    // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
     $http_method = $_SERVER["REQUEST_METHOD"];
 
+	// get일 경우 삭제 버튼을 눌렀을 때?
     if($http_method === "GET") {
+		//파라미터에서 받아올 date, id의 값
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $arr_err_msg = [];
+
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
+		//여기서 나 date의 값은 없앴는데 이래도괜찮은건가?
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
+			//에러메세지 출력할 때 한 배열에 출력하기 위해 (implode(): 배열에 속한 문자열을 한 문자열로 만드는 함수) 사용 
         }
 
         // 게시글 정보 획득

@@ -781,7 +781,7 @@ progress[value]::-webkit-progress-bar{
 .box6-1 {
 	display: inline-block;
 	border: none;
-	color: #57bca9;
+	color: rgb(0, 0, 0, 0.5);
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	width: 260px;
@@ -794,7 +794,7 @@ progress[value]::-webkit-progress-bar{
 .box6-2 {
 	display: inline-block;
 	text-decoration: none;
-	color: #57bca9;
+	color: rgb(0, 0, 0, 0.5);
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
 	width: 260px;
