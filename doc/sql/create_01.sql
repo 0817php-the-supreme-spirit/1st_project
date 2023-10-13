@@ -35,9 +35,9 @@ INSERT INTO user_table (
 )
  	
 VALUES (
- 	4000000
- 	,133000
- 	,20230701
+ 	3000000
+ 	,100000
+ 	,20230501
 );
 
 INSERT INTO category_table (
@@ -141,3 +141,7 @@ date_format(now(), '%Y-%m-%d');
 SELECT *
 FROM todolist_table
 WHERE create_date = CURDATE();
+
+SELECT DATE_FORMAT(create_date,'%Y-%m') AS create_date, sum(amount_used)
+FROM todolist_table 
+GROUP BY create_date
