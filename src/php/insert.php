@@ -36,6 +36,7 @@ if($http_method === "POST") {
 		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
+		// var_dump($create_date);
 		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
