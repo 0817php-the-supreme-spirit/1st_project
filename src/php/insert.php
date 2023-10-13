@@ -229,10 +229,10 @@ else {
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
 						</div>
 					</div>
 
