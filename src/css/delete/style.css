@@ -224,7 +224,7 @@ button {
 }
 
 .side-left-off {
-	margin-top: 25px;
+	margin-top: 30px;
 	background-image: url(/1st_project/src/img/btn-off.png);
 	height: 91px;
 	text-align: center;
@@ -265,8 +265,10 @@ button {
 	border-radius: 20px;
 	width: 340px;
 	height: 250px;
+	margin-top: 30px;
 	background-image: url(/1st_project/src/icon/Helmet.png);
 	background-repeat: no-repeat;
+	background-size: cover;
 	background-size: 250px 250px;
 }
 
@@ -277,13 +279,14 @@ button {
 }
 
 .font-left-box {
+	top: -10px;
 	display: inline-block;
 	font-size: 3em;
 	font-style: oblique;
 	position: relative;
 	left: 80px;
 	top: 170px;
-	color: #57bca9;
+	color: #c0a0c9;
 	-webkit-text-stroke: 1px #000;
 }
 
