@@ -231,7 +231,14 @@ button {
 	line-height: 91px;
 	color: rgba(0, 0, 0, 0.5);
 }
-
+.side-left-on:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
+.side-left-off:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
 .side-left-page:hover {
 	background-image: url(/1st_project/src/img/btn-on.png);
 	color: #57BCA9;
