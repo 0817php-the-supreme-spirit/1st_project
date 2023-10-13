@@ -20,17 +20,19 @@ try {
     // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
     $http_method = $_SERVER["REQUEST_METHOD"];
 
-	// get일 경우 삭제 버튼을 눌렀을 때?
+	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
     if($http_method === "GET") {
 		//파라미터에서 받아올 date, id의 값
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
+		//date는 빈값이 될수가 없으니까?되면안되니까?
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $arr_err_msg = [];
 
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
-		//여기서 나 date의 값은 없앴는데 이래도괜찮은건가?
+		//여기서 나 date의 에러메세지는 없앴는데 이래도괜찮은건가?
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
 			//에러메세지 출력할 때 한 배열에 출력하기 위해 (implode(): 배열에 속한 문자열을 한 문자열로 만드는 함수) 사용 
@@ -40,7 +42,10 @@ try {
         $arr_param = [
             "id" => $id
         ];
+		// 파라미터에 받아올 id값?
         $result = db_select_id($conn, $arr_param);
+		// 받아올 값을 
+
         // 예외처리
         if($result === false) {
             throw new Exception("DB Error : Select id");

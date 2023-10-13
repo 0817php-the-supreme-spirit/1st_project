@@ -160,9 +160,9 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	text-align: center;
-	color: #c0a0c9;
+	color: #57bca9;
 }
 
 .date-box:focus {
@@ -210,7 +210,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	border-radius: 5px;
 }
 
@@ -224,7 +224,7 @@ button {
 }
 
 .side-left-off {
-	margin-top: 30px;
+	margin-top: 28px;
 	background-image: url(/1st_project/src/img/btn-off.png);
 	height: 91px;
 	text-align: center;
@@ -242,7 +242,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	border-radius: 5px;
 	background-color: rgba(255, 255, 255, 0.929);
 }
@@ -260,12 +260,12 @@ button {
 } */
 
 .img-left-box {
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
 	width: 340px;
 	height: 250px;
-	margin-top: 30px;
+	margin-top: 40px;
 	background-image: url(/1st_project/src/icon/Helmet.png);
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -273,7 +273,7 @@ button {
 }
 
 .img-left-box:hover {
-	background-color: #c0a0c9;
+	background-color: #57bca9;
 	transform: scale(1.1);
 	transition-duration: 0.3s;
 }
@@ -285,7 +285,7 @@ button {
 	font-style: oblique;
 	position: relative;
 	left: 60px;
-	top: 140px;
+	top: 150px;
 	color: #c0a0c9;
 	-webkit-text-stroke: 1px #000;
 }
@@ -359,7 +359,7 @@ input[type="radio"]:checked + label {
 	height: 780px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 50px 50px 50px 50px;
-	border: 1px solid #c0a0c9;
+	border: 1px solid #57bca9;
 }
 
 .side-right-top {
@@ -655,7 +655,7 @@ progress[value]::-webkit-progress-bar{
 
 .box1 {
 	background-color: rgba(255, 255, 255, 0.5);
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	border-radius: 30px;
 	text-align: center;
 	width: 870px;
@@ -677,24 +677,37 @@ progress[value]::-webkit-progress-bar{
 
 .box2 {
 	text-align: center;
+	font-size: 30px;
+	
 }
 
 .box2-1, .box2-2 {
-	width: 430px;
+	width: 420px;
 	height: 100px;
 	background-color: rgba(255, 255, 255, 0.5);
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	border-radius: 20px;
 	text-align: center;
 	display: inline-block;
 	line-height: 100px;
-	color: #c0a0c9;
+	color: #57bca9;
+}
+
+.box2-1 {
+	position: relative;
+	right: 8px;
+}
+
+.box2-2 {
+	position: relative;
+	left: 8px;
 }
 
 .box3 {
 	width: 870px;
 	height: 100px;
 	position: relative;
+	
 }
 
 .box3-1 {
@@ -704,9 +717,10 @@ progress[value]::-webkit-progress-bar{
 	width: 157px;
 	height: 100px;
 	text-align: center;
-	padding-top: 40px;
+	padding-top: 35px;
 	position: absolute;
-	color: #c0a0c9;
+	color: #57bca9;
+	font-size: 30px;
 }
 
 .box3-2 {
@@ -725,6 +739,7 @@ progress[value]::-webkit-progress-bar{
 	width: 870px;
 	height: 100px;
 	position: relative;
+	font-size: 30px;
 }
 
 .box4-1 {
@@ -734,9 +749,9 @@ progress[value]::-webkit-progress-bar{
 	width: 157px;
 	height: 100px;
 	text-align: center;
-	padding-top: 40px;
+	padding-top: 35px;
 	position: absolute;
-	color: #c0a0c9;
+	color: #57bca9;
 }
 
 .box4-2 {
@@ -753,32 +768,35 @@ progress[value]::-webkit-progress-bar{
 
 .box5 {
 	text-align: center;
+	font-size: 30px;
 }
 
 .box5-1, .box5-2 {
 	background-color: rgba(255, 255, 255, 0.5);
-	border: 3px solid #c0a0c9;
+	border: 3px solid #57bca9;
 	border-radius: 20px;
 	display: inline-block;
-	width: 430px;
+	width: 420px;
 	height: 100px;
 	line-height: 100px;
-	color: #c0a0c9;
+	color: #57bca9;
 }
 
 .box5-1 {
 	position: relative;
 	bottom: 20px;
+	right: 8px;
 }
 
 .box5-2 {
 	position: relative;
 	bottom: 20px;
+	left: 8px;
 }
 
 .box6 {
 	text-align: center;
-	
+	font-size: 30px;
 }
 
 .box6-1 {
@@ -792,6 +810,7 @@ progress[value]::-webkit-progress-bar{
 	position: relative;
 	right: 80px;
 	bottom: 30px;
+	font-size: 30px;
 }
 
 .box6-2 {
