@@ -261,13 +261,19 @@ button {
 
 .img-left-box {
 	border: 3px solid #c0a0c9;
-	background-color: rgba(255, 255, 255, 0.929);
+	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
 	width: 340px;
-	height: 270px;
+	height: 250px;
 	background-image: url(/1st_project/src/icon/Helmet.png);
 	background-repeat: no-repeat;
 	background-size: 250px 250px;
+}
+
+.img-left-box:hover {
+	background-color: #c0a0c9;
+	transform: scale(1.1);
+	transition-duration: 0.3s;
 }
 
 .font-left-box {
