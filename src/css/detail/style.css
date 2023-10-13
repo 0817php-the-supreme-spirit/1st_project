@@ -159,13 +159,13 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #AFE175;
+	border: 3px solid #57BCA9;
 	text-align: center;
-	color: #AFE175;
+	color: #57BCA9;
 }
 
 .date-box:focus {
-	background-color: #AFE175;
+	background-color: #57BCA9;
 	color: #fff;
 	border: none;
 	outline: none;
@@ -209,7 +209,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #AFE175;
+	border: 3px solid #57BCA9;
 	border-radius: 5px;
 }
 
@@ -219,7 +219,7 @@ button {
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
-	color: #AFE175;
+	color: #57BCA9;
 }
 
 .side-left-off {
@@ -243,7 +243,7 @@ button {
 
 .side-left-page:hover {
 	background-image: url(/1st_project/src/img/btn-on.png);
-	color: #AFE175;
+	color: #57BCA9;
 }
 
 .side-left-line-2 {
@@ -251,7 +251,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #AFE175;
+	border: 3px solid #57BCA9;
 	border-radius: 5px;
 }
 
@@ -273,10 +273,10 @@ button {
 	height: 50px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #AFE175;
+	border: 3px solid #57BCA9;
 	text-align: center;
 	line-height: 43px;
-	color: #AFE175;
+	color: #57BCA9;
 	display: inline-block;
 }
 
@@ -285,17 +285,17 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + label {
-    background-color:#AFE175;
+    background-color:#57BCA9;
 	color: #fff;
 }
 
 .category-box:hover {
-    background-color:#AFE175;
+    background-color:#57BCA9;
 	color: #fff;
 }
 
 .category-box:focus {
-	background-color: #AFE175;
+	background-color: #57BCA9;
 }
 /* ------------------------------------------------------------------------ */
 
@@ -327,7 +327,6 @@ input[type="radio"]:checked + label {
 	color: #57BCA9;
 	display: inline-block;
 	margin-right: 20px;
-	border: 1px solid #AFE175;
 }
 
 .content-category-box {
@@ -340,7 +339,6 @@ input[type="radio"]:checked + label {
 	font-size: 35px;
 	color: #57BCA9;
 	display: inline-block;
-	border: 1px solid #AFE175;
 }
 
 .content-title-box {
@@ -361,7 +359,6 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	margin-right: 25px;
 	display: inline-block;
-	border: 1px solid #AFE175;
 }
 
 .content-title-box-2 {
@@ -370,7 +367,6 @@ input[type="radio"]:checked + label {
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
 	display: inline-block;
-	border: 1px solid #AFE175;
 }
 
 .content-memo-box {
@@ -394,7 +390,6 @@ input[type="radio"]:checked + label {
 	display: inline-block;
 	position: absolute;
 	left: 0px;
-	border: 1px solid #AFE175;
 }
 
 .content-memo-box-2 {
@@ -405,7 +400,6 @@ input[type="radio"]:checked + label {
 	display: inline-block;
 	position: absolute;
 	left: 200px;
-	border: 1px solid #AFE175;
 }
 
 .content-value-box {
@@ -434,7 +428,6 @@ input[type="radio"]:checked + label {
 	height: 115px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
-	border: 1px solid #AFE175;
 	border-bottom: 1px solid #57bca9;
 	font-size: 30px;
 }
@@ -444,7 +437,6 @@ input[type="radio"]:checked + label {
 	height: 115px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
-	border: 1px solid #AFE175;
 	border-top: 1px solid #57bca9;
 	font-size: 30px;
 }
@@ -458,7 +450,6 @@ input[type="radio"]:checked + label {
 	border-radius: 30px;
 	display: inline-block;
 	font-size: 45px;
-	border: 1px solid #AFE175;
 }
 
 .content-btn-box {
@@ -500,7 +491,6 @@ input[type="radio"]:checked + label {
 	background-color: rgba(255, 255, 255, 0.8);
 	transition-duration: 0.3s;
 	color: #AFE175;
-	border: 1px solid #AFE175;
 }
 
 .content-btn-box a{
@@ -668,7 +658,7 @@ progress[value]::-webkit-progress-bar{
 }
 
 .category-box-select {
-	background-color: #AFE175;
+	background-color: #57BCA9;
 	color: #fff;
 }
 
@@ -691,14 +681,14 @@ progress[value]::-webkit-progress-bar{
 .small {
 	font-size: 20px;
 	line-height: 20px;
-	color: #AFE175;
+	color: #57BCA9;
 }
 
 .bar {
 	margin: auto;
 	width: 230px;
 	margin-top: 7px;
-	border: 1px solid #AFE175;
+	border: 1px solid #57BCA9;
 }
 
 .side-right-user {
