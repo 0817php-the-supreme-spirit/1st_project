@@ -83,7 +83,7 @@ try {
             throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
-		header("Location: /1st_project/src/php/list.php");
+		header("Location: /1st_project/src/php/list.php/");
         exit;
     }
 	$user_data = db_select_user_table($conn);

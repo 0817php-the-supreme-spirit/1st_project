@@ -363,11 +363,11 @@ input[type="radio"]:checked + label {
 	color: rgba(0, 0, 0, 0.5);
 }
 
-.content-title-box a:hover {
-	color:  #57BCA9;;
+.content-title-box-hover a:hover {
+	color:  #57BCA9;
 }
 
-.content-title-box:hover {
+.content-title-box-hover:hover {
 	transform: scale(1.1);
 	transition-duration: 0.3s;
 	font-size: 2.1rem;
