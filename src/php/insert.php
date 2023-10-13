@@ -4,7 +4,7 @@ require_once(ROOT."lib/lib_db.php"); // db관련 라이브러리
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null; 
-$http_method = $_SERVER["REQUEST_METHOD"];
+$http_method = $_SERVER["REQUEST_METHOD"]; //REQUEST == 요청 METHOD == 방식
 $arr_err_msg = []; // 에러 메세지 저장
 // $title = "";
 // $memo = "";
@@ -12,20 +12,20 @@ $arr_err_msg = []; // 에러 메세지 저장
 // $create_date = "";
 // $category_id = "";
 
-
 // POSt로 request가 왔을 때 처리
-// $mttp_method = $_SERVER["REQUEST"];
+$mttp_method = $_SERVER["REQUEST"];
 if($http_method === "POST") {
 	try {
-
 		$arr_post = $_POST;
+		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
-        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null;
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null; 
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
-	
+		
+		//넘어와서 if 조건문이 빈 값일때 오류 실행 하는 if문
 		if($title === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
         }
@@ -39,6 +39,7 @@ if($http_method === "POST") {
 		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
+		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {
 
 			// DB 접속
@@ -193,7 +194,7 @@ else {
 						<div class="content-button">
 							<button class="content-button-go" type="submit">작성</button>
 						<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" class="content-button-back">돌아가기</a>
-	</form>
+					</form>
 					</div>
 				</div>
 			</div>
