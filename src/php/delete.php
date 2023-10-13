@@ -1,11 +1,11 @@
 <?php
-define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
-define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
-require_once(ROOT."lib/lib_db.php");
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //상수 설정, 웹서버 root패스 생성
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다."); //상수 설정, 파라미터 에러 메세지 불러오기 
+require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 //db_conn($conn);
 
-$arr_err_msg = [];
+$arr_err_msg = [];//에러메세지 저장용
 
 try {
     //2. db connect
