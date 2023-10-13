@@ -260,23 +260,23 @@
 
 							<div class="content-phrases-box">
 								<?php if($percent_days >= 0 && $percent_days < 20) {?>
-									<p>잘하고</p>
-									<p>있어</p>
+									<p class="content-phrases-box-color">잘하고</p>
+									<p class="content-phrases-box-color">있어</p>
 								<?php } else if($percent_days >= 20 && $percent_days < 40) { ?>
-									<p>아직은</p>
-									<p>괜찮아</p>
+									<p class="content-phrases-box-color">아직은</p>
+									<p class="content-phrases-box-color">괜찮아</p>
 								<?php } else if($percent_days >= 40 && $percent_days < 60) { ?>
-									<p>소비 액수가</p>
-									<p>좀 큰대?</p>
+									<p class="content-phrases-box-color">소비 액수가</p>
+									<p class="content-phrases-box-color">좀 큰대?</p>
 								<?php } else if($percent_days >= 60 && $percent_days < 80) { ?>
-									<p>잔고</p>
-									<p>감당 가능해?</p>
+									<p class="content-phrases-box-failure">잔고</p>
+									<p class="content-phrases-box-failure">감당 가능해?</p>
 								<?php } else if($percent_days >= 80 && $percent_days < 99) { ?>
-									<p>너 혹시</p>
-									<p>제정신이야?</p>
+									<p class="content-phrases-box-failure">너 혹시</p>
+									<p class="content-phrases-box-failure">제정신이야?</p>
 								<?php } else { ?>
-									<p>다음 달도</p>
-									<p>텅장이다</p>
+									<p class="content-phrases-box-failure">다음 달도</p>
+									<p class="content-phrases-box-failure">텅장이다</p>
 								<?php } ?>
 							</div>
 						</div>
