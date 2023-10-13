@@ -1,103 +1,132 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 require_once(ROOT."lib/lib_db.php");
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null;
 db_conn($conn);
 $http_method = $_SERVER["REQUEST_METHOD"];
-
-//기본 날짜값 세팅
+$arr_err_msg = [];
 
 
 try{
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
-		if(!db_conn($conn)) {
-			// DB Instance 에러
-			throw new Exception("DB Error : PDO Instance");
-		}
-	
-		$arr_param = [
-			"date" => $date
-		];
-	
-		$amount_used = db_select_amount_used($conn, $arr_param);
-		if($amount_used === false) {
-			throw new Exception("DB Error : select_user_table");
-		}
-		$amount_used = $amount_used[0];
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d'); //기본 날짜 세팅
+			
+			if(!db_conn($conn)) {
+				// DB Instance 에러
+				throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
+			}
+			
+			// if($id === "" ) {
+			// 	$arr_err_msg[] = sprint(ERROR_MSG_PARAM, "제목");
+			// }
+			// if($date === "") {
+			// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+			// }
+
+			// if(count($arr_err_msg) >= 1){
+			// 	throw new Exception(implode("<br>", $arr_err_msg));
+			// }
+
+			// if($arr_err_msg === 0 ){
+
+			//일일 사용금액 계산을 위한 조건(날짜) 세팅
+			$arr_param = [
+				"date" => $date
+			];
+			//일일 사용금액 계산
+			$amount_used = db_select_amount_used($conn, $arr_param);
+			if($amount_used === false) {
+				throw new Exception("DB Error : select_user_table");
+			}
+			$amount_used = $amount_used[0];
+		// };
 
 	}
 	else {
 	$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
-	$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
+	$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d'); //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
 
-	//POST 값 변수지정
-	$title = $_POST["title"];
-	$memo = $_POST["memo"] ? $_POST["memo"] : null; //memo 값 없을 시 null 세팅
-	$amount_used = $_POST["amount_used"];
-	$create_date = $_POST["create_date"];
-	$category_id = $_POST["category_id"];
-	
-	//POST 값 받아오기
-	$arr_param = [
-		"title" => $title
-		,"memo" => $memo
-		,"amount_used" => $amount_used
-		,"create_date" => $create_date
-		,"category_id" => $category_id
-		,"id" => $id
-	];
+		// if($id === "") {
+		// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
+		// }
+		// if($page === "") {
+		// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+		// }
 
-	$conn->beginTransaction();
+		// if(count($arr_err_msg) === 0) {
 
-	//POST값 입력
-	if(!update_execute($conn, $arr_param)){
-		throw new Exception("DB Error : Update_boards_id");
-	}
-	
-	//커밋
-	$conn->commit();
+			//POST 값 변수지정
+			$title = $_POST["title"] ? $_POST["title"] : "";
+			$memo = $_POST["memo"] ? $_POST["memo"] : null; //memo 값 없을 시 null 세팅
+			$amount_used = $_POST["amount_used"] ? $_POST["amount_used"] : "";
+			$create_date = $_POST["create_date"] ? $_POST["create_date"] : "";
+			$category_id = $_POST["category_id"] ? $_POST["category_id"] : "";
+			
 
-	//업데이트 완료 후 디테일 페이지로 이동
-	header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}"); 
-	exit;
-	}
+			//POST 값 받아오기
+			$arr_param = [
+				"title" => $title
+				,"memo" => $memo
+				,"amount_used" => $amount_used
+				,"create_date" => $create_date
+				,"category_id" => $category_id
+				,"id" => $id
+			];
+			//트랜잭션 시작
+			$conn->beginTransaction();
 
-	$user_data = db_select_user_table($conn);
+			//POST값 입력
+				if(!update_execute($conn, $arr_param)){
+					throw new Exception("DB Error : Update_boards_id");
+				}
+			
+			//커밋
+			$conn->commit();
 
-	if($user_data === false) {
-		throw new Exception("DB Error : select_user_table");
-	}
-
-	$user_days = $user_data[0];
-
-	$user_days_percent = $user_days["daily_salary"];
-
-	$amount_used_percent = $amount_used["amount_used"];
-
-	$percent = ($amount_used_percent / $user_days_percent) * 100;
-
-	$percent = (int)$percent;
-	//업데이트 완료한거 불러오기
-
-	$arr_param_id = [
-		"id" => $id
-	];
-
-	// 게시글 데이터 조회
-	$result = select_change_detail( $conn, $arr_param_id );
-
-		//게시글 조회 예외처리
-		if($result === false){
-			throw new Exception("DB Error : PDO Select_id");
+			//업데이트 완료 후 디테일 페이지로 이동
+			header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+			exit;
 		}
-		
-	$item = $result[0];
+
+			//이번달 유저 일일 급여 조회
+			$user_data = db_select_user_table($conn);
+
+				//실패시 false
+				if($user_data === false) {
+					throw new Exception("DB Error : select_user_table");
+				}
+
+			//사용자가 입력한 일일 사용금액 불러오기
+			$user_days = $user_data[0];
+			$user_days_percent = $user_days["daily_salary"];
+			//일일 총 사용금액 변수에 담기
+			$amount_used_percent = $amount_used["amount_used"];
+			//퍼센트 계산 (1일 총 사용금액 / 일일 목표 금액)
+			$percent = ($amount_used_percent / $user_days_percent) * 100;
+			//퍼센트 int값으로 변환
+			$percent = (int)$percent;
+
+			//업데이트 완료한거 불러오기
+			$arr_param_id = [
+				"id" => $id
+			];
+
+			// 게시글 데이터 조회
+			$result = select_change_detail( $conn, $arr_param_id );
+
+				//게시글 조회 실패시 에러메세지 출력
+				if($result === false){
+					throw new Exception("DB Error : PDO Select_id");
+				}
+			//결과값을 $item변수에 담음
+			$item = $result[0];
 
 } catch(Exception $e) {
+
 	if($http_method === "POST") {
 	$conn->rollBack();
 	}
@@ -144,7 +173,7 @@ try{
 
 					<div class="side-left-line-2"></div>
 
-					<div class="update-icon"></div>
+					<div class="update-icon"></div><!-- 좌측 사이드바 아이콘 -->
 <!-- 
 					<form action="" method="post">
 						<input type="radio" name="category" id="category1">
