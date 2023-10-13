@@ -161,13 +161,13 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #ebd461;
+	border: 3px solid #57BCA9;
 	text-align: center;
-	color: #ebd461;
+	color: #57BCA9;
 }
 
 .date-box:focus {
-	background-color: #ebd461;
+	background-color: #57BCA9;
 	color: #fff;
 	border: none;
 	outline: none;
@@ -213,7 +213,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #edcd2b;
+	border: 3px solid #57BCA9;
 	border-radius: 5px;
 }
 
@@ -245,7 +245,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #edcd2b;
+	border: 3px solid #57BCA9;
 	border-radius: 5px;
 }
 
@@ -530,7 +530,7 @@ select:focus {
 }
 select:hover {
 	background-color: rgb(255, 255, 255, 0.8);
-	border: 3px solid #ebd461;
+	border: 3px solid #57BCA9;
 
 }
 .update-category>select>option {
@@ -586,7 +586,7 @@ select:hover {
 } 
 .update-date[type='date']:focus, .update-date-total[type='date']:active{
 	outline: none;
-	border: 3px solid #ebd461;
+	border: 3px solid #57BCA9;
 } 
 	
 .update-date{
@@ -596,7 +596,7 @@ text-align: center;
 
 .update-date:hover {
 background-color: rgba(255, 255, 255, 0.8);
-border: 3px solid #ebd461;;
+border: 3px solid #57BCA9;
 }
 
 .update-date[type='date']:valid::before {
@@ -658,7 +658,7 @@ textarea {
 	border-radius: 30px;
 	background-color: rgb(255, 255, 255, 0.5);
 	margin-top: 43px;
-	border: 3px solid #ebd461;
+	border: 3px solid #57BCA9;
 	text-align: center;
 	
 }
