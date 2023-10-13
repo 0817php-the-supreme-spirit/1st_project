@@ -35,6 +35,7 @@ if($http_method === "POST") {
 		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
+		// var_dump($create_date);
 		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
@@ -141,7 +142,7 @@ else {
 
 						<div class="side-left-line-1"></div>
 
-						<a href=""><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
+						<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
 						<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-on"><p>지출 작성부</p></div></a>
 						<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 

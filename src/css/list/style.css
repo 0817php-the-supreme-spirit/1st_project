@@ -223,6 +223,16 @@ button {
 	color: #57BCA9;
 }
 
+.side-left-on:hover {
+	transform: scale(1.2);
+	transition-duration: 0.3s;
+}
+
+.side-left-off:hover {
+	transform: scale(1.2);
+	transition-duration: 0.3s;
+}
+
 .side-left-off {
 	margin-top: 25px;
 	background-image: url(/1st_project/src/img/btn-off.png);
@@ -281,8 +291,11 @@ input[type="radio"]:checked + label {
 }
 
 .category-box:hover {
+	transform: scale(1.1);
+	transition-duration: 0.3s;
     background-color:#57BCA9;
 	color: #fff;
+	box-shadow: 0 14px 28px rgba(107, 107, 107, 0.2), 0 10px 10px rgba(117, 117, 117, 0.2);
 }
 
 .category-box:focus {
