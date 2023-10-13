@@ -1,7 +1,7 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "%s 해당 값을 찾을 수 없습니다.");
+	define("ERROR_MSG_PARAM", "%s 값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
@@ -44,7 +44,7 @@
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date2");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "data");
 				}
 
 				$arr_param = [
@@ -177,7 +177,7 @@
 					<div class="side-left-line-1"></div>
 
 					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
-					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
+					<a href="/1st_project/src/php/insert.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
@@ -242,7 +242,7 @@
 									<img src="/1st_project/src/img/stupid.png">
 								<?php } ?>
 							</td>
-							<td class="content-title-box"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
+							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo $item["amount_used"], "원"; ?></td>
 						</tr>
 						<?php 

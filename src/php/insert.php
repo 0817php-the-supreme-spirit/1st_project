@@ -41,6 +41,7 @@ if($http_method === "POST") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
 
+
 		if(count($arr_err_msg) === 0) {
 
 			// DB 접속
@@ -81,6 +82,9 @@ if($http_method === "POST") {
     }
 }
 else {
+
+	// $date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+
 
 	if(!db_conn($conn)) {
 		// DB Instance 에러
@@ -133,7 +137,7 @@ else {
 			</div>
 			<div class="side-left">
 				<div class="side-left-box">
-					<form action="/1st_project/src/php/list.php" method="post">
+					<form action="/1st_project/src/php/insert.php" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
 							<label class="date-label">
 								<input type="hidden" name="date" value="<?php echo $date; ?>">
@@ -205,7 +209,7 @@ else {
 						</div>
 						<div class="content-button">
 							<button class="content-button-go" type="submit">작성</button>
-						<a href="/1st_project/src/php/list.php" class="content-button-back">돌아가기</a>
+						<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" class="content-button-back">돌아가기</a>
 					</form>
 					</div>
 				</div>
