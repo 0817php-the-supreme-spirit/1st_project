@@ -538,7 +538,7 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	// ----------------------------
 
 	function update_execute( &$conn, &$arr_param ){
-		try{ $sql = " UPDATE "
+		$sql = " UPDATE "
 			."			todolist_table "
 			."		SET "
 			."			title = :title "
@@ -560,9 +560,10 @@ function db_delete_date_id(&$conn, &$arr_param) {
 				,":id" => $arr_param["id"]
 			];
 
-			$stmt = $conn->prepare($sql);
-			$result = $stmt->execute($arr_ps);
-			return $result;
+			try{
+				$stmt = $conn->prepare($sql);
+				$result = $stmt->execute($arr_ps);
+				return $result;
 	}catch(Exception $e){
 		echo $e->getMessage(); // Exception 메세지 출력
 		return false;
@@ -578,7 +579,7 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	// ----------------------------
 
 	function select_change_detail( &$conn, &$arr_param_id ){
-		try{$sql = " SELECT "
+		$sql = " SELECT "
 		."			cate.category_name "
 		."			,tod.title "
 		."			,tod.memo "
@@ -596,11 +597,11 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		$arr_param = [
 			":id" => $arr_param_id["id"]
 		];
-	
-		$stmt = $conn->prepare($sql);
-		$stmt->execute($arr_param);
-		$result = $stmt->fetchAll();
-		return $result;
+		try{
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_param);
+			$result = $stmt->fetchAll();
+			return $result;
 	}catch(Exception $e){
 		echo $e->getMessage(); // Exception 메세지 출력
 		return false;
@@ -613,6 +614,39 @@ function db_delete_date_id(&$conn, &$arr_param) {
 // ----------------------------
 // ******* total lib. *************
 
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_sum
+	// 기능 	: 유저의 달 값과 해당 달의 합산 사용 값과 한달 급여 조회
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function db_user_salary_date_sum(&$conn){
+		$sql = " SELECT "
+		."			DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month "
+		."			,DATE_FORMAT(usta.input_date,'%Y-%m') AS input_month "
+		."			,sum(todo.amount_used) AS total_amount "
+		."			,usta.monthly_salary "
+		."		FROM "
+		."			todolist_table todo "
+		."		JOIN "
+		."			user_table usta "
+		."		ON "
+		."			DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m') "
+		."		GROUP BY "
+		."			create_month "
+		;
+
+		try {
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
 
 // ******* total lib. *************
 // ----------------------------
