@@ -16,6 +16,8 @@ $arr_err_msg = []; // 에러 메세지 저장
 // $mttp_method = $_SERVER["REQUEST"];
 if($http_method === "POST") {
 	try {
+		
+
 		$arr_post = $_POST;
 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
@@ -47,7 +49,10 @@ if($http_method === "POST") {
 				// DB Instance 에러
 				throw new Exception("DB Error : PDO Instance");
 			}
+
 			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
+
+			
 
 			// 게시글 작성을 위해 파라미터 셋팅
 			$arr_post = [
@@ -113,6 +118,7 @@ else {
 
 	$percent = (int)$percent;
 }
+
 
 ?>
 
