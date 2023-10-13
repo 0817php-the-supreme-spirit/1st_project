@@ -11,8 +11,7 @@ $memo = "";
 $amount_used = "";
 $create_date = "";
 $category_id = "";
-
-$date = date('Y-m-d');
+$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
 // POSt로 request가 왔을 때 처리
 // $mttp_method = $_SERVER["REQUEST"];

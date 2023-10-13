@@ -20,7 +20,7 @@
 			// date값 확인 후 받은 date값이 있으면 해당 값을 넘기고 없을 경우 오늘의 date값을 변수에 넘김
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 			// id값 확인 후 받은 id값을 변수로 넘김
-			$id = isset($_GET["id"]) ? $_GET["id"] : "";
+			// $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 			// date값이 비어있을 경우 arr_err_msg배열에 상수 ERROP_MSG_PAEAM값과 ""값을 이어서 넣어줌
 			if($date === "") {
@@ -28,9 +28,9 @@
             }
 
 			// id값이 비어있을 경우 arr_err_msg배열에 상수 ERROP_MSG_PAEAM값과 ""값을 이어서 넣어줌
-			if($id === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
-            }
+			// if($id === "") {
+            //     $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
+            // }
 			
 
 			//arr_err_msg의 카운트 값이 0일 경우에만 실행
