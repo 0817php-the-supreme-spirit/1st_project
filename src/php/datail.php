@@ -121,9 +121,15 @@
 
 		$amount_used_percent = $amount_used["amount_used"];
 
+		$amunt_used_days_percent = $item["amount_used"];
+
 		$percent = ($amount_used_percent / $user_days_percent) * 100;
 
+		$percent_days = ($amunt_used_days_percent / $user_days_percent) * 100;
+
 		$percent = (int)$percent;
+
+		$percent_days = (int)$percent_days;
 
 	}
 	catch(Exception $e) {
@@ -166,7 +172,7 @@
 
 					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
 					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+					<a href="/1st_project/src/php/total.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
 
@@ -253,8 +259,25 @@
 							</div>
 
 							<div class="content-phrases-box">
-								<p>파이어족이</p>
-								<p>될꺼야?</p>
+								<?php if($percent_days >= 0 && $percent_days < 20) {?>
+									<p>잘하고</p>
+									<p>있어</p>
+								<?php } else if($percent_days >= 20 && $percent_days < 40) { ?>
+									<p>아직은</p>
+									<p>괜찮아</p>
+								<?php } else if($percent_days >= 40 && $percent_days < 60) { ?>
+									<p>소비 액수가</p>
+									<p>좀 큰대?</p>
+								<?php } else if($percent_days >= 60 && $percent_days < 80) { ?>
+									<p>잔고</p>
+									<p>감당 가능해?</p>
+								<?php } else if($percent_days >= 80 && $percent_days < 99) { ?>
+									<p>너 혹시</p>
+									<p>제정신이야?</p>
+								<?php } else { ?>
+									<p>다음 달도</p>
+									<p>텅장이다</p>
+								<?php } ?>
 							</div>
 						</div>
 				<?php } ?>

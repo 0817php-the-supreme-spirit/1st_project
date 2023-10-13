@@ -118,9 +118,9 @@
 
 					<div class="side-left-line-1"></div>
 
-					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
+					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
 					<a href="/1st_project/src/php/insert.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
-					<a href="/1st_project/src/php/total.php"><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+					<a href="/1st_project/src/php/total.php"><div class="side-left-page side-left-on"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
 
