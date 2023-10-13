@@ -4,14 +4,13 @@ require_once(ROOT."lib/lib_db.php"); // db관련 라이브러리
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null; 
-$http_method = $_SERVER["REQUEST_METHOD"];
+$http_method = $_SERVER["REQUEST_METHOD"]; //REQUEST == 요청 METHOD == 방식
 $arr_err_msg = []; // 에러 메세지 저장
-$title = "";
-$memo = "";
-$amount_used = "";
-$create_date = "";
-$category_id = "";
-
+// $title = "";
+// $memo = "";
+// $amount_used = "";
+// $create_date = "";
+// $category_id = "";
 
 // POSt로 request가 왔을 때 처리
 // $mttp_method = $_SERVER["REQUEST"];
@@ -20,13 +19,15 @@ if($http_method === "POST") {
 		
 
 		$arr_post = $_POST;
+		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
-        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null;
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null; 
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
-	
+		
+		//넘어와서 if 조건문이 빈 값일때 오류 실행 하는 if문
 		if($title === "") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
         }
@@ -40,6 +41,7 @@ if($http_method === "POST") {
 		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
+		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {
 
 			// DB 접속
@@ -149,7 +151,7 @@ else {
 
 						<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
 						<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-on"><p>지출 작성부</p></div></a>
-						<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+						<a href="/1st_project/src/php/total.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 						<div class="side-left-line-2"></div>
 						
@@ -191,14 +193,18 @@ else {
 								</div>
 							</div>
 							<div class="content-float2">
-								<p>벌써지출</p>
-								<p>할거에요?</p>
+							<p><?php 
+								$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
+								$selected = array_rand($randment);
+								echo $randment[$selected]; ?></p>
+								<!-- <p>벌써지출</p>
+								<p>할거에요?</p> -->
 							</div>
 						</div>
 						<div class="content-button">
 							<button class="content-button-go" type="submit">작성</button>
 						<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" class="content-button-back">돌아가기</a>
-	</form>
+					</form>
 					</div>
 				</div>
 			</div>
@@ -234,10 +240,10 @@ else {
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
 						</div>
 					</div>
 

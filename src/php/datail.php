@@ -122,8 +122,14 @@
 		$amount_used_percent = $amount_used["amount_used"];
 
 		$percent = ($amount_used_percent / $user_days_percent) * 100;
-
+		
 		$percent = (int)$percent;
+		
+		$amunt_used_days_percent = $item["amount_used"];
+
+		$percent_days = ($amunt_used_days_percent / $user_days_percent) * 100;
+		
+		$percent_days = (int)$percent_days;
 
 	}
 	catch(Exception $e) {
@@ -166,7 +172,7 @@
 
 					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
 					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+					<a href="/1st_project/src/php/total.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
 
@@ -244,17 +250,34 @@
 						<div class="content-value-box">
 							<div class="content-user-box">
 								<div class="content-user-amount">
-									<p>일일 남은 금액 : <?php echo $item["amount_used"]; ?>원</p>
+									<p>일일 사용 금액 : <?php echo number_format($item["amount_used"]); ?>원</p>
 								</div>
 		
 								<div class="content-user-remaining">
-									<p>일일 남은 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+									<p>일일 남은 금액 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
 								</div>
 							</div>
 
 							<div class="content-phrases-box">
-								<p>파이어족이</p>
-								<p>될꺼야?</p>
+								<?php if($percent_days >= 0 && $percent_days < 20) {?>
+									<p class="content-phrases-box-color">잘하고</p>
+									<p class="content-phrases-box-color">있어</p>
+								<?php } else if($percent_days >= 20 && $percent_days < 40) { ?>
+									<p class="content-phrases-box-color">아직은</p>
+									<p class="content-phrases-box-color">괜찮아</p>
+								<?php } else if($percent_days >= 40 && $percent_days < 60) { ?>
+									<p class="content-phrases-box-color">소비 액수가</p>
+									<p class="content-phrases-box-color">좀 큰대?</p>
+								<?php } else if($percent_days >= 60 && $percent_days < 80) { ?>
+									<p class="content-phrases-box-failure">잔고</p>
+									<p class="content-phrases-box-failure">감당 가능해?</p>
+								<?php } else if($percent_days >= 80 && $percent_days < 99) { ?>
+									<p class="content-phrases-box-failure">너 혹시</p>
+									<p class="content-phrases-box-failure">제정신이야?</p>
+								<?php } else { ?>
+									<p class="content-phrases-box-failure">다음 달도</p>
+									<p class="content-phrases-box-failure">텅장이다</p>
+								<?php } ?>
 							</div>
 						</div>
 				<?php } ?>
@@ -306,10 +329,10 @@
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 금액 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
 						</div>
 					</div>
 

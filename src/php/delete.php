@@ -33,7 +33,9 @@ try {
             $arr_err_msg[] = "Parameter Error : ID";
         }
 		//여기서 나 date의 에러메세지는 없앴는데 이래도괜찮은건가?
+		//지금은 괜찮으나 현업에선안댐..
         if(count($arr_err_msg) >= 1) {
+		//에러메세지 수를 카운트하고 1보다 이상이 되면 밑에 실행
             throw new Exception(implode("<br>", $arr_err_msg));
 			//에러메세지 출력할 때 한 배열에 출력하기 위해 (implode(): 배열에 속한 문자열을 한 문자열로 만드는 함수) 사용 
         }
@@ -51,24 +53,29 @@ try {
             throw new Exception("DB Error : Select id");
 			// 에러메세지로 얘를 보내주겠다
         } else if(!(count($result) === 1)) {
-			//또는 ...얜뭘까
+			//또는 함수의 결과 값이 1개가 아닐때(디테일페이지 표시는 1항목만 가능하니까)
             throw new Exception("DB Error : Select id Count");
+			//에러메세지
         }
         $item = $result[0];
 		// result[0]방에 담아준것을 item변수에 담겠다
 
+		//date값 획득?
 		$arr_param = [
 			"date" => $date
 		];
 		//파라미터에 date값을 받아올거임
 
 		$amount_used = db_select_amount_used($conn, $arr_param);
+		// 유저 일일급여 조회 함수 변수에 담아주기
 		if($amount_used === false) {
 			throw new Exception("DB Error : select_user_table");
+			//함수 가져오는데 실패했을때 이렇게 에러메세지 띄우겟따
 		}
 		$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-		
+		//(isset=it is set~~)유저 일일급여 함수가 셋팅되어있는지 확인하면서 참이 되면 함수를 그대로 갖고오고 거짓이 되면 지출없음
 		$amount_used = $amount_used[0];
+		//배열에 담아줌
 
     } else {
         //3-2. post일 경우 (삭제버튼 클릭시)
@@ -76,46 +83,67 @@ try {
         $id = isset($_POST["id"]) ? $_POST["id"] : "";
 		$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
         $arr_err_msg = [];
+		//에러메세지 받아오기
         if($id === "") {
+			//id값이 빈값이면
             $arr_err_msg[] = "Parameter Error : ID";
+			//이렇게 에러메세지 띄우게따
         }
 
         if(count($arr_err_msg) >= 1) {
+			//에러메세지가 하나 이상이 되면
             throw new Exception(implode("<br>", $arr_err_msg));
+			//여러 메세지를 출력하기 위해서 정리해주기! implode함수를 사용하여.
         }
 
 	
         //트랜젝션 시작
         $conn->beginTransaction();
+		//트랜젝션: 연산작업의 단위 , 데이터베이스 변동?실행시 필요함. 그래서 insert,delete,update에서 사용하는것.
+		//얘로 안묶어주면 데이터가 이상해짐.
 
         //게시글 정보 삭제
         $arr_param = [
             "id" => $id
         ];
+		//삭제할 id값 받아오기
         $result = db_delete_date_id($conn, $arr_param);
+		//delete함수 변수에 넣어주기
 
         //예외처리
         if(!$result) {
             throw new Exception("DB Error : Delete_date id");
+			//함수 제대로 못받아오면 에러
         }
         $conn->commit();
 		header("Location: /1st_project/src/php/list.php/?date={$date}");
         exit;
     }
+
+	// 우측 사이드바 소비한 벨의 값 출력을 위해
 	$user_data = db_select_user_table($conn);
+	//user_table의 유저 일일급여 조회 함수 변수에 넣어놓기
+
+	//예외처리
 	if($user_data === false) {
 		throw new Exception("DB Error : select_user_table");
 	}
 
 	$user_days = $user_data[0];
+	//유저 일일급여의 0번방에 있는 값을 변수에 담기
 
 	$user_days_percent = $user_days["daily_salary"];
+	//daily_selary에 있는 값을 다른 변수에 넘겨줌
 
 	$amount_used_percent = $amount_used["amount_used"];
+	//유저 일일 사용금액을 변수에 넣어줌
 
 	$percent = ($amount_used_percent / $user_days_percent) * 100;
+	//
 
 	$percent = (int)$percent;
+	//실수로 나올테니까 정수로 바꿔줄 수 있는 int사용
+
 } catch(Exception $e) {
     if($http_method === "POST") {
         $conn->rollBack();
@@ -162,7 +190,7 @@ try {
 
 					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
 					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+					<a href="/1st_project/src/php/total.php/?date=<?php echo $date; ?>"><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
 					<div class="side-left-line-2"></div>
 
@@ -218,7 +246,8 @@ try {
 					<br>
 					<br>
 						<div class="box5">
-							<span class="box5-1">일일 사용 금액 : <?php echo $item["amount_used"]?></span> <span class="box5-2">일일 잔여 금액 : </span>
+							<span class="box5-1">일일 사용 금액 : <?php echo number_format($item["amount_used"])?></span> 
+							<span class="box5-2">일일 잔여 금액 : <?php echo number_format($user_days["daily_salary"] - $item["amount_used"])?></span>
 						</div>
 					
 				<br>
@@ -265,10 +294,10 @@ try {
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
 						</div>
 					</div>
 
