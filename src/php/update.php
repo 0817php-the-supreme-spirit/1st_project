@@ -76,6 +76,7 @@ try{
 				,"category_id" => $category_id
 				,"id" => $id
 			];
+			
 			//트랜잭션 시작
 			$conn->beginTransaction();
 
@@ -92,38 +93,38 @@ try{
 			exit;
 		}
 
-			//이번달 유저 일일 급여 조회
-			$user_data = db_select_user_table($conn);
+	//이번달 유저 일일 급여 조회
+	$user_data = db_select_user_table($conn);
 
-				//실패시 false
-				if($user_data === false) {
-					throw new Exception("DB Error : select_user_table");
-				}
+	//실패시 false
+	if($user_data === false) {
+		throw new Exception("DB Error : select_user_table");
+	}
 
-			//사용자가 입력한 일일 사용금액 불러오기
-			$user_days = $user_data[0];
-			$user_days_percent = $user_days["daily_salary"];
-			//일일 총 사용금액 변수에 담기
-			$amount_used_percent = $amount_used["amount_used"];
-			//퍼센트 계산 (1일 총 사용금액 / 일일 목표 금액)
-			$percent = ($amount_used_percent / $user_days_percent) * 100;
-			//퍼센트 int값으로 변환
-			$percent = (int)$percent;
+	//사용자가 입력한 일일 사용금액 불러오기
+	$user_days = $user_data[0];
+	$user_days_percent = $user_days["daily_salary"];
+	//일일 총 사용금액 변수에 담기
+	$amount_used_percent = $amount_used["amount_used"];
+	//퍼센트 계산 (1일 총 사용금액 / 일일 목표 금액)
+	$percent = ($amount_used_percent / $user_days_percent) * 100;
+	//퍼센트 int값으로 변환
+	$percent = (int)$percent;
 
-			//업데이트 완료한거 불러오기
-			$arr_param_id = [
-				"id" => $id
-			];
+	//기존값 불러오기
+	$arr_param_id = [
+		"id" => $id
+	];
 
-			// 게시글 데이터 조회
-			$result = select_change_detail( $conn, $arr_param_id );
+	// 게시글 데이터 조회
+	$result = select_change_detail( $conn, $arr_param_id );
 
-				//게시글 조회 실패시 에러메세지 출력
-				if($result === false){
-					throw new Exception("DB Error : PDO Select_id");
-				}
-			//결과값을 $item변수에 담음
-			$item = $result[0];
+		//게시글 조회 실패시 에러메세지 출력
+		if($result === false){
+			throw new Exception("DB Error : PDO Select_id");
+		}
+	//결과값을 $item변수에 담음
+	$item = $result[0];
 
 } catch(Exception $e) {
 
