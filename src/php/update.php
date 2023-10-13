@@ -7,14 +7,13 @@ db_conn($conn);
 $http_method = $_SERVER["REQUEST_METHOD"];
 
 //기본 날짜값 세팅
-$date = date('Y-m-d');
 
 
 try{
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
-
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 		if(!db_conn($conn)) {
 			// DB Instance 에러
 			throw new Exception("DB Error : PDO Instance");
@@ -168,6 +167,7 @@ try{
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
+						<input type="hidden" name="date" value="<?php echo $date; ?>">
 						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
 							<select name="category_id" class="update-category">
