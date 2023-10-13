@@ -164,9 +164,15 @@
 					<details>
 						<summary>
 							<?php foreach($date_sum as $val) { ?>
-								<div class="content-date-box content-td-margin"><?php echo $val["create_month"] ?></div>
-								<div class="content-amount-box content-td-margin"><?php echo number_format($val["total_amount"]) ?>원</div>
-								<div class="content-monthly-box "><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+								<?php if($val["total_amount"] <= $val["monthly_salary"]) {?>
+									<div class="content-date-box content-td-margin content-box-success-color"><?php echo $val["create_month"] ?></div>
+									<div class="content-amount-box content-td-margin content-box-success-color"><?php echo number_format($val["total_amount"]) ?>원</div>
+									<div class="content-monthly-box content-box-success-color"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+								<?php } else { 	?>
+									<div class="content-date-box content-td-margin content-box-success-failure"><?php echo $val["create_month"] ?></div>
+									<div class="content-amount-box content-td-margin content-box-success-failure"><?php echo number_format($val["total_amount"]) ?>원</div>
+									<div class="content-monthly-box content-box-success-failure"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+								<?php }	?>
 							<?php } ?>
 						</summary>	
 							<div class="content-date-summary-box content-td-margin">aa</div>

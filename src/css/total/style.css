@@ -374,6 +374,15 @@ summary::marker {
 	display: inline-block;
 }
 
+.content-box-success-color {
+	color: #8496E2;
+}
+
+
+.content-box-success-failure {
+	color: #F08384;
+}
+
 .content-td-color {
 	background-color: rgba(87, 188, 169, 0.8);
 	color: #fff;
