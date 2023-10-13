@@ -44,19 +44,23 @@ try {
         ];
 		// 파라미터에 받아올 id값?
         $result = db_select_id($conn, $arr_param);
-		// 받아올 값을 
+		// list페이지의 정보를 result에 담아주겠다
 
-        // 예외처리
+        // 예외처리 >> db_select_id함수를 못불러왔을때?
         if($result === false) {
             throw new Exception("DB Error : Select id");
+			// 에러메세지로 얘를 보내주겠다
         } else if(!(count($result) === 1)) {
+			//또는 ...얜뭘까
             throw new Exception("DB Error : Select id Count");
         }
         $item = $result[0];
+		// result[0]방에 담아준것을 item변수에 담겠다
 
 		$arr_param = [
 			"date" => $date
 		];
+		//파라미터에 date값을 받아올거임
 
 		$amount_used = db_select_amount_used($conn, $arr_param);
 		if($amount_used === false) {
@@ -67,8 +71,8 @@ try {
 		$amount_used = $amount_used[0];
 
     } else {
-        //3-2. post일 경우
-        //파라미터 id획득
+        //3-2. post일 경우 (삭제버튼 클릭시)
+        //파라미터 id, date획득
         $id = isset($_POST["id"]) ? $_POST["id"] : "";
 		$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
         $arr_err_msg = [];
