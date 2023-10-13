@@ -1,6 +1,6 @@
 <?php
 //------------------------------------------
-// 함수명   : db_delete_boards_id
+// 함수명   : db_delete_date_id
 // 기능     : 특정 id 레코드 삭제처리
 // 파라미터 : PDO  &$conn
 //            Array &$arr_param          

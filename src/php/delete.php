@@ -7,11 +7,13 @@ require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 $arr_err_msg = [];//에러메세지 저장용
 
+// TRY문 시작
 try {
     //2. db connect
     //2-1. connection 함수 호출
     $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
+		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
         throw new Exception("DB Error : PDO Instance");
     }
 
