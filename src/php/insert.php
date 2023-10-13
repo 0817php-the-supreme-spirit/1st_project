@@ -12,7 +12,6 @@ $amount_used = "";
 $create_date = "";
 $category_id = "";
 
-$date = date('Y-m-d');
 
 // POSt로 request가 왔을 때 처리
 // $mttp_method = $_SERVER["REQUEST"];
@@ -20,7 +19,7 @@ if($http_method === "POST") {
 	try {
 
 		$arr_post = $_POST;
-
+		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
         $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null;
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
@@ -36,10 +35,10 @@ if($http_method === "POST") {
 		if($create_date === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
+		// var_dump($create_date);
 		if($category_id === "") {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
-
 		if(count($arr_err_msg) === 0) {
 
 			// DB 접속
@@ -65,7 +64,7 @@ if($http_method === "POST") {
 			$conn->commit(); //모든 처리 완료 시 커밋
 
 			//리스트 페이지로 이동
-			header("Location: list.php");
+			header("Location: list.php/?date={$date}");
 			exit;
     	}
 	} catch(Exception $e) {
@@ -80,6 +79,7 @@ if($http_method === "POST") {
     }
 }
 else {
+	$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
 	if(!db_conn($conn)) {
 		// DB Instance 에러
@@ -140,31 +140,19 @@ else {
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>
 
-					<div class="side-left-line-1"></div>
+						<div class="side-left-line-1"></div>
 
-					<a href=""><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
-					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
-					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
+						<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
+						<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-on"><p>지출 작성부</p></div></a>
+						<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
-					<div class="side-left-line-2"></div>
-					
-					<div class="category-box">
-						<!-- <p>작성중..</p> -->
-						<div class="category-box2"></div>
-					</div>
-					<!-- <form action="" method="post">
-						<input type="radio" name="category" id="category1">
-						<label for="category1" class="category-box">전체 비용</label>
-				
-						<input type="radio" name="category" id="category2">
-						<label for="category2" class="category-box">생활 비용</label>
-				
-						<input type="radio" name="category" id="category3">
-						<label for="category3" class="category-box">활동 비용</label>
-				
-						<input type="radio" name="category" id="category4">
-						<label for="category4" class="category-box">멍청 비용</label>
-					</form> -->
+						<div class="side-left-line-2"></div>
+						
+						<div class="category-box">
+							<!-- <p>작성중..</p> -->
+							<div class="category-box2"></div>
+						</div>
+					</form> 
 
 				</div>
 			</div>
@@ -204,8 +192,8 @@ else {
 						</div>
 						<div class="content-button">
 							<button class="content-button-go" type="submit">작성</button>
-						<a href="/1st_project/src/php/list.php" class="content-button-back">돌아가기</a>
-					</form>
+						<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>" class="content-button-back">돌아가기</a>
+	</form>
 					</div>
 				</div>
 			</div>
@@ -241,10 +229,10 @@ else {
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 금액 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo $user_days["daily_salary"]; ?>원</p>
 						</div>
 					</div>
 

@@ -171,7 +171,7 @@
 
 	// ----------------------------
 	// 함수명 	: db_select_search
-	// 기능 	: 1st_project 해당 날짜 게시물 조회
+	// 기능 	: 1st_project 해당 날짜와 카테고리 게시물 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -200,6 +200,9 @@
 			":date" => $arr_param["date"]
 		];
 
+		// : = 플레이스홀더(실제 값으로 대체될 위치, 해당 sql문이 실행 시에 결정된 값을 넣어줌) :date 배열의 키, $arr_param["date"]는 :date에 대응하는 값
+		// 동적 쿼리문, lisg.php에서 카테고리 값이 넘어왔을 경우에  sql문에 해당 AND문을 추가하고 받은 카테고리 값을 arr_ps에 :categpry에 값을 넘김
+		//(empty = 비어있을 경우에, 현재는 !empty기 때문에 값이 있을 경우)
 		if (!empty($arr_param["category"])) {
 			$sql .= " AND cate.category_name = :category ";
 			$arr_ps[":category"] = $arr_param["category"];
@@ -238,6 +241,7 @@
 			." AND "
 			." 		date_format(now(), '%Y-%m-%d') "
 			;
+			// 현재 달의 1일과 마지막일사이에 값이 있을 경우의 조건문
 		try {
 			$stmt = $conn->query($sql);
 			$result = $stmt->fetchAll();

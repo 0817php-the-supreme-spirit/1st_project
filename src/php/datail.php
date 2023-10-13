@@ -244,11 +244,11 @@
 						<div class="content-value-box">
 							<div class="content-user-box">
 								<div class="content-user-amount">
-									<p>일일 남은 금액 : <?php echo $item["amount_used"]; ?></p>
+									<p>일일 남은 금액 : <?php echo $item["amount_used"]; ?>원</p>
 								</div>
 		
 								<div class="content-user-remaining">
-									<p>일일 남은 금액 : <?php echo $user_days["daily_salary"]; ?></p>
+									<p>일일 남은 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
 								</div>
 							</div>
 
@@ -260,14 +260,14 @@
 				<?php } ?>
 
 					<div class="content-btn-box">
-						<div class="content-btn-before">
+						<div class="content-btn-before content-btn-box-hover">
 							<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>">이전</a>
 						</div>
-						<div class="content-btn-correction">
-							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>">수정</a>
+						<div class="content-btn-correction content-btn-box-hover">
+							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정</a>
 						</div>
-						<div class="content-btn-delete">
-							<a href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>">삭제</a>
+						<div class="content-btn-delete content-btn-box-hover">
+							<a href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">삭제</a>
 						</div>
 
 					</div>

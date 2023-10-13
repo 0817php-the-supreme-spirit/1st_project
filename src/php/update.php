@@ -7,14 +7,13 @@ db_conn($conn);
 $http_method = $_SERVER["REQUEST_METHOD"];
 
 //기본 날짜값 세팅
-$date = date('Y-m-d');
 
 
 try{
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
-
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 		if(!db_conn($conn)) {
 			// DB Instance 에러
 			throw new Exception("DB Error : PDO Instance");
@@ -33,6 +32,7 @@ try{
 	}
 	else {
 	$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
+	$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 
 	//POST 값 변수지정
 	$title = $_POST["title"];
@@ -62,7 +62,7 @@ try{
 	$conn->commit();
 
 	//업데이트 완료 후 디테일 페이지로 이동
-	header("Location: /1st_project/src/php/datail.php/?id={$id}"); 
+	header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}"); 
 	exit;
 	}
 
@@ -191,7 +191,7 @@ try{
 						</div>
 						<div class="update-button">
 							<button type="submit">수정확인</button>
-							<a href="/1st_project/src/php/datail.php/?id=<?php echo $id; ?>">수정취소</a>
+							<a href="/1st_project/src/php/datail.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정취소</a>
 						</div>
 					</form>
 				</div>

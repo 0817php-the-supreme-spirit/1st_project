@@ -1,39 +1,51 @@
 <?php
-define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //웹 서버
-define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
-require_once(ROOT."lib/lib_db.php");
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/"); //상수 설정, 웹서버 root패스 생성
+define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다."); //상수 설정, 파라미터 에러 메세지 불러오기 
+require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 //db_conn($conn);
 
-$arr_err_msg = [];
+$arr_err_msg = [];//에러메세지 저장용
 
+// TRY문 시작
 try {
     //2. db connect
     //2-1. connection 함수 호출
     $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
+		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
         throw new Exception("DB Error : PDO Instance");
     }
 
-    // METHOD 획득?
+    // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
     $http_method = $_SERVER["REQUEST_METHOD"];
 
+	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
     if($http_method === "GET") {
+		//파라미터에서 받아올 date, id의 값
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
+		//date는 빈값이 될수가 없으니까?되면안되니까?
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
         $arr_err_msg = [];
+
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
         }
+		//여기서 나 date의 에러메세지는 없앴는데 이래도괜찮은건가?
         if(count($arr_err_msg) >= 1) {
             throw new Exception(implode("<br>", $arr_err_msg));
+			//에러메세지 출력할 때 한 배열에 출력하기 위해 (implode(): 배열에 속한 문자열을 한 문자열로 만드는 함수) 사용 
         }
 
         // 게시글 정보 획득
         $arr_param = [
             "id" => $id
         ];
+		// 파라미터에 받아올 id값?
         $result = db_select_id($conn, $arr_param);
+		// 받아올 값을 
+
         // 예외처리
         if($result === false) {
             throw new Exception("DB Error : Select id");
@@ -83,7 +95,7 @@ try {
             throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
-		header("Location: /1st_project/src/php/list.php");
+		header("Location: /1st_project/src/php/list.php/?date={$date}");
         exit;
     }
 	$user_data = db_select_user_table($conn);
@@ -137,14 +149,14 @@ try {
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
 							<label class="date-label">
 								<input type="hidden" name="date" value="<?php echo $date; ?>">
-								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
+								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date;  ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>
 					</form>
 
 					<div class="side-left-line-1"></div>
 
-					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-on"><p>오늘의 지출</p></div></a>
+					<a href="/1st_project/src/php/list.php"><div class="side-left-page side-left-off"><p>오늘의 지출</p></div></a>
 					<a href="/1st_project/src/php/insert.php"><div class="side-left-page side-left-off"><p>지출 작성부</p></div></a>
 					<a href=""><div class="side-left-page side-left-off"><p>지출 통계서</p></div></a>
 
@@ -210,8 +222,9 @@ try {
 					<div class="box6">
 						<form action="/1st_project/src/php/delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id; ?>">
+							<input type="hidden" name="date" value="<?php echo $date; ?>">
 							<button type="submit" class="box6-1">삭제</button>
-							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>" class="box6-2">취소</a>
+							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>" class="box6-2">취소</a>
 						</form>
 					</div>
 				</div>
@@ -248,10 +261,10 @@ try {
 						<p>소비한 벨</p>
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
-							<p class="small">사용 금액 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
-							<p class="small p_gpa">남은 금액 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
+							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo $amount_used["amount_used"]; }?>원</p>
+							<p class="small p_gpa">남은 벨 : <?php echo $user_days["daily_salary"] - $amount_used["amount_used"]; ?>원</p>
 							<div class="bar"></div>
-							<p class="small p_gpa all">전체 금액 : <?php echo $user_days["daily_salary"]; ?>원</p>
+							<p class="small p_gpa all">전체 벨 : <?php echo $user_days["daily_salary"]; ?>원</p>
 						</div>
 					</div>
 

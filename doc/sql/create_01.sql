@@ -31,11 +31,13 @@ COMMIT;
 INSERT INTO user_table (
  	monthly_salary
  	,daily_salary
+ 	,input_date
 )
  	
 VALUES (
- 	3000000
- 	,100000
+ 	2000000
+ 	,50000
+ 	,20230909
 );
 
 INSERT INTO category_table (
@@ -88,8 +90,8 @@ SELECT todo.id, cate.category_name, todo.title, todo.amount_used
 FROM todolist_table todo
 JOIN category_table cate
 ON todo.category_id = cate.category_id
-WHERE cate.category_name = 'life'
-AND todo.create_date = 20231010;
+where todo.create_date = 20231012
+AND todo.delete_date IS NULL;
 
 SELECT todo.id, cate.category_name, todo.title, todo.amount_used
 FROM todolist_table todo
@@ -116,3 +118,26 @@ WHERE MONTH(input_date) = NOW();
 
 SELECT * from user_table
 where input_date between date_format(now(), '%Y-%m-01') and date_format(now(), '%Y-%m-%d');
+
+
+
+
+SELECT todo.id ,cate.category_name ,todo.title ,todo.amount_used
+FROM todolist_table todo
+JOIN category_table cate
+ON
+todo.category_id = cate.category_id
+WHERE
+todo.create_date = 20231011;
+
+SELECT daily_salary
+FROM user_table
+WHERE input_date
+BETWEEN
+date_format(now(), '%Y-%m-01')
+AND
+date_format(now(), '%Y-%m-%d');
+
+SELECT *
+FROM todolist_table
+WHERE create_date = CURDATE();
