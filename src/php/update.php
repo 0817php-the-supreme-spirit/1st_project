@@ -32,7 +32,7 @@ try{
 	}
 	else {
 	$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
-	$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+	$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 
 	//POST 값 변수지정
 	$title = $_POST["title"];
@@ -167,7 +167,6 @@ try{
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
-						<input type="hidden" name="date" value="<?php echo $date; ?>">
 						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
 							<select name="category_id" class="update-category">

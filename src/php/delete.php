@@ -83,7 +83,7 @@ try {
             throw new Exception("DB Error : Delete_date id");
         }
         $conn->commit();
-		header("Location: /1st_project/src/php/list.php/");
+		header("Location: /1st_project/src/php/list.php/?date={$date}");
         exit;
     }
 	$user_data = db_select_user_table($conn);
@@ -137,7 +137,7 @@ try {
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
 							<label class="date-label">
 								<input type="hidden" name="date" value="<?php echo $date; ?>">
-								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
+								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date;  ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>
 					</form>
@@ -210,8 +210,9 @@ try {
 					<div class="box6">
 						<form action="/1st_project/src/php/delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id; ?>">
+							<input type="hidden" name="date" value="<?php echo $date; ?>">
 							<button type="submit" class="box6-1">삭제</button>
-							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>" class="box6-2">취소</a>
+							<a href="/1st_project/src/php/list.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>" class="box6-2">취소</a>
 						</form>
 					</div>
 				</div>
