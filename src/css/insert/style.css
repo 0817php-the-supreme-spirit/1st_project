@@ -527,6 +527,7 @@ textarea:focus {outline: none;}
 	font-size: 60px;
 	color: rgba(228, 91, 91, 0.89);
 	/* text-align: center; */
+	margin-top: 35px;
 }
 
 .content-button {

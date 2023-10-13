@@ -13,7 +13,7 @@ $arr_err_msg = []; // 에러 메세지 저장
 // $category_id = "";
 
 // POSt로 request가 왔을 때 처리
-$mttp_method = $_SERVER["REQUEST"];
+// $mttp_method = $_SERVER["REQUEST"];
 if($http_method === "POST") {
 	try {
 		$arr_post = $_POST;
@@ -187,8 +187,12 @@ else {
 								</div>
 							</div>
 							<div class="content-float2">
-								<p>벌써지출</p>
-								<p>할거에요?</p>
+							<p><?php 
+								$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
+								$selected = array_rand($randment);
+								echo $randment[$selected]; ?></p>
+								<!-- <p>벌써지출</p>
+								<p>할거에요?</p> -->
 							</div>
 						</div>
 						<div class="content-button">
