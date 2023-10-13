@@ -34,6 +34,15 @@
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date1");
             }
 
+			$date_sum = db_user_salary_date_sum($conn);
+			if($date_sum  === false) {
+				throw new Exception("DB Error : select_user_table");
+			}
+
+			var_dump($date_sum);
+
+			
+
 		}
 		else {
 
@@ -152,15 +161,17 @@
 					<table class="content-table">
 						<tr>
 							<td class="content-date-box content-td-color">날 짜</td>
-							<td class="content-amount-box content-td-color">사용 금액 (달)</td>
-							<td class="content-monthly-box content-td-color">남은 금액 (달)</td>
+							<td class="content-amount-box content-td-color">사용 벨 (달)</td>
+							<td class="content-monthly-box content-td-color">남은 벨 (달)</td>
 						</tr>
 					</table>
 					<details>
 						<summary>
-							<div class="content-date-box content-td-margin">aa</div>
-							<div class="content-amount-box content-td-margin">aa</div>
-							<div class="content-monthly-box ">aa</div>
+							<?php foreach($date_sum as $val) { ?>
+								<div class="content-date-box content-td-margin"><?php echo $val["create_month"] ?></div>
+								<div class="content-amount-box content-td-margin"><?php echo number_format($val["total_amount"]) ?>원</div>
+								<div class="content-monthly-box "><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+							<?php } ?>
 						</summary>	
 							<div class="content-date-summary-box content-td-margin">aa</div>
 							<div class="content-amount-summarybox content-td-margin">aa</div>
