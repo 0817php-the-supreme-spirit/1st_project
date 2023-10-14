@@ -46,10 +46,10 @@ try{
 	else {
 		$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d'); //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
-		$title = $_POST["title"] ? $_POST["title"] : ""; //title 세팅
-		$memo = $_POST["memo"] ? $_POST["memo"] : null; //memo 값 없을 시 null 세팅
-		$amount_used = $_POST["amount_used"] ? $_POST["amount_used"] : ""; //사용한 금액 세팅
-		$create_date = $_POST["create_date"] ? $_POST["create_date"] : ""; //날짜 세팅
+		$title = isset($_POST["title"]) ? trim($_POST["title"]) : ""; //title 세팅
+		$memo = isset($_POST["memo"]) ? trim($_POST["memo"]) : null; //memo 값 없을 시 null 세팅
+		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : ""; //사용한 금액 세팅
+		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //날짜 세팅
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : ""; //카테고리 id 세팅
 
 
@@ -79,17 +79,6 @@ try{
 
 			$category = $category[0];
 			$category_id = (int)$category;
-
-			// if( $category === 0){
-			// 	$category_id = 0;
-			// }
-
-			// else if( $category === 1){
-			// 	$category_id = 1;
-			// }
-			// else if( $category === 2){
-			// 	$category_id = 2;
-			// }
 		}
 
 		//POST 값 받아오기
