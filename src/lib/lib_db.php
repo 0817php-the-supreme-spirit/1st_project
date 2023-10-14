@@ -607,6 +607,26 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		return false;
 	}
 	}
+
+
+	function category_id( &$conn, &$arr_ps_id ){
+		
+		$sql = " SELECT "
+		."			category_id "
+		."		FROM "
+		."			todolist_table "
+		."		WHERE "
+		."			id = :id ";
+
+		$arr_param = [
+			":id" => $arr_ps_id["id"]
+		];
+
+		$stmt = $conn->prepare($sql);
+		$stmt->execute($arr_param);
+		$result = $stmt->fetchAll();
+		return $result;
+	}
 // ******* update lib. *************
 // ----------------------------
 
