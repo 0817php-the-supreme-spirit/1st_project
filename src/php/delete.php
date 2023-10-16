@@ -64,11 +64,6 @@ try {
         $item = $result[0];
 		// result[0]방에 담아준것을 item변수에 담겠다
 
-		//date값 획득?
-		$arr_param = [
-			"date" => $date
-		];
-		//파라미터에 date값을 받아올거임
 
 
 

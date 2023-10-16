@@ -48,13 +48,9 @@
 				else if($result === false) {
 					throw new Exception("DB Error : Select id");
 				}
-		
-				
+
 				$item = $result[0];
 
-				$arr_param = [
-					"date" => $date
-				];
 			}
 		}
 		else {
@@ -90,11 +86,6 @@
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 					// throw new Exception("DB Error : select_date");
 				}
-
-				$arr_param = [
-					"date" => $date
-				];
-		
 			}
 		}
 
