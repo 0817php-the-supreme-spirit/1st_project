@@ -14,6 +14,7 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 
+
 		// 메소드 확인 해당 페이지는 기본 데이터를 출력하기 위한 GET와 날짜와 카테고리 값을 받는 POST가 존재
 		if($http_method === "GET") {
 

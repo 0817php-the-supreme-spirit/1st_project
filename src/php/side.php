@@ -12,6 +12,8 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 
+		// $date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+
 		//일일 사용금액 계산을 위한 조건(날짜) 세팅
 		$arr_param = [
 			"date" => $date
@@ -31,6 +33,16 @@
 			throw new Exception("DB Error : select_user_table");
 		}
 
+		$arr_param = [
+			"date" => $date
+		];
+
+		$user_data = db_select_user_table_all($conn, $arr_param);
+		if($user_data === false) {
+			throw new Exception("DB Error : select_user_table");
+		}
+
+
 		// 유저의 일일 급여의 0번 방에 있는 값을 넘겨줌
 		$user_days = $user_data[0];
 
@@ -45,7 +57,6 @@
 
 		// 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
 		$percent = (int)$percent;
-		
 
 	}
 	catch(Exception $e) {
@@ -95,7 +106,7 @@
 					<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
 					<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 					<div class="bar"></div>
-					<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
+					<p class="small p_gpa all">전체 벨 :  <?php echo number_format($user_days["daily_salary"]);?>원</p>
 				</div>
 			</div>
 

@@ -30,16 +30,6 @@ try{
 			throw new Exception(implode("<br>", $arr_err_msg));
 		}
 
-		//일일 사용금액 계산을 위한 조건(날짜) 세팅
-		$arr_param = [
-			"date" => $date
-		];
-		//일일 사용금액 계산
-		$amount_used = db_select_amount_used($conn, $arr_param);
-		if($amount_used === false) {
-			throw new Exception("DB Error : select_user_table");
-		}
-		$amount_used = $amount_used[0];
 
 	}
 	else {
@@ -75,7 +65,7 @@ try{
 			// }
 
 			//트랜잭션 시작
-			// $conn->beginTransaction();
+			$conn->beginTransaction();
 
 			if(count($arr_err_msg) === 0) {
 

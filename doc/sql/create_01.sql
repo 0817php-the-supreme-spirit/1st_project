@@ -130,13 +130,10 @@ todo.category_id = cate.category_id
 WHERE
 todo.create_date = 20231011;
 
-SELECT daily_salary
+SELECT daily_salary, DATE_FORMAT(input_date,'%Y-%m') AS input_month
 FROM user_table
-WHERE input_date
-BETWEEN
-date_format(now(), '%Y-%m-01')
-AND
-date_format(now(), '%Y-%m-%d');
+GROUP BY input_month
+HAVING input_month = 202305;
 
 SELECT *
 FROM todolist_table
@@ -171,4 +168,5 @@ GROUP BY todo.create_date
 
 SELECT SUM(amount_used) AS amount_sum
 FROM todolist_table
-WHERE delete_date IS NULL;
+WHERE create_date = 20231011 
+and delete_date IS NULL;

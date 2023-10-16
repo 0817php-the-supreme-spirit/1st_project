@@ -174,6 +174,35 @@
 			return false;
 		} 
 	}
+	
+	function db_select_user_table_all(&$conn, &$arr_param) {
+		$sql =
+			" SELECT "
+			." 		daily_salary "
+			." 		,input_date "
+			." FROM "
+			."		user_table "
+			." WHERE "
+			." 		Input_date >= DATE_FORMAT(:date1, '%Y-%m-01') "
+			." AND "
+			." 		Input_date <= LAST_DAY(:date2) "
+			;
+
+			$arr_ps = [
+				":date1" => $arr_param["date"]
+				,":date2" => $arr_param["date"]
+			];
+
+		try {
+			$stmt = $conn->prepare($sql);
+			$stmt->execute($arr_ps);
+			$result = $stmt->fetchAll();
+			return $result; // 
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
 
 
 	// ----------------------------
