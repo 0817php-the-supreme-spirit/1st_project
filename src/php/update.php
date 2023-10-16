@@ -1,7 +1,7 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 require_once(ROOT."lib/lib_db.php");
-define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
+define("ERROR_MSG_PARAM", "Parameter Error : %s"); //파라미터 에러 메세지
 
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
@@ -29,7 +29,11 @@ try{
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 		}
 
+		if(count($arr_err_msg) >= 1){
+			throw new Exception(implode("<br>", $arr_err_msg));
+		}
 
+		if(count($arr_err_msg) === 0) {
 		//일일 사용금액 계산을 위한 조건(날짜) 세팅
 		$arr_param = [
 			"date" => $date
@@ -41,7 +45,7 @@ try{
 		}
 		$amount_used = $amount_used[0];
 		// };
-
+		}
 	}
 	else {
 		$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
@@ -52,6 +56,7 @@ try{
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //날짜 세팅
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : ""; //카테고리 id 세팅
 
+		
 
 		if($id === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
@@ -59,6 +64,11 @@ try{
 		if($date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 		}
+
+		if(count($arr_err_msg) >= 1) {
+			throw new Exception(implode("<br>", $arr_err_msg));
+		}
+		
 		if($title === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
 		}
@@ -68,40 +78,44 @@ try{
 		if($create_date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-
-		//카테고리 값 불러오기
-		if( $category_id === ""){
-			$arr_ps_id = [
-				"id" => $id
-			];
-			
-			$category = category_id( $conn, $arr_ps_id );
-
-			$category = $category[0];
-			$category_id = (int)$category;
-		}
-
-		//POST 값 받아오기
-		$arr_param = [
-			"title" => $title
-			,"memo" => $memo
-			,"amount_used" => $amount_used
-			,"create_date" => $create_date
-			,"category_id" => $category_id
-			,"id" => $id
-		];
-
-		//POST값 입력
-			if(!update_execute($conn, $arr_param)){
-				throw new Exception("DB Error : Update_boards_id");
-			}
 		
-		//커밋
-		$conn->commit();
 
-		//업데이트 완료 후 디테일 페이지로 이동
-		header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
-		exit;
+		if(count($arr_err_msg) === 0) {
+
+			//카테고리 값 불러오기
+			if( $category_id === ""){
+				$arr_ps_id = [
+					"id" => $id
+				];
+				
+				$category = category_id( $conn, $arr_ps_id );
+
+				$category = $category[0];
+				$category_id = (int)$category;
+			}
+
+			//POST 값 받아오기
+			$arr_param = [
+				"title" => $title
+				,"memo" => $memo
+				,"amount_used" => $amount_used
+				,"create_date" => $create_date
+				,"category_id" => $category_id
+				,"id" => $id
+			];
+
+			//POST값 입력
+				if(!update_execute($conn, $arr_param)){
+					throw new Exception("DB Error : Update_boards_id");
+				}
+			
+			//커밋
+			$conn->commit();
+
+			//업데이트 완료 후 디테일 페이지로 이동
+			header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+			exit;
+		}
 	}
 
 	//이번달 유저 일일 급여 조회
@@ -210,8 +224,15 @@ try{
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
+							<?php
+								foreach($arr_err_msg as $val){
+							?>
+									<p class="update-error"><?php echo $val; ?></p></br>
+							<?php		
+								}
+							?>
 						<div class="update-category">
-							<select name="category_id" class="update-category">fgdfgdfg
+							<select name="category_id" class="update-category">
 							<?php if($item["category_name"] == "life") { ?>
 									<option value="0" selected>생활 비용</option>
 									<option value="1">활동 비용</option>
@@ -230,7 +251,7 @@ try{
 						<div class="update-title-memo">
 							<div class="update-title">
 								<label for="update-title" id ="title1">제목</label>
-								<input type="text" name="title" id="update-title" placeholder="뭘 샀는지 궁금해요!" required value="<?php echo $item["title"]; ?>">
+								<input type="text" name="title" id="update-title" placeholder="뭘 샀는지 궁금해요!" value="<?php echo $item["title"]; ?>">
 							</div>
 							<div class="update-memo">
 								<label for="update-memo">메모</label>

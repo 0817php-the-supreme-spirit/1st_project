@@ -716,7 +716,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .update-icon{
 	background-color: rgb(255, 255, 255, 0.5);
-	background-image: url(../../icon/updateicon.png);
+	background-image: url(../../icon/update_icon.png);
 	background: cover;
 	margin-top: 10px;
 	width: 340px;
@@ -730,4 +730,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .update-icon:hover {
 	background-color: #ebd461;
+}
+
+.update-error{
+	text-align: center;
 }
