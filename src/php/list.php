@@ -161,7 +161,7 @@
 	<body>
 		<main>
 			<div class="header">
-				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<div class="side-left">

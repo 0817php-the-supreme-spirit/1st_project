@@ -161,13 +161,13 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #AFE175;
 	text-align: center;
-	color: #57BCA9;
+	color: #AFE175;
 }
 
 .date-box:focus {
-	background-color: #57BCA9;
+	background-color: #AFE175;
 	color: #fff;
 	border: none;
 	outline: none;
@@ -211,7 +211,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #AFE175;
 	border-radius: 5px;
 }
 
@@ -221,7 +221,7 @@ button {
 	height: 91px;
 	text-align: center;
 	line-height: 91px;
-	color: #57BCA9;
+	color: #AFE175;
 }
 
 .side-left-off {
@@ -245,7 +245,7 @@ button {
 
 .side-left-page:hover {
 	background-image: url(/1st_project/src/img/btn-on.png);
-	color: #57BCA9;
+	color: #AFE175;
 }
 
 .side-left-line-2 {
@@ -253,7 +253,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #AFE175;
 	border-radius: 5px;
 }
 
@@ -270,35 +270,30 @@ button {
 } */
 
 .category-box {
-	margin-top: 17px;
+	margin-top: 20px;
 	width: 340px;
-	height: 50px;
-	background-color: rgba(255, 255, 255, 0.5);
+	height: 250px;
+	background-color: rgba(255, 255, 255, 0.3);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #AFE175;
 	text-align: center;
 	line-height: 43px;
-	color: #57BCA9;
+	/* color: #57BCA9; */
 	display: inline-block;
+	background-image: url(/1st_project/src/icon/insert_icon.png);
+	background-size: 240px;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
-input[type="radio"] {
-    display: none; /* 라디오 버튼 숨김 */
-}
-
-input[type="radio"]:checked + label {
-    background-color:#57BCA9;
-	color: #fff;
-}
 
 .category-box:hover {
-    background-color:#57BCA9;
+    background-color: #AFE175;
 	color: #fff;
+	transform: scale(1.1);
+    transition-duration: 0.3s;
 }
 
-.category-box:focus {
-	background-color: #57BCA9;
-}
 /* ------------------------------------------------------------------------ */
 
 
@@ -725,7 +720,7 @@ progress[value]::-webkit-progress-bar{
 	width: 300px;
 	padding: 10px;
 	background-color: rgba(255, 255, 255, 0.5);
-	border: 1px solid #57BCA9;
+	border: 1px solid #57bca934;
 	border-radius: 30px;
 	box-shadow: 0 14px 28px rgba(107, 107, 107, 0.1), 0 10px 10px rgba(117, 117, 117, 0.1);
 }
