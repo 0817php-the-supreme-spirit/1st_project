@@ -145,7 +145,7 @@ try{
 	// if($http_method === "POST") {
 	// $conn->rollBack();
 	// }
-	header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 	$e->getMessage(); // Exception 메세지 출력
 	exit;
 }finally{
