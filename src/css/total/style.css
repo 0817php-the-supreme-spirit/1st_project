@@ -281,7 +281,7 @@ button {
 	line-height: 43px;
 	/* color: #57BCA9; */
 	display: inline-block;
-	background-image: url(/1st_project/src/icon/insert_icon.png);
+	background-image: url(/1st_project/src/icon/total_icon.png);
 	background-size: 240px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -399,7 +399,7 @@ summary::marker {
 }
 
 .content-date-summary-box {
-	width: 175px;
+	width: 180px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -410,7 +410,7 @@ summary::marker {
 }
 
 .content-amount-summary-box{
-	width: 290px;
+	width: 295px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -421,7 +421,7 @@ summary::marker {
 }
 
 .content-monthly-summary-box {
-	width: 290px;
+	width: 295px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -480,19 +480,12 @@ summary::marker {
 
 .content-day-bar {
 	width: 830px;
-	border: 3px solid rgba(255, 255, 255, 0.5);
+	border: 3px solid rgba(255, 255, 255, 0.8);
 	opacity: 0.5;
 	margin-bottom: 20px;
 	border-radius: 30px;
 }
 
-.background-box {
-	width: 830px;
-	padding-left: 8px;
-	/* padding-top: 20px;
-	padding: 5px; */
-	/* border-radius: 30px; */
-}
 
 /* ------------------------------------------------------------------------ */
 
