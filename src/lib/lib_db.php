@@ -144,7 +144,7 @@
 	}
 }
 
-// ----------------------------
+	// ----------------------------
 	// 함수명 	: db_select_user_table
 	// 기능 	: user_table 유저 일일 급여 조회
 	// 파라미터 : PDO 		&$conn
@@ -174,6 +174,14 @@
 			return false;
 		} 
 	}
+
+	// ----------------------------
+	// 함수명 	: db_select_user_table_all
+	// 기능 	: user_table 해당 달에 맞는 유저 일일급여 조회
+	// 파라미터 : PDO 		&$conn
+	// 리턴 	: Array / false
+	// ----------------------------
+
 	
 	function db_select_user_table_all(&$conn, &$arr_param) {
 		$sql =
