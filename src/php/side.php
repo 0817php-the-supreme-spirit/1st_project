@@ -12,6 +12,11 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 
+		//일일 사용금액 계산을 위한 조건(날짜) 세팅
+		$arr_param = [
+			"date" => $date
+		];
+
 		// 데이터 베이스에서 유저의 사용 금액을 조회하는 함수
 		$amount_used = db_select_amount_used($conn, $arr_param);
 		if($amount_used === false) {

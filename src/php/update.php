@@ -116,13 +116,6 @@ try{
 		}
 	}
 
-	//이번달 유저 일일 급여 조회
-	$user_data = db_select_user_table($conn);
-
-	//실패시 false
-	if($user_data === false) {
-		throw new Exception("DB Error : select_user_table");
-	}
 
 
 	//기존값 불러오기
