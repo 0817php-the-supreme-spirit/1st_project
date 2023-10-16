@@ -375,11 +375,11 @@ summary::marker {
 }
 
 .content-box-success-color {
-	color: #8496E2;
+	color: #57BCA9;
 }
 
 
-.content-box-success-failure {
+.content-box-failure-color {
 	color: #F08384;
 }
 
@@ -402,9 +402,10 @@ summary::marker {
 	text-align: center;
 	line-height: 40px;
 	display: inline-block;
+	font-size: 20px;
 }
 
-.content-amount-summarybox{
+.content-amount-summary-box{
 	width: 295px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
@@ -412,6 +413,7 @@ summary::marker {
 	text-align: center;
 	line-height: 40px;
 	display: inline-block;
+	font-size: 20px;
 }
 
 .content-monthly-summary-box {
@@ -422,9 +424,60 @@ summary::marker {
 	text-align: center;
 	line-height: 40px;
 	display: inline-block;
+	font-size: 20px;
+}
+
+.content-table-day {
+	display: inline-block;
+}
+
+.content-table-day tr td {
+	margin-bottom: 10px;
+}
+
+.content-td-color-day {
+	color: #57BCA9;
+	font-size: 20px;
 }
 
 
+.content-date-box-day {
+	width: 180px;
+	height: 50px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 30px;
+	text-align: center;
+	line-height: 50px;
+	display: inline-block;
+}
+
+.content-amount-box-day {
+	width: 295px;
+	height: 50px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 30px;
+	text-align: center;
+	line-height: 50px;
+	display: inline-block;
+}
+
+.content-monthly-box-day {
+	width: 295px;
+	height: 50px;
+	background-color: rgba(255, 255, 255, 0.8);
+	border-radius: 30px;
+	text-align: center;
+	line-height: 50px;
+	display: inline-block;
+}
+
+.content-day-bar {
+	width: 830px;
+	border: 3px solid rgba(255, 255, 255, 0.5);
+	opacity: 0.5;
+	margin-bottom: 20px;
+	border-radius: 30px;
+}
 
 
 /* ------------------------------------------------------------------------ */

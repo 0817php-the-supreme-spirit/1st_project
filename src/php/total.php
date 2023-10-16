@@ -39,6 +39,11 @@
 				throw new Exception("DB Error : select_user_table");
 			}
 
+			$date_sum_day = db_user_salary_date_day($conn);
+			if($date_sum  === false) {
+				throw new Exception("DB Error : select_user_table");
+			}
+
 		}
 		else {
 
@@ -161,24 +166,44 @@
 							<td class="content-monthly-box content-td-color">남은 벨 (달)</td>
 						</tr>
 					</table>
-					<details>
-						<summary>
-							<?php foreach($date_sum as $val) { ?>
+					<?php foreach($date_sum as $val) { ?>
+						<details>
+							<summary>
 								<?php if($val["total_amount"] <= $val["monthly_salary"]) {?>
 									<div class="content-date-box content-td-margin content-box-success-color"><?php echo $val["create_month"] ?></div>
 									<div class="content-amount-box content-td-margin content-box-success-color"><?php echo number_format($val["total_amount"]) ?>원</div>
 									<div class="content-monthly-box content-box-success-color"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
 								<?php } else { 	?>
-									<div class="content-date-box content-td-margin content-box-success-failure"><?php echo $val["create_month"] ?></div>
-									<div class="content-amount-box content-td-margin content-box-success-failure"><?php echo number_format($val["total_amount"]) ?>원</div>
-									<div class="content-monthly-box content-box-success-failure"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+									<div class="content-date-box content-td-margin content-box-failure-color"><?php echo $val["create_month"] ?></div>
+									<div class="content-amount-box content-td-margin content-box-failure-color"><?php echo number_format($val["total_amount"]) ?>원</div>
+									<div class="content-monthly-box content-box-failure-color"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
 								<?php }	?>
-							<?php } ?>
-						</summary>	
-							<div class="content-date-summary-box content-td-margin">aa</div>
-							<div class="content-amount-summarybox content-td-margin">aa</div>
-							<div class="content-monthly-summary-box ">aa</div>
-					</details>
+								<div class="content-day-bar"></div>
+							</summary>
+							<table class="content-table-day">
+								<tr>
+									<td class="content-date-box-day content-td-color-day">날 짜</td>
+									<td class="content-amount-box-day content-td-color-day">사용 벨 (일)</td>
+									<td class="content-monthly-box-day content-td-color-day">남은 벨 (일)</td>
+								</tr>	
+							</table>
+								<?php foreach($date_sum_day as $sum) { ?>
+									<?php if($sum["create_month"] == $val["create_month"]) { ?>
+										<?php if($sum["amount_used_sum"] <= $sum["daily_salary"]) {?>
+											<div class="content-date-summary-box content-td-margin content-box-success-color"><?php echo $sum["create_date"]; ?></div>
+											<div class="content-amount-summary-box content-td-margin content-box-success-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+											<div class="content-monthly-summary-box content-box-success-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+										<?php } else { 	?>
+											<div class="content-date-summary-box content-td-margin content-box-failure-color"><?php echo $sum["create_date"]; ?></div>
+											<div class="content-amount-summary-box content-td-margin content-box-failure-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+											<div class="content-monthly-summary-box content-box-failure-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+			
+										<?php }	?>
+									<?php } ?>
+								<?php } ?>
+								<div class="content-day-bar"></div>
+						</details>
+					<?php } ?>
 				</div>
 			</div>
 
