@@ -70,10 +70,10 @@
 			
 			$amount_used = $amount_used[0];
 			
-			$user_data = db_select_user_table($conn);
-			if($user_data === false) {
-				throw new Exception("DB Error : select_user_table");
-			}
+			// $user_data = db_select_user_table($conn);
+			// if($user_data === false) {
+			// 	throw new Exception("DB Error : select_user_table");
+			// }
 	
 		}
 		else {
