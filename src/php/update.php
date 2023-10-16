@@ -65,7 +65,7 @@ try{
 			// }
 
 			//트랜잭션 시작
-			// $conn->beginTransaction();
+			$conn->beginTransaction();
 
 			if(count($arr_err_msg) === 0) {
 
