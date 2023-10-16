@@ -30,7 +30,6 @@ try{
 			throw new Exception(implode("<br>", $arr_err_msg));
 		}
 
-		if(count($arr_err_msg) === 0) {
 		//일일 사용금액 계산을 위한 조건(날짜) 세팅
 		$arr_param = [
 			"date" => $date
@@ -41,8 +40,7 @@ try{
 			throw new Exception("DB Error : select_user_table");
 		}
 		$amount_used = $amount_used[0];
-		// };
-		}
+
 	}
 	else {
 		$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
@@ -53,7 +51,6 @@ try{
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //날짜 세팅
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : ""; //카테고리 id 세팅
 
-		
 
 		if($id === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
@@ -82,7 +79,7 @@ try{
 		}
 
 		//트랜잭션 시작
-		$conn->beginTransaction();
+		// $conn->beginTransaction();
 
 		if(count($arr_err_msg) === 0) {
 
