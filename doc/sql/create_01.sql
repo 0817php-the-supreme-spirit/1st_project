@@ -163,8 +163,12 @@ SELECT id
 FROM todolist_table
 ORDER BY id DESC
 
-SELECT todo.create_date, sum(todo.amount_used) AS amount_used_sum, usta.daily_salary
+SELECT todo.create_date, sum(todo.amount_used) AS amount_used_sum, usta.daily_salary, DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month
 FROM todolist_table todo
 JOIN user_table usta
 ON DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m')
 GROUP BY todo.create_date
+
+SELECT SUM(amount_used) AS amount_sum
+FROM todolist_table
+WHERE delete_date IS NULL;

@@ -118,8 +118,6 @@
 			." 		todo.create_date = :date "
 			." AND "
 			." 		delete_date IS NULL "
-			." ORDER BY "
-			." 		todo.id DESC "
 			;
 
 		$arr_ps = [
@@ -133,7 +131,7 @@
 			$sql .= " AND cate.category_name = :category ";
 			$arr_ps[":category"] = $arr_param["category"];
 		}
-		
+			$sql .= " ORDER BY todo.id DESC ";
 	try {
 		$stmt = $conn->prepare($sql);
 		$stmt->execute($arr_ps);
