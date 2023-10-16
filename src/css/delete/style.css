@@ -162,9 +162,9 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57bca9;
+	border: 3px solid #c0a0c9;
 	text-align: center;
-	color: #57bca9;
+	color: #c0a0c9;
 }
 
 .date-box:focus {
@@ -212,7 +212,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #57bca9;
+	border: 3px solid #c0a0c9;
 	border-radius: 5px;
 }
 
@@ -244,7 +244,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #57bca9;
+	border: 3px solid #c0a0c9;
 	border-radius: 5px;
 	background-color: rgba(255, 255, 255, 0.929);
 }

@@ -43,16 +43,16 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	function db_select_id(&$conn, &$arr_param) {
 		$sql = 
 			" SELECT "
-			." 		todo.id "
-			."		,cate.category_name "
-			."		,todo.title "
-			." 		,todo.memo "
-			."		,todo.amount_used "
-			." 		,todo.create_date "
+			." 		todo.id "//id값
+			."		,cate.category_name "//카테고리 이름
+			."		,todo.title "//제목
+			." 		,todo.memo "//메모
+			."		,todo.amount_used "//일일사용금액
+			." 		,todo.create_date "//작성날짜
 			." FROM "
 			."		todolist_table todo "
 			." JOIN "
-			." 		category_table cate "
+			." 		category_table cate "//두테이블 조인
 			." ON "
 			." 		todo.category_id = cate.category_id "
 			." WHERE "
