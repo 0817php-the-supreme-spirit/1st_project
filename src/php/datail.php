@@ -20,7 +20,6 @@
 			if($id === "" ) {
 				$arr_err_msg[] = "Parameter Error : id";
 			}
-
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
@@ -41,14 +40,15 @@
 				];
 		
 				$result = db_select_id($conn, $arr_param);
+
+				if(!(count($result) === 1)) {
+					throw new Exception("DB Error : Select id Count");
+				}
 		
-				if($result === false) {
+				else if($result === false) {
 					throw new Exception("DB Error : Select id");
 				}
 		
-				else if(!(count($result) === 1)) {
-					throw new Exception("DB Error : Select id Count");
-				}
 				
 				$item = $result[0];
 
@@ -216,10 +216,10 @@
 			</div>
 
 			<div class="content">
-				<?php 
-					foreach($result as $item) {
-				?>
-					<div class="content-box">
+				<div class="content-box">
+					<?php 
+						foreach($result as $item) {
+					?>
 						<div class="content-date-box">
 							<span><?php echo $item["create_date"]; ?></span>
 						</div>
@@ -291,7 +291,7 @@
 								<?php } ?>
 							</div>
 						</div>
-				<?php } ?>
+					<?php } ?>
 
 					<div class="content-btn-box">
 						<div class="content-btn-before content-btn-box-hover">

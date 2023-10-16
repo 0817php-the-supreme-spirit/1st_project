@@ -73,7 +73,9 @@
 				." WHERE "
 				." 		todo.create_date = :date "
 				." AND "
-				." 		todo.delete_date IS NULL ";
+				." 		todo.delete_date IS NULL "
+				." ORDER BY "
+				." 		todo.id DESC "
 				;
 
 		$arr_ps = [
@@ -115,7 +117,7 @@
 			." WHERE "
 			." 		todo.create_date = :date "
 			." AND "
-			." 		delete_date IS NULL ";
+			." 		delete_date IS NULL "
 			;
 
 		$arr_ps = [
@@ -129,7 +131,7 @@
 			$sql .= " AND cate.category_name = :category ";
 			$arr_ps[":category"] = $arr_param["category"];
 		}
-		
+			$sql .= " ORDER BY todo.id DESC ";
 	try {
 		$stmt = $conn->prepare($sql);
 		$stmt->execute($arr_ps);
@@ -550,8 +552,8 @@
 		."			DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month "
 		."			,DATE_FORMAT(usta.input_date,'%Y-%m') AS input_month "
 		."			,sum(todo.amount_used) AS total_amount "
-			."			,usta.monthly_salary "
-			."		FROM "
+		."			,usta.monthly_salary "
+		."		FROM "
 		."			todolist_table todo "
 		."		JOIN "
 		."			user_table usta "
@@ -559,6 +561,40 @@
 		."			DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m') "
 		."		GROUP BY "
 		."			create_month "
+		;
+
+		try {
+			$stmt = $conn->query($sql);
+			$result = $stmt->fetchAll();
+			return $result;
+		}
+		catch(Exception $e) {
+			return false;
+		} 
+	}
+
+	// ----------------------------
+	// 함수명 	: db_user_salary_date_day
+	// 기능 	: 유저의 일일 사용 금액과 하루 사용 가능 금액의 통계
+	// 파라미터 : PDO 		&$conn
+	// 리턴 	: Array / false
+	// 사용 함수 : DATE_FORMAT : DATE값을 년월만 받기위해 변환, 같은 달의 값을 그룹화
+	// ----------------------------
+
+	function db_user_salary_date_day(&$conn){
+		$sql = " SELECT "
+		." 			DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month "
+		."			,todo.create_date "
+		."			,sum(todo.amount_used) AS amount_used_sum "
+		."			,usta.daily_salary "
+		."		FROM "
+		."			todolist_table todo "
+		."		JOIN "
+		."			user_table usta "
+		."		ON "
+		."			DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m') "
+		."		GROUP BY "
+		."			todo.create_date "
 		;
 
 		try {

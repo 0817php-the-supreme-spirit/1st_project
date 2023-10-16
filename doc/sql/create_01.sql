@@ -142,6 +142,33 @@ SELECT *
 FROM todolist_table
 WHERE create_date = CURDATE();
 
-SELECT DATE_FORMAT(create_date,'%Y-%m') AS create_date, sum(amount_used)
-FROM todolist_table 
-GROUP BY create_date
+SELECT DATE_FORMAT(create_date,'%Y-%m') AS create_month, sum(amount_used) AS total_amount
+FROM todolist_table todo
+JOIN user_table usta
+IN todo.create_date = usta.Input_date
+GROUP BY create_month;
+
+SELECT DATE_FORMAT(input_date,'%Y-%m') AS input_month, monthly_salary
+FROM user_table
+GROUP BY input_month;
+
+
+SELECT DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month, DATE_FORMAT(input_date,'%Y-%m') AS input_month, sum(todo.amount_used) AS total_amount, FORMAT(usta.monthly_salary,0)
+FROM todolist_table todo
+JOIN user_table usta
+ON DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m')
+GROUP BY create_month;
+
+SELECT id
+FROM todolist_table
+ORDER BY id DESC
+
+SELECT todo.create_date, sum(todo.amount_used) AS amount_used_sum, usta.daily_salary, DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month
+FROM todolist_table todo
+JOIN user_table usta
+ON DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m')
+GROUP BY todo.create_date
+
+SELECT SUM(amount_used) AS amount_sum
+FROM todolist_table
+WHERE delete_date IS NULL;

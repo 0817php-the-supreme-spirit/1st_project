@@ -222,9 +222,7 @@
 						</div>
 					<?php } ?>
 
-					<?php 
-					// 해당 부분이 꼭 필요한가?
-					if(!$arr_err_msg) { ?>
+					<?php if(!$arr_err_msg) { ?>
 					<table class="content-table">
 						<tr>
 							<td class="content-categort-box content-td-color">분류</td>
