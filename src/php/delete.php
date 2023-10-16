@@ -5,7 +5,7 @@ require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 //db_conn($conn);
 
-$arr_err_msg = [];//에러메세지 저장용
+$arr_err_msg = [];//추후 에러메세지를 받기위한 빈배열 세팅
 
 // TRY문 시작
 try {
@@ -17,7 +17,7 @@ try {
         throw new Exception("DB Error : PDO Instance");
     }
 
-    // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
+    // METHOD 획득 >> 슈퍼글로벌안의 변수는 건드리면 안되기 때문에 변수에 담아준다.(혹시 모를 경우)
     $http_method = $_SERVER["REQUEST_METHOD"];
 
 	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
@@ -27,10 +27,13 @@ try {
 		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
 		//date는 빈값이 될수가 없으니까?되면안되니까?
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        $arr_err_msg = [];
 
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
+        }
+
+		if($date === "") {
+            $arr_err_msg[] = "Parameter Error : DATE";
         }
 		//여기서 나 date의 에러메세지는 없앴는데 이래도괜찮은건가?
 		//지금은 괜찮으나 현업에선안댐..
@@ -46,6 +49,7 @@ try {
         ];
 		// 파라미터에 받아올 id값?
         $result = db_select_id($conn, $arr_param);
+		//여기서 가져오는것은 카테고리,날짜,제목,메모
 		// list페이지의 정보를 result에 담아주겠다
 
         // 예외처리 >> db_select_id함수를 못불러왔을때?
@@ -66,16 +70,7 @@ try {
 		];
 		//파라미터에 date값을 받아올거임
 
-		$amount_used = db_select_amount_used($conn, $arr_param);
-		// 유저 일일급여 조회 함수 변수에 담아주기
-		if($amount_used === false) {
-			throw new Exception("DB Error : select_user_table");
-			//함수 가져오는데 실패했을때 이렇게 에러메세지 띄우겟따
-		}
-		$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-		//(isset=it is set~~)유저 일일급여 함수가 셋팅되어있는지 확인하면서 참이 되면 함수를 그대로 갖고오고 거짓이 되면 지출없음
-		$amount_used = $amount_used[0];
-		//배열에 담아줌
+
 
     } else {
         //3-2. post일 경우 (삭제버튼 클릭시)
@@ -120,29 +115,7 @@ try {
         exit;
     }
 
-	// 우측 사이드바 소비한 벨의 값 출력을 위해
-	$user_data = db_select_user_table($conn);
-	//user_table의 유저 일일급여 조회 함수 변수에 넣어놓기
-
-	//예외처리
-	if($user_data === false) {
-		throw new Exception("DB Error : select_user_table");
-	}
-
-	$user_days = $user_data[0];
-	//유저 일일급여의 0번방에 있는 값을 변수에 담기
-
-	$user_days_percent = $user_days["daily_salary"];
-	//daily_selary에 있는 값을 다른 변수에 넘겨줌
-
-	$amount_used_percent = $amount_used["amount_used"];
-	//유저 일일 사용금액을 변수에 넣어줌
-
-	$percent = ($amount_used_percent / $user_days_percent) * 100;
-	//
-
-	$percent = (int)$percent;
-	//실수로 나올테니까 정수로 바꿔줄 수 있는 int사용
+	require_once(ROOT."php/amount.php");
 
 } catch(Exception $e) {
     if($http_method === "POST") {
@@ -263,46 +236,7 @@ try {
 				</div>
 			</div>
 
-			<div class="side-right">
-				<div class="side-right-box">
-					
-					<div class="side-right-top">
-						<?php if($percent >= 0 && $percent < 80) { ?>
-							<p class="success">성 공!</p>
-						<?php } else if($percent >= 80 && $percent < 99) { ?>
-							<p class="danger">위 험!</p>
-						<?php } else { ?>
-							<p class="failure">실 패!</p>
-						<?php } ?>
-					</div>
-					<div class="side-right-character">
-						<?php if($percent >= 0 && $percent < 20) { ?>
-							<div class="side-right-character-1"></div>
-						<?php } else if($percent >= 20 && $percent < 40) { ?>
-							<div class="side-right-character-2"></div>
-						<?php } else if($percent >= 40 && $percent < 60) { ?>
-							<div class="side-right-character-3"></div>
-						<?php } else if($percent >= 60 && $percent < 80) { ?>
-							<div class="side-right-character-4"></div>
-						<?php } else if($percent >= 80 && $percent < 100) { ?>
-							<div class="side-right-character-5"></div>
-						<?php } else if($percent > 100) { ?>
-							<div class="side-right-character-6"></div>
-						<?php } ?>
-					</div>
-					<div class="side-right-bottom">
-						<p>소비한 벨</p>
-						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
-						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
-							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			<?php require_once(ROOT."php/side.php") ?>
 		</main>
 		
 	</body>

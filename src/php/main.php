@@ -9,6 +9,7 @@
 
 
 		try {
+			
 
 			if(!db_conn($conn))
 			{
@@ -42,10 +43,6 @@
 				
 				if(count($arr_err_msg) === 0) {
 
-					if(!db_conn($conn))
-					{
-						throw new Exception("DB Error : PDO Instance");
-					}
 					$conn->beginTransaction();
 
 					// 게시글 작성을 위헤 파라미터 셋팅
@@ -73,7 +70,7 @@
 				$conn->rollBack();
 			}
 			// echo $e->getMessage(); // 예외발생 메세지 출력
-			header("Location: /mini_board/src/error.php/?err_msg={$e->getMessage()}"); // 에러 메세지 error.php로 이동
+			header("Location: /1st_project/src/php/main.php"); // 에러 메세지 error.php로 이동
 			exit;
 		}
 		

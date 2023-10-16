@@ -35,11 +35,11 @@ if($http_method === "POST") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
 		}
 		if($create_date === "") {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
 		// var_dump($create_date);
 		if($category_id === "") {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
 		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {
@@ -96,27 +96,6 @@ else {
 		"date" => $date
 	];
 
-	$amount_used = db_select_amount_used($conn, $arr_param);
-	if($amount_used === false) {
-		throw new Exception("DB Error : select_user_table");
-	}
-	$amount_used = $amount_used[0];
-
-	$user_data = db_select_user_table($conn);
-
-	if($user_data === false) {
-		throw new Exception("DB Error : select_user_table");
-	}
-
-	$user_days = $user_data[0];
-
-	$user_days_percent = $user_days["daily_salary"];
-
-	$amount_used_percent = $amount_used["amount_used"];
-
-	$percent = ($amount_used_percent / $user_days_percent) * 100;
-
-	$percent = (int)$percent;
 }
 
 
@@ -209,46 +188,7 @@ else {
 				</div>
 			</div>
 
-			<div class="side-right">
-				<div class="side-right-box">
-					
-					<div class="side-right-top">
-						<?php if($percent >= 0 && $percent < 80) { ?>
-							<p class="success">성 공!</p>
-						<?php } else if($percent >= 80 && $percent < 99) { ?>
-							<p class="danger">위 험!</p>
-						<?php } else { ?>
-							<p class="failure">실 패!</p>
-						<?php } ?>
-					</div>
-					<div class="side-right-character">
-						<?php if($percent >= 0 && $percent < 20) { ?>
-							<div class="side-right-character-1"></div>
-						<?php } else if($percent >= 20 && $percent < 40) { ?>
-							<div class="side-right-character-2"></div>
-						<?php } else if($percent >= 40 && $percent < 60) { ?>
-							<div class="side-right-character-3"></div>
-						<?php } else if($percent >= 60 && $percent < 80) { ?>
-							<div class="side-right-character-4"></div>
-						<?php } else if($percent >= 80 && $percent < 100) { ?>
-							<div class="side-right-character-5"></div>
-						<?php } else if($percent > 100) { ?>
-							<div class="side-right-character-6"></div>
-						<?php } ?>
-					</div>
-					<div class="side-right-bottom">
-						<p>소비한 벨</p>
-						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
-						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
-							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			<?php require_once(ROOT."php/side.php") ?>
 		</main>
 		
 	</body>

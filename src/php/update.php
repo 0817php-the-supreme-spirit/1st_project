@@ -124,15 +124,6 @@ try{
 		throw new Exception("DB Error : select_user_table");
 	}
 
-	//사용자가 입력한 일일 사용금액 불러오기
-	$user_days = $user_data[0];
-	$user_days_percent = $user_days["daily_salary"];
-	//일일 총 사용금액 변수에 담기
-	$amount_used_percent = (int)$amount_used;
-	//퍼센트 계산 (1일 총 사용금액 / 일일 목표 금액)
-	$percent = ($amount_used_percent / $user_days_percent) * 100;
-	//퍼센트 int값으로 변환
-	$percent = (int)$percent;
 
 	//기존값 불러오기
 	$arr_param_id = [
@@ -269,46 +260,7 @@ try{
 				</div>
 			</div>
 
-			<div class="side-right">
-				<div class="side-right-box">
-					
-					<div class="side-right-top">
-						<?php if($percent >= 0 && $percent < 80) { ?>
-							<p class="success">성 공!</p>
-						<?php } else if($percent >= 80 && $percent < 99) { ?>
-							<p class="danger">위 험!</p>
-						<?php } else { ?>
-							<p class="failure">실 패!</p>
-						<?php } ?>
-					</div>
-					<div class="side-right-character">
-						<?php if($percent >= 0 && $percent < 20) { ?>
-							<div class="side-right-character-1"></div>
-						<?php } else if($percent >= 20 && $percent < 40) { ?>
-							<div class="side-right-character-2"></div>
-						<?php } else if($percent >= 40 && $percent < 60) { ?>
-							<div class="side-right-character-3"></div>
-						<?php } else if($percent >= 60 && $percent < 80) { ?>
-							<div class="side-right-character-4"></div>
-						<?php } else if($percent >= 80 && $percent < 100) { ?>
-							<div class="side-right-character-5"></div>
-						<?php } else if($percent > 100) { ?>
-							<div class="side-right-character-6"></div>
-						<?php } ?>
-					</div>
-					<div class="side-right-bottom">
-						<p>소비한 벨</p>
-						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
-						<div class="side-right-user">
-							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
-							<p class="small p_gpa">남은 벨 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
-							<div class="bar"></div>
-							<p class="small p_gpa all">전체 벨 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
-						</div>
-					</div>
-
-				</div>
-			</div>
+			<?php require_once(ROOT."php/side.php") ?>
 		</main>
 		
 	</body>
