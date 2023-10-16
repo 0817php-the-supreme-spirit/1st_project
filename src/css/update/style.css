@@ -137,6 +137,16 @@ button {
 	height: 775px;
 }
 
+.side-left-on:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
+
+.side-left-off:hover {
+    transform: scale(1.2);
+    transition-duration: 0.3s;
+}
+
 .date-label {
 	position: relative;
 }

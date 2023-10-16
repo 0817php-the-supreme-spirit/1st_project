@@ -46,8 +46,8 @@
 	}
 
 
-// -------------------------------------------------------------
-// list.php
+	// ---------------------------- ---------------------------- ----------------------------
+	// // ******* list lib. *************
 
 	// ----------------------------
 	// 함수명 	: db_select
@@ -90,84 +90,6 @@
 			return false; // 예외 발생 : flase 리턴
 		}
 	}
-
-// 	// ----------------------------
-// 	// 함수명 	: db_select_date
-// 	// 기능 	: 1st_project 해당 날짜 게시물 조회
-// 	// 파라미터 : PDO 		&$conn
-// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
-// 	// 리턴 	: Array / false
-// 	// ----------------------------
-
-// 	function db_select_date(&$conn, &$arr_param) {
-// 			$sql = 
-// 				" SELECT "
-// 				." 		todo.id "
-// 				."		,cate.category_name "
-// 				."		,todo.title "
-// 				."		,todo.amount_used "
-// 				." FROM "
-// 				."		todolist_table todo "
-// 				." JOIN "
-// 				." category_table cate "
-// 				." ON "
-// 				." todo.category_id = cate.category_id "
-// 				." WHERE "
-// 				." todo.create_date = :date "
-// 				;
-
-// 			$arr_ps = [
-// 				":date" => $arr_param["date"]
-// 			];
-// 		try {
-// 			$stmt = $conn->prepare($sql);
-// 			$stmt->execute($arr_ps);
-// 			$result = $stmt->fetchAll();
-// 			return $result; // 결과 리턴
-// 		}
-// 		catch(Exception $e) {
-// 			return false; // 예외 발생 : flase 리턴
-// 		}
-// 	}
-	
-// 	// ----------------------------
-// 	// 함수명 	: db_select_category
-// 	// 기능 	: 1st_project 해당 카테고리 게시물 조회
-// 	// 파라미터 : PDO 		&$conn
-// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
-// 	// 리턴 	: Array / false
-// 	// ----------------------------
-
-// 	function db_select_category(&$conn, &$arr_param) {
-// 		$sql = 
-// 			" SELECT "
-// 			." 		todo.id "
-// 			."		,cate.category_name "
-// 			."		,todo.title "
-// 			."		,todo.amount_used "
-// 			." FROM "
-// 			."		todolist_table todo "
-// 			." JOIN "
-// 			." category_table cate "
-// 			." ON "
-// 			." todo.category_id = cate.category_id "
-// 			." WHERE "
-// 			." cate.category_name = :category "
-// 			;
-
-// 		$arr_ps = [
-// 			":category" => $arr_param["category"]
-// 		];
-// 	try {
-// 		$stmt = $conn->prepare($sql);
-// 		$stmt->execute($arr_ps);
-// 		$result = $stmt->fetchAll();
-// 		return $result; // 결과 리턴
-// 	}
-// 	catch(Exception $e) {
-// 		return false; // 예외 발생 : flase 리턴
-// 	}
-// }
 
 	// ----------------------------
 	// 함수명 	: db_select_search
@@ -224,7 +146,6 @@
 	// 함수명 	: db_select_user_table
 	// 기능 	: user_table 유저 일일 급여 조회
 	// 파라미터 : PDO 		&$conn
-	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
 	// ----------------------------
 
@@ -287,12 +208,12 @@
 		} 
 	}
 
+	// // ******* list lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
 
-// -------------------------------------------------------------
 
-
-// -------------------------------------------------------------
-// datal.php
+	// ---------------------------- ---------------------------- ----------------------------
+	// // ******* datail lib. *************
 
 	// ----------------------------
 	// 함수명 	: db_select_id
@@ -335,11 +256,14 @@
 			return false; // 예외 발생 : flase 리턴
 		} 
 	}
+	
+	// // ******* datail lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
 
-// -------------------------------------------------------------
 
-// ----------------------------
-// ******* insert lib. *************
+
+	// ---------------------------- ---------------------------- ----------------------------
+	// ******* insert lib. *************
 	// 함수명 	: db_insert
 	// 기능 	: boards 레코드 작성
 	// 파라미터 : PDO 	&$conn
@@ -379,52 +303,52 @@
 			return false;
 		}
 	}
-// ******* insert lib. *************
-// ----------------------------
-
-
-// ----------------------------
-// ******* delete lib. *************
-//------------------------------------------
-// 함수명   : db_delete_boards_id
-// 기능     : 특정 id 레코드 삭제처리
-// 파라미터 : PDO  &$conn
-//            Array &$arr_param          
-// 리턴     : boolean
-// -----------------------------------------
-function db_delete_date_id(&$conn, &$arr_param) {
-    $sql =
-    " UPDATE "
-	." todolist_table "
-    ." SET " 
-    ." delete_date = now() "
-    ." WHERE "
-    ." id = :id "
-    ;
-
-    $arr_ps = [
-        ":id" => $arr_param["id"]
-    ];
-
-    try {
-        //쿼리 실행
-        $stmt = $conn->prepare($sql);
-        $result = $stmt->execute($arr_ps);
-
-        return $result;
-    } catch(Exception $e) {
-        echo $e->getMessage();
-        return false;
-    }
-}
-// ******* delete lib. *************
-// ----------------------------
+	// ******* insert lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
 
 
 
-// -------------------------------------------------------------
-// main.php
+	// ---------------------------- ---------------------------- ----------------------------
+	// ******* delete lib. *************
+	//------------------------------------------
+	// 함수명   : db_delete_boards_id
+	// 기능     : 특정 id 레코드 삭제처리
+	// 파라미터 : PDO  &$conn
+	//            Array &$arr_param          
+	// 리턴     : boolean
+	// -----------------------------------------
+	function db_delete_date_id(&$conn, &$arr_param) {
+		$sql =
+		" UPDATE "
+		." todolist_table "
+		." SET " 
+		." delete_date = now() "
+		." WHERE "
+		." id = :id "
+		;
 
+		$arr_ps = [
+			":id" => $arr_param["id"]
+		];
+
+		try {
+			//쿼리 실행
+			$stmt = $conn->prepare($sql);
+			$result = $stmt->execute($arr_ps);
+
+			return $result;
+		} catch(Exception $e) {
+			echo $e->getMessage();
+			return false;
+		}
+	}
+	// ******* delete lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
+
+
+
+	// ---------------------------- ---------------------------- ----------------------------
+	// ******* main lib. *************
 	// ----------------------------
 	// 함수명 	: db_user_salary_insert
 	// 기능 	: 유저의 한달 급여 입력
@@ -460,46 +384,12 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		}
 	}
 
+
 	// ----------------------------
 	// 함수명 	: db_user_salary_compare
-	// 기능 	: 유저의 한달 주기 비교
+	// 기능 	: 한달 급여 확인 함수
 	// 파라미터 : PDO 		&$conn
-	// 			: Array 	&$arr_param | 쿼리 작성용 배열
-	// 리턴 	: Array / false
-	// ----------------------------
-
-	function db_user_salary_date_compare(&$conn, &$arr_param) {
-		$sql = 
-			" SELECT "
-			." 		input_date "
-			." FROM "
-			."		user_table "
-			." WHERE "
-			." 		input_date "
-			." BETWEEN "
-			." date_format(now(), '%Y-%m-01') "
-			." AND "
-			." date_format(now(), '%Y-%m-%d') "
-			;
-
-		try {
-			$stmt = $conn->prepare($sql);
-			$stmt->execute($arr_ps);
-			$result = $stmt->fetchAll();
-			return count($result);
-		}
-		catch(Exception $e) {
-			return false; // 예외 발생 : flase 리턴
-		} 
-	}
-
-
-	// ----------------------------
-	// 함수명 	: db_user_salary_date_compare
-	// 기능 	: 유저의 한달 주기 비교
-	// 파라미터 : PDO 		&$conn
-	// 			: Array 	&$arr_param | 쿼리 작성용 배열
-	// 리턴 	: Array / false
+	// 리턴 	: 0 OR 1 / false
 	// ----------------------------
 
 	function db_user_salary_compare(&$conn) {
@@ -526,12 +416,16 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		} 
 	}
 
-// -------------------------------------------------------------
-// ----------------------------
-// ******* update lib. *************
+	// ******* mnain lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
+
+
+
+	// ---------------------------- ---------------------------- ----------------------------
+	// ******* update lib. *************
 	// ----------------------------
-	// 함수명 	: db_user_salary_date_compare
-	// 기능 	: 유저의 한달 주기 비교
+	// 함수명 	: update_execute
+	// 기능 	: id값에 대응하는 해당 데이터값 업데이트
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -570,9 +464,10 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	}
 	
 	}
+
 	// ----------------------------
-	// 함수명 	: db_user_salary_date_compare
-	// 기능 	: 유저의 한달 주기 비교
+	// 함수명 	: select_change_detail
+	// 기능 	: id값에 대응하는 값 화면 출력
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
@@ -607,19 +502,47 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		return false;
 	}
 	}
-// ******* update lib. *************
-// ----------------------------
+
+	// ----------------------------
+	// 함수명 	: category_id
+	// 기능 	: 카테고리 id 확인 
+	// 파라미터 : PDO 		&$conn
+	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 리턴 	: Array / false
+	// ----------------------------
+
+	function category_id( &$conn, &$arr_ps_id ){
+		
+		$sql = " SELECT "
+		."			category_id "
+		."		FROM "
+		."			todolist_table "
+		."		WHERE "
+		."			id = :id ";
+
+		$arr_param = [
+			":id" => $arr_ps_id["id"]
+		];
+
+		$stmt = $conn->prepare($sql);
+		$stmt->execute($arr_param);
+		$result = $stmt->fetchAll();
+		return $result;
+	}
+	// ******* update lib. *************
+	// ---------------------------- ---------------------------- ----------------------------
 
 
-// ----------------------------
-// ******* total lib. *************
+
+	// ---------------------------- ---------------------------- ----------------------------
+	// ******* total lib. *************
 
 	// ----------------------------
 	// 함수명 	: db_user_salary_date_sum
 	// 기능 	: 유저의 달 값과 해당 달의 합산 사용 값과 한달 급여 조회
 	// 파라미터 : PDO 		&$conn
-	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false
+	// 사용 함수 : DATE_FORMAT : DATE값을 년월만 받기위해 변환, 같은 달의 값을 그룹화
 	// ----------------------------
 
 	function db_user_salary_date_sum(&$conn){
@@ -627,8 +550,8 @@ function db_delete_date_id(&$conn, &$arr_param) {
 		."			DATE_FORMAT(todo.create_date,'%Y-%m') AS create_month "
 		."			,DATE_FORMAT(usta.input_date,'%Y-%m') AS input_month "
 		."			,sum(todo.amount_used) AS total_amount "
-		."			,usta.monthly_salary "
-		."		FROM "
+			."			,usta.monthly_salary "
+			."		FROM "
 		."			todolist_table todo "
 		."		JOIN "
 		."			user_table usta "
@@ -649,5 +572,121 @@ function db_delete_date_id(&$conn, &$arr_param) {
 	}
 
 // ******* total lib. *************
-// ----------------------------
+// ---------------------------- ---------------------------- ----------------------------
+
+
+
+// ---------------------------- ---------------------------- ----------------------------
+// ******* 주석 처리 lib *************
+	// // ----------------------------
+	// // 함수명 	: db_user_salary_date_compare
+	// // 기능 	: 유저의 한달 주기 비교
+	// // 파라미터 : PDO 		&$conn
+	// // 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// // 리턴 	: Array / false
+	// // ----------------------------
+
+	// function db_user_salary_date_compare(&$conn, &$arr_param) {
+	// 	$sql = 
+	// 		" SELECT "
+	// 		." 		input_date "
+	// 		." FROM "
+	// 		."		user_table "
+	// 		." WHERE "
+	// 		." 		input_date "
+	// 		." BETWEEN "
+	// 		." date_format(now(), '%Y-%m-01') "
+	// 		." AND "
+	// 		." date_format(now(), '%Y-%m-%d') "
+	// 		;
+
+	// 	try {
+	// 		$stmt = $conn->prepare($sql);
+	// 		$stmt->execute($arr_ps);
+	// 		$result = $stmt->fetchAll();
+	// 		return count($result);
+	// 	}
+	// 	catch(Exception $e) {
+	// 		return false; // 예외 발생 : flase 리턴
+	// 	} 
+	// }
+
+
+	// 	// ----------------------------
+	// 	// 함수명 	: db_select_date
+	// 	// 기능 	: 1st_project 해당 날짜 게시물 조회
+	// 	// 파라미터 : PDO 		&$conn
+	// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 	// 리턴 	: Array / false
+	// 	// ----------------------------
+
+	// 	function db_select_date(&$conn, &$arr_param) {
+	// 			$sql = 
+	// 				" SELECT "
+	// 				." 		todo.id "
+	// 				."		,cate.category_name "
+	// 				."		,todo.title "
+	// 				."		,todo.amount_used "
+	// 				." FROM "
+	// 				."		todolist_table todo "
+	// 				." JOIN "
+	// 				." category_table cate "
+	// 				." ON "
+	// 				." todo.category_id = cate.category_id "
+	// 				." WHERE "
+	// 				." todo.create_date = :date "
+	// 				;
+
+	// 			$arr_ps = [
+	// 				":date" => $arr_param["date"]
+	// 			];
+	// 		try {
+	// 			$stmt = $conn->prepare($sql);
+	// 			$stmt->execute($arr_ps);
+	// 			$result = $stmt->fetchAll();
+	// 			return $result; // 결과 리턴
+	// 		}
+	// 		catch(Exception $e) {
+	// 			return false; // 예외 발생 : flase 리턴
+	// 		}
+	// 	}
+		
+	// 	// ----------------------------
+	// 	// 함수명 	: db_select_category
+	// 	// 기능 	: 1st_project 해당 카테고리 게시물 조회
+	// 	// 파라미터 : PDO 		&$conn
+	// 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
+	// 	// 리턴 	: Array / false
+	// 	// ----------------------------
+
+	// 	function db_select_category(&$conn, &$arr_param) {
+	// 		$sql = 
+	// 			" SELECT "
+	// 			." 		todo.id "
+	// 			."		,cate.category_name "
+	// 			."		,todo.title "
+	// 			."		,todo.amount_used "
+	// 			." FROM "
+	// 			."		todolist_table todo "
+	// 			." JOIN "
+	// 			." category_table cate "
+	// 			." ON "
+	// 			." todo.category_id = cate.category_id "
+	// 			." WHERE "
+	// 			." cate.category_name = :category "
+	// 			;
+
+	// 		$arr_ps = [
+	// 			":category" => $arr_param["category"]
+	// 		];
+	// 	try {
+	// 		$stmt = $conn->prepare($sql);
+	// 		$stmt->execute($arr_ps);
+	// 		$result = $stmt->fetchAll();
+	// 		return $result; // 결과 리턴
+	// 	}
+	// 	catch(Exception $e) {
+	// 		return false; // 예외 발생 : flase 리턴
+	// 	}
+	// }
 ?>

@@ -4,94 +4,105 @@ require_once(ROOT."lib/lib_db.php");
 define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 
 $conn = null;
-db_conn($conn);
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = [];
-
+// $id2 = (int)$_GET["id"];
+// var_dump($id2);
 
 try{
+	if(!db_conn($conn)) {
+		// DB Instance 에러
+		throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
+	}
+
+		//트랜잭션 시작
+	$conn->beginTransaction();
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d'); //기본 날짜 세팅
 			
-			if(!db_conn($conn)) {
-				// DB Instance 에러
-				throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
-			}
-			
-			// if($id === "" ) {
-			// 	$arr_err_msg[] = sprint(ERROR_MSG_PARAM, "제목");
-			// }
-			// if($date === "") {
-			// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
-			// }
+		if($id === "" ) {
+			$arr_err_msg[] = sprint(ERROR_MSG_PARAM, "title");
+		}
+		if($date === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+		}
 
-			// if(count($arr_err_msg) >= 1){
-			// 	throw new Exception(implode("<br>", $arr_err_msg));
-			// }
 
-			// if($arr_err_msg === 0 ){
-
-			//일일 사용금액 계산을 위한 조건(날짜) 세팅
-			$arr_param = [
-				"date" => $date
-			];
-			//일일 사용금액 계산
-			$amount_used = db_select_amount_used($conn, $arr_param);
-			if($amount_used === false) {
-				throw new Exception("DB Error : select_user_table");
-			}
-			$amount_used = $amount_used[0];
+		//일일 사용금액 계산을 위한 조건(날짜) 세팅
+		$arr_param = [
+			"date" => $date
+		];
+		//일일 사용금액 계산
+		$amount_used = db_select_amount_used($conn, $arr_param);
+		if($amount_used === false) {
+			throw new Exception("DB Error : select_user_table");
+		}
+		$amount_used = $amount_used[0];
 		// };
 
 	}
 	else {
-	$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
-	$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d'); //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
+		$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
+		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d'); //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
+		$title = isset($_POST["title"]) ? trim($_POST["title"]) : ""; //title 세팅
+		$memo = isset($_POST["memo"]) ? trim($_POST["memo"]) : null; //memo 값 없을 시 null 세팅
+		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : ""; //사용한 금액 세팅
+		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //날짜 세팅
+		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : ""; //카테고리 id 세팅
 
-		// if($id === "") {
-		// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
-		// }
-		// if($page === "") {
-		// 	$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
-		// }
 
-		// if(count($arr_err_msg) === 0) {
+		if($id === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
+		}
+		if($date === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+		}
+		if($title === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
+		}
+		if($amount_used === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
+		}
+		if($create_date === "") {
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+		}
 
-			//POST 값 변수지정
-			$title = $_POST["title"] ? $_POST["title"] : "";
-			$memo = $_POST["memo"] ? $_POST["memo"] : null; //memo 값 없을 시 null 세팅
-			$amount_used = $_POST["amount_used"] ? $_POST["amount_used"] : "";
-			$create_date = $_POST["create_date"] ? $_POST["create_date"] : "";
-			$category_id = $_POST["category_id"] ? $_POST["category_id"] : "";
-			
-
-			//POST 값 받아오기
-			$arr_param = [
-				"title" => $title
-				,"memo" => $memo
-				,"amount_used" => $amount_used
-				,"create_date" => $create_date
-				,"category_id" => $category_id
-				,"id" => $id
+		//카테고리 값 불러오기
+		if( $category_id === ""){
+			$arr_ps_id = [
+				"id" => $id
 			];
 			
-			//트랜잭션 시작
-			$conn->beginTransaction();
+			$category = category_id( $conn, $arr_ps_id );
 
-			//POST값 입력
-				if(!update_execute($conn, $arr_param)){
-					throw new Exception("DB Error : Update_boards_id");
-				}
-			
-			//커밋
-			$conn->commit();
-
-			//업데이트 완료 후 디테일 페이지로 이동
-			header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
-			exit;
+			$category = $category[0];
+			$category_id = (int)$category;
 		}
+
+		//POST 값 받아오기
+		$arr_param = [
+			"title" => $title
+			,"memo" => $memo
+			,"amount_used" => $amount_used
+			,"create_date" => $create_date
+			,"category_id" => $category_id
+			,"id" => $id
+		];
+
+		//POST값 입력
+			if(!update_execute($conn, $arr_param)){
+				throw new Exception("DB Error : Update_boards_id");
+			}
+		
+		//커밋
+		$conn->commit();
+
+		//업데이트 완료 후 디테일 페이지로 이동
+		header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+		exit;
+	}
 
 	//이번달 유저 일일 급여 조회
 	$user_data = db_select_user_table($conn);
@@ -119,10 +130,10 @@ try{
 	// 게시글 데이터 조회
 	$result = select_change_detail( $conn, $arr_param_id );
 
-		//게시글 조회 실패시 에러메세지 출력
-		if($result === false){
-			throw new Exception("DB Error : PDO Select_id");
-		}
+	//게시글 조회 실패시 에러메세지 출력
+	if($result === false){
+		throw new Exception("DB Error : PDO Select_id");
+	}
 	//결과값을 $item변수에 담음
 	$item = $result[0];
 
@@ -136,6 +147,7 @@ try{
 }finally{
 	db_destroy_conn($conn);
 }
+
 
 ?>
 
@@ -199,10 +211,20 @@ try{
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
 						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
-							<select name="category_id" class="update-category">
-								<option value="0">생활 비용</option>
-								<option value="1">활동 비용</option>
-								<option value="2">멍청 비용</option>
+							<select name="category_id" class="update-category">fgdfgdfg
+							<?php if($item["category_name"] == "life") { ?>
+									<option value="0" selected>생활 비용</option>
+									<option value="1">활동 비용</option>
+									<option value="2">멍청 비용</option>
+								<?php } else if($item["category_name"] == "activity") { ?>
+									<option value="0">생활 비용</option>
+									<option value="1" selected>활동 비용</option>
+									<option value="2">멍청 비용</option>
+								<?php }  else if($item["category_name"] === "stupid") { ?>
+									<option value="0">생활 비용</option>
+									<option value="1">활동 비용</option>
+									<option value="2" selected>멍청 비용</option>
+								<?php } ?>
 							</select>
 						</div>
 						<div class="update-title-memo">

@@ -128,7 +128,7 @@
 		//daily_selary에 있는 값을 다른 변수에 넘겨줌, 위와 아래는 통합 가능, 코드 리뷰를 위해 풀어서 정리 
 		$user_days_percent = $user_days["daily_salary"];
 
-		//유저의 사용 금액을 해당 변수로 넘김
+		//유저의 사용 금액을 총합을 해당 변수로 넘김
 		$amount_used_percent = $amount_used["amount_used"];
 
 		// 사용 금액의 퍼센트를 구하는 계산식
@@ -168,6 +168,8 @@
 				<div class="side-left-box">
 					<form action="/1st_project/src/php/list.php" method="post">
 							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
+							<!-- date값을 보내주기 위함 보내 주는 값의 키값은 name가 되고 사용자가 지정한 date값은 값이 된다. -->
+							<!-- 해당 부분에 hidden이 필요한가? -->
 							<label class="date-label">
 								<input type="hidden" name="date" value="<?php echo $date; ?>">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
@@ -182,6 +184,7 @@
 
 					<div class="side-left-line-2"></div>
 
+						<!-- 카테고리 값을 라디오 박스 형태로 지정  -->
 						<div class="category-all-box">
 							<input type="radio" name="category" id="category1" value="">
 							<!-- <label for="category1" class="category-box">전체 비용</label> -->
@@ -212,25 +215,27 @@
 
 			<div class="content">
 				<div class="content-box">
-						<?php foreach($arr_err_msg as $val) { ?>
-							<div class="error-box">
-							<p class="err_msg"><?php echo $val; ?></p>
-							</div>
-						<?php } ?>
+					<!-- sql 구문에서 받아온 값들이 하나라도 없을 경우 화면에 에러 코드를 출력 -->
+					<?php foreach($arr_err_msg as $val) { ?>
+						<div class="error-box">
+						<p class="err_msg"><?php echo $val; ?></p>
+						</div>
+					<?php } ?>
 
 					<?php 
+					// 해당 부분이 꼭 필요한가?
 					if(!$arr_err_msg) { ?>
-						<table class="content-table">
-							<tr>
-								<td class="content-categort-box content-td-color">분류</td>
-								<td class="content-title-box content-td-color">제목</td>
-								<td class="content-amount-box content-td-color">사용 금액</td>
-							</tr>
+					<table class="content-table">
+						<tr>
+							<td class="content-categort-box content-td-color">분류</td>
+							<td class="content-title-box content-td-color">제목</td>
+							<td class="content-amount-box content-td-color">사용 금액</td>
+						</tr>
 					<?php } ?>
 						
-						<?php 
-							foreach($result as $item) {
-						?>
+					<?php 
+						foreach($result as $item) {
+					?>
 						<tr>
 							<!-- if문을 통해 카테고리 값에 따라 이미지 변경 -->
 							<td class="content-categort-box">
@@ -245,9 +250,9 @@
 							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo number_format($item["amount_used"]), "원"; ?></td>
 						</tr>
-						<?php 
-							}
-						?>
+					<?php 
+						}
+					?>
 					</table>
 				</div>
 			</div>
@@ -281,6 +286,7 @@
 					</div>
 					<div class="side-right-bottom">
 						<p>소비한 벨</p>
+						<!-- 유저의 일일 총 사용금액과 하루 급여를 비교하여 게이지바와 값으로 출력 -->
 						<progress id="progress" value="<?php echo $amount_used["amount_used"]; ?>" min="0" max="<?php echo $user_days["daily_salary"]; ?>"></progress>
 						<div class="side-right-user">
 							<p class="small">사용 벨 : <?php if($amount_used["amount_used"] == 0) { echo 0; } else { echo number_format($amount_used["amount_used"]); }?>원</p>
