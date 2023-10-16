@@ -192,19 +192,19 @@
 							</div>
 
 							<div class="content-phrases-box">
-								<?php if($percent_days >= 0 && $percent_days < 20) {?>
+								<?php if($percent >= 0 && $percent< 20) {?>
 									<p class="content-phrases-box-color">잘하고</p>
 									<p class="content-phrases-box-color">있어</p>
-								<?php } else if($percent_days >= 20 && $percent_days < 40) { ?>
+								<?php } else if($percent >= 20 && $percent < 40) { ?>
 									<p class="content-phrases-box-color">아직은</p>
 									<p class="content-phrases-box-color">괜찮아</p>
-								<?php } else if($percent_days >= 40 && $percent_days < 60) { ?>
+								<?php } else if($percent >= 40 && $percent < 60) { ?>
 									<p class="content-phrases-box-color">소비 액수가</p>
 									<p class="content-phrases-box-color">좀 큰대?</p>
-								<?php } else if($percent_days >= 60 && $percent_days < 80) { ?>
+								<?php } else if($percent >= 60 && $percent < 80) { ?>
 									<p class="content-phrases-box-failure">잔고</p>
 									<p class="content-phrases-box-failure">감당 가능해?</p>
-								<?php } else if($percent_days >= 80 && $percent_days < 99) { ?>
+								<?php } else if($percent >= 80 && $percent < 99) { ?>
 									<p class="content-phrases-box-failure">너 혹시</p>
 									<p class="content-phrases-box-failure">제정신이야?</p>
 								<?php } else { ?>

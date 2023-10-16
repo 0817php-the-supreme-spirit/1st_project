@@ -91,7 +91,9 @@ else {
 		// DB Instance 에러
 		throw new Exception("DB Error : PDO Instance");
 	}
+
 }
+require_once(ROOT."php/amount.php");
 
 
 ?>

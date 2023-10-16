@@ -123,6 +123,8 @@ try{
 	//결과값을 $item변수에 담음
 	$item = $result[0];
 
+	require_once(ROOT."php/amount.php");
+	
 } catch(Exception $e) {
 
 	// if($http_method === "POST") {

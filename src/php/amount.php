@@ -44,12 +44,12 @@
 		$percent = (int)$percent;
 
 
-		//유저의 사용 금액을 id값에 대응하는 금액으로 넣어줌
-		$amunt_used_days_percent = $item["amount_used"];
+		// //유저의 사용 금액을 id값에 대응하는 금액으로 넣어줌
+		// $amunt_used_days_percent = $item["amount_used"];
 
-		// 유저의 id값에 대응하는 사용 금액과 유저의 일일 사용 가능 금액을 퍼센트로 변환
-		$percent_days = ($amunt_used_days_percent / $user_days_percent) * 100;
+		// // 유저의 id값에 대응하는 사용 금액과 유저의 일일 사용 가능 금액을 퍼센트로 변환
+		// $percent_days = ($amunt_used_days_percent / $user_days_percent) * 100;
 		
-		// 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
-		$percent_days = (int)$percent_days;
+		// // 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
+		// $percent_days = (int)$percent_days;
 ?>
