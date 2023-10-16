@@ -6,6 +6,9 @@ define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 $conn = null; 
 $http_method = $_SERVER["REQUEST_METHOD"]; //REQUEST == 요청 METHOD == 방식
 $arr_err_msg = []; // 에러 메세지 저장
+
+
+// =--------------------------------------------------------------------------------
 // $title = "";
 // $memo = "";
 // $amount_used = "";
@@ -14,11 +17,103 @@ $arr_err_msg = []; // 에러 메세지 저장
 
 // POSt로 request가 왔을 때 처리
 // $mttp_method = $_SERVER["REQUEST"];
-if($http_method === "POST") {
-	try {
+// if($http_method === "POST") {
+// 	try {
 		
 
-		$arr_post = $_POST;
+// 		$arr_post = $_POST;
+// 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
+// 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
+// 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
+//         $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null; 
+// 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
+// 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
+// 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
+		
+// 		//넘어와서 if 조건문이 빈 값일때 오류 실행 하는 if문
+// 		if($title === "") {
+//             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
+//         }
+// 		if($amount_used === "") {
+//             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
+// 		}
+// 		if($create_date === "") {
+// 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+// 		}
+// 		// var_dump($create_date);
+// 		if($category_id === "") {
+// 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
+// 		}
+// 		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
+// 		if(count($arr_err_msg) === 0) {
+
+// 			// DB 접속
+// 			if(!db_conn($conn)) {
+// 				// DB Instance 에러
+// 				throw new Exception("DB Error : PDO Instance");
+// 			}
+
+// 			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
+
+			
+
+// 			// 게시글 작성을 위해 파라미터 셋팅
+// 			$arr_post = [
+// 				"title" => $_POST["title"]
+// 				,"memo" => $_POST["memo"]
+// 				,"amount_used" => $_POST["amount_used"]
+// 				,"create_date" => $_POST["create_date"]
+// 				,"category_id" => $_POST["category_id"]
+// 			];
+
+// 			//insert
+// 			if(!db_insert($conn, $arr_post)) {
+// 				throw new Exception("DB Error : Insert page");
+// 			}
+// 			$conn->commit(); //모든 처리 완료 시 커밋
+
+// 			//리스트 페이지로 이동
+// 			header("Location: list.php/?date={$date}");
+// 			exit;
+//     	}
+// 	} catch(Exception $e) {
+//         if($conn !== null) {
+//         $conn->rollBack();
+//         }
+//         echo $e->getMessage(); //Exception 메세지 출력
+//         // header("Location: error.php/?err_msg={$e->getMessage()}");
+//         exit;
+//     } finally {
+//         db_destroy_conn($conn); // db 파기
+//     }
+// }
+// else {
+// 	$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+
+// 	if(!db_conn($conn)) {
+// 		// DB Instance 에러
+// 		throw new Exception("DB Error : PDO Instance");
+// 	}
+
+// }
+// =--------------------------------------------------------------------------------
+
+try {
+	if(!db_conn($conn)) {
+		// DB Instance 에러
+		throw new Exception("DB Error : PDO Instance");
+	}
+	
+	if($http_method === "GET") {
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+
+		if(!db_conn($conn)) {
+			// DB Instance 에러
+			throw new Exception("DB Error : PDO Instance");
+		}
+	}
+	else {
+		// $arr_post = $_POST;
 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
@@ -72,26 +167,19 @@ if($http_method === "POST") {
 			//리스트 페이지로 이동
 			header("Location: list.php/?date={$date}");
 			exit;
-    	}
-	} catch(Exception $e) {
-        if($conn !== null) {
-        $conn->rollBack();
-        }
-        echo $e->getMessage(); //Exception 메세지 출력
-        // header("Location: error.php/?err_msg={$e->getMessage()}");
-        exit;
-    } finally {
-        db_destroy_conn($conn); // db 파기
-    }
-}
-else {
-	$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
-
-	if(!db_conn($conn)) {
-		// DB Instance 에러
-		throw new Exception("DB Error : PDO Instance");
+		}
 	}
-}
+	require_once(ROOT."php/amount.php");
+	} catch(Exception $e) {
+		if($conn !== null) {
+			$conn->rollBack();
+		}
+		echo $e->getMessage(); //Exception 메세지 출력
+		// header("Location: error.php/?err_msg={$e->getMessage()}");
+		exit;
+	} finally {
+		db_destroy_conn($conn); // db 파기
+	}
 
 
 ?>
