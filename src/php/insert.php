@@ -106,11 +106,6 @@ try {
 	
 	if($http_method === "GET") {
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
-
-		if(!db_conn($conn)) {
-			// DB Instance 에러
-			throw new Exception("DB Error : PDO Instance");
-		}
 	}
 	else {
 		// $arr_post = $_POST;
@@ -140,10 +135,6 @@ try {
 		if(count($arr_err_msg) === 0) {
 
 			// DB 접속
-			if(!db_conn($conn)) {
-				// DB Instance 에러
-				throw new Exception("DB Error : PDO Instance");
-			}
 
 			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
 
