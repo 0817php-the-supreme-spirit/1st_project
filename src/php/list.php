@@ -32,6 +32,10 @@
             //     $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
             // }
 			
+			if(db_user_salary_compare($conn) === 0)
+				{
+					header("Location: main.php");
+				}
 
 			//arr_err_msg의 카운트 값이 0일 경우에만 실행
 			if(count($arr_err_msg) === 0) {

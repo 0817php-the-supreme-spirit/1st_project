@@ -88,7 +88,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/1st_project/src/css/main/style.css">
-		<title>Document</title>
+		<title>아껴봐요 절약의 숲 메인 페이지</title>
 	</head>
 
 	<body>

@@ -280,7 +280,7 @@ button {
 	line-height: 43px;
 	/* color: #57BCA9; */
 	display: inline-block;
-	background-image: url(/1st_project/src/icon/insert_icon.png);
+	background-image: url(/1st_project/src/icon/detail_icon.png);
 	background-size: 240px;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -447,17 +447,19 @@ button {
 	border-radius: 30px;
 	display: inline-block;
 	font-size: 45px;
-	line-height: 80px;
+	line-height: 85px;
 	padding: 30px;
 }
 
 .content-phrases-box-color {
 	color: #8496E2;
+	font-size: 60px;
 }
 
 
 .content-phrases-box-failure {
 	color: #F08384;
+	font-size: 60px;
 }
 
 .content-btn-box {
@@ -647,6 +649,8 @@ progress {
 	height: 35px;
 	color: #2ecc71;
 	margin-bottom: 20px;
+	border-radius:30px;
+	box-shadow: 0 5px 10px rgba(107, 107, 107, 0.2), 0 10px 10px rgba(117, 117, 117, 0.2);
 }
 
 progress[value]::-webkit-progress-bar{
