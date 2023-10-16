@@ -56,12 +56,6 @@
 		else {
 			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
-			$life = isset($_POST["life"]) ? trim($_POST["life"]) : "";
-			$activity = isset($_POST["activity"]) ? trim($_POST["activity"]) : "";
-			$stupid = isset($_POST["stupid"]) ? trim($_POST["stupid"]) : "";
-
-			$category = [];
-
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }

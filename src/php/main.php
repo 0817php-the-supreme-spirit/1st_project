@@ -35,8 +35,10 @@
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "한달 급여를 입력하지 않으셨습니다.");
 				}
 
+				// date('t') : 해당 달의 전체 일수 | date('d') 현재 일수
 				$days = date('t')-date('d');
 
+				// 한 달급여를 남은 일수 만큼 나눔
 				$daily_salary = $monthly_salary / $days;
 
 				$daily_salary = (int)$daily_salary;
@@ -54,7 +56,7 @@
 					// insert
 					if(!db_user_salary_insert($conn, $arr_param)) {
 						// DB Insert 에러
-						throw new Exception("DB Error : Insert Boards");
+						throw new Exception("DB Error : salary_insert");
 					}
 
 					$conn->commit();
@@ -69,8 +71,8 @@
 			if($conn !== null) {
 				$conn->rollBack();
 			}
-			// echo $e->getMessage(); // 예외발생 메세지 출력
-			header("Location: /1st_project/src/php/main.php"); // 에러 메세지 error.php로 이동
+			echo $e->getMessage(); // 예외발생 메세지 출력
+			header("Location: /1st_project/src/php/main.php"); 
 			exit;
 		}
 		
