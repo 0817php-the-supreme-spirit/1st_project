@@ -69,7 +69,7 @@ try{
 
 				//트랜잭션 시작
 				$conn->beginTransaction();
-				
+
 				//카테고리 값 불러오기
 				if( $category_id === ""){
 					$arr_ps_id = [
@@ -131,8 +131,8 @@ try{
 	// if($http_method === "POST") {
 	// $conn->rollBack();
 	// }
+	$e->getMessage(); // Exception 메세지 출력
 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
-	// $e->getMessage(); // Exception 메세지 출력
 	exit;
 }finally{
 	db_destroy_conn($conn);
