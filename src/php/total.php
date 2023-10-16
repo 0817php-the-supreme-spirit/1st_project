@@ -108,7 +108,7 @@
 
 		<main>
 			<div class="header">
-				<a href="/1st_project/src/php/list.php"><h1>: 아껴봐요 절약의 숲</h1></a>
+				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
 
 			<<div class="side-left">
@@ -129,29 +129,7 @@
 
 					<div class="side-left-line-2"></div>
 
-						<div class="category-all-box">
-							<input type="radio" name="category" id="category1" value="">
-							<!-- <label for="category1" class="category-box">전체 비용</label> -->
-							<button class="category-box category-box-select" id="category" name="category">카테고리 선택</button>
-						</div>
-				
-						<div class="category-all-box">
-							<input type="radio" name="category" id="category2" value='life'>
-							<!-- <label for="category2" class="category-box">생활 비용</label> -->
-							<button class="category-box" id="category" name="category" value="life">생활 비용</button>
-						</div>
-				
-						<div class="category-all-box">
-							<input type="radio" name="category" id="category3" value='activity'>
-							<!-- <label for="category3" class="category-box">활동 비용</label> -->
-							<button class="category-box" id="category" name="category" value="activity">활동 비용</button>
-						</div>
-				
-						<div class="category-all-box">
-							<input type="radio" name="category" id="category4" value='stupid'>
-							<!-- <label for="category4" class="category-box" >멍청 비용</label> -->
-							<button class="category-box" id="category" name="category" value="stupid">멍청 비용</button>
-						</div>
+					<div class="category-box"></div>
 					</form>
 
 				</div>
@@ -190,14 +168,17 @@
 								<?php foreach($date_sum_day as $sum) { ?>
 									<?php if($sum["create_month"] == $val["create_month"]) { ?>
 										<?php if($sum["amount_used_sum"] <= $sum["daily_salary"]) {?>
-											<div class="content-date-summary-box content-td-margin content-box-success-color"><?php echo $sum["create_date"]; ?></div>
-											<div class="content-amount-summary-box content-td-margin content-box-success-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
-											<div class="content-monthly-summary-box content-box-success-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											<div class="background-box">
+												<div class="content-date-summary-box content-td-margin content-box-success-color"><?php echo $sum["create_date"]; ?></div>
+												<div class="content-amount-summary-box content-td-margin content-box-success-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+												<div class="content-monthly-summary-box content-box-success-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											</div>
 										<?php } else { 	?>
-											<div class="content-date-summary-box content-td-margin content-box-failure-color"><?php echo $sum["create_date"]; ?></div>
-											<div class="content-amount-summary-box content-td-margin content-box-failure-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
-											<div class="content-monthly-summary-box content-box-failure-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
-			
+											<div class="background-box">
+												<div class="content-date-summary-box content-td-margin content-box-failure-color"><?php echo $sum["create_date"]; ?></div>
+												<div class="content-amount-summary-box content-td-margin content-box-failure-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+												<div class="content-monthly-summary-box content-box-failure-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											</div>
 										<?php }	?>
 									<?php } ?>
 								<?php } ?>
