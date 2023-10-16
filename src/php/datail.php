@@ -159,7 +159,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/1st_project/src/css/detail/style.css">
-		<title>Document</title>
+		<title>아껴봐요 절약의 숲 상세 페이지</title>
 	</head>
 
 	<body>
@@ -243,7 +243,7 @@
 								</div>
 		
 								<div class="content-user-remaining">
-									<p>일일 남은 금액 : <?php echo number_format($user_days["daily_salary"]); ?>원</p>
+									<p>일일 남은 금액 : <?php echo number_format($user_days["daily_salary"] - $amount_used["amount_used"]); ?>원</p>
 								</div>
 							</div>
 
@@ -272,15 +272,12 @@
 					<?php } ?>
 
 					<div class="content-btn-box">
-						<div class="content-btn-before content-btn-box-hover">
-							<a href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>">이전</a>
-						</div>
-						<div class="content-btn-correction content-btn-box-hover">
-							<a href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정</a>
-						</div>
-						<div class="content-btn-delete content-btn-box-hover">
-							<a href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">삭제</a>
-						</div>
+
+							<a class="content-btn-before content-btn-box-hover" href="/1st_project/src/php/list.php/?date=<?php echo $date; ?>">이전</a>
+
+							<a class="content-btn-correction content-btn-box-hover" href="/1st_project/src/php/update.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정</a>
+
+							<a class="content-btn-delete content-btn-box-hover" href="/1st_project/src/php/delete.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">삭제</a>
 
 					</div>
 					

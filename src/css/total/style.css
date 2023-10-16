@@ -485,8 +485,6 @@ summary::marker {
 	margin-bottom: 20px;
 	border-radius: 30px;
 }
-
-
 /* ------------------------------------------------------------------------ */
 
 
@@ -621,6 +619,8 @@ progress {
 	height: 35px;
 	color: #2ecc71;
 	margin-bottom: 20px;
+	border-radius:30px;
+	box-shadow: 0 5px 10px rgba(107, 107, 107, 0.2), 0 10px 10px rgba(117, 117, 117, 0.2);
 }
 
 progress[value]::-webkit-progress-bar{
