@@ -172,13 +172,13 @@ button {
 	height: 60px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #e7ca36;
 	text-align: center;
-	color: #57BCA9;
+	color: #e7ca36;
 }
 
 .date-box:focus {
-	background-color: #57BCA9;
+	background-color: #e7ca36;
 	color: #fff;
 	border: none;
 	outline: none;
@@ -224,7 +224,7 @@ button {
 	margin: auto;
 	margin-top: 30px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #ebd461;
 	border-radius: 5px;
 }
 
@@ -257,7 +257,7 @@ button {
 
 .side-left-page:hover {
 	background-image: url(../../img/btn-on.png);
-	color: #57BCA9;
+	color: #dfc235;
 }
 
 .side-left-line-2 {
@@ -265,7 +265,7 @@ button {
 	margin-top: 30px;
 	margin-bottom: 20px;
 	width: 140px;
-	border: 3px solid #57BCA9;
+	border: 3px solid #ebd461;
 	border-radius: 5px;
 }
 
@@ -287,10 +287,10 @@ button {
 	height: 50px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 20px;
-	border: 3px solid #ebd461;
+	border: 3px solid #e7ca36;
 	text-align: center;
 	line-height: 43px;
-	color: #ebd461;
+	color: #e7ca36;
 	display: inline-block;
 }
 
@@ -751,4 +751,5 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .update-error{
 	text-align: center;
+	font-size: 3rem;
 }

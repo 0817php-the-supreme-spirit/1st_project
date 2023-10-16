@@ -1,7 +1,7 @@
 <?php
 define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
+define("ERROR_MSG_PARAM", "%s은 필수 입력값입니다."); //파라미터 에러 메세지
 require_once(ROOT."lib/lib_db.php");
-define("ERROR_MSG_PARAM", "Parameter Error : %s"); //파라미터 에러 메세지
 
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
@@ -14,9 +14,6 @@ try{
 		// DB Instance 에러
 		throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
 	}
-
-		//트랜잭션 시작
-	$conn->beginTransaction();
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
@@ -78,7 +75,14 @@ try{
 		if($create_date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-		
+
+		if(count($arr_err_msg)>=1){
+			header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+			exit;
+		}
+
+		//트랜잭션 시작
+		$conn->beginTransaction();
 
 		if(count($arr_err_msg) === 0) {
 
