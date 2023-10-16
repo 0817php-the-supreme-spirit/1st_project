@@ -117,6 +117,8 @@ button {
 
 .header h1:hover {
 	color: #fff;
+	transform: scale(1.1);
+	transition-duration: 0.3s;
 }
 
 
@@ -663,11 +665,11 @@ progress[value]::-webkit-progress-bar{
 
 #progress::-webkit-progress-bar {
     background:#f0f0f0;
-    border-radius:10px;
+    border-radius:30px;
     box-shadow: inset 3px 3px 10px #ccc;
 }
 #progress::-webkit-progress-value {
-    border-radius:10px;
+    border-radius:30px;
     background: #1D976C;
 	background-image: linear-gradient(to left, #2ecc71, #3498db);
 }

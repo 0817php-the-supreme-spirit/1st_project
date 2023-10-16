@@ -118,6 +118,8 @@ button {
 
 .header h1:hover {
 	color: #fff;
+	transform: scale(1.1);
+	transition-duration: 0.3s;
 }
 
 
@@ -394,8 +396,12 @@ summary::marker {
 	margin-bottom: 20px;
 }
 
+.cotent-table tr, td:last-child {
+	margin-right: 0px;
+}
+
 .content-date-summary-box {
-	width: 180px;
+	width: 175px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -406,7 +412,7 @@ summary::marker {
 }
 
 .content-amount-summary-box{
-	width: 295px;
+	width: 290px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -417,7 +423,7 @@ summary::marker {
 }
 
 .content-monthly-summary-box {
-	width: 295px;
+	width: 290px;
 	height: 40px;
 	background-color: rgba(255, 255, 255, 0.5);
 	border-radius: 30px;
@@ -425,6 +431,10 @@ summary::marker {
 	line-height: 40px;
 	display: inline-block;
 	font-size: 20px;
+}
+
+.content-monthly-summary-box:last-child {
+	margin-right: 0px;
 }
 
 .content-table-day {
@@ -439,7 +449,6 @@ summary::marker {
 	color: #57BCA9;
 	font-size: 20px;
 }
-
 
 .content-date-box-day {
 	width: 180px;
@@ -479,6 +488,13 @@ summary::marker {
 	border-radius: 30px;
 }
 
+.background-box {
+	width: 830px;
+	padding-left: 8px;
+	/* padding-top: 20px;
+	padding: 5px; */
+	/* border-radius: 30px; */
+}
 
 /* ------------------------------------------------------------------------ */
 
@@ -627,11 +643,11 @@ progress[value]::-webkit-progress-bar{
 
 #progress::-webkit-progress-bar {
     background:#f0f0f0;
-    border-radius:10px;
+    border-radius:30px;
     box-shadow: inset 3px 3px 10px #ccc;
 }
 #progress::-webkit-progress-value {
-    border-radius:10px;
+    border-radius:30px;
     background: #1D976C;
 	background-image: linear-gradient(to left, #2ecc71, #3498db);
 }

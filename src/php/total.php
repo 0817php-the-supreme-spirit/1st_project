@@ -190,14 +190,17 @@
 								<?php foreach($date_sum_day as $sum) { ?>
 									<?php if($sum["create_month"] == $val["create_month"]) { ?>
 										<?php if($sum["amount_used_sum"] <= $sum["daily_salary"]) {?>
-											<div class="content-date-summary-box content-td-margin content-box-success-color"><?php echo $sum["create_date"]; ?></div>
-											<div class="content-amount-summary-box content-td-margin content-box-success-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
-											<div class="content-monthly-summary-box content-box-success-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											<div class="background-box">
+												<div class="content-date-summary-box content-td-margin content-box-success-color"><?php echo $sum["create_date"]; ?></div>
+												<div class="content-amount-summary-box content-td-margin content-box-success-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+												<div class="content-monthly-summary-box content-box-success-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											</div>
 										<?php } else { 	?>
-											<div class="content-date-summary-box content-td-margin content-box-failure-color"><?php echo $sum["create_date"]; ?></div>
-											<div class="content-amount-summary-box content-td-margin content-box-failure-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
-											<div class="content-monthly-summary-box content-box-failure-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
-			
+											<div class="background-box">
+												<div class="content-date-summary-box content-td-margin content-box-failure-color"><?php echo $sum["create_date"]; ?></div>
+												<div class="content-amount-summary-box content-td-margin content-box-failure-color"><?php echo number_format($sum["amount_used_sum"]); ?></div>
+												<div class="content-monthly-summary-box content-box-failure-color"><?php echo number_format($sum["daily_salary"] - $sum["amount_used_sum"]); ?></div>
+											</div>
 										<?php }	?>
 									<?php } ?>
 								<?php } ?>
