@@ -35,11 +35,11 @@ if($http_method === "POST") {
             $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "amount_used");
 		}
 		if($create_date === "") {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
 		// var_dump($create_date);
 		if($category_id === "") {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
 		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {

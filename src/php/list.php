@@ -63,6 +63,8 @@
 				// $amount_used의 0번방에 있는 값들을 넣어주는 구문
 				$amount_used = $amount_used[0];
 
+				
+
 			}
 		}
 		else {
@@ -70,13 +72,15 @@
 			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
 			// 카테고리 부분에서 POST로 값을 전달 시에 값이 있는지 없는지 확인
-			$life = isset($_POST["life"]) ? trim($_POST["life"]) : "";
-			$activity = isset($_POST["activity"]) ? trim($_POST["activity"]) : "";
-			$stupid = isset($_POST["stupid"]) ? trim($_POST["stupid"]) : "";
+			// $life = isset($_POST["life"]) ? trim($_POST["life"]) : "";
+			// $activity = isset($_POST["activity"]) ? trim($_POST["activity"]) : "";
+			// $stupid = isset($_POST["stupid"]) ? trim($_POST["stupid"]) : "";
 
+			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
+			
 			// 동적 쿼리를 위해 카테고리를 받을 빈 배열 생성
 			$category = [];
-
+			
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
@@ -99,6 +103,7 @@
 				if($result === false) {
 					throw new Exception("DB Error : select_search");
 				}
+
 				else if(count($result) === 0) {
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date4");
 					// throw new Exception("DB Error : select_date");
@@ -175,7 +180,6 @@
 							<!-- date값을 보내주기 위함 보내 주는 값의 키값은 name가 되고 사용자가 지정한 date값은 값이 된다. -->
 							<!-- 해당 부분에 hidden이 필요한가? -->
 							<label class="date-label">
-								<input type="hidden" name="date" value="<?php echo $date; ?>">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
 							</label>

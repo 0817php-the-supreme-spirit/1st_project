@@ -5,7 +5,7 @@ require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 
 //db_conn($conn);
 
-$arr_err_msg = [];//에러메세지 저장용
+$arr_err_msg = [];//추후 에러메세지를 받기위한 빈배열 세팅
 
 // TRY문 시작
 try {
@@ -17,7 +17,7 @@ try {
         throw new Exception("DB Error : PDO Instance");
     }
 
-    // METHOD 획득 >> 안넣으면 어떻게되지? 서버의 값을 아예 못받아오나?
+    // METHOD 획득 >> 슈퍼글로벌안의 변수는 건드리면 안되기 때문에 변수에 담아준다.(혹시 모를 경우)
     $http_method = $_SERVER["REQUEST_METHOD"];
 
 	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
@@ -27,10 +27,13 @@ try {
 		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
 		//date는 빈값이 될수가 없으니까?되면안되니까?
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
-        $arr_err_msg = [];
 
         if($id === "") {
             $arr_err_msg[] = "Parameter Error : ID";
+        }
+
+		if($date === "") {
+            $arr_err_msg[] = "Parameter Error : DATE";
         }
 		//여기서 나 date의 에러메세지는 없앴는데 이래도괜찮은건가?
 		//지금은 괜찮으나 현업에선안댐..
@@ -46,6 +49,7 @@ try {
         ];
 		// 파라미터에 받아올 id값?
         $result = db_select_id($conn, $arr_param);
+		//여기서 가져오는것은 카테고리,날짜,제목,메모
 		// list페이지의 정보를 result에 담아주겠다
 
         // 예외처리 >> db_select_id함수를 못불러왔을때?
