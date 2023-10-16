@@ -49,6 +49,7 @@
 				else if(!(count($result) === 1)) {
 					throw new Exception("DB Error : Select id Count");
 				}
+				
 				$item = $result[0];
 
 				$arr_param = [
@@ -82,6 +83,7 @@
 			}
 
 			if(count($arr_err_msg) === 0) {
+				
 				$arr_param = [
 					"date" => $date
 					,"category" => $category
