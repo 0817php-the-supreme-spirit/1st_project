@@ -209,7 +209,7 @@ try {
 					</form> -->
 
 					<div class="img-left-box">
-						<p class="font-left-box">삭제중..</p>
+						
 					</div>
 
 				</div>

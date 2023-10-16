@@ -266,10 +266,11 @@ button {
 	width: 340px;
 	height: 250px;
 	margin-top: 40px;
-	background-image: url(/1st_project/src/icon/Helmet.png);
+	background-image: url(/1st_project/src/icon/delete_icon.png);
 	background-repeat: no-repeat;
+	background-position: center;
 	background-size: cover;
-	background-size: 250px 250px;
+	background-size: 250px 250px ;
 }
 
 .img-left-box:hover {
