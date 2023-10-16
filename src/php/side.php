@@ -53,15 +53,8 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="/1st_project/src/css/side/style.css">
-	<title>Document</title>
-</head>
-<body>
+
+
 	<div class="side-right">
 		<div class="side-right-box">
 			<!-- if문을 통해 우측 사이드바 글귀와 이미지 변경 -->
@@ -103,5 +96,3 @@
 
 		</div>
 	</div>
-</body>
-</html>

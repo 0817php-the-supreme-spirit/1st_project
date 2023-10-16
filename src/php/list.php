@@ -121,6 +121,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="/1st_project/src/css/list/style.css">
+		<link rel="stylesheet" href="/1st_project/src/css/side/style.css">
 		<title>아껴봐요 절약의 숲 리스트 페이지</title>
 	</head>
 
