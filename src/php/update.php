@@ -20,7 +20,7 @@ try{
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d'); //기본 날짜 세팅
 			
 		if($id === "" ) {
-			$arr_err_msg[] = sprint(ERROR_MSG_PARAM, "title");
+			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
 		}
 		if($date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
@@ -58,10 +58,6 @@ try{
 		if($date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 		}
-
-		if(count($arr_err_msg) >= 1) {
-			throw new Exception(implode("<br>", $arr_err_msg));
-		}
 		
 		if($title === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
@@ -72,50 +68,51 @@ try{
 		if($create_date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-
-		if(count($arr_err_msg)>=1){
-			header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
-			exit;
-		}
-
-		//트랜잭션 시작
-		// $conn->beginTransaction();
-
 		if(count($arr_err_msg) === 0) {
+			// if(count($arr_err_msg)>=1){
+			// 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+			// 	exit;
+			// }
 
-			//카테고리 값 불러오기
-			if( $category_id === ""){
-				$arr_ps_id = [
-					"id" => $id
-				];
-				
-				$category = category_id( $conn, $arr_ps_id );
+			//트랜잭션 시작
+			// $conn->beginTransaction();
 
-				$category = $category[0];
-				$category_id = (int)$category;
-			}
+			if(count($arr_err_msg) === 0) {
 
-			//POST 값 받아오기
-			$arr_param = [
-				"title" => $title
-				,"memo" => $memo
-				,"amount_used" => $amount_used
-				,"create_date" => $create_date
-				,"category_id" => $category_id
-				,"id" => $id
-			];
+				//카테고리 값 불러오기
+				if( $category_id === ""){
+					$arr_ps_id = [
+						"id" => $id
+					];
+					
+					$category = category_id( $conn, $arr_ps_id );
 
-			//POST값 입력
-				if(!update_execute($conn, $arr_param)){
-					throw new Exception("DB Error : Update_boards_id");
+					$category = $category[0];
+					$category_id = (int)$category;
 				}
-			
-			//커밋
-			$conn->commit();
 
-			//업데이트 완료 후 디테일 페이지로 이동
-			header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
-			exit;
+				//POST 값 받아오기
+				$arr_param = [
+					"title" => $title
+					,"memo" => $memo
+					,"amount_used" => $amount_used
+					,"create_date" => $create_date
+					,"category_id" => $category_id
+					,"id" => $id
+				];
+
+				//POST값 입력
+					if(!update_execute($conn, $arr_param)){
+						throw new Exception("DB Error : Update_boards_id");
+					}
+				
+				//커밋
+				$conn->commit();
+
+				//업데이트 완료 후 디테일 페이지로 이동
+				header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+				exit;
+			}
 		}
 	}
 
@@ -145,10 +142,11 @@ try{
 
 } catch(Exception $e) {
 
-	if($http_method === "POST") {
-	$conn->rollBack();
-	}
-	echo $e->getmessage(); // Exception 메세지 출력
+	// if($http_method === "POST") {
+	// $conn->rollBack();
+	// }
+	header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+	$e->getMessage(); // Exception 메세지 출력
 	exit;
 }finally{
 	db_destroy_conn($conn);
@@ -253,7 +251,7 @@ try{
 						</div>
 						<div class="update-spent">
 							<label for="update-spent"></label>
-							<input type="number" name="amount_used" id="update-spent" placeholder="금액을 입력해주세요." required value="<?php echo $item["amount_used"]; ?>">
+							<input type="number" name="amount_used" id="update-spent" placeholder="금액을 입력해주세요." value="<?php echo $item["amount_used"]; ?>">
 						</div>
 						<div class="update-button">
 							<button type="submit">수정확인</button>

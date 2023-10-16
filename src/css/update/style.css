@@ -545,6 +545,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .update-error{
+	display: inline-block;
 	text-align: center;
 	font-size: 3rem;
+	color: #2CAE92;
 }
