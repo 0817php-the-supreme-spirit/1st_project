@@ -197,15 +197,15 @@
 			;
 
 			$arr_ps = [
-				":date1" => $arr_param["date"]
-				,":date2" => $arr_param["date"]
+				":date1" => $arr_param["date1"]
+				,":date2" => $arr_param["date2"]
 			];
 
 		try {
 			$stmt = $conn->prepare($sql);
 			$stmt->execute($arr_ps);
 			$result = $stmt->fetchAll();
-			return $result; // 
+			return $result;
 		}
 		catch(Exception $e) {
 			return false;

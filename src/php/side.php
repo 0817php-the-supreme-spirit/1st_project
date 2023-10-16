@@ -1,5 +1,5 @@
 
-	<div class="side-right">
+<div class="side-right">
 		<div class="side-right-box">
 			<!-- if문을 통해 우측 사이드바 글귀와 이미지 변경 -->
 			<div class="side-right-top">

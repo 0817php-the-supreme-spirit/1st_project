@@ -130,10 +130,9 @@ todo.category_id = cate.category_id
 WHERE
 todo.create_date = 20231011;
 
-SELECT daily_salary, DATE_FORMAT(input_date,'%Y-%m') AS input_month
+SELECT daily_salary, input_date
 FROM user_table
-GROUP BY input_month
-HAVING input_month = 202305;
+WHERE Input_date >= 20230901 AND Input_date <= LAST_DAY(20230916);
 
 SELECT *
 FROM todolist_table

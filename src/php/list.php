@@ -57,6 +57,24 @@
 					"date" => $date
 				];
 			}
+
+			$arr_param = [
+				"date" => $date
+			];
+	
+			$amount_used = db_select_amount_used($conn, $arr_param);
+			if($amount_used === false) {
+				throw new Exception("DB Error : select_user_table");
+			}
+			$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
+			
+			$amount_used = $amount_used[0];
+			
+			$user_data = db_select_user_table($conn);
+			if($user_data === false) {
+				throw new Exception("DB Error : select_user_table");
+			}
+	
 		}
 		else {
 			// date값 확인 후 받은 date값이 있으면 해당 값을 넘기고 없을 경우 오늘의 date값을 변수에 넘김
@@ -100,12 +118,27 @@
 					// throw new Exception("DB Error : select_date");
 				}
 				
-				$arr_param = [
-					"date" => $date
-				];
 			}
+
+			// $arr_param = [
+			// 	"date1" => $date
+			// 	,"date2" => $date
+			// ];
+		
+			// // 데이터 베이스에서 유저의 사용 금액을 조회하는 함수
+			// $amount_used = db_select_user_table_all($conn, $arr_param);
+		
+			// if($amount_used === false) {
+			// 	throw new Exception("DB Error : select_user_table");
+			// }
+
+			// var_dump($amount_used);
+			// $user_days = $amount_used[0];
+
 		}
+
 		require_once(ROOT."php/amount.php");
+		
 	}
 	catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
