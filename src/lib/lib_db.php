@@ -145,37 +145,6 @@
 	}
 }
 
-	// // ----------------------------
-	// // 함수명 	: db_select_user_table
-	// // 기능 	: user_table 유저 일일 급여 조회
-	// // 파라미터 : PDO 		&$conn
-	// // 리턴 	: Array / false
-	// // ----------------------------
-
-	// function db_select_user_table(&$conn) {
-	// 	$sql =
-	// 		" SELECT "
-	// 		." 		daily_salary "
-	// 		." FROM "
-	// 		."		user_table "
-	// 		." WHERE "
-	// 		." 		input_date "
-	// 		." BETWEEN "
-	// 		." 		date_format(now(), '%Y-%m-01') "
-	// 		." AND "
-	// 		." 		date_format(now(), '%Y-%m-%d') "
-	// 		;
-	// 		// 현재 달의 1일과 마지막일사이에 값이 있을 경우의 조건문
-	// 	try {
-	// 		$stmt = $conn->query($sql);
-	// 		$result = $stmt->fetchAll();
-	// 		return $result;
-	// 	}
-	// 	catch(Exception $e) {
-	// 		return false;
-	// 	} 
-	// }
-
 	// ----------------------------
 	// 함수명 	: db_select_user_table_all
 	// 기능 	: user_table 해당 달에 맞는 유저 일일급여 조회
@@ -763,4 +732,36 @@
 	// 		return false; // 예외 발생 : flase 리턴
 	// 	}
 	// }
+
+		// // ----------------------------
+	// // 함수명 	: db_select_user_table
+	// // 기능 	: user_table 유저 일일 급여 조회
+	// // 파라미터 : PDO 		&$conn
+	// // 리턴 	: Array / false
+	// // ----------------------------
+
+	// function db_select_user_table(&$conn) {
+	// 	$sql =
+	// 		" SELECT "
+	// 		." 		daily_salary "
+	// 		." FROM "
+	// 		."		user_table "
+	// 		." WHERE "
+	// 		." 		input_date "
+	// 		." BETWEEN "
+	// 		." 		date_format(now(), '%Y-%m-01') "
+	// 		." AND "
+	// 		." 		date_format(now(), '%Y-%m-%d') "
+	// 		;
+	// 		// 현재 달의 1일과 마지막일사이에 값이 있을 경우의 조건문
+	// 	try {
+	// 		$stmt = $conn->query($sql);
+	// 		$result = $stmt->fetchAll();
+	// 		return $result;
+	// 	}
+	// 	catch(Exception $e) {
+	// 		return false;
+	// 	} 
+	// }
+
 ?>

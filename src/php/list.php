@@ -7,6 +7,8 @@
 	$http_method = $_SERVER["REQUEST_METHOD"];
 	$arr_err_msg = []; // 에러 메세지 저장용
 
+	$item = ["amount_used" => 0];
+
 	try {
 		if(!db_conn($conn))
 		{
@@ -14,87 +16,50 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 
-
-		// 메소드 확인 해당 페이지는 기본 데이터를 출력하기 위한 GET와 날짜와 카테고리 값을 받는 POST가 존재
 		if($http_method === "GET") {
-
-			// date값 확인 후 받은 date값이 있으면 해당 값을 넘기고 없을 경우 오늘의 date값을 변수에 넘김
-			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
-			// id값 확인 후 받은 id값을 변수로 넘김
-			// $id = isset($_GET["id"]) ? $_GET["id"] : "";
-
-			// date값이 비어있을 경우 arr_err_msg배열에 상수 ERROP_MSG_PAEAM값과 ""값을 이어서 넣어줌
-			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date1");
-            }
-
-			// id값이 비어있을 경우 arr_err_msg배열에 상수 ERROP_MSG_PAEAM값과 ""값을 이어서 넣어줌
-			// if($id === "") {
-            //     $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
-            // }
 			
-			// 한달 급여가 입력되지 않은 경우 강제로 main 페이지 이동
-			if(db_user_salary_compare($conn) === 0)
-				{
-					header("Location: main.php");
-				}
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
-			//arr_err_msg의 카운트 값이 0일 경우에만 실행
+			if($date === "") {
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+            }
+			// 한달 급여가 입력되지 않은 경우 강제로 main 페이지 이동
+			// if(db_user_salary_compare($conn) === 0)
+			// 	{
+			// 		header("Location: main.php");
+			// 	}
+
 			if(count($arr_err_msg) === 0) {
-				// arr_param에 "date"라는 키에 $date 값을 할당
+
 				$arr_param = [
 					"date" => $date
 				];
 
-				// 데이터 베이스에 있는 값을 불러오기 위한 함수
+				// 해당하는 날짜에 맞는 값을 불러오기 위한 함수
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "data");
+					throw new Exception("DB Error : db_select");
 				}
 
 				$arr_param = [
 					"date" => $date
 				];
 			}
-
-			$arr_param = [
-				"date" => $date
-			];
-	
-			$amount_used = db_select_amount_used($conn, $arr_param);
-			if($amount_used === false) {
-				throw new Exception("DB Error : select_user_table");
-			}
-			$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-			
-			$amount_used = $amount_used[0];
-			
-			// $user_data = db_select_user_table($conn);
-			// if($user_data === false) {
-			// 	throw new Exception("DB Error : select_user_table");
-			// }
-	
 		}
-		else {
-			// date값 확인 후 받은 date값이 있으면 해당 값을 넘기고 없을 경우 오늘의 date값을 변수에 넘김
-			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
-			// 카테고리 부분에서 POST로 값을 전달 시에 값이 있는지 없는지 확인
-			// $life = isset($_POST["life"]) ? trim($_POST["life"]) : "";
-			// $activity = isset($_POST["activity"]) ? trim($_POST["activity"]) : "";
-			// $stupid = isset($_POST["stupid"]) ? trim($_POST["stupid"]) : "";
+		else {
+			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
 			
-			// 동적 쿼리를 위해 카테고리를 받을 빈 배열 생성
-			$category = [];
+			// // 동적 쿼리를 위해 카테고리를 받을 빈 배열 생성
+			// $category = [];
 			
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
 
-			// POST에 카테고리 값이 있을 경우에 $category에 넘김
 			if(isset($_POST["category"])) {
 				$category = $_POST["category"];
 			}
@@ -110,31 +75,15 @@
 				$result = db_select_search($conn, $arr_param);
 				
 				if($result === false) {
-					throw new Exception("DB Error : select_search");
+					throw new Exception("DB Error : select_search - false");
 				}
 
-				else if(count($result) === 0) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date4");
-					// throw new Exception("DB Error : select_date");
-				}
+				// else if(count($result) === 0) {
+				// 	throw new Exception("DB Error : select_search - 0");
+				// 	// throw new Exception("DB Error : select_date");
+				// }
 				
 			}
-
-			// $arr_param = [
-			// 	"date1" => $date
-			// 	,"date2" => $date
-			// ];
-		
-			// // 데이터 베이스에서 유저의 사용 금액을 조회하는 함수
-			// $amount_used = db_select_user_table_all($conn, $arr_param);
-		
-			// if($amount_used === false) {
-			// 	throw new Exception("DB Error : select_user_table");
-			// }
-
-			// var_dump($amount_used);
-			// $user_days = $amount_used[0];
-
 		}
 
 		require_once(ROOT."php/amount.php");
