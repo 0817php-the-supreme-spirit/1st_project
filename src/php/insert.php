@@ -6,8 +6,6 @@ define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 $conn = null; 
 $http_method = $_SERVER["REQUEST_METHOD"]; //REQUEST == 요청 METHOD == 방식
 $arr_err_msg = []; // 에러 메세지 저장
-
-
 // =--------------------------------------------------------------------------------
 // $title = "";
 // $memo = "";
@@ -97,25 +95,22 @@ $arr_err_msg = []; // 에러 메세지 저장
 
 // }
 // =--------------------------------------------------------------------------------
+	try {
 
-try {
 	if(!db_conn($conn)) {
 		// DB Instance 에러
 		throw new Exception("DB Error : PDO Instance");
 	}
 	
-
-
 	if($http_method === "GET") {
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+	$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
 
-		if(db_user_salary_compare($conn) === 0)
+	if(db_user_salary_compare($conn) === 0)
 	{
 		header("Location: main.php");
 	}
 	
-	}
-	else {
+	} else {
 		// $arr_post = $_POST;
 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
 		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
@@ -139,15 +134,11 @@ try {
 		if($category_id === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
+
 		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {
-
 			// DB 접속
-
 			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
-
-			
-
 			// 게시글 작성을 위해 파라미터 셋팅
 			$arr_post = [
 				"title" => $_POST["title"]
@@ -170,7 +161,6 @@ try {
 	}
 	
 	require_once(ROOT."php/amount.php");
-
 	
 	} catch(Exception $e) {
 		if($conn !== null) { //null값과 타입이 다르거나 값이 다르면 롤백
@@ -195,9 +185,7 @@ try {
 		<link rel="stylesheet" href="/1st_project/src/css/side/style.css">
 		<title>아껴봐요 절약의 숲 작성 페이지</title>
 	</head>
-
 	<body>
-
 		<main>
 			<div class="header">
 				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
@@ -258,13 +246,13 @@ try {
 								</div>
 							</div>
 							<div class="content-float2">
-							<p><?php 
-								$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
-								$selected = array_rand($randment);
-								echo $randment[$selected];
-								?></p>
-								<!-- <p>벌써지출</p>
-								<p>할거에요?</p> -->
+							<p>
+							<?php 
+							$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
+							$selected = array_rand($randment);
+							echo $randment[$selected];
+							?>
+							</p>
 							</div>
 						</div>
 						<div class="content-button">
@@ -274,9 +262,7 @@ try {
 					</div>
 				</div>
 			</div>
-
 			<?php require_once(ROOT."php/side.php") ?>
 		</main>
-		
 	</body>
 </html>

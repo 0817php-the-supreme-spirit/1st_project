@@ -1,9 +1,8 @@
 <?php 
-
-$user_days_percent = $user_days["daily_salary"] = 0;
-$amount_used_percent = $amount_used["amount_used"] = 0;
-$percent = 0;
-$arr_err_msg = [];
+	$user_days_percent = $user_days["daily_salary"] = 0;
+	$amount_used_percent = $amount_used["amount_used"] = 0;
+	$percent = 0;
+	$arr_err_msg = [];
 
 	if(!db_conn($conn)) {
 		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
@@ -34,7 +33,6 @@ $arr_err_msg = [];
 		throw new Exception("DB Error : db_select_user_table_all");
 	}	
 
-	
 	if(count($user_data) == 0) {
 		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "급여");
 	}	
@@ -54,12 +52,9 @@ $arr_err_msg = [];
 
 		// 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
 		$percent = ceil($percent);
-		
-	}
-	else {
+	} else {
 		$user_days_percent = $user_days["daily_salary"] = 0;
 		$amount_used_percent = $amount_used["amount_used"] = 0;
 		$percent = 0;
 	}
-
 ?>

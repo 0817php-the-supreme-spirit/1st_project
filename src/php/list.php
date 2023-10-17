@@ -7,17 +7,14 @@
 	$http_method = $_SERVER["REQUEST_METHOD"];
 	$arr_err_msg = []; // 배열 초기화
 
-	// $item = ["amount_used" => 0];
-
 	try {
 		if(!db_conn($conn))
 		{
 			//강제 예외 발생 : DB Instance
 			throw new Exception("DB Error : PDO Instance");
 		}
-
 		if($http_method === "GET") {
-			
+		
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
 			if($date === "") {
@@ -41,14 +38,8 @@
 				if(!$result) {
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "사용");
 				}
-
-				$arr_param = [
-					"date" => $date
-				];
 			}
-		}
-
-		else {
+		} else {
 			$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
 
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
@@ -57,12 +48,7 @@
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
 
-			// if(isset($_POST["category"])) {
-			// 	$category = $_POST["category"];
-			// }
-
 			if(count($arr_err_msg) === 0) {
-
 				$arr_param = [
 					"date" => $date
 					,"category" => $category
@@ -74,28 +60,16 @@
 				if($result === false) {
 					throw new Exception("DB Error : select_search - false");
 				}
-
-				// else if(count($result) === 0) {
-				// 	throw new Exception("DB Error : select_search - 0");
-				// 	// throw new Exception("DB Error : select_date");
-				// }
-				
 			}
 		}
-
 		require_once(ROOT."php/amount.php");
-		
-	}
-	catch(Exception $e) {
+	} catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
 		exit; // 처리 종료
-	}
-	finally {
+	} finally {
 		db_destroy_conn($conn); // DB 파기
 	}
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -176,9 +150,7 @@
 						</tr>
 					<?php } ?>
 						
-					<?php 
-						foreach($result as $item) {
-					?>
+					<?php foreach($result as $item) { ?>
 						<tr>
 							<!-- if문을 통해 카테고리 값에 따라 이미지 변경 -->
 							<td class="content-categort-box">
@@ -193,15 +165,11 @@
 							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo number_format($item["amount_used"]), "원"; ?></td>
 						</tr>
-					<?php 
-						}
-					?>
+					<?php } ?>
 					</table>
 				</div>
 			</div>
-
 			<?php require_once(ROOT."php/side.php") ?>
 		</main>
-		
 	</body>
 </html>
