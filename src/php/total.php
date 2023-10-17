@@ -68,20 +68,7 @@
 			throw new Exception("DB Error : select_user_table");
 		}
 
-		// 유저의 일일 급여의 0번 방에 있는 값을 넘겨줌
-		$user_days = $user_data[0];
-
-		//daily_selary에 있는 값을 다른 변수에 넘겨줌, 위와 아래는 통합 가능, 코드 리뷰를 위해 풀어서 정리 
-		$user_days_percent = $user_days["daily_salary"];
-
-		//유저의 사용 금액을 해당 변수로 넘김
-		$amount_used_percent = $amount_used["amount_used"];
-
-		// 사용 금액의 퍼센트를 구하는 계산식
-		$percent = ($amount_used_percent / $user_days_percent) * 100;
-
-		// 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
-		$percent = (int)$percent;
+		require_once(ROOT."php/amount.php");
 
 		
 	}
@@ -151,11 +138,11 @@
 								<?php if($val["total_amount"] <= $val["monthly_salary"]) {?>
 									<div class="content-date-box content-td-margin content-box-success-color"><?php echo $val["create_month"] ?></div>
 									<div class="content-amount-box content-td-margin content-box-success-color"><?php echo number_format($val["total_amount"]) ?>원</div>
-									<div class="content-monthly-box content-box-success-color"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+									<div class="content-monthly-box content-box-success-color"><?php echo number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
 								<?php } else { 	?>
 									<div class="content-date-box content-td-margin content-box-failure-color"><?php echo $val["create_month"] ?></div>
 									<div class="content-amount-box content-td-margin content-box-failure-color"><?php echo number_format($val["total_amount"]) ?>원</div>
-									<div class="content-monthly-box content-box-failure-color"><?php echo  number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
+									<div class="content-monthly-box content-box-failure-color"><?php echo number_format($val["monthly_salary"] - $val["total_amount"])?>원</div>
 								<?php }	?>
 								<div class="content-day-bar"></div>
 							</summary>

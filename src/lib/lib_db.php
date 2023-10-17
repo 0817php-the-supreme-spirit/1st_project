@@ -15,6 +15,7 @@
 		$db_charset = "utf8mb4"; // charset
 		$db_dns		= "mysql:host=".$db_host.";dbname=".$db_name.";charset=".$db_charset;
 	
+
 		try
 		{
 			$db_options = [
@@ -144,36 +145,36 @@
 	}
 }
 
-	// ----------------------------
-	// 함수명 	: db_select_user_table
-	// 기능 	: user_table 유저 일일 급여 조회
-	// 파라미터 : PDO 		&$conn
-	// 리턴 	: Array / false
-	// ----------------------------
+	// // ----------------------------
+	// // 함수명 	: db_select_user_table
+	// // 기능 	: user_table 유저 일일 급여 조회
+	// // 파라미터 : PDO 		&$conn
+	// // 리턴 	: Array / false
+	// // ----------------------------
 
-	function db_select_user_table(&$conn) {
-		$sql =
-			" SELECT "
-			." 		daily_salary "
-			." FROM "
-			."		user_table "
-			." WHERE "
-			." 		input_date "
-			." BETWEEN "
-			." 		date_format(now(), '%Y-%m-01') "
-			." AND "
-			." 		date_format(now(), '%Y-%m-%d') "
-			;
-			// 현재 달의 1일과 마지막일사이에 값이 있을 경우의 조건문
-		try {
-			$stmt = $conn->query($sql);
-			$result = $stmt->fetchAll();
-			return $result;
-		}
-		catch(Exception $e) {
-			return false;
-		} 
-	}
+	// function db_select_user_table(&$conn) {
+	// 	$sql =
+	// 		" SELECT "
+	// 		." 		daily_salary "
+	// 		." FROM "
+	// 		."		user_table "
+	// 		." WHERE "
+	// 		." 		input_date "
+	// 		." BETWEEN "
+	// 		." 		date_format(now(), '%Y-%m-01') "
+	// 		." AND "
+	// 		." 		date_format(now(), '%Y-%m-%d') "
+	// 		;
+	// 		// 현재 달의 1일과 마지막일사이에 값이 있을 경우의 조건문
+	// 	try {
+	// 		$stmt = $conn->query($sql);
+	// 		$result = $stmt->fetchAll();
+	// 		return $result;
+	// 	}
+	// 	catch(Exception $e) {
+	// 		return false;
+	// 	} 
+	// }
 
 	// ----------------------------
 	// 함수명 	: db_select_user_table_all
@@ -197,15 +198,15 @@
 			;
 
 			$arr_ps = [
-				":date1" => $arr_param["date"]
-				,":date2" => $arr_param["date"]
+				":date1" => $arr_param["date1"]
+				,":date2" => $arr_param["date2"]
 			];
 
 		try {
 			$stmt = $conn->prepare($sql);
 			$stmt->execute($arr_ps);
 			$result = $stmt->fetchAll();
-			return $result; // 
+			return $result;
 		}
 		catch(Exception $e) {
 			return false;
@@ -215,7 +216,7 @@
 
 	// ----------------------------
 	// 함수명 	: db_select_amount_used
-	// 기능 	: user_table 유저 일일 급여 조회
+	// 기능 	: user_table 유저 일일 사용 금액 조회
 	// 파라미터 : PDO 		&$conn
 	// 			: Array 	&$arr_param | 쿼리 작성용 배열
 	// 리턴 	: Array / false

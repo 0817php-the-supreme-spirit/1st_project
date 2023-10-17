@@ -10,6 +10,7 @@ $arr_err_msg = [];
 // var_dump($id2);
 
 try{
+	//db 접속
 	if(!db_conn($conn)) {
 		// DB Instance 에러
 		throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
@@ -58,16 +59,16 @@ try{
 		if($create_date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-		if(count($arr_err_msg) === 0) {
+		// if(count($arr_err_msg) === 0) {
 			// if(count($arr_err_msg)>=1){
 			// 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 			// 	exit;
 			// }
 
-			//트랜잭션 시작
-			$conn->beginTransaction();
-
 			if(count($arr_err_msg) === 0) {
+
+				//트랜잭션 시작
+				$conn->beginTransaction();
 
 				//카테고리 값 불러오기
 				if( $category_id === ""){
@@ -102,7 +103,7 @@ try{
 				//업데이트 완료 후 디테일 페이지로 이동
 				header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
 				exit;
-			}
+			
 		}
 	}
 
@@ -130,8 +131,8 @@ try{
 	// if($http_method === "POST") {
 	// $conn->rollBack();
 	// }
-	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 	$e->getMessage(); // Exception 메세지 출력
+	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 	exit;
 }finally{
 	db_destroy_conn($conn);
@@ -199,7 +200,6 @@ try{
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
-						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 							<?php
 								foreach($arr_err_msg as $val){
 							?>
@@ -207,6 +207,7 @@ try{
 							<?php		
 								}
 							?>
+						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
 							<select name="category_id" class="update-category">
 							<?php if($item["category_name"] == "life") { ?>
