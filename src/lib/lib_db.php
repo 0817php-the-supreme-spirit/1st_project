@@ -93,14 +93,6 @@
 		}
 	}
 
-	<?php
-	foreach($arr_err_msg as $val){
-?>
-		<p class="update-error"><?php echo $val; ?></p></br>
-<?php		
-	}
-?>
-
 	// ----------------------------
 	// 함수명 	: db_select_search
 	// 기능 	: 1st_project 해당 날짜와 카테고리 게시물 조회
