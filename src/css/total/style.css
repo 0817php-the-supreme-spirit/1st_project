@@ -487,5 +487,11 @@ summary::marker {
 }
 /* ------------------------------------------------------------------------ */
 
+summary div:hover {
+	background-color: #57BCA9;
+	color: #fff;
+    transition-duration: 0.3s;
+	box-shadow: 0 14px 28px rgba(107, 107, 107, 0.1), 0 10px 10px rgba(117, 117, 117, 0.1);
+}
 
 
