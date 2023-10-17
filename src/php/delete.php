@@ -27,7 +27,8 @@ try {
 		//파라미터에서 받아올 date, id의 값
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
-		//date는 빈값이 될수가 없으니까?되면안되니까?
+		//trim은 공백을 없애주고 값만 가지고 오게한다.
+		//date는 빈값이 되면 안됨.
         $id = isset($_GET["id"]) ? $_GET["id"] : "";
 
         if($id === "") {
@@ -59,7 +60,7 @@ try {
             throw new Exception("DB Error : Select id");
 			// 에러메세지로 얘를 보내주겠다
         } else if(!(count($result) === 1)) {
-			//또는 함수의 결과 값이 1개가 아닐때(디테일페이지 표시는 1항목만 가능하니까)
+			//또는 함수의 결과 값이 1개가 아닐때(디테일페이지 표시는 1항목만 가능하니까 조건걸어줌)
             throw new Exception("DB Error : Select id Count");
 			//에러메세지
         }
@@ -86,12 +87,13 @@ try {
 			//에러메세지가 하나 이상이 되면
             throw new Exception(implode("<br>", $arr_err_msg));
 			//여러 메세지를 출력하기 위해서 정리해주기! implode함수를 사용하여.
+			//implode:배열에 속한 문자열을 하나의 문자열로 만드는 함수
         }
 
 	
         //트랜젝션 시작
         $conn->beginTransaction();
-		//트랜젝션: 연산작업의 단위 , 데이터베이스 변동?실행시 필요함. 그래서 insert,delete,update에서 사용하는것.
+		//트랜젝션: 연산작업의 단위 , 데이터베이스 변동후 실행시 필요함. 그래서 insert,delete,update에서 사용하는것.
 		//얘로 안묶어주면 데이터가 이상해짐.
 
         //게시글 정보 삭제
@@ -112,6 +114,7 @@ try {
         exit;
     }
 
+	// 우측 사이드바 소비한 벨의 값 출력을 위해
 	require_once(ROOT."php/amount.php");
 
 } catch(Exception $e) {
@@ -119,6 +122,7 @@ try {
         $conn->rollBack();
     }
     //echo $e->getMessage(); // 에러메세지 출력
+	//에러페이지 없어서 안씀
     //header("Location: error.php/?err_msg={$e->getMessage()}");
     exit; // 처리종료
 } finally {

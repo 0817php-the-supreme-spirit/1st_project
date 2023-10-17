@@ -64,9 +64,9 @@ function db_delete_date_id(&$conn, &$arr_param) {
 			];
 			
 		try {
-			$stmt = $conn->prepare($sql);
-			$stmt->execute($arr_ps);
-			$result = $stmt->fetchAll();
+			$stmt = $conn->prepare($sql);//prepare는 메소드(실행준비하는 메소드)
+			$stmt->execute($arr_ps);//인스턴스화(->) 해서 execute로 실행하게 함.
+			$result = $stmt->fetchAll();//fetchAll:연관배열로 만들어준다
 			return $result;
 		}
 		catch(Exception $e) {
@@ -100,8 +100,9 @@ function db_conn( &$conn )
 			,PDO::ATTR_ERRMODE 				=> PDO::ERRMODE_EXCEPTION
 			,PDO::ATTR_DEFAULT_FETCH_MODE 	=> PDO::FETCH_ASSOC
 			];
-		
+		//PDO란 여러 데이터베이스를 제어하는 방법을 표준화시킨 것
 			$conn = new PDO($db_dns, $db_user, $db_pw, $db_options);
+			//클래스인 PDO를 쉽게 활용하기위해? $conn에 담아줌
 			return true;
 		}
 		catch (Exception $e)
