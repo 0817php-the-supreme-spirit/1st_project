@@ -8,17 +8,19 @@ require_once(ROOT."lib/lib_db.php"); //db파일 불러오기
 $arr_err_msg = [];//추후 에러메세지를 받기위한 빈배열 세팅
 
 // TRY문 시작
+//기본적으로 예외처리 if-else문 만으로 가능함. 
+//하지만 예외발생시 처리방법에 일관성(이말은, 에러메세지출력하는건가?)이 있으면 간결한 코드 작성가능.
 try {
     //2. db connect
     //2-1. connection 함수 호출
     $conn=null; // PDO 객체 변수
     if(!db_conn($conn)) {
-		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
+		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력할거 던짐)
         throw new Exception("DB Error : PDO Instance");
     }
 
     // METHOD 획득 >> 슈퍼글로벌안의 변수는 건드리면 안되기 때문에 변수에 담아준다.(혹시 모를 경우)
-    $http_method = $_SERVER["REQUEST_METHOD"];
+    $http_method = $_SERVER["REQUEST_METHOD"];//REQUEST_METHOD == 요청방식 == 서버에게 네트워크로 어떤 명령을 보낼 때의 방식..?
 
 	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
     if($http_method === "GET") {
