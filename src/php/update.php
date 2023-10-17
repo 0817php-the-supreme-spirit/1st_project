@@ -6,8 +6,7 @@ require_once(ROOT."lib/lib_db.php");
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = [];
-// $id2 = (int)$_GET["id"];
-// var_dump($id2);
+
 
 try{
 	//db 접속
@@ -17,8 +16,9 @@ try{
 	}
 
 	if ($http_method === "GET") {
-		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
+		$id = isset($_GET["id"]) ? trim($_GET["id"]) : ""; //get일 경우 아이디 값 세팅
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d'); //기본 날짜 세팅
+		$category_id_get = isset($_GET[""]) ? trim($_GET[""]) : "";
 			
 		if($id === "" ) {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
@@ -131,13 +131,14 @@ try{
 	if($http_method === "POST") {
 	$conn->rollBack();
 	}
+
 	echo $e->getMessage(); // Exception 메세지 출력
-	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+	// header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 	exit;
+
 }finally{
 	db_destroy_conn($conn);
 }
-
 
 ?>
 
@@ -200,6 +201,7 @@ try{
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
+						<input type="hidden" name="category_id" value="<?php echo $id; ?>">
 							<?php
 								foreach($arr_err_msg as $val){
 							?>
