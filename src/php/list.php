@@ -18,7 +18,7 @@
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
 			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "GET_DATE");
             }
 			// 한달 급여가 입력되지 않은 경우 강제로 main 페이지 이동
 			if(db_user_salary_compare($conn) === 0)
@@ -36,7 +36,7 @@
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "사용");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "DATA");
 				}
 			}
 		} else {
@@ -45,7 +45,7 @@
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
 			
 			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "POST_DATE");
             }
 
 			if(count($arr_err_msg) === 0) {

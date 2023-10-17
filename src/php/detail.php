@@ -8,8 +8,6 @@
 	$arr_err_msg = []; // 에러 메세지 저장용
 	$result_text = ["잘하고 있어", "아직은 괜찮아", "소비 액수가 좀 큰대?", "잔고 감당 가능해?", "너 혹시 제정신이야?", "다음 달도텅장이다"];
 
-	
-
 	//try/catch/finally문 프로그램이 실행되는 도중 발생하는 예외를 처리하기 위해 사용.
 	try {
 		if(!db_conn($conn))//db연결확인
@@ -67,39 +65,7 @@
 		}
 		//post로 받을 경우
 		else {
-			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
-			//date값이 없을 경우 에러메세지 내겠다
-			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
-            }
 
-			//카테고리를 포스트로 받아오면(지금페이지에선 카테고리가 필요없긴하나 동적쿼리사용 때문에 남겨둠)
-			if(isset($_POST["category"])) {
-				$category = $_POST["category"];
-			}
-
-			//에러메세지 카운트해서 0이면
-			if(count($arr_err_msg) === 0) {
-				
-				//데이터 받아오고
-				$arr_param = [
-					"date" => $date
-					,"category" => $category
-				];
-
-				$result = db_select_search($conn, $arr_param);
-				//이함수에서 데이트와 카테고리값을 받아옴.동적 쿼리를 이용해서 카테고리값을 찾는  where문이 구동하지 않기 때문에 넣어줌
-				
-				// 왜 여기는 Exception을 사용한것인가!!>> 이부분은 개발자가 정해야함. 
-				//사용자가 잘못해서 생기는 에러가 아닌 서버에서 지정된 값에 대한 오류는 보이지 않게 처리하기 위해
-				if($result === false) {
-					throw new Exception("DB Error : select_search");
-				}
-				else if(!count($result) === 1) {
-					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
-					// throw new Exception("DB Error : select_date");
-				}
-			}
 		}
 		require_once(ROOT."php/amount.php");//공통페이지 불러옴 >> 오른쪽 사이드바
 	} catch(Exception $e) {
