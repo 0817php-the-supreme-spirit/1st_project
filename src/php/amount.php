@@ -1,6 +1,8 @@
 <?php 
 
-
+$user_days_percent = $user_days["daily_salary"] = 0;
+$amount_used_percent = $amount_used["amount_used"] = 0;
+$percent = 0;
 $arr_err_msg = [];
 
 	if(!db_conn($conn)) {
@@ -48,7 +50,7 @@ $arr_err_msg = [];
 		$amount_used_percent = $amount_used["amount_used"];
 
 		// 사용 금액의 퍼센트를 구하는 계산식
-		$percent = ($amount_used_percent / $user_days_percent) * 100;
+		// $percent = ($amount_used_percent / $user_days_percent) * 100;
 
 		// 실수가 아닌 정수로 값을 보기 위해 데이터타입 변환
 		$percent = (int)$percent;

@@ -94,7 +94,7 @@
 		<div class="input-box">
 			<div class="input-box-int">
 				<form action="/1st_project/src/php/main.php" method="post">
-					<input type="number" name="monthly_salary" id="monthly_salary" placeholder="<?php if($arr_err_msg == 0) { ?> 한달 급여를 입력해주세요 <?php } else { foreach($arr_err_msg as $val) { ?><?php echo $val; ?><?php } } ?>" required>
+					<input type="number" name="monthly_salary" id="monthly_salary" placeholder="한달 급여를 입력해주세요" required>
 
 					<div class="start-btn">
 						<button type="sibmit">START</button>

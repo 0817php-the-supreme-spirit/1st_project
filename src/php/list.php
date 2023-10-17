@@ -24,10 +24,10 @@
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
 			// 한달 급여가 입력되지 않은 경우 강제로 main 페이지 이동
-			// if(db_user_salary_compare($conn) === 0)
-			// 	{
-			// 		header("Location: main.php");
-			// 	}
+			if(db_user_salary_compare($conn) === 0)
+				{
+					header("Location: main.php");
+				}
 
 			if(count($arr_err_msg) === 0) {
 
