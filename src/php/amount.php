@@ -1,8 +1,6 @@
 <?php 
 
-$user_days_percent = $user_days["daily_salary"] = 0;
-$amount_used_percent = $amount_used["amount_used"] = 0;
-$percent = 0;
+
 $arr_err_msg = [];
 
 	if(!db_conn($conn)) {
@@ -57,8 +55,9 @@ $arr_err_msg = [];
 		
 	}
 	else {
-
-
+		$user_days_percent = $user_days["daily_salary"] = 0;
+		$amount_used_percent = $amount_used["amount_used"] = 0;
+		$percent = 0;
 	}
 
 ?>
