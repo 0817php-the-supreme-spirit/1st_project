@@ -162,7 +162,7 @@ try {
 	}
 	require_once(ROOT."php/amount.php");
 	} catch(Exception $e) {
-		if($conn !== null) {
+		if($conn !== null) { //null값과 타입이 다르거나 값이 다르면 롤백
 			$conn->rollBack();
 		}
 		echo $e->getMessage(); //Exception 메세지 출력
@@ -250,7 +250,8 @@ try {
 							<p><?php 
 								$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
 								$selected = array_rand($randment);
-								echo $randment[$selected]; ?></p>
+								echo $randment[$selected];
+								?></p>
 								<!-- <p>벌써지출</p>
 								<p>할거에요?</p> -->
 							</div>

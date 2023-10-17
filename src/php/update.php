@@ -128,10 +128,10 @@ try{
 	
 } catch(Exception $e) {
 
-	// if($http_method === "POST") {
-	// $conn->rollBack();
-	// }
-	$e->getMessage(); // Exception 메세지 출력
+	if($http_method === "POST") {
+	$conn->rollBack();
+	}
+	echo $e->getMessage(); // Exception 메세지 출력
 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
 	exit;
 }finally{

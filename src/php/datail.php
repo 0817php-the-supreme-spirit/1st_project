@@ -7,55 +7,68 @@
 	$http_method = $_SERVER["REQUEST_METHOD"];
 	$arr_err_msg = []; // 에러 메세지 저장용
 
+	//try/catch/finally문 프로그램이 실행되는 도중 발생하는 예외를 처리하기 위해 사용.
 	try {
-		if(!db_conn($conn))
+		if(!db_conn($conn))//db연결확인
 		{
 			//강제 예외 발생 : DB Instance
+			//연결안되면 에러코드를 던져준다(throw). new(클래스불러오기),Exception()은 클래스임.
 			throw new Exception("DB Error : PDO Instance");
 		}
+		//list페이지의 정보를 가지고 옴.
 		if($http_method === "GET") {
+			//확인해야할 값
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 			$id = isset($_GET["id"]) ? $_GET["id"] : "";
 
+			//값을 못 받아올 경우 에러메세지 발생
 			if($id === "" ) {
 				$arr_err_msg[] = "Parameter Error : id";
 			}
 			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
+                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");//sprintf:출력하는 함수같은건데 에러메세지 상수 설정해놈.
             }
 
+			//에러메세지가 0이면 list페이지 갖고오기 실행!	
 			if(count($arr_err_msg) === 0) {
+				//에러메세지가 0개일 때 데이트 값을 받아오고 실행하자(date값을 받아오는 이유는 함수에서 그렇게 받아왔으니까!!)
 				$arr_param = [
 					"date" => $date
 				];
 
-				$result = db_select($conn, $arr_param);
+				$result = db_select($conn, $arr_param);//게시물 조회 함수. 이 함수를 실행해야 list페이지의 정보를 받아 올 수 있음 
 
+				//값을 못받아올 경우 에러처리! 함수도 확인해야함.
 				if(!$result)
 				{
 					throw new Exception("DB Error : SELECT boards");
 				}
+				//에러 없으면 id값 받아오고(여기도 id값 받아오는 이유는 함수에서 받아오니까!!)
 				$arr_param = [
 					"id" => $id
 				];
 		
+				//함수 실행함
 				$result = db_select_id($conn, $arr_param);
 
-				if(!(count($result) === 1)) {
-					throw new Exception("DB Error : Select id Count");
+				if(!(count($result) === 1)) { //id값은 여러개 중복될 수 없으니까! 하나만 와야함.
+					throw new Exception("DB Error : Select id Count");//이 함수는 리스트페이지의 게시물 id값
 				}
 		
-				else if($result === false) {
+				else if($result === false) { //또 실패하면 이 에러를 발생하게따!!
 					throw new Exception("DB Error : Select id");
 				}
 
-				$item = $result[0];
+				//함수의 첫번째 방에 있는 값을 변수에 담아준다
+				$item = $result[0]; //이렇게 안하면 $result[0]["title"]이렇게 일일히 지정해 주어야하기 때문에 편의성을 위해 [0]번방을 $item에 담아준것.
 
 			}
 		}
+		//post로 받을 경우
 		else {
 			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
 
+			//해당 구문은 값확인용으로 만들었고 사용하지 않아 주석처리함. 마지막 작업시 주석처리 내용 삭제예정
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
