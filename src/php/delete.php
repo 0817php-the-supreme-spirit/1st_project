@@ -25,7 +25,7 @@ try {
 	// detail page에서 get으로 출력될 때 삭제 버튼 클릭 시
     if($http_method === "GET") {
 		//파라미터에서 받아올 date, id의 값
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
 		//삼항연산자 사용, date값이 참이면 trim date를 반환, 거짓이면 현재 date를 반환
 		//trim은 공백을 없애주고 값만 가지고 오게한다.
 		//date는 빈값이 되면 안됨.
@@ -67,14 +67,11 @@ try {
         $item = $result[0];
 		// result[0]방에 담아준것을 item변수에 담겠다
 
-
-
-
     } else {
         //3-2. post일 경우 (삭제버튼 클릭시)
         //파라미터 id, date획득
         $id = isset($_POST["id"]) ? $_POST["id"] : "";
-		$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
+		$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
         $arr_err_msg = [];
 		//에러메세지 받아오기
         if($id === "") {
@@ -129,9 +126,7 @@ try {
     db_destroy_conn($conn);
 }
 
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -142,14 +137,11 @@ try {
 		<link rel="stylesheet" href="/1st_project/src/css/side/style.css">
 		<title>아껴봐요 절약의 숲 삭제 페이지</title>
 	</head>
-
 	<body>
-
 		<main>
 			<div class="header">
 				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
 			</div>
-
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="/1st_project/src/php/list.php" method="post">
@@ -169,30 +161,13 @@ try {
 
 					<div class="side-left-line-2"></div>
 
-					<!-- <form action="" method="post">
-						<input type="radio" name="category" id="category1">
-						<label for="category1" class="category-box">전체 비용</label>
-				
-						<input type="radio" name="category" id="category2">
-						<label for="category2" class="category-box">생활 비용</label>
-				
-						<input type="radio" name="category" id="category3">
-						<label for="category3" class="category-box">활동 비용</label>
-				
-						<input type="radio" name="category" id="category4">
-						<label for="category4" class="category-box">멍청 비용</label>
-					</form> -->
-
 					<div class="img-left-box">
-						
 					</div>
-
 				</div>
 			</div>
 
 			<div class="content">
 				<div class="content-box">
-					
 						<div class="box1">
 							<h1>리스트를 <span>삭제</span>하시겠습니까?</h1>
 							<p>삭제 후 복구할 수 없습니다.</p>
@@ -224,9 +199,8 @@ try {
 							<span class="box5-1">일일 사용 금액 : <?php echo number_format($item["amount_used"])?></span> 
 							<span class="box5-2">일일 잔여 금액 : <?php echo number_format($user_days["daily_salary"] - $item["amount_used"])?></span>
 						</div>
-					
-				<br>
-				<br>
+					<br>
+					<br>
 					<div class="box6">
 						<form action="/1st_project/src/php/delete.php" method="post">
 							<input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -237,9 +211,7 @@ try {
 					</div>
 				</div>
 			</div>
-
 			<?php require_once(ROOT."php/side.php") ?>
 		</main>
-		
 	</body>
 </html>

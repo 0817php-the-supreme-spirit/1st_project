@@ -6,8 +6,6 @@ define("ERROR_MSG_PARAM", "해당 값을 찾을 수 없습니다.");
 $conn = null; 
 $http_method = $_SERVER["REQUEST_METHOD"]; //REQUEST == 요청 METHOD == 방식
 $arr_err_msg = []; // 에러 메세지 저장
-
-
 // =--------------------------------------------------------------------------------
 // $title = "";
 // $memo = "";
@@ -97,22 +95,27 @@ $arr_err_msg = []; // 에러 메세지 저장
 
 // }
 // =--------------------------------------------------------------------------------
+	try {
 
-try {
 	if(!db_conn($conn)) {
 		// DB Instance 에러
 		throw new Exception("DB Error : PDO Instance");
 	}
 	
 	if($http_method === "GET") {
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+	$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
+
+	if(db_user_salary_compare($conn) === 0)
+	{
+		header("Location: main.php");
 	}
-	else {
+	
+	} else {
 		// $arr_post = $_POST;
 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
-		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
+		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
-        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null; 
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : ""; 
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
@@ -131,15 +134,11 @@ try {
 		if($category_id === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "category_id");
 		}
+
 		//넘어와서 (오류값이 안뜰때) 값이 0일때 if문 실행
 		if(count($arr_err_msg) === 0) {
-
 			// DB 접속
-
 			$conn ->beginTransaction(); //트랜잭션 시작 하는 부분
-
-			
-
 			// 게시글 작성을 위해 파라미터 셋팅
 			$arr_post = [
 				"title" => $_POST["title"]
@@ -160,7 +159,9 @@ try {
 			exit;
 		}
 	}
+	
 	require_once(ROOT."php/amount.php");
+	
 	} catch(Exception $e) {
 		if($conn !== null) { //null값과 타입이 다르거나 값이 다르면 롤백
 			$conn->rollBack();
@@ -184,9 +185,7 @@ try {
 		<link rel="stylesheet" href="/1st_project/src/css/side/style.css">
 		<title>아껴봐요 절약의 숲 작성 페이지</title>
 	</head>
-
 	<body>
-
 		<main>
 			<div class="header">
 				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
@@ -227,11 +226,11 @@ try {
 					</div>
 							<div class="content-title-box">
 								<label for="text-title" class="content-title-box1">제목</label>
-								<input type="text" name="title" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
+								<input type="text" name="title" id="text-title" class="content-title-box2" maxlength="25" required placeholder="뭘 샀는지 궁금해요!">
 							</div>
 							<div class="content-memo-box">
 								<label for="text-memo" class="content-memo-box1">메모</label>
-								<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="50" placeholder="메모도 중요해요!"></textarea>
+								<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="25" placeholder="메모도 중요해요!"></textarea>
 							</div>
 							
 						<div class="content-value-box">
@@ -243,17 +242,17 @@ try {
 										<option value="2">멍청비용</option>
 									</select>
 								<div class="content-category-money">
-									<input type="number" name="amount_used" id="amount_used" required placeholder="금액을 입력해 주세요">
+									<input type="number" name="amount_used" id="amount_used" min="1" maxlength="6" required placeholder="금액을 입력해 주세요">
 								</div>
 							</div>
 							<div class="content-float2">
-							<p><?php 
-								$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
-								$selected = array_rand($randment);
-								echo $randment[$selected];
-								?></p>
-								<!-- <p>벌써지출</p>
-								<p>할거에요?</p> -->
+							<p>
+							<?php 
+							$randment = array("힘든 생활..", "우리 돈 없엉", "돈좀 쓰네?", "절약하자!!", "그만써~~!");
+							$selected = array_rand($randment);
+							echo $randment[$selected];
+							?>
+							</p>
 							</div>
 						</div>
 						<div class="content-button">
@@ -263,9 +262,7 @@ try {
 					</div>
 				</div>
 			</div>
-
 			<?php require_once(ROOT."php/side.php") ?>
 		</main>
-		
 	</body>
 </html>

@@ -14,7 +14,7 @@
 			throw new Exception("DB Error : PDO Instance");
 		}
 		if($http_method === "GET") {
-			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
 
 			// 달에 대한 결과 값
 			$date_sum = db_user_salary_date_sum($conn);

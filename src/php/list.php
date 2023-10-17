@@ -1,13 +1,11 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "값을 찾을 수 없습니다.");
+	define("ERROR_MSG_PARAM", "%s값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
-	$arr_err_msg = []; // 에러 메세지 저장용
-
-	$item = ["amount_used" => 0];
+	$arr_err_msg = []; // 배열 초기화
 
 	try {
 		if(!db_conn($conn))
@@ -15,19 +13,18 @@
 			//강제 예외 발생 : DB Instance
 			throw new Exception("DB Error : PDO Instance");
 		}
-
 		if($http_method === "GET") {
-			
+		
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
             }
 			// 한달 급여가 입력되지 않은 경우 강제로 main 페이지 이동
-			// if(db_user_salary_compare($conn) === 0)
-			// 	{
-			// 		header("Location: main.php");
-			// 	}
+			if(db_user_salary_compare($conn) === 0)
+				{
+					header("Location: main.php");
+				}
 
 			if(count($arr_err_msg) === 0) {
 
@@ -39,33 +36,19 @@
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					throw new Exception("DB Error : db_select");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "사용");
 				}
-
-				$arr_param = [
-					"date" => $date
-				];
 			}
-		}
-
-		else {
-			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
+		} else {
+			$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
 
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
-			
-			// // 동적 쿼리를 위해 카테고리를 받을 빈 배열 생성
-			// $category = [];
 			
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
 
-			if(isset($_POST["category"])) {
-				$category = $_POST["category"];
-			}
-
 			if(count($arr_err_msg) === 0) {
-
 				$arr_param = [
 					"date" => $date
 					,"category" => $category
@@ -77,28 +60,16 @@
 				if($result === false) {
 					throw new Exception("DB Error : select_search - false");
 				}
-
-				// else if(count($result) === 0) {
-				// 	throw new Exception("DB Error : select_search - 0");
-				// 	// throw new Exception("DB Error : select_date");
-				// }
-				
 			}
 		}
-
 		require_once(ROOT."php/amount.php");
-		
-	}
-	catch(Exception $e) {
+	} catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
 		exit; // 처리 종료
-	}
-	finally {
+	} finally {
 		db_destroy_conn($conn); // DB 파기
 	}
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -119,9 +90,6 @@
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="/1st_project/src/php/list.php" method="post">
-							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<!-- date값을 보내주기 위함 보내 주는 값의 키값은 name가 되고 사용자가 지정한 date값은 값이 된다. -->
-							<!-- 해당 부분에 hidden이 필요한가? -->
 							<label class="date-label">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>
@@ -182,9 +150,7 @@
 						</tr>
 					<?php } ?>
 						
-					<?php 
-						foreach($result as $item) {
-					?>
+					<?php foreach($result as $item) { ?>
 						<tr>
 							<!-- if문을 통해 카테고리 값에 따라 이미지 변경 -->
 							<td class="content-categort-box">
@@ -199,15 +165,11 @@
 							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo number_format($item["amount_used"]), "원"; ?></td>
 						</tr>
-					<?php 
-						}
-					?>
+					<?php } ?>
 					</table>
 				</div>
 			</div>
-
 			<?php require_once(ROOT."php/side.php") ?>
 		</main>
-		
 	</body>
 </html>
