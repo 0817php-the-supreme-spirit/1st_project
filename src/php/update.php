@@ -7,6 +7,8 @@ $true_conn = false;
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = [];
+
+
 	try{
 		//db 접속
 		if(!db_conn($conn)) {
@@ -15,8 +17,10 @@ $arr_err_msg = [];
 		}
 		if ($http_method === "GET") {
 			$id = isset($_GET["id"]) ? trim($_GET["id"]) : ""; //get일 경우 아이디 값 세팅
+			$id = isset($_GET["id"]) ? trim($_GET["id"]) : ""; //get일 경우 아이디 값 세팅
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : ""; //기본 날짜 세팅
-				
+			
+
 			if($id === "" ) {
 				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
 			}
