@@ -552,4 +552,6 @@ input[type="number"]::-webkit-inner-spin-button {
 	text-align: center;
 	font-size: 2rem;
 	color: #2CAE92;
+	margin-top: 10px;
+	margin-bottom: -50px;
 }
