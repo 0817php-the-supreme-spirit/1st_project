@@ -6,6 +6,9 @@
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
 	$arr_err_msg = []; // 에러 메세지 저장용
+	$result_text = ["잘하고 있어", "아직은 괜찮아", "소비 액수가 좀 큰대?", "잔고 감당 가능해?", "너 혹시 제정신이야?", "다음 달도텅장이다"];
+
+	
 
 	//try/catch/finally문 프로그램이 실행되는 도중 발생하는 예외를 처리하기 위해 사용.
 	try {

@@ -162,7 +162,7 @@
 									<img src="/1st_project/src/img/stupid.png">
 								<?php } ?>
 							</td>
-							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/datail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
+							<td class="content-title-box content-title-box-hover"><a href="/1st_project/src/php/detail.php/?id=<?php echo $item["id"]; ?>&date=<?php echo $date;?>"><?php echo $item["title"]?></a></td>
 							<td class="content-amount-box"><?php echo number_format($item["amount_used"]), "원"; ?></td>
 						</tr>
 					<?php } ?>
