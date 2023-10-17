@@ -1,13 +1,13 @@
 <?php
 	define("ROOT",$_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 	require_once(ROOT."lib/lib_db.php");
-	define("ERROR_MSG_PARAM", "값을 찾을 수 없습니다.");
+	define("ERROR_MSG_PARAM", "%s값을 찾을 수 없습니다.");
 
 	$conn = null;
 	$http_method = $_SERVER["REQUEST_METHOD"];
-	$arr_err_msg = []; // 에러 메세지 저장용
+	$arr_err_msg = []; // 배열 초기화
 
-	$item = ["amount_used" => 0];
+	// $item = ["amount_used" => 0];
 
 	try {
 		if(!db_conn($conn))
@@ -39,7 +39,7 @@
 				$result = db_select($conn, $arr_param);
 
 				if(!$result) {
-					throw new Exception("DB Error : db_select");
+					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "사용");
 				}
 
 				$arr_param = [
@@ -53,16 +53,13 @@
 
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
 			
-			// // 동적 쿼리를 위해 카테고리를 받을 빈 배열 생성
-			// $category = [];
-			
 			if($date === "") {
                 $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date3");
             }
 
-			if(isset($_POST["category"])) {
-				$category = $_POST["category"];
-			}
+			// if(isset($_POST["category"])) {
+			// 	$category = $_POST["category"];
+			// }
 
 			if(count($arr_err_msg) === 0) {
 
@@ -119,9 +116,6 @@
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="/1st_project/src/php/list.php" method="post">
-							<!-- <input class="date-box" type="date" required value={props.date} onChange={props.changeHandler}> -->
-							<!-- date값을 보내주기 위함 보내 주는 값의 키값은 name가 되고 사용자가 지정한 date값은 값이 된다. -->
-							<!-- 해당 부분에 hidden이 필요한가? -->
 							<label class="date-label">
 								<input class="date-box" type="date" id="date" name="date" value="<?php echo $date; ?>">
 								<button class="date-btn" type="sibmit"><img src="/1st_project/src/img/date.png" alt=""></button>

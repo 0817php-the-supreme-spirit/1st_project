@@ -38,7 +38,7 @@
 				// date('t') : 해당 달의 전체 일수 | date('d') 현재 일수
 				$days = date('t')-date('d');
 
-				// 한 달급여를 남은 일수 만큼 나눔
+				// 한 달급여를 남은 일수 만큼 나눠
 				$daily_salary = $monthly_salary / $days;
 
 				$daily_salary = (int)$daily_salary;
@@ -94,7 +94,7 @@
 		<div class="input-box">
 			<div class="input-box-int">
 				<form action="/1st_project/src/php/main.php" method="post">
-					<input type="number" name="monthly_salary" id="monthly_salary" placeholder="한달 급여를 입력해주세요">
+					<input type="number" name="monthly_salary" id="monthly_salary" placeholder="<?php if($arr_err_msg == 0) { ?> 한달 급여를 입력해주세요 <?php } else { foreach($arr_err_msg as $val) { ?><?php echo $val; ?><?php } } ?>" required>
 
 					<div class="start-btn">
 						<button type="sibmit">START</button>

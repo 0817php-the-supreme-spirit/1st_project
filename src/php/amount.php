@@ -29,12 +29,12 @@ $arr_err_msg = [];
 	$user_data = db_select_user_table_all($conn, $arr_param);
 
 	if($user_data === false) {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "data");
+		throw new Exception("DB Error : db_select_user_table_all");
 	}	
 
 	
 	if(count($user_data) == 0) {
-		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "data");
+		$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "급여");
 	}	
 
 	if(count($arr_err_msg) === 0) {

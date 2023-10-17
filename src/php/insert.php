@@ -104,8 +104,16 @@ try {
 		throw new Exception("DB Error : PDO Instance");
 	}
 	
+
+
 	if($http_method === "GET") {
 		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+
+		if(db_user_salary_compare($conn) === 0)
+	{
+		header("Location: main.php");
+	}
+	
 	}
 	else {
 		// $arr_post = $_POST;
@@ -160,7 +168,10 @@ try {
 			exit;
 		}
 	}
+	
 	require_once(ROOT."php/amount.php");
+
+	
 	} catch(Exception $e) {
 		if($conn !== null) { //null값과 타입이 다르거나 값이 다르면 롤백
 			$conn->rollBack();

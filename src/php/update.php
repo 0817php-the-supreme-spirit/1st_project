@@ -59,11 +59,10 @@ try{
 		if($create_date === "") {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 		}
-		// if(count($arr_err_msg) === 0) {
-			// if(count($arr_err_msg)>=1){
-			// 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
-			// 	exit;
-			// }
+
+			if(count($arr_err_msg)>=1){
+				header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+			}
 
 			if(count($arr_err_msg) === 0) {
 
