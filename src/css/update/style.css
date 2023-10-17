@@ -335,6 +335,7 @@ input[type="radio"]:checked + label {
 .content-box {
 	text-align: center;
 	color: #2CAE92;
+	font-size: 30px;
 }
 .content-box>form {
 	margin-top: 15px;
@@ -356,6 +357,7 @@ select {
 		line-height: 104px;
 		margin-top: 30px;
 		color: #2CAE92;
+		font-size: 30px;
 }
 select:focus {
 	outline: 0;
@@ -400,6 +402,7 @@ select:hover {
 	line-height: 100px;
 	cursor: pointer;
 	box-sizing: border-box;
+	font-size: 30px;
 }
 
 .update-date[type='date']::-webkit-calendar-picker-indicator {
