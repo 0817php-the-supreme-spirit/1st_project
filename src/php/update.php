@@ -3,6 +3,7 @@ define("ROOT", $_SERVER["DOCUMENT_ROOT"]."/1st_project/src/");
 define("ERROR_MSG_PARAM", "%s은 필수 입력값입니다."); //파라미터 에러 메세지
 require_once(ROOT."lib/lib_db.php");
 
+$true_conn = false;
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = [];
@@ -13,25 +14,26 @@ $arr_err_msg = [];
 			throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
 		}
 		if ($http_method === "GET") {
-			$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
+			$id = isset($_GET["id"]) ? trim($_GET["id"]) : ""; //get일 경우 아이디 값 세팅
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : ""; //기본 날짜 세팅
 				
 			if($id === "" ) {
-				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
+				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "id");
 			}
 			if($date === "") {
 				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 			}
 
-			if(count($arr_err_msg) >= 1){
-				throw new Exception(implode("<br>", $arr_err_msg));
-			}
+			if(count($arr_err_msg) >= 1) {
+                throw new Exception(implode("<br>", $arr_err_msg));
+            }
+
 		}
 		else {
 			$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
 			$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
 			$title = isset($_POST["title"]) ? trim($_POST["title"]) : ""; //title 세팅
-			$memo = isset($_POST["memo"]) ? trim($_POST["memo"]) : null; //memo 값 없을 시 null 세팅
+			$memo = isset($_POST["memo"]) ? trim($_POST["memo"]) : ""; //memo 값 없을 시 null 세팅
 			$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : ""; //사용한 금액 세팅
 			$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //날짜 세팅
 			$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : ""; //카테고리 id 세팅
@@ -53,15 +55,11 @@ $arr_err_msg = [];
 			if($create_date === "") {
 				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 			}
-
-			if(count($arr_err_msg)>=1){
-				header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
-			}
+			
 
 			if(count($arr_err_msg) === 0) {
-
 				//트랜잭션 시작
-				$conn->beginTransaction();
+				$true_conn = $conn->beginTransaction();
 
 				//카테고리 값 불러오기
 				if( $category_id === ""){
@@ -116,12 +114,14 @@ $arr_err_msg = [];
 		require_once(ROOT."php/amount.php");
 		
 	} catch(Exception $e) {
-
 		if($http_method === "POST") {
-		$conn->rollBack();
+			echo $e->getMessage();
+			if($conn_true === true)
+			{
+				$conn->rollBack();
+			}
 		}
-		echo $e->getMessage(); // Exception 메세지 출력
-		header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+		// header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}->getMessage()}");
 		exit;
 	}finally{
 		db_destroy_conn($conn);
@@ -141,10 +141,10 @@ $arr_err_msg = [];
 	</head>
 	<body>
 		<main>
-			<div class="header">
-				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1></a>
-			</div>
 
+			<div class="header">
+				<a href="/1st_project/src/php/main.php"><h1>: 아껴봐요 절약의 숲</h1> </a>
+			</div>
 			<div class="side-left">
 				<div class="side-left-box">
 					<form action="/1st_project/src/php/list.php" method="post">
@@ -173,13 +173,6 @@ $arr_err_msg = [];
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
-							<?php
-								foreach($arr_err_msg as $val){
-							?>
-									<p class="update-error"><?php echo $val; ?></p></br>
-							<?php		
-								}
-							?>
 						<input type="date" name="create_date" class="update-date" value="<?php echo $item["create_date"]; ?>">
 						<div class="update-category">
 							<select name="category_id" class="update-category">
@@ -203,9 +196,16 @@ $arr_err_msg = [];
 								<label for="update-title" id ="title1">제목</label>
 								<input type="text" name="title" id="update-title" placeholder="뭘 샀는지 궁금해요!" value="<?php echo $item["title"]; ?>">
 							</div>
+							<?php
+								foreach($arr_err_msg as $val){
+							?>
+									<p class="update-error"><?php echo $val; ?></p></br>
+							<?php		
+								}
+							?>
 							<div class="update-memo">
 								<label for="update-memo">메모</label>
-								<textarea name="memo" id="update-memo" cols="50" rows="1" maxlength="49"><?php echo $item["memo"]; ?></textarea>
+								<textarea name="memo" id="update-memo" cols="50" rows="1" maxlength="49" placeholder="메모는 선택 사항입니다."><?php echo $item["memo"]; ?></textarea>
 							</div>
 						</div>
 						<div class="update-spent">

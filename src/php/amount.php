@@ -1,8 +1,8 @@
 <?php 
-	$user_days_percent = $user_days["daily_salary"] = 0;
-	$amount_used_percent = $amount_used["amount_used"] = 0;
 	$percent = 0;
-	$arr_err_msg = [];
+
+	$amount_used = isset($user_days["daily_salary"]) ? trim($user_days["daily_salary"]) : 0;
+	$amount_used = isset($amount_used["amount_used"]) ? trim($amount_used["amount_used"]) : 0;
 
 	if(!db_conn($conn)) {
 		//예외 처리 (PDO 제대로 연결안되면? 에러메세지 출력?)
@@ -17,7 +17,7 @@
 	if($amount_used === false) {
 		throw new Exception("DB Error : select_user_table");
 	}
-	$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
+
 	
 	$amount_used = $amount_used[0];
 

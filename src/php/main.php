@@ -79,7 +79,7 @@
 				<form action="/1st_project/src/php/main.php" method="post">
 					<input type="number" name="monthly_salary" id="monthly_salary" placeholder="한달 급여를 입력해주세요" required>
 					<div class="start-btn">
-						<button type="sibmit">START</button>
+						<button>START</button>
 					</div>
 				</form>
 			</div>

@@ -175,7 +175,7 @@
 						</div>
 						<div class="content-memo-box-2">
 							<!-- 메모의 경우 빈값으로 남겨두었을때 문구출력과 입력값이 있을 때 출력값을 위해 if문 사용 -->
-							<p><?php if($item["memo"] == 0) {
+							<p><?php if($item["memo"] === "") {
 								echo "메모를 하지 않았어요";
 								}
 								else {

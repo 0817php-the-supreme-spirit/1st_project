@@ -46,7 +46,6 @@
 		$conn = null;
 	}
 
-
 	// ---------------------------- ---------------------------- ----------------------------
 	// // ******* list lib. *************
 
@@ -78,7 +77,7 @@
 				." ORDER BY "
 				." 		todo.id DESC "
 				;
-
+	
 		$arr_ps = [
 			":date" => $arr_param["date"]
 		];
@@ -93,6 +92,14 @@
 			return false; // 예외 발생 : flase 리턴
 		}
 	}
+
+	<?php
+	foreach($arr_err_msg as $val){
+?>
+		<p class="update-error"><?php echo $val; ?></p></br>
+<?php		
+	}
+?>
 
 	// ----------------------------
 	// 함수명 	: db_select_search
