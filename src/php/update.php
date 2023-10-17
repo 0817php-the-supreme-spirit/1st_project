@@ -6,6 +6,8 @@ require_once(ROOT."lib/lib_db.php");
 $conn = null;
 $http_method = $_SERVER["REQUEST_METHOD"];
 $arr_err_msg = [];
+
+
 	try{
 		//db 접속
 		if(!db_conn($conn)) {
@@ -13,9 +15,10 @@ $arr_err_msg = [];
 			throw new Exception("DB Error : PDO Instance"); //db가 연결되지 않을 경우 에러 출력
 		}
 		if ($http_method === "GET") {
-			$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
+			$id = isset($_GET["id"]) ? trim($_GET["id"]) : ""; //get일 경우 아이디 값 세팅
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : ""; //기본 날짜 세팅
-				
+			
+
 			if($id === "" ) {
 				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
 			}
@@ -54,9 +57,9 @@ $arr_err_msg = [];
 				$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "create_date");
 			}
 
-			if(count($arr_err_msg)>=1){
-				header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
-			}
+			// if(count($arr_err_msg)>=1){
+			// 	header("Location: /1st_project/src/php/update.php/?id={$id}&date={$date}");
+			// }
 
 			if(count($arr_err_msg) === 0) {
 
@@ -173,7 +176,6 @@ $arr_err_msg = [];
 				<div class="content-box">
 					<form action="/1st_project/src/php/update.php" method="POST">
 						<input type="hidden" name="id" value="<?php echo $id; ?>">
-						<input type="hidden" name="category_id" value="<?php echo $id; ?>">
 							<?php
 								foreach($arr_err_msg as $val){
 							?>
