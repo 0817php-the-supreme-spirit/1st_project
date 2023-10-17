@@ -22,6 +22,8 @@
 				{
 					header("Location: list.php");
 				}
+
+				exit;
 			
 			}
 
@@ -41,7 +43,7 @@
 				// 한 달급여를 남은 일수 만큼 나눠
 				$daily_salary = $monthly_salary / $days;
 
-				$daily_salary = (int)$daily_salary;
+				$daily_salary = ceil($daily_salary);
 				
 				if(count($arr_err_msg) === 0) {
 

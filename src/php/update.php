@@ -18,7 +18,7 @@ try{
 
 	if ($http_method === "GET") {
 		$id = isset($_GET["id"]) ? trim($_GET["id"]) : $_POST["id"]; //get일 경우 아이디 값 세팅
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d'); //기본 날짜 세팅
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : ""; //기본 날짜 세팅
 			
 		if($id === "" ) {
 			$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "title");
@@ -35,7 +35,7 @@ try{
 	}
 	else {
 		$id = isset($_POST["id"]) ? $_POST["id"] : ""; //post일 경우 id값 세팅
-		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d'); //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
+		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : ""; //수정할 때 날짜 세팅. 유저가 보내지 않을 경우 오늘 날짜
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : ""; //title 세팅
 		$memo = isset($_POST["memo"]) ? trim($_POST["memo"]) : null; //memo 값 없을 시 null 세팅
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : ""; //사용한 금액 세팅

@@ -49,7 +49,7 @@
 		}
 
 		else {
-			$date = isset($_POST["date"]) ? trim($_POST["date"]) : date('Y-m-d');
+			$date = isset($_POST["date"]) ? trim($_POST["date"]) : "";
 
 			$category = isset($_POST["category"]) ? trim($_POST["category"]) : "";
 			

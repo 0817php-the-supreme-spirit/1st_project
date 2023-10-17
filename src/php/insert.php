@@ -107,7 +107,7 @@ try {
 
 
 	if($http_method === "GET") {
-		$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+		$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
 
 		if(db_user_salary_compare($conn) === 0)
 	{
@@ -118,9 +118,9 @@ try {
 	else {
 		// $arr_post = $_POST;
 		//iset안에 함수 확인 트루일경우 삼항연산자 true 문 싫행 아닐경우 false 실행
-		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : date('Y-m-d');
+		$date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$title = isset($_POST["title"]) ? trim($_POST["title"]) : "";
-        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : null; 
+        $memo =isset($_POST["memo"]) ? trim($_POST["memo"]) : ""; 
 		$amount_used = isset($_POST["amount_used"]) ? trim($_POST["amount_used"]) : "";
 		$create_date = isset($_POST["create_date"]) ? trim($_POST["create_date"]) : "";
 		$category_id = isset($_POST["category_id"]) ? trim($_POST["category_id"]) : "";
@@ -238,11 +238,11 @@ try {
 					</div>
 							<div class="content-title-box">
 								<label for="text-title" class="content-title-box1">제목</label>
-								<input type="text" name="title" id="text-title" class="content-title-box2" required placeholder="뭘 샀는지 궁금해요!">
+								<input type="text" name="title" id="text-title" class="content-title-box2" maxlength="25" required placeholder="뭘 샀는지 궁금해요!">
 							</div>
 							<div class="content-memo-box">
 								<label for="text-memo" class="content-memo-box1">메모</label>
-								<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="50" placeholder="메모도 중요해요!"></textarea>
+								<textarea class="content-memo-box2" name="memo" id="text-memo" maxlength="25" placeholder="메모도 중요해요!"></textarea>
 							</div>
 							
 						<div class="content-value-box">
@@ -254,7 +254,7 @@ try {
 										<option value="2">멍청비용</option>
 									</select>
 								<div class="content-category-money">
-									<input type="number" name="amount_used" id="amount_used" required placeholder="금액을 입력해 주세요">
+									<input type="number" name="amount_used" id="amount_used" min="1" maxlength="6" required placeholder="금액을 입력해 주세요">
 								</div>
 							</div>
 							<div class="content-float2">

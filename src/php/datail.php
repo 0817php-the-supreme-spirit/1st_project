@@ -18,7 +18,7 @@
 		//list페이지의 정보를 가지고 옴.
 		if($http_method === "GET") {
 			//확인해야할 값
-			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
+			$date = isset($_GET["date"]) ? trim($_GET["date"]) : "";
 			$id = isset($_GET["id"]) ? $_GET["id"] : "";
 
 			//값을 못 받아올 경우 에러메세지 발생
@@ -39,7 +39,7 @@
 				$result = db_select($conn, $arr_param);//게시물 조회 함수. 이 함수를 실행해야 list페이지의 정보를 받아 올 수 있음 
 
 				//값을 못받아올 경우 에러처리! 함수도 확인해야함.
-				if(!$result)
+				if($result === false)
 				{
 					throw new Exception("DB Error : SELECT boards");
 				}
@@ -50,13 +50,13 @@
 		
 				//함수 실행함
 				$result = db_select_id($conn, $arr_param);
-
-				if(!(count($result) === 1)) { //id값은 여러개 중복될 수 없으니까! 하나만 와야함.
-					throw new Exception("DB Error : Select id Count");//이 함수는 리스트페이지의 게시물 id값
-				}
-		
-				else if($result === false) { //또 실패하면 이 에러를 발생하게따!!
+				
+				if($result === false) { //또 실패하면 이 에러를 발생하게따!!
 					throw new Exception("DB Error : Select id");
+				}
+
+				else if(!(count($result) === 1)) { //id값은 여러개 중복될 수 없으니까! 하나만 와야함.
+					throw new Exception("DB Error : Select id Count");//이 함수는 리스트페이지의 게시물 id값
 				}
 
 				//함수의 첫번째 방에 있는 값을 변수에 담아준다
@@ -102,7 +102,7 @@
 				if($result === false) {
 					throw new Exception("DB Error : select_search");
 				}
-				else if(count($result) === 0) {
+				else if(!count($result) === 1) {
 					$arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date");
 					// throw new Exception("DB Error : select_date");
 				}
@@ -165,9 +165,7 @@
 
 			<div class="content">
 				<div class="content-box">
-					<?php 
-						foreach($result as $item) { //foreach 사용한 이유는 배열을 반복처리하기 위해
-					?>
+					
 						<div class="content-date-box">
 							<span><?php echo $item["create_date"]; ?></span>
 						</div>
@@ -180,6 +178,7 @@
 								<?php }  else { ?>
 									<p>멍청 비용</p>
 								<?php } ?></span>
+								
 						</div>
 
 						<div class="content-title-box">
@@ -244,7 +243,7 @@
 								<?php } ?>
 							</div>
 						</div>
-					<?php } ?>
+
 
 					<div class="content-btn-box">
 
