@@ -16,61 +16,35 @@
 		if($http_method === "GET") {
 			$date = isset($_GET["date"]) ? trim($_GET["date"]) : date('Y-m-d');
 
-			$arr_param = [
-				"date" => $date
-			];
-	
-			// 데이터 베이스에서 유저의 사용 금액을 조회하는 함수
-			$amount_used = db_select_amount_used($conn, $arr_param);
-			if($amount_used === false) {
-				throw new Exception("DB Error : select_user_table");
-			}
-			$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-			
-			$amount_used = $amount_used[0];
-			
-
-			if($date === "") {
-                $arr_err_msg[] = sprintf(ERROR_MSG_PARAM, "date1");
-            }
-
+			// 달에 대한 결과 값
 			$date_sum = db_user_salary_date_sum($conn);
 			if($date_sum  === false) {
-				throw new Exception("DB Error : select_user_table");
+				throw new Exception("DB Error : db_user_salary_date_sum");
 			}
 
+			// 일에 대한 결과 값
 			$date_sum_day = db_user_salary_date_day($conn);
 			if($date_sum  === false) {
-				throw new Exception("DB Error : select_user_table");
+				throw new Exception("DB Error : db_user_salary_date_day");
 			}
-
-		}
-		else {
 
 			$arr_param = [
-				"date" => $date
+				"date1" => $date
+				,"date2" => $date
 			];
-	
+		
 			// 데이터 베이스에서 유저의 사용 금액을 조회하는 함수
-			$amount_used = db_select_amount_used($conn, $arr_param);
-			if($amount_used === false) {
+			$user_data = db_select_user_table_all($conn, $arr_param);
+			if($user_data === false) {
 				throw new Exception("DB Error : select_user_table");
 			}
-			$amount_used = isset($amount_used) ? $amount_used : "지출 없음";
-			
-			$amount_used = $amount_used[0];
-			
-
+	
+			require_once(ROOT."php/amount.php");
+		}
+		else {
+			// 통계 페이지에는 post가 사용되지 않음
 		}
 
-		$user_data = db_select_user_table($conn);
-		if($user_data === false) {
-			throw new Exception("DB Error : select_user_table");
-		}
-
-		require_once(ROOT."php/amount.php");
-
-		
 	}
 	catch(Exception $e) {
 		echo $e->getMessage(); // 예외발생 메세지 출력
