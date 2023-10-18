@@ -24,6 +24,7 @@
 			if(db_user_salary_compare($conn) === 0)
 				{
 					header("Location: main.php");
+					exit;
 				}
 
 			if(count($arr_err_msg) === 0) {

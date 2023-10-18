@@ -565,6 +565,8 @@
 		."			user_table usta "
 		."		ON "
 		."			DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m') "
+		." 		AND "
+		." 			delete_date IS NULL "
 		."		GROUP BY "
 		."			create_month "
 		;
@@ -599,6 +601,8 @@
 		."			user_table usta "
 		."		ON "
 		."			DATE_FORMAT(todo.create_date,'%Y-%m') = DATE_FORMAT(usta.input_date,'%Y-%m') "
+		." 		AND "
+		." 			delete_date IS NULL "
 		."		GROUP BY "
 		."			todo.create_date "
 		;
