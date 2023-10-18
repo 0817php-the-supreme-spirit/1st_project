@@ -19,8 +19,8 @@
 			if(db_user_salary_compare($conn) === 1)
 			{
 				header("Location: list.php");
+				exit;
 			}
-			exit;
 		}
 		else {
 			// 파라미터 획득
