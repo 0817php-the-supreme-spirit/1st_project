@@ -96,7 +96,7 @@ $arr_err_msg = [];
 				$conn->commit();
 
 				//업데이트 완료 후 디테일 페이지로 이동
-				header("Location: /1st_project/src/php/datail.php/?id={$id}&date={$date}");
+				header("Location: /1st_project/src/php/detail.php/?id={$id}&date={$date}");
 				exit;
 			}
 		}
@@ -218,7 +218,7 @@ $arr_err_msg = [];
 						</div>
 						<div class="update-button">
 							<button type="submit">수정확인</button>
-							<a href="/1st_project/src/php/datail.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정취소</a>
+							<a href="/1st_project/src/php/detail.php/?id=<?php echo $id; ?>&date=<?php echo $date; ?>">수정취소</a>
 						</div>
 					</form>
 				</div>
