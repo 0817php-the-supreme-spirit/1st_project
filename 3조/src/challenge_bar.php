@@ -33,6 +33,7 @@ try {
             <a href="insert.php" class="insert_button">+</a>
         </header>
         <section>
+            <!-- 위에 null 값은 완료하지않은 챌린지 클래스를 주기 위함, 아래는 완료된 챌린지에 주는 클래스 -->
             <?php
             foreach($challenge_bar as $item) {
                 if($item["c_com_at"] == null) { ?>

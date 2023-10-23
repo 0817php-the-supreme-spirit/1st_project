@@ -124,7 +124,8 @@
 							} // 1, 2, 3번까지 출력
 						?>
 							<div class="left_bottom_layout1">
-								<img class="left_emotion_size1" src='<?php echo IMGPATH.$item['em_path']; ?>'>
+								<!-- 1 : 아이콘, 2 : 랭크, 3 : 결과 값 -->
+								<img class="left_emotion_size1" src='<?php echo IMGPATH.$item['em_path']; ?>'> 
 								<img class="left_star_size1" src="/todolist/doc/img/star_<?php echo $i; ?>.png">
 								<p><?php echo $item['em_name']." : ".$item['cnt_em_id']; ?></p>
 							</div>
@@ -140,7 +141,7 @@
 							$y++;
 							if($y <=3) {
 								continue;
-							} // 4, 5번 출력
+							} // contiune를 통해 3번 넘어가고 4, 5번 출력 | db에 limit 5를 걸어놨기 때문에 5개만 
 						?>
 							<div class="left_bottom_layout2">
 								<img class="left_emotion_size2" src='<?php echo IMGPATH.$item['em_path']; ?>'>

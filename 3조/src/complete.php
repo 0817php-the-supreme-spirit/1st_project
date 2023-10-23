@@ -84,12 +84,12 @@ try {
 
           // 화면 표시용 데이터 배열에 데이터 삽입
           $arr_item = [
-                "create_id" => $item["create_id"]
-                ,"c_id" => $item["c_id"]
-                ,"c_created_at" => $item["c_created_at"]
-                ,"c_com_at" => $item["c_com_at"]
-                ,"c_name" => $item["c_name"]
-                ,"list" => $result1
+                "create_id" => $item["create_id"] // 생성 번호
+                ,"c_id" => $item["c_id"] // 사용 x
+                ,"c_created_at" => $item["c_created_at"] // 생성 날짜
+                ,"c_com_at" => $item["c_com_at"] // 완료 날짜
+                ,"c_name" => $item["c_name"] // 제목
+                ,"list" => $result1 // 챌린지 리스트 정보
           ];
 
           $data[] = $arr_item;
