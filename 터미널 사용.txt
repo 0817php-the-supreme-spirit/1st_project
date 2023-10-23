@@ -1,8 +1,0 @@
-
-
-xcopy 원본경로 카피경로 /E /Y
-
-xcopy D:\workspace\1st_project\src C:\Apache24\htdocs\1st_project\src /E /Y
-
-
-해당 코드를 터미널로

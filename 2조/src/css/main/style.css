@@ -1,0 +1,163 @@
+
+/* 기본 값
+/* ------------------------------------------------------------------------ */
+@font-face {
+	src: url(/1st_project/src/font/a신디나루M.ttf);
+	font-family: "main-font";
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	/* font-family: 'Inter', sans-serif; */
+	font-family: "main-font";
+	font-size: 25px;
+	font-weight: 600;
+	cursor: url(/1st_project/src/cur/B.cur), url(/1st_project/src/cur/A.cur), auto;
+}
+
+/* reset.css */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+	text-decoration-line: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+input {
+	border: none;
+	background-color: transparent;
+}
+
+body {
+	background-image: url(/1st_project/src/img/main.png);
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 50px;
+}
+
+main {
+	width: 1820px;
+	height: 950px;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 0px 50px 50px 0px;
+	position: relative;
+	/* z-index: -1; */
+}
+
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+	outline: none;
+	border: none;
+}
+
+
+/* ------------------------------------------------------------------------ */
+
+.input-box {
+	width: 1000px;
+	height: 150px;
+	background-color: rgba(255, 255, 255, 1);
+	margin: auto;
+	margin-top: 350px;
+	border-radius: 50px;
+	border: 10px solid #57BCA9;
+	vertical-align: middle;
+}
+
+.input-box-int {
+	margin: auto;
+	width: 800px;
+	margin-top: 15px;
+}
+
+.input-box-int input
+{
+	width: 100%;
+	height: 110px;
+	color: #57BCA9;
+	font-size: 50px;
+	text-align: center;
+}
+
+input:focus {
+	outline: 2px solid #d50000;
+}
+
+input:focus {
+	outline: none;
+} /* outline 테두리 없애기 */
+
+input::-webkit-inner-spin-button {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+.start-btn {
+	width: 360px;
+	height: 120px;
+	background-color: rgba(255, 255, 255, 0.6);
+	margin: auto;
+	margin-top: 50px;
+	border-radius: 50px;
+	border: 10px solid #57BCA9;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 95px;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+.start-btn button {
+	width: 100%;
+	height: 100%;
+	color: #57BCA9;
+	font-size: 50px;
+}
+
+.start-btn:hover {
+	background-color: #ffffff;
+}

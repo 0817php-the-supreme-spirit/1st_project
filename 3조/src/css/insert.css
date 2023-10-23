@@ -1,0 +1,142 @@
+
+*{
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	font-family: 'Black Han Sans', sans-serif;
+    font-family: 'Nanum Pen Script', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #424242;
+}
+.create_at{
+	margin:20px;
+	margin-left:150px;
+}
+.div_1{	
+	border:1px solid #F2F4F7;
+	border-radius: 10px 10px 10px 10px;
+	width:550px;
+	padding:10px;
+	background-color:#fff;
+	text-align: left;
+	float:left;
+	margin-left:150px;	
+	margin-top:35px;
+	height: 200px;
+	box-sizing: border-box;
+	filter:drop-shadow(2px 4px 6px gray);
+}
+footer{
+	position:fixed;
+	bottom: 10px;
+	right:200px;
+	line-height: 15px;
+}
+button{
+	margin:10px;
+}
+.a_no{
+	margin:10px;
+}
+.button_no{
+	background-color:#E4E4E4;
+	border:1px solid #E4E4E4;
+	width:80px;
+	height:40px;
+	border-radius: 5px 5px 5px 5px;
+	filter:drop-shadow(2px 4px 6px gray);
+	text-decoration: none;
+	color:black;
+	cursor:pointer;
+	text-decoration: none;
+	padding: 8px 25px;
+	font-size: 0.9rem;
+}
+.button_yes{
+	background-color:#E4E4E4;
+	border:none;
+	width:80px;
+	height:40px;
+	border-radius: 5px 5px 5px 5px;
+	filter:drop-shadow(2px 4px 6px gray);
+	cursor: pointer;
+	font-weight: light;
+}
+.boxed input[type="radio"] {
+	display: none;
+}
+
+#chk1:checked + label
+, #chk2:checked + label
+, #chk3:checked + label
+, #chk4:checked + label
+, #chk5:checked + label{
+	background-color: #FFDEAC;
+}
+.section-in{
+background-color: #F2F4F7;
+	width: 1700px;
+	height: 900px;
+	padding: 35px 60px;
+
+	position: relative;
+	margin-left: 200px;
+	margin-top: 80px;
+	border-radius: 50px 0 0 50px / 50px 0 0 50px;
+}
+/* .boxed input
+[type="radio"]:checked + label{
+	background-color: #FFDEAC;
+}
+.div_1:active{
+	background-color: #FFDEAC;
+} */
+
+ 
+
+/* 
+.div_2{
+	border:1px solid #F2F4F7;
+	border-radius: 10px 10px 10px 10px;
+	width:550px;
+	margin:15px;
+	padding:10px;
+	background-color:#fff;
+	text-align: left;
+	clear:both;
+	margin:30px ;
+}
+.div_3{
+	border:1px solid #F2F4F7;
+	border-radius: 10px 10px 10px 10px;
+	width:550px;
+	margin:15px;
+	padding:10px;
+	float:left;
+	background-color:#fff;
+	text-align: left;
+	margin:30px;
+}
+.div_4{
+	border:1px solid #F2F4F7;
+	border-radius: 10px 10px 10px 10px;
+	width:550px;
+	margin:15px;
+	padding:10px;
+	clear:both;
+	background-color:#fff;
+	text-align:left;
+	margin:30px;
+}
+.div_5{
+	border:1px solid #F2F4F7;
+	border-radius: 10px 10px 10px 10px;
+	width:550px;
+	margin:15px;
+	padding:10px;
+	float: left;
+	background-color:#fff;
+	text-align: left;
+	margin:30px;
+} */
+

@@ -1,0 +1,144 @@
+* {
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	font-family: 'Black Han Sans', sans-serif;
+    font-family: 'Nanum Pen Script', cursive;
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #424242;
+}
+
+.section-in {
+	background-color: #F2F4F7;
+	width: 1459px;
+	height: 900px;
+	padding: 80px;
+	position: relative;
+	margin-left: 200px;
+	margin-top: 80px;
+	border-radius: 50px 0 0 50px / 50px 0 0 50px;
+}
+
+.form-in {
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 500px;
+}
+
+.create_at {
+	font-size: 1.2rem;
+	font-weight: lighter;
+	margin-bottom: 15px;
+}
+
+.ch-name {
+	font-size: 1.5rem;
+	margin-bottom: 15px;
+	font-weight: bold;
+}
+
+.progress {
+	width: 100%;
+	height: 50px;
+    appearance: none;
+	margin-bottom: 70px;
+	box-sizing: border-box;
+}
+.progress::-webkit-progress-bar {
+    background:#f0f0f0;
+    border-radius: 25px;
+    box-shadow: inset 3px 3px 10px #ccc;
+}
+.progress::-webkit-progress-value {
+    border-radius: 25px 25px 25px 25px / 25px 0 0 25px;
+    background: #62B6F5;
+    background: -webkit-linear-gradient(to right, #86DCF4, #62B6F5);
+    background: linear-gradient(to right, #86DCF4, #62B6F5);
+
+}
+
+.progress-com {
+	width: 100%;
+	height: 50px;
+    appearance: none;
+	margin-bottom: 70px;
+	box-sizing: border-box;
+}
+.progress-com::-webkit-progress-bar {
+    background:#f0f0f0;
+    border-radius: 25px;
+    box-shadow: inset 3px 3px 10px #ccc;
+}
+.progress-com::-webkit-progress-value {
+    border-radius: 25px;
+    background: #62B6F5;
+    background: -webkit-linear-gradient(to right, #86DCF4, #62B6F5);
+    background: linear-gradient(to right, #86DCF4, #62B6F5);
+
+}
+
+.button-in {
+	width: 90%;
+	height: 90px;
+	margin-bottom: 30px;
+	border-radius: 15px;
+	text-align: left;
+	padding-left: 30px;
+	margin-left: 50px;
+	box-sizing: border-box;
+}
+
+.pro-menu, .pro-clear {
+	display: inline-block;
+	font-size: 1.2rem;
+}
+
+.pro-clear {
+	position: absolute;
+	right: 190px;
+}
+
+.trash {
+	background-image: url("../img/trash.png");
+	background-size: cover;
+	width: 50px;
+	height: 50px;
+	position: absolute;
+	right: 60px;
+	bottom: 40px;
+	border: none;
+}
+
+.button-in:active {
+	background-color: #828282;
+	opacity: 0.8;
+}
+
+.button-com {
+	width: 90%;
+	height: 90px;
+	margin-bottom: 30px;
+	border-radius: 15px;
+	text-align: left;
+	padding-left: 30px;
+	margin-left: 50px;
+	box-sizing: border-box;
+	background-color: #828282;
+	opacity: 0.8;
+}
+.button-com>p {
+	color: #fff;
+}
+
+.button-com>.pro-menu {
+	text-decoration: line-through;
+}
+
+button {
+	cursor: pointer;
+}
+
+button>.challenge_num {
+	color: #fff;
+}
