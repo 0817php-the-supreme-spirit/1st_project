@@ -13,7 +13,7 @@ $arr_err_msg = []; // 에러 메세지 저장
 // $create_date = "";
 // $category_id = "";
 
-// POSt로 request가 왔을 때 처리
+// POSt로 request가 왔을 때 처리한다
 // $mttp_method = $_SERVER["REQUEST"];
 // if($http_method === "POST") {
 // 	try {
